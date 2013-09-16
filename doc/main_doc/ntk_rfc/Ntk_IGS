@@ -1,0 +1,130 @@
+== NTK_RFC 0003 ==
+
+Subject: Internet Gateway Search
+
+----
+This text describes a change to the Npv7.
+It will be included in the final documentation, so feel free to correct it.
+But if you want to change the system here described, please contact us first.
+----
+
+If the nodes are in restricted mode (compatibility with the Internet), they
+should share their Internet connection. This can be easily done, in fact, if
+a node X, connected to the Internet, activates the masquerading, it is
+possible for the other nodes to connect by setting as the default gateway
+their rnode which lead to the node X.
+
+This can be automated by Netsukuku itself and it requires small changes in the
+code: it is just necessary that the nodes connected to the Internet set a flag
+in the qspn_pkt, in this way the other nodes will know the routes to reach the
+Internet.
+
+=== Multi-gateways ===
+
+The situation becomes a little complex when there is more than one node which
+shares its internet connection. Let's consider this scenario:
+
+{{{
+		   A(gw)      B(gw)
+		    \	       /
+		     \___  ___/
+		         \/
+		      Ntk nodes (10.x.x.x)
+}}}
+
+A and B are nodes which shares their internet connection, we call them
+gateways. Let's call X the node which wants to connect to an Internet host.
+In this case, the nodes near A, might find useful to use A itself to
+reach the Internet, the same happens for the nodes near B.
+Instead, the nodes in the middle don't know what is the best choice and they
+might continuosly change their gw. This means that a tcp connection
+(to an inet host), which was established trough A, when is then routed trough
+B dies because A and B have different public IPs on the Internet.
+
+The node X has to create an IPIP tunnel to the gateway it wants to use, and
+set as default gw the tunnel. In this way, the node X is sure to always use
+the same gateway while the routing of the packets between it and the gw is
+made transparently by the other Netsukuku nodes.
+
+==== Anti loop multi-inet_gw shield ====
+
+An inet-gw is a normal node like all the other, therefore it can use the
+Internet connections of the other inet-gws in conjunction with its own one.
+
+Consider the previous scenario, A and B are two inet-gw. 
+A sets in his internet default route the adsl modem and B.
+B does the same, but sets A as the second default route.
+
+What would happen if the default route, written in the routing cache of A, is
+B and, at the same time, the default route set in the routing cache of B is A?
+The packets would jump endlessy in a infinite loop loosing themself forever.
+
+That's why we need the "anti loop multi-inet_gw shield".
+It's working way is simple: each inet-gw has a netfilter rule which marks
+all the packets coming from the outside and directed to the Internet. These
+packets are then routed directly to the Internet without being sent, again, to
+an inet-gw. In the example:
+A wants to send a packet to the Internet and its looks in its routing cache.
+It decide to forward the packet to B. B receives the packet, recognizes it is
+an extern packet directed to the Internet and shoots it on its modem.
+
+=== Load sharing ===
+
+Let's consider the previous scenario.
+
+The node X can also decide to use both A and B to reach the Internet, using
+at the same time their connections! Even the gw A can use at the same time
+its own line and the connection of the gw B.
+
+The procedure to implement this is what follows:
+
+ * X creates a tunnel to A and another one to B
+ 
+ * X adds in the routing table the default route using A and B as multipath
+gateways. The gateway for the connections is chosen randomly.
+
+ * X adds a rule in the routing table to route all the packets of established
+connections trough the same gateway used to create the same connection.
+The rule is linked to some netfilter rules which track and mark each
+connection. The method is described in details here:
+https://lists.netfilter.org/pipermail/netfilter/2006-March/065005.html
+
+=== The bad ===
+
+The implementation of the Load sharing is very Linux specific, so it will be
+very difficult to port it to other kernels, therefore this feature will be
+available only to nodes which run Linux (ehi, one more reason to use Linux ;).
+
+=== MASQUERADING ===
+
+Each node sharing the Internet connection (inet-gw) has to masquerade its
+interfaces, so iptables must be used.
+In order to keep the daemon portable, NetsukukuD will launch the script found
+at /etc/netsukuku/masquerade.sh, which in Linux will be a simple script that
+executes "iptables -A POSTROUTING -t nat -j MASQUERADE".
+When NetsukukuD is closed the added firewall rules are flushed with 
+"/etc/netsukuku/masquerade.sh close"
+
+
+=== Traffic shaping ===
+
+The inet-gw can also shape its internet connection in order to prioritize its
+local outgoing traffic (the traffic coming from its 192.168.x.x LAN). 
+In this way, even if it shares its Internet connection, it won't notice any
+difference 'cause it will have the first priority. Moreover with the traffic
+shaper, the inet-gw can also prioritize some protocol, i.e. SSH.
+
+The traffic shaper will activated at the start of NetsukukuD. The daemon will
+run the /etc/netsukuku/tc_shaper.sh script, which in Linux utilizes the
+iproute2 userspace utility.
+When the daemon is closed the traffic shaping will be disabled with
+"/etc/netsukuku/tc_shaper.sh close".
+
+=== See also ===
+
+For more information on the necessity of using ipip tunnels in an adhoc
+network used to share internet connections, you can read this paper:
+http://www.olsr.org/docs/XA-OLSR-paper-for-ICC04.pdf
+
+----
+related: ["Netsukuku RFC"]

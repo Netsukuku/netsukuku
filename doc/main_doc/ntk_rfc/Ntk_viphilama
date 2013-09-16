@@ -1,0 +1,193 @@
+== NTK_RFC 0010 ==
+
+Subject: Viphilama - Virtual to Physical Layer Mapper
+
+----
+This text describes a change to the Npv7.
+It will be included in the final documentation, so feel free to correct it.
+But if you want to change the system here described, please contact us first.
+----
+
+
+=== Viphilama ===
+
+Viphilama will permit to Netsukuku to expand itself over the Internet and then
+switching automatically to the physical layer without interfering with the
+stability of the Net.
+The theory of Viphilama isn't complete yet. This document, right now, is just
+a description of what it would be.
+
+=== Layer ===
+
+Netsukuku will be split in two layer: the virtual layer and the physical one.
+
+==== The physical layer ====
+
+This is the original Netsukuku layer: every node is linked to other nodes by
+physical links (wifi, cables, ...).
+The physical layer is prioritised over the virtual one.
+
+==== The virtual layer ====
+
+The virtual layer is built upon the Internet or any other existing network.
+The Netsukuku nodes, in this layer, are linked each other by tunnels.
+
+A node, in order to join in the virtual layer, has to know its physical
+coordinates. 
+The use of geographical coordinates is required for Viphilama, because it has
+to map the virtual layer to the physical one and it needs a way to measure
+the effective distance between two virtual nodes.
+
+The coordinates can be retrieved using an online map service like
+http://maps.google.com or with a GPS.
+
+The coordinates are stored in the internal, external and bnode maps. 
+In the internal map there are the coordinates of each single node.
+In the external maps, the coordinates which locate a gnode are set to its
+barycenter: it is the average of the coordinates of all its internal nodes.
+
+==== Gate node ====
+
+The two layers are joined by the gate nodes. They are nodes which belong to
+both layers.
+This means that the two layer form a unique network.
+
+
+=== Virtual to Physical mapper ===
+
+The mapper does a basic job: whenever it finds that a virtual link can be
+replaced by a physical one, it removes the virtual link.
+
+Assume this scenario:
+
+{{{
+	Tokyo      Moscow          Rome      London
+	  |	     |               |	       |
+	  |	     |               |	       |
+	  |__________|Internet tunnel|_________|
+}}}
+
+Only one link exists, and it is a virtual one.
+Only Tokyo and London are linked, all the other cities are alone.
+
+When Tokyo and Moscow will be linked by a series of physical nodes, the mapper
+will change the net in this way:
+
+{{{
+	Tokyo<--ntk nodes-->Moscow     Rome          London
+	                     |		|		|
+		   	     |______ Internet tunnel ___|
+}}}
+
+
+When even Moscow and Rome will be linked by physical nodes:
+
+{{{
+	Tokyo<--ntk nodes-->Moscow<--ntk nodes-->Rome          London
+	                                   	  |		   |
+		   	                          |__ Inet tunnel _|
+}}}
+
+And so on.
+
+Basically when there are two nodes linked physically, one of them can cut
+its virtual link which connects it to the virtual layer.
+
+Let's go into the details.
+
+==== Virtual hooking ====
+
+A node, which hasn't any physical neighbours, resides in a black zone and, for
+this reason, it can't hook to the physical layer. It will hook directly to
+a vnode (virtual node), joining the virtual layer.
+Let this hooking node be X.
+
+The first part of the Virtual Hooking is the creation of the virtual links
+(ip tunnels).
+
+X chooses, at first, a random vnode which can be located anywhere in the
+globe. If it is its first hook to the virtual layer, it will get the IP of
+the vnode from a small public list available on the Internet, otherwise it
+will consult its saved virtual maps.
+Let the chosen vnode be Y.
+
+X sends to Y a packet containing its coordinates. This pkt will be forwarded
+with a greedy technique: 
+Y looks up its maps and forwards the pkt to the vnode which is the nearest to X.
+If this latter vnode knows another vnode which is nearer to X, it forwards
+again the packet. Finally, the pkt will arrive to the node Z, which is a node
+very near to X.
+
+Let d(A, B) be the physical distance between the node A and B.
+
+The node Z appends its Internet IP to the received packet and forwards it
+again to a node T, so that d(X,T) ~= d(X,Z).
+The node T will do the same (adds its IP and forwards the pkt).
+When the packet will be forwarded for the 16th time or when it can't be
+forwarded anymore, it is sent back to the node X.
+
+The node X collects this last packet and creates a virtual link (tunnel) to
+each Internet IP which has been stored in the packet itself. 
+These linked nodes are the new rnodes of the node X.
+
+
+At this point the node X will hook to each linked node. This procedure is
+called v-linking:
+
+Let "L" be the generic linked node.
+
+X sends the I_AM_VHOOKING request to L.
+
+L analyses its virtual rnodes and compares d(L,vR) to d(X,vR), where vR is a
+vrnode. If d(X,vR) < d(L,vR), L adds the Internet IP of the vR in the reply
+packet. This means that if L finds out that X is nearer to one of its
+vrnodes, it tells X to create a link to it and deletes its link to the vrnode.
+
+X receives the reply packet of L and tries to create a virtual link to each
+vR listed in the same packet.
+X writes the list of all the vR nodes which has been successfully linked to X
+itself. This list is sent back to L.
+
+L reads this latter list and delete all its links to the vR nodes, which has
+been successfully linked to X.
+
+X repeats this same hooking procedure for each L.
+
+In the end, X chooses one of its vrnodes and hooks with the classical method
+to it.
+
+==== Gate hooking ====
+
+A node can hook to the physical layer as a normal node or as gate node.
+
+A normal node is the old plain node of Netsukuku, it doesn't have to specify
+its coordinates and doesn't need any other prerequisites.
+
+The gate-node has an Internet connection that it uses to connect to
+the virtual layer, it is also connected to physical nodes.
+
+There are two cases:
+
+ * When the node is from the start a gate node
+ * When it is first a vnode and then becomes a gate node
+
+In the first case it hooks directly to a physical node. If one of its rnodes
+is a gate node too, it will start the v-linking procedure with it. 
+In this way, the new gate-node will be linked to its nearer vrnodes.
+The old gate-node will delete all the links to the vrnodes which have been
+linked by the new gate-node.
+
+In the second case, the node directly v-links to the new gate node which is
+connected to.
+
+When a gate-node can reach one of it vrnodes using both a virtual and a
+physical link, it will delete the virtual one.
+
+== TODO ==
+
+ * Is it possible to avoid using the coordinates?
+ * What does happen when a (v)node dies?
+
+---- 
+
+Feel free to help the development of Viphilama.

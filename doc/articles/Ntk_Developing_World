@@ -1,0 +1,51 @@
+== Netsukuku and ICT infrastructure in the Developing World ==
+
+{{{
+
+Netsukuku network: enabled self-made and self-sustained ICT infrastructure
+for developing countries.
+
+The end-users, in order to connect their PC to the rest of the World
+through the Internet, have to make a subscription with an Internet Operator.
+The Domain Names, as well, are the unique way by which a network attached
+device (which could consist of a computer, a file server, a network storage
+device, a fax machine, a cable modem, etc.) is known on the Internet,
+and are literally sold through the centralised system of the Domain
+Name System (DNS).  Netsukuku, an Open Source software, downloadable
+from http://netsukuku.freaknet.org makes possible the creation of a
+new distributed global Net, expandable to an unlimited number of users,
+alternative, independent and totally apart from the Internet.  
+The Netsukuku particular routing system, created by some members of the
+"Freaknet" group of Catania (Italy), allows the Net to be self-sustained,
+thanks to all the Net users, that share a small part of their own PC
+resources. Anybody has the chance to join the Net and, at the same time, to
+let other users do the same.
+In those countries and areas of the globe where Internet facilities are still
+not available, a public Net can be created and developed in a very simple way
+(i.e. through a wi-fi coverage), without depending on any Internet Operators.
+In the same way, all the contents holder will be able to share any documents
+simply from their PC, since a maximum of 256 hostnames can be recorded and
+automatically supported by each PC (i.e. node of the Net).  
+Last but not least, inside Netsukuku Net all the users will have the chance to
+get through the Internet: in fact any user can get the connectivity to
+Internet from other users that share and devolve into the net the bandwidth
+they don't use at the moment.
+Netsukuku routing system differs from all the other protocols and algorithms:
+the existing dynamic schemes are solely utilised to create small and medium
+nets.  
+The routers of Internet are also managed by different protocols as the OSPF,
+the RIP or the BGP, all based on different classical algorithms. 
+These algorithms are able to find out the best path to reach a node in the
+net, but require a very high waste of CPU and memory. That's why inside
+Internet, all the routers are powerful computers specifically dedicated to
+this purpose.  On the contrary, when a node hooks to Netsukuku, the net
+automatically rewrites itself, while all the other nodes, using a very small
+part of the CPU and of the memory resource (a few kb), recognised which are
+the fastest and more efficient routes to  communicate with the new arrived.
+The nodes don't have privileges or limitations: when compared to other nodes,
+they are part of the net and give their contribution to its expansion and
+efficiency. The more they increase in number the more the net grows and
+becomes stable. In Netsukuku there is no any difference between private and
+public nets and talking about LAN become meaningless.
+
+-CLazop

@@ -1,0 +1,8 @@
+Import('env')
+
+idir_bin    = '$destdir' + '$BIN_DIR'
+idir_conf   = '$destdir' + '$CONF_DIR'
+
+env.Install(idir_bin, ['ntk-wifi'])
+env.Install(idir_conf, ['ip_masquerade.sh', 'rc.ntk', 'tc_shaper.sh'])
+env.Alias('install', [idir_bin, idir_conf])

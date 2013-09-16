@@ -1,0 +1,91 @@
+== Netsukuku e le reti civiche ==
+
+{{{ 
+Netsukuku e le reti civiche
+
+Comuni, Enti ed Istituzioni stanno dimostrando un crescente interesse verso
+progetti di e-government finalizzati a fornire servizi on line ai cittadini
+attraverso Internet, chioschi informatici, call center, come
+ad esempio:
+
+	- servizi amministrativi comunali (anagrafe, tributi locali, avvio e
+	  monitoraggio di procedimenti amministrativi, ecc.)
+	- attivita' scolastiche (iscrizioni, iniziative culturali,progetti
+	  educativi)
+	- portali territoriali, news, radio e live webcam locali
+	- guide per eventi e fiere, informazioni di interesse turistico e
+	  culturale
+	- forum di discussione, sondaggi, iniziative socio-culturali.
+
+Tuttavia, la diffusione e l'accesso alle reti civiche sono, oggi, limitati
+dalla indisponibilita' della banda larga in molti Comuni e dai costi imposti
+dagli Internet sevice provider (ISP) per fornire la connettivita'.
+
+La realizzazione di reti telematiche cittadine, nelle quali gli utenti
+possano accedere gratuitamente ai siti web ed ai servizi informatici di Enti
+ed Istituzioni e' resa, oggi, possibile dal protocollo Netsukuku, che e' stato
+ideato per permettere l'implementazione di una mesh network su scala globale,
+indipendente da Internet, nella quale i singoli PC, collegandosi in frequenza
+radio fra loro, diventano i nodi (router) della rete, e contribuiscono a
+mantenerla e ad allargarla, secondo uno schema a frattale, recursivo ed a
+crescita esponenziale. 
+
+Il protocollo Netsukuku abilita:
+
+- gli utenti ad accedere non solo alla rete civica della propria citta' ma
+  anche a quelle allocate in tutte le citta' che, una volta interconesse,
+  formano una vera e propria ragnatela globale, parallela ad Internet, che
+  puo' espandersi indefinitamente, facendo sempre a meno di qualisiasi
+  operatore di telefonia o Internet (ISP);
+  
+- ciascun PC (ovvero nodo della rete) a supportare liberamente fino ad un
+  massimo di 256 hostnames.
+
+Per collegarsi alla rete Netsukuku, gli utenti devono semplicemnte dotare
+il proprio PC di una comune scheda wi-fi ed avviare il programma Netsukuku
+scaricabile da Internet. E' evidente che una copertura del territorio
+wi-fi a banda larga dedicata alla rete Netsukuku, ne puo' assicurare una
+piu' rapida espansione. Il mercato del wireless mette ormai a disposizione
+svariate soluzioni, tutte valide ed economiche (ripetitori, access point,
+antenne ecc.)e Comuni, Istituzioni, Associazioni non-profit, Imprenditori
+potranno cogliere l'opportunita' di sostenere questa rete come nuovo canale di
+comunicazione efficace, affidabile, simile ma indipendente da Internet, ideale
+per offrire a tutti la possibilita' di navigare liberamente e gratuitamente
+in siti web dedicati ad attivita' istituzionali, educative, commerciali,
+turistiche, promozionali e sociali, che richiedono un dialogo costante e
+diretto col pubblico.
+
+Sulla rete Netsukuku chiunque voglia, potra', semplicemente dal proprio
+PC, offrire in rete contenuti digitali, informazioni e servizi informatici:
+maggiore sara' il numero degli attori rappresentati nel sistema, piu' saranno
+garantiti la patertecipazione, il dialogo, la circolazione delle idee,
+il processo democratico ed il pieno esercizio del diritto di cittadinanza
+nella nuova societa' dell'informazione.
+
+La rete Netsukuku, infine, potra' essere utilizzata per connettersi
+gratuitamente ad Internet: 
+infatti, qualsiasi nodo puo' condividere con la rete Netsukuku la
+connettivita' ad Internet, a favore di chi non ha un account attivo con un ISP
+o perche' ne e' provvisto o perche' si trova fuori sede.
+
+Come realizzare facilmente una rete wireless Netsukuku: 
+La wireless mesh network di Netsukuku e' una architettura di rete flessibile 
+che fa muovere dati in maniera efficiente tra PC forniti di connessione radio, 
+in modo tale che il flusso di dati raggiunga la destinazione voluta, passando 
+attraverso gli stessi nodi (PC ovvero Access Point con Netsukuku installato) 
+interconnessi tra loro, e seguendo la rotta migliore.
+Gli utenti potranno essere interconnessi tra loro, all'interno del raggio
+d'azione delle proprie schede wi-fi o dei loro Access Point, sfruttando, ad
+esempio, i supporti delle antenne televisive del loro palazzo, ove potranno
+essere attaccate antenne wi-fi centralizzate (access point) o singole (schede
+wi-fi).
+Per favorire una piu' rapida e generale espansione della wireless mesh network
+basata sul protocollo Netsukuku, bastera', poi, assicurare sul territorio la
+presenza di semplici ripetitori wi-fi dotati di antenne omnidirezionali.
+
+La comunita' di Netsukuku e' disponibile in rete, per qualsiasi ulteriore
+informazione o richiesta di assistenza, sul sito:
+http://netsukuku.freaknet.org
+
+-CLazop
+}}}

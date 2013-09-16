@@ -1,0 +1,16 @@
+#
+#			ANDNA hostnames
+#
+#
+# In this file you can list, one per line, all the hostnames you want to
+# register in ANDNA.
+#
+# You can register up to 256 hostnames. Each hostname can be a string of
+# maximum 512 bytes, which contains a newline (\n) only at its end.
+#
+# Read: man andna
+#
+# *WARNING*    DO NOT LEAVE EMPTY LINES WITH SPACES OR TABS,   *WARNING*
+#	        THEY WILL BE REGISTERED AS REAL HOSTNAMES
+
+#my_cool_hostname

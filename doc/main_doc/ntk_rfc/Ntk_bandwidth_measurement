@@ -1,0 +1,121 @@
+== NTK_RFC 0002 ==
+
+Subject: bandwidth measurement
+
+----
+This text describes a change to the Npv7.
+It will be included in the final documentation, so feel free to correct it.
+But if you want to change the system here described, please contact us first.
+----
+
+== Link measurement issues ==
+
+In the current version of the Npv7 the link quality is measured only with the
+rtt and packets loss, so only the lantecy is actually considered, this isn't
+optimal since also a link with a bandwidth of 20000 bps can have a good
+lantecy.
+It isn't a critical problem since more than one route is used to reach a
+single dst_node, so when a route is satured the kernel will use another one
+looking in the nexthop table of that route.
+
+== Improvement ==
+
+In order to improve the link measurement a node must include in the tracer
+pkts the available bandwidth of its traversed link.
+The link bandwidth, which will be used to modify the real rtt, in this way it
+will be possible to have a traffic shaping based also on the real bandwidth of
+the links.
+
+== Bandwidth measurement ==
+
+There are two phases of measurement: in the first the total bandwidth of the
+new links is measured by the hooking node and the destination nodes, in the
+second the bandwidth of the links is constantly monitored.
+
+The utilised bandwidth will be monitored with iptables and the libiptc library.
+See http://www.tldp.org/HOWTO/Querying-libiptc-HOWTO/bmeter.html .
+
+We also need to know the total bandwidth which can handle the network
+interface. What is a good method to do this?
+
+=== Total available bandwidth ===
+
+{{{
+	A  <->  B  <->  C
+}}}
+
+The node B is hooking to A and C. At the end of the hook, B measures the
+total available bandwidth of the links B<->C and B<->A.
+It sends an indefinite amount of random packets, for some seconds, to the
+destination of the link. The link is monitored with libiptc and the maximum
+rate of bytes per second is registered as the maximum available upload
+bandwidth for that specific link. These steps are repeated for each rnode.
+Since the link might be asymettric the measurement is also repeated by A and
+C. In the end we have the measurement of: A->B, B->A, C->B, B->C.
+
+=== Realtime bandwidth monitoring ===
+
+With the use of the libiptc library, B can monitor the bandwidth usage of its
+links.
+
+{{{
+Max_link_bw	= Total available bandwidth of the link
+free_link_bw 	= available/not used bandwidth of the link
+cur_used_link_bw= amount of bandwidth currently used
+
+Max_NIC_bw	= maximum bandwidth of the network interface
+cur_used_NIC_bw = amount of the total bandwidth currently used of the network
+		  interface
+}}}
+
+To calculate the `free_link_bw':
+{{{
+free_link_bw = Max_link_bw - cur_used_link_bw
+if(free_link_bw > Max_NIC_bw - cur_used_NIC_bw)
+	free_link_bw = (Max_NIC_bw - cur_used_NIC_bw);
+}}}
+The `free_link_bw' value will be used to modify the `rtt' used to sort the
+routes in the routing table.
+{{{
+modified_rtt(free_link_bw, real_rtt) = 27<<27 + real_rtt - bandwidth_in_8bit(free_link_bw)
+
+real_rtt must be <= 2^32-27<<27-1 (about 8 days)
+
+You can find the definition of bandwidth_in_8bit() here:
+http://hinezumilabs.org/cgi-bin/viewcvs.cgi/netsukuku/src/igs.c?rev=HEAD&content-type=text/vnd.viewcvs-markup
+}}}
+
+== Latency VS bandwidth ==
+
+It may also happens that a link has a good bandwidth but a high latency.
+A low latency is needed by semi-realtime applications: for a ssh connection
+we don't care to have a 100Mbs connection but we want to use the shell in
+realtime, so when we type a command we get a fast response.
+
+The Netsukuku should create three different routing tables:
+ * the first shall include the routes formed by the links with the best bandwidth value.
+ * the second shall include the "best latency" routes
+ * the routes in the third table shall be an average of the first and the second tables
+
+If the protocol of the application uses the "tos" value in its IP packets, it
+is possible to add a routing rule and choose the right table for that
+protocol: the ssh protocol will be routed by the second table.
+
+== Caveats ==
+
+If the libiptc are used, it will be more difficult to port the daemon for
+other kernels than Linux. Libpcap is a good alternative.
+It is possible to capture the packets for some seconds using libpcap, count
+them and find how much bandwidth is used.
+
+== IGS ==
+
+The inet-gw which share their internet connection measure also the utilzed
+bandwidth of the Internet connection. 
+The maximum download and upload bandwidth is known since it must be specified
+by the user in the netsukuku.conf config file. In this way, monitoring the
+device used by the Internet default route, it's trivial to known the
+available bandwidth.
+
+----
+related: [Netsukuku_RFC]

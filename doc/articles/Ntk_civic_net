@@ -1,0 +1,66 @@
+== Netsukuku and the civic networks ==
+
+{{{
+Cities and Institutions are showing a growing interest in e-government
+projects finilised in providing on line services to the citizens through
+Internet.
+For example are disposable:
+
+	- school related activities (enrolments, cultural and educational
+	  programs),
+	- news, local radio and televisions
+	- guides for expositions and events, cultural and tourist information
+	- discussion forums, social and cultural activities
+
+However, the diffusion and access to the Net isn't still disposable for
+everyone: DSL facilities aren't available in many cities and the ISPs impose
+expensive rates/costs to grant connectivity.  
+The creation of civic nets, in which the users can have free access to web
+sites and to the on line e-services, surfing freely and without any cost web
+sites dedicated to institutional, educational, tourist, commercial and social
+activities, which need a constant and direct dialogue with the people, is
+today made possible by NETSUKUKU Open Source software.
+His first aim is the implementation of a global mesh network, completely
+independent from Internet, in which the single PCs, communicating each other
+through radio frequencies, become automatically the nodes/access points of the
+net and in such way give  their contribution to make it alive and, at the same
+time, to expand it, exactly as in a fractal scheme.
+
+The NETSUKUKU routing system allows: 
+
+- every user to go not only through the Net of their city but also through
+  those located in all the other cities which, once they are inter-connected,
+  create a kind of global Network, parallel to Internet, which can
+  indefinitely  expand, completely without the support of ISPs;
+  
+- till a maximum of 256 hostnames to be recorded and supported by each PC
+  (i.e. node of the Net).
+  
+On the Netsukuku Net everybody wishing to offer digital contents/information,
+will be able to share them simply from his or her PC. The more of actors
+represented in the system is high in number, the more will be granted
+dialogue, circulation of different ideas, democratic process and the full
+right of citizenship inside the society of information.
+
+Last but not least, inside Netsukuku Net users will have the chance to get
+through the Internet free of cost: in fact any node can share with the
+Netsukuku Net his connectivity to Internet and get from other users the
+bandwidth they didn't use in any the moment.
+
+=== How to realize a wireless Netsukuku Net ===
+
+Netsukuku is an architecture of flexible net and will create autonomously an
+efficient wireless mesh network among PCs equipped with radio connection
+devices.  The simplest way to create/join the Netsukuku Net is to install a
+common wi-fi card inside your own PC and launch the Netsukuku program, freely
+downloadable from Internet. The flux of data will reach the wished
+destination, going through the same nodes (PCs or Access Points in which
+Netsukuku as been installed inside), interconnected among them.  Obviously a
+larger diffusion of the Netsukuku dedicated network can be achieved by the
+wi-fi coverage of wide urban and rural areas: in the market there are many and
+different solutions of wireless devices, all valid and cheap (routers, access
+points, omni directional antennas).  
+
+For more information or any request of assistance Netsukuku community is
+available on the net at the following site: 
+http://netsukuku.freaknet.org

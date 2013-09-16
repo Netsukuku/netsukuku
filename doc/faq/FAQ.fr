@@ -1,0 +1,27 @@
+= Questions fréquentes sur Netsukuku (fr) =
+
+== 0. Généralités ==
+
+=== 0.1. Qu'est-ce que Netsukuku ? ===
+
+Netsukuku est un réseau maillé ou un système P2P qui se génère et entretient son fonctionnement de façon autonome. Il est conçu pour gérer un nombre illimité de n?uds avec des ressources en puissance de calcul et en mémoire minimales. Il peut ainsi être facilement utilisé pour bâtir un réseau mondial distribué, anonyme et anarchique, distinct d'Internet, sans recourir à aucun serveur, fournisseur d'accès ou autorité de contrôle.
+
+Gardez à l'esprit qu'il s'agit d'un réseau ''physique'' : il ne se fonde sur aucun autre réseau existant. Il doit par conséquent y avoir des ordinateurs reliés ''physiquement'', Netsukuku créant ensuite les routes.
+
+En d'autres termes, Netsukuku remplace le niveau 3 du modèle ISO/OSI par un autre protocole de routage.
+
+Pour plus d'informations, lisez la section 2.4, ''Mais qu'est-ce que c'est, à la fin ?'' de la documentation.
+
+=== 0.2. Quelles sont ses fonctionnalités ? ===
+
+La liste complète des fonctionnalités se trouve ici : [http://netsukuku.freaknet.org/files/doc/misc/Ntk_features_list].
+
+=== 0.3. Pourquoi avoir choisi ce nom ? ===
+
+Nouveaux Électriciens Trappistes Sans Kimono Unissant Karma et Urbanité.
+
+Mais il y a une autre histoire, aussi. Nous apprenions les katakanas japonais avec slimeforest, un chouette jeu pour GNU/Linux.
+
+Malheureusement, quand nous sommes tombés sur le mot ''réseau'' écrit en japonais, nous ne connaissions pas tous les symboles employés ; nous ne pouvions donc lire que quelques katakanas et, mélangés avec d'autres, ça donnait le nom Ne-tsu-ku-ku.
+
+Bon, mais vous pouvez toujours imaginer d'autres significations exotiques...

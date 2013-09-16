@@ -1,0 +1,28 @@
+{{{
+L'Open Source vous permet  de migrer vers une informatique libre, mais il
+n'y a aucune possibilité de connecter votre ordinateur au reste du monde
+en modalité libre.  
+Imaginez un Réseau global ou tout le monde peut entrer sans s'obliger avec des
+fournisseurs d'accés a Internet.
+Imaginez de naviguer dans un Net sans devoir vous soumettre à aucune Autorité
+régulatrice centrale qui puisse contrôler les serveurs, établir les
+conditions.
+
+NETSUKUKU, un logiciel Open source, qui peut être téléchargé de
+http://netsukuku.freaknet.org, rend possible la création  d'un nouveau
+réseau global distribué, extensible à un nombre illimité d'utilisateurs,
+indépendant et totalement détaché de l'Internet.  Grâce au système
+particulier de cheminement de Netsukuku, créé par le groupe de "Freaknet"
+de Catane (Italie), les utilisateurs de ce réseau en sont, aussi, les
+membres actifs à travers le partage d'une petite partie des ressources de
+leurs ordinateur. Quiconque a la possibilité de s'unir au Réseau et, en
+même temps, de le faire grandir, l'objectif étant de créer et développer
+un réseau libre, communautaire, citoyen, accessible à tous et permettant,
+dans le respect des réglementations, la libre circulation des données.
+Les pays et les régions du globe où Internet n'est encore pas disponible,
+de cette façon, et simplement par l'utilisation d'une couverture wi-fi,
+peuvent créer et développer un Réseau sans se soumettre aux Opérateurs
+d'Internet ou à ses Autorités régulatrices centrales...
+
+"And the world will be as one...."
+J.Lennon

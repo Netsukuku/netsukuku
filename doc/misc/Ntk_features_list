@@ -1,0 +1,100 @@
+
+== Netsukuku features list ==
+
+{{{
+
+- The Netsukuku mesh network is: distributed, not hierarchic, and higly
+  scalable. The design of Netsukuku prioritises the stability of net.
+  For this reason, it isn't specifically suitable for mobile nodes.
+  However if the mobile nodes are inside an area covered by static Netsukuku
+  nodes, there aren't any problems. It is also possible to use other mesh
+  network protocols designed for mobility in conjunction with Netsukuku (f.e.
+  see olsrd.org), in the same way they are used in conjunction with the 
+  Internet.
+  
+- Scalability: Netsukuku is specifically designed to handle an unlimited
+	       number of nodes with minimal CPU and memory resources.
+
+	- The net isn't overloaded with discoveries packet
+	
+	- The size of the maps is fixed: about 4Kb for the int_map and 16Kb
+	  for  the ext_map.
+	  
+	- Not all the nodes sends a broadcast discovery.
+	
+	- There are few floods for each discovery.
+	
+	- When a node receives a flood it has already the routes that can be
+	  used to reach all the nodes traversed by the flood. It doesn't need
+	  to calculate anything about them.
+	  
+	- A flood is synchronized: the same flood starts at the same time for
+	  all the nodes.
+
+	- http://lab.dyne.org/Netsukuku_scalability
+
+- zeroconf: the network builds itself, without need of human intervention
+
+- ANDNA: distributed and not hierarchic DNS
+
+	- When the net becomes larger, ANDNA scales more because its DB will
+	  be distributed among the nodes.
+	  
+	- Any node can register up to 256 hostnames.
+
+	- The registration is secure: it is based on asymmetric cryptography,
+	  thus it is very difficult to take hostnames which has been already
+	  registered by other nodes.
+
+	- Each hostname can be a string of maximum 512 bytes.
+	
+	- DNS compatibility: all the network programs are already compatible
+	  with ANDNA, because NetsukukuD comes with a DNS wrapper which
+	  converts DNS queries to ANDNA requests.
+	  
+	-  All the resolved hostnames are kept, in the "resolved hostnames
+	   cache" to speed up the resolution process. 
+	   The rhcache is synchronized with ANDNA, therefore its stored
+	   entries will expire exactly when the registered hostnames expire
+	   in ANDNA.
+	
+	- Scattered Name Service Disgregation
+	  http://lab.dyne.org/Ntk_SNSD
+	  The SNSD is the ANDNA equivalent of the SRV Record of the Internet 
+	  Domain Name System, which is defined here:
+	  http://www.ietf.org/rfc/rfc2782.txt
+	  SNSD isn't the same of the "SRV Record", in fact, it has its own
+	  unique features.
+
+- Internet compatibility
+	- internet sharing
+		* Multi-inet-gateways. 
+		  The Netsukuku nodes will now automatically use multiple
+		  inet-gateways to connect to the Internet, therefore their
+		  Internet connection will be effectively load-balanced.
+		  
+		* Anti-loop multi-igw shield. 
+		  The nodes which share their Internet connection will also
+		  automatically use the shared connection of the other nodes.
+		  Through a simple marking system, death loops are avoided.
+		  
+		* Traffic shaping.
+		  The nodes which share their Internet connection can now
+		  shape it, in this way they'll prioritize their local
+		  outgoingtraffic and the lowdelay one (f.e. SSH).
+
+- Routes based on bandwidth and latency
+  http://lab.dyne.org/Ntk_bandwidth_measurement
+
+- NetsukukuD:
+	- low memory and CPU usage
+		- it can run smoothly on a small Access Point
+		
+	- Support for multipath routes: to reach a destination node, the
+	  packets will use, at the same time, more than one route.
+	  
+	- support for multi network interfaces
+	
+	- Multi interfaces multipath: if the node can reach a rnode trough
+	  multiple interfaces, it uses them all with a multipath route.
+}}}

@@ -1,0 +1,24 @@
+Main authors and maintainers:
+
+Andrea Lo Pumo aka AlpT <alpt@netsukuku.org>
+
+
+Contributors (in chronological order of initial contribution):
+
+Andrea Leofreddi <andrea.leofreddi@gmail.com> wrote the first implementation
+of the DNS wrapper code (dns_pkt.cpp, dns_rendian.h, dns_utils.h).  
+
+Enzo Nicosia (Katolaz) <katolaz@netsukuku.org> wrote the files needed to use
+Automake/Autoconf. (Makefile.am configure.ac, src/Makefile.am,
+src/man/Makefile.am).
+
+Federico Tomassini (Efphe) <efphe@netsukuku.org> wrote andns, which provides
+DNS compatibility for the ANDNA system. He also wrote the interface to the
+libiptc. (andns* ntkresolv.* dnslib.[ch] mark.[ch] libiptc/*)
+
+
+Website developers and maintainers:
+
+Crash 		<crash@netsukuku.org>,
+Entropika	<e@entropika.net>,
+Black		<black@netsukuku.org>

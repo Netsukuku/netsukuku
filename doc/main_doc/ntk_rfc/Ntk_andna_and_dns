@@ -1,0 +1,436 @@
+{{{
+
+
+
+                        ANDNS PROTOCOL
+
+INDEX:
+
+0 - Introduction
+1 - Notations
+2 - Packet Headers
+3 - Query Type
+4 - Query Realm
+5 - Rcode
+6 - Questions
+7 - Answers
+8 - Compression
+
+
+0. - INTRODUCTION -
+
+   This document describes the protocol used to communicate with ANDNA.
+   This protocol is used also to make query in internet realm.
+   So, we can query for `google.it` in internet, or for `depausceve`
+   in the netsukuku net.
+
+   In the case of internet queries, the dns_wrapper will contact the
+   dns-servers specified in /etc/resolv.conf when ntkd is loaded.
+
+1. - NOTATIONS -
+
+   In the next section, we represent a byte with this graphic:
+
+         1  2  3  4  5  6  7  8
+        +--+--+--+--+--+--+--+--+
+        |                       |
+        +--+--+--+--+--+--+--+--+
+
+   The numbers represent the bits
+   Let's show two bytes:
+
+         1  2  3  4  5  6  7  8  1  2  3  4  5  6  7  8
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                       |                       |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+2. - HEADERS -
+
+  Headers are 4-byte long, and the format is:
+
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                      ID                    | R|
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |QR| P| Z| QT  |  ANCOUNT  |I |   NK|   RCODE   |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+  where:
+
+        ID      =  It's a 2-byte value which identifies the query.
+                   ID is choosed in a random way and the future
+                   answers must have the same ID.
+	
+	R	=  Recursion bit. If set, SNSD queries that have
+		   a hostname as resolution will be resolved (if
+		   possible).
+
+        QR      =  0 implies that this packet contains a question
+                   1 if the packets contains answers
+
+        P       =  If the query is h2ip and ntk-related, P specifies
+                   the protocol service:
+                   0 for TCP
+                   1 for UDP
+                   P has to be zero otherwise.
+	
+	Z	= zlib compression. If z=1, the packet contents, 
+		  headers excluded, are zlib-compressed. See
+		  Section 8.
+
+        QT      = Query Type. See below.
+                  Note: answers must leave this field unchanged.
+
+        ANCOUNT = Answer Count. This field is set only if QR=1,
+                  ie if this packet contains answers.
+                  ANCOUNT is the number of answers which belongs
+                  to this packet.
+
+        I       = Ip-version bit. Specifies the ip version for the
+                  packet contents. All addresses contained in the 
+                  packet are:
+                  if I==0    IPv4 addresses (4-bytes)
+                  if I==1    Ipv6 addresses (16-bytes)
+                  This bit is useful only for questions. The server 
+                  will reply "NO SUCH DOMAIN" if his node is running
+                  with a different ip-version.
+                  Otherwise, only IPs of the same family will be 
+                  returned.
+                  
+        NK      = Netsukuku bit. With this field, you can specify
+                  the query realm.
+                  If NK=1, the realm is netsukuku.
+                  If NK=2, the realm is internet.
+                  If NK=0, the packet is not encoded with this
+                  protocol, but with standard DNS protocol.
+                  To specify realms with DNS protocol, see below.
+                  Note: answers must leave this field unchanged.
+
+        RCODE   = This is the result of a query.
+                  RCODE has to be 0 if this packet contains a
+                  question.
+                  In the case of errors, ANCOUNT has to be 0.
+
+3. - QUERY TYPE -
+
+  There are different kind of questions:
+
+  QTYPE = 0
+        This is the classic resolution `hostname -> ip`.
+        A gethostbyname.
+        Note: this type of query is used also for SNSD
+        resolution (see `NTK_RFC 0009`).
+        You can specify a service.
+        So, the general way to represent this query is:
+
+                hostname:service -> ip
+
+        If you don't specify a service, the 0-service
+        will be used.
+
+        Example: if you want to discover which address is
+        hosting the http service of hostname `depausceve`,
+        you have to formule this query:
+
+                depausceve:80
+
+        See below how to formule queries.
+
+  QTYPE = 1
+        This is a reverse resolution: `ip -> host`.
+
+  QTYPE =2
+  	This is a global query: all services for the
+	hostname will be answered.
+	The query realm has to be Ntk.
+
+4. - QUERY REALMS -
+
+  A query can be formulated to find some object in the
+  netsukuku net or in internet.
+  Maybe you want to know the ip of `google.it`, but you
+  have to specify where: internet or netsukuku?
+
+  If you use ANDNS protocol, you specify this with NK
+  bit (See the HEADERS SECTION).
+
+  If you use DNS protocol, you have to formule the query
+  with some suffix: if you ask for `google.it.int` (or
+  google.it.INT), the question is made in internet.
+  If you ask for `google.it.ntk` (or `google.it.NTK)
+  the question is made in netsukuku.
+  If you don't specify any suffix, the default realm
+  is Netsukuku Realm
+
+  The dns_wrapper first search for a suffix, understanding
+  the correct realm.
+  If the question does not have any suffix, the query
+  will be made in the default realm.
+  Otherwise, dns_wrapper removes this suffix and
+  resolves the query without it.
+
+5. - RCODE -
+
+  This is the answer report.
+  It's always 0 if the packet carries a question.
+  Possible values, in the case of an answer, are:
+
+   RCODE = 0 No Error.
+        This answer contains answers.
+        The number of ANSWERS is ANCOUNT (see
+        HEADERS SECTION).
+
+   RCODE = 1 Interpretation Error.
+        The server did not understand your query.
+        In other words, your question is malformed.
+
+   RCODE = 2 Server Fail.
+        The server did encounter some error processing
+        your question. Your question is good.
+
+   RCODE = 3 No Such Domain
+        The object of your question does not exist.
+
+   RCODE = 4 Not Implemented
+        This type of query is not implemented yet
+        in this server.
+
+   RCODE = 5 Refused
+        The server refuse to talk with you.
+
+  Note: this expression is always true:
+
+                (RCODE XOR ANCOUNT)
+
+  ie, if RCODE contains some error (RCODE!=0), there is
+  not answer in this packet. If RCODE is 0 (no error),
+  the packet contains some answer.
+
+6. - QUESTIONS -
+
+  We have to switch the value QTYPE against realm.
+
+  - Case QTYPE = 0 (h2ip) AND Realm=NTK
+    The format of the question is:
+
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                    SERVICE                    |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                                               |       
+        |                                               |       
+        |                                               |
+        |                   HOSTNAME                    |
+        |                     HASH                      |
+        |                     (HH)                      |
+        |                                               |
+        |                                               |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+    where:
+
+     SERVICE is a 2-byte field and represents the SNSD service
+     value (see `NTK_RFC 0009`).
+
+     HH is the 16-bytes hostname hash.
+
+  - Case QTYPE = 0 (h2ip) AND Realm=INET
+    The format of the question is:
+
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                   SERVICE                     |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                   RDLENGTH                    |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                                               |
+        \                                               \
+        \                    RDATA                      \
+        |                                               |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+    where:
+
+     SERVICE is a 2-byte field and represents the SNSD service
+     value (see `NTK_RFC 0009`). At this moment, for INET 
+     resolutions, the service is limited to value 25 
+     - TCP is assumed - or 0.
+
+     RDLENGTH is the RDATA len
+
+     RDATA is a hostname string, such that:
+                 strlen(RDATA)=RDLENGTH
+
+  - Case QTYPE = 1 (ip2h).
+    The format of the question is:
+
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                                               |
+        /                     RDATA                     /
+        /                                               /
+        |                                               |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+    where:
+
+     RDATA is an IP in the binary format.
+     The length of the field - ie the family address (4 or 6) -
+     depends on the bit `I' in the headers section. 
+   
+  - Case QTYPE = 2 (global query).
+    The format of the question is:
+
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                                               |       
+        |                                               |       
+        |                                               |
+        |                   HOSTNAME                    |
+        |                     HASH                      |
+        |                     (HH)                      |
+        |                                               |
+        |                                               |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+    where:
+
+     HH is the 16-bytes hostname hash.
+
+7. - ANSWERS -
+
+  The format of answers is:
+
+  CASE QTYPE=0    (h2ip)   
+
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |  | T|     WG          |       PRIO            |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                                               |
+        /                     RDATA                     /
+        /                                               /
+        |                                               |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+   where:
+    
+   T is set if this answer carries an IP.
+   T is 0 if the answer carries a hostname hash.
+     
+   WG is the weigth of an answer (see `NTK_RFC 0009`)
+
+   PRIO the priority (see `NTK_RFC 0009`)
+
+   RDATA is a binary ip address (His family (and his length) is specified
+         in the headers bit `I') or a hostname hash).
+
+  CASE QTYPE=1   (ip2h)
+
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                    RDLENGTH                   |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                                               |
+        /                     RDATA                     /
+        /                                               /
+        |                                               |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+   where:
+
+   RDLENGTH is the strlen of RDATA (RDATA is a hostname).
+
+   RDATA the hostname resolution.
+
+  CASE QTYPE=2   (global query)
+
+   If QTYPE=2, there is a extra header field before answers:
+
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                    ANCOUNT                    |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+   The two bytes are the number of answers that the query
+   produced. After the two bytes.
+
+   Note: the ANCOUNT field on main headers has to be 1 if
+   RCODE=0, 0 otherwise.
+   The two extra bytes are the real number of answers in the
+   case of QTYPE=2.
+
+   After the two bytes, this is the format for each answer:
+	
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        | M| T| P|  WG          |       PRIO            |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                    SERVICE                    |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                                               |
+        /                     DATA                      /
+        /                                               /
+        |                                               |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+   where T is the type of the DATA.
+   T is:
+   	T = 0	Hostname
+	T = 1 	Ip
+
+   M is set if T is set, and specifies that this is the MAIN_IP
+   of the hostname.
+
+   P is The protocol: Tcp if 0, UDP if 1.
+   
+   If T=1, the ip version is specified in main headers, in the
+   field I.
+   If T=0, the format of data is:
+
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                                               |       
+        |                                               |       
+        |                                               |
+        |                   HOSTNAME                    |
+        |                     HASH                      |
+        |                     (HH)                      |
+        |                                               |
+        |                                               |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+   where HH is the 16 bytes hash of SNSD hostname.
+
+   If T=1, the format of data is:
+
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                                               |
+        /                    RDATA                      /
+        /                                               /
+        |                                               |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+   where RDATA is the binary IP and the length of his contents
+   depends on the field I of main headers (4 in IPv4, 16 in IPv6).
+
+   
+8. - COMPRESSION -
+
+  The format of a compressed packet is:
+
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                      ID                    | R|
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |QR| P| Z| QT  |  ANCOUNT  |I |   NK|   RCODE   |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                                               |
+        |                     USIZE                     |
+        |                                               |
+        |                                               |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+        |                                               |
+        /                     DATA                      /
+        /                                               /
+        |                                               |
+        +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+  Headers remain uncompressed. The packet contents, question and
+  answers, are compressed with zlib. The buffer obtained with the
+  compression is DATA.
+  USIZE is the original size of packet contents (question and 
+  answers). 
+  If a packet is compressed, then Z=1.
+	
+}}}
+

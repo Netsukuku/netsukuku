@@ -1,0 +1,38 @@
+== NTK_RFC 0007 ==
+
+
+Subject: ANDNA counter system based on public key
+
+----
+This text describes a change to the counter_gnode system in ANDNA.
+It will be included in the final documentation, so feel free to correct it.
+But if you want to change the system here described, please contact us first.
+----
+
+{{{
+The counter_gnode is used to prevent massive registrations of hnames by a
+single node, however there is a bug in the actual protocol.
+
+Currently the IP of the counter_gnode is the hash of the public key of the
+register node.
+
+The public key is part of the key pair used by the register_node to register
+and update its hnames, therefore there should be only one key pair for each
+node.
+
+However, nothing prevents the register node to create multiple key pairs,
+modify the ntkd code and use them at the same time. 
+With this technique, the register node can have a new counter_gnode for each
+new generated key pair, avoiding in this way the registration limit.
+
+The solution is to calculate the IP of the counter_gnode using the hash of the
+IP of the register_node. This method was previously proposed but it was
+discarded because every time the register_node changes IP it will have a new
+counter_gnode. The new counter_gnode cannot know how many hnames the
+register_node registered before so it will accept all the new requests, but in
+reality, this is not a problem, in fact, the new counter_gnode can accept only
+256 hnames, thus the limit is maintained.
+}}}
+
+----
+related: ["Netsukuku RFC"]

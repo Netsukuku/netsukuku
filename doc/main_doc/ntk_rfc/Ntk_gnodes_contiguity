@@ -1,0 +1,198 @@
+= NTK_RFC 0001 =
+
+Subject: Gnode contiguity
+
+----
+This text describes a change to the Npv7 about the collision of IPs.
+It will be included in the final documentation, so feel free to correct it.
+But if you want to change the system here described, please contact us first.
+----
+
+= The real problems =
+
+A collision of IPs happens when two gnodes with the same ID are born separately,
+so when they meet each trough a direct link or trough other nodes many
+problems arise since there are some ambiguities:
+
+ * In the first case there can be nodes which have the same IP.
+
+ * In the second:
+		A <-> B <-> D <-> A
+  After a qspn_round the node B will have two routes to reach the gnode A. But in this case the gnode A isn't a contiguous gnode, so when B wants to reach a node which belongs to A, it will send the packet using only one route which may lead to the A gnode which hasn't the wanted node.
+	  
+So these are the real problems.
+In order to solve them it is necessary that every time two gnodes meets each
+other for the first time, one of them will redo the hook, in fact, this was
+the cause of all. 
+When a gnode meets for the first time another gnode is like when a new node joins
+the network: it hooks with the other nodes. The same must be done for the
+gnode.
+
+= Hook of gnodes =
+
+The hook of two gnodes works in this way: only the gnode which has less
+nodes than the other will change (let's call the first gnode X and the second
+Y). If X and Y have the same number of nodes, the gnode which has the smaller
+gnode_id will change.
+The bnodes of X will start to re-hook, the other nodes will re-hook when
+they notice that a new rnode which belongs to Y comes up. 
+Summing up: the bnodes re-hook first, then their rnodes, then the rnodes of
+the rnodes of the bnodes... and so on, all the nodes of the gnode have
+re-hooked.
+
+It doesn't matter that a gnode composed by 2^24 nodes changes all its IPs,
+since it will happen only very few times, i.e. when the gnode of the Europe
+meets that of the America.
+
+== Gnode count ==
+
+This method requires that the number of nodes present in a gnode has to be
+known, therefore the qspn_pkt which traverse gnodes stores also the number
+of nodes of each traversed gnode.
+
+== No first tracer_pkt ==
+
+While re-hooking, the first tracer_pkt won't be sent like in the normal hook
+'cause if all the nodes of the gnode which is re-hooking send it, there
+would be a broadcast pkt for each node. The next qspn_round will let
+the other know the routes to reach them.
+
+== Re-hook of two equal, not contiguous gnodes ==
+
+When there are two nodes with the same ip, or gnodes with the
+same gid, one of them will re-hook, following the same rules we've described,
+but all the packets that the two (g)nodes will send each other will be routed
+by the daemons. For example if A wants to send a packet to A' it stores in the
+pkt the route it received with the last qspn_pkt, the other nodes will forward
+the packet to A' using that route, this is to avoid the problem described
+above.
+
+== Re-hook details ==
+
+The gnode X is re-hooking at the gnode Y.
+
+If the gnode Y hasn't enough free nodes for all the nodes of the
+gnode X then the situation evolves in this way:
+	maxYnodes = maxmimum number of nodes in Y;
+	curYnodes = current number of nodes in Y (gnode count of Y).
+	
+	diff = maxYnodes - curYnodes;
+
+`diff' is the number of new nodes which the gnode Y can accept inside.
+The bnodes of X will say to `diff'# nodes in X to re-hook in the gnode Y, all
+the other non-informed nodes will create a new gnode.
+
+Let's analyse the two cases.
+
+=== informed nodes ===
+
+Remembering how the nodes re-hook (first the bnode, then its rnodes, then the
+rnodes of its rnodes, etc..) we adopt this strategy:
+
+	join_rate=diff/number_of_X_bnodes - 1;
+	
+Each bnode of X knows it can inform `join_rate'# nodes, so when its
+rnodes try to re-hook at it, they'll know that:
+
+ * they will become part of the gnode Y
+ * they can inform other `(join_rate-1)/(number_of_links-1)'# nodes
+
+The same procedure holds for recursively the rnodes of the rnodes of the
+bnode.
+
+When `join_rate' becomes zero the node becomes non-informed.
+
+=== non-informed nodes ===
+
+The gid of the new gnode they create is based on the hash of their previous
+gid. In this way all the non-informed nodes will be in the same new gnode,
+cause they all generates the same hash. If the new gid is already taken in the
+map they'll increment it by one until they choose a non-taken gnode.
+
+== Counting the nodes ==
+
+At this point all seems to be solved, but it is not.
+Anyone can modify the qspn, so for example the X which has less nodes than Y
+can fake the number, and Y will be forced to re-hook.
+It this happens anyone can easily force a gnode of 2^24 nodes to change its
+IPs!
+Therefore the problem to be solved now is: how can the gnode Y verify that the
+gnode X has really more nodes?
+
+What is the main property of a network which has more nodes than another?
+The computability power!
+
+We assume that the average computability power for a gnode of the second level
+or greater is constant. (a gnode of the second level can have 2^16 nodes, in the
+third level 2^24). Therefore the gnode of level 1 won't be checked.
+
+Each node of the gnode which has to re-hook (in this case the gnode Y,
+since the gnode X is faking the qspn_pkt) will send a problem to solve to the
+other gnode and it wait for a very small time the reply with the solution in
+it. If the solution is right the node receiving it will re-hook, otherwise
+the gnode X will be banned and excluded from all the qspn floods.
+Only one challenge each T time can occur, where T is proportional to the size
+of the Y gnode. So say that Y has 16milions IPs, if it has already sent a
+challenge it will send another after 10 minutes.
+
+== Computability power ==
+
+But this system leaves opened another kind of attack: the gnode X can target a single
+node in Y, replying only to its reply and making it re-hook. In order to
+prevent this the nodes act in this way:
+
+ * When a node hooks it creates a RSA key pair, then its rnodes get its public key.
+
+ * When a node receives a reply to the problem, it broadcasts the reply inside its gnode,
+signing it with its public key. When its rnodes receive the pkt, check the signature. 
+If it is valid they update the counter of received replies for the problems sent, then 
+they substitute the signature with their own. The packet will propagate
+until it reaches all the nodes of the gnode.
+
+ * The nodes will start to rehook only when all the replies will be
+received (during the wait time). Since it is not possible that all the reply are 
+received it is allowed that 10% of replies are lost.
+	
+The problem to solve sent by the nodes is:
+		f(x) mod k
+where k is a random number between 2^16  and  2^32.
+
+f(x) is a function which is not easily computable with mod k.
+When x gets bigger the computation time increases.
+We are still deciding on what f() function using.
+
+=== Dumb machines ===
+
+Generating the problem doesn't require a high computability power, in
+fact, the daemon will keep 8 or 16 problems cached, generated while the cpu
+isn't used.
+
+The machines which have a very low computability power won't reply and even
+try to solve the problems they receive (but only if they can't take the
+computability of the problem).
+
+= ANDNA changes =
+
+If a same hostname is registered in two separeted gnodes what happens when they meet?
+Which node will mantain the hostname?
+
+The node which is in the greater gnode wins: the hash_nodes of the smaller
+gnode, which re-hooks, will reset their uptime counter, in this way when they
+receive the update request from the node (which has changed its IP and must
+update its hname), they ask to the other gnode for the old andna_caches.
+
+Moreover the ANDNA_MIN_UPDATE_TIME (the minum amount of time to be waited
+before sending an update os the hname) has to be reduced to
+NEW_HOOK_WAIT_TIME, which is the minimum amount of time to be waited before
+re-hooking. This is necessary, because all the hname updates sent 
+before ANDNA_MIN_UPDATE_TIME seconds have elapsed since the last update 
+rejected. If a gnode re-hooked, the hostname of its nodes has to be
+updated, therefore the update request must be accepted.
+
+= And that's all =
+
+That's all folks.
+
+Alpt, Katolaz, Mancausoft, Uscinziatu
+----
+related: [Netsukuku_RFC]

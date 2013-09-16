@@ -1,0 +1,89 @@
+#!/bin/sh
+
+PATH="/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin:/usr/local/sbin/"
+pids="`pidof ntkd`"
+
+not_running()
+{
+	if test -z "$pids"
+	then
+		echo "ntkd is not running"
+		exit 1
+	fi
+}
+
+already_running()
+{
+	if ! test -z "$pids"
+	then
+		echo "ntkd is already running"
+		exit 1
+	fi
+}
+
+start()
+{
+	already_running
+	echo Launching '"'ntkd $@'"'
+	ntkd $@
+}
+
+stop()
+{
+	not_running
+  	echo "Killing ntkd"
+  	kill $pids
+}
+
+clean_cache_files()
+{
+	rm -fv /usr/share/netsukuku/{*cache*,*map*}
+}
+
+case "$1" in
+  start)
+  	shift
+	start $@
+    ;;
+  stop)
+  	stop
+    ;;
+  restart)
+  	stop
+	start $@
+    ;;
+  flush)
+  	not_running
+  	echo "Flushing the cache of resolved hostnames" 
+	kill -ALRM $pids
+    ;;
+  reload)
+  	not_running
+  	echo Reloading '"'andna_hostnames'"' and trying to register the new hostnames
+	kill -HUP $pids
+    ;;
+  cclean)
+	echo "Cleaning the cache and map files from /usr/share/netsukuku"
+  	clean_cache_files
+    ;;
+  help)
+    cat <<HELP
+  start -- starts the ntkd daemon with the options specified on the
+	   command line
+   stop -- quits the daemon killing all the ntkd processes
+restart -- stops the daemon and then starts it with the options specified on
+	   the command line
+  flush -- flushes the cache of resolved hostnames
+ cclean -- clean cache and map files from /usr/share/netsukuku.
+ 	   It is equivalent to:	rm -fv /usr/share/netsukuku/{*cache*,*map*}
+ reload -- sends ntkd HUP making it reread the "andna_hostnames" and
+           "snsd_nodes" files
+HELP
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|flush|cclean|reload|help}"
+    exit 1
+    ;;
+esac
+
+exit 0

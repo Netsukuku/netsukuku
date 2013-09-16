@@ -1,0 +1,294 @@
+=head1 NAME
+
+ntkd - Netsukuku protocol daemon
+
+=head1 SYNOPSIS
+
+ntkd [-hvaldrD46] [-i net_interface] [-c conf_file] [-l logfile]
+
+=head1 DESCRIPTION
+
+
+Netsukuku is a mesh network or a P2P net system that generates and sustains
+itself autonomously. It is designed to handle an unlimited number of nodes with
+minimal CPU and memory resources. Thanks to this feature it can be easily
+used to build a worldwide distributed, anonymous and anarchical network,
+separated from the Internet, without the support of any servers, ISPs or
+authority controls.
+
+The complete features list of Netsukuku is here:
+L<http://netsukuku.freaknet.org/files/doc/misc/Ntk_features_list>
+
+
+In order to join to Netsukuku you have to use B<ntkd>, which is the
+daemon implementing the Npv7 protocol.
+The daemon at startup takes the list of all the network interfaces which are
+currently UP and it uses all of them to send and receive packets. If you want
+to force the daemon to use specific interfaces you should use the B<-i>
+option.
+The ports it listens to are: 269-udp, 269-tcp, 277-udp, 277-tcp. So
+be sure to open them in the firewall.
+
+
+For more information about Netsukuku visit:
+L<http://netsukuku.freaknet.org>
+
+=head1 OPTIONS
+
+=over
+
+=item B<-4>, B<--ipv4> 
+
+Forces the daemon to use ipv4 addresses only
+
+=item B<-6>, B<--ipv6> 
+
+Forces the daemon to use ipv6 addresses only. Warning, this is still
+experimental.
+
+=item B<-i> I<interface>, B<--iface> I<interface> 
+
+Specifies the network interface the daemon will use to join Netsukuku, i.e.
+wlan0. You can use more than one interface by specifying multiple times the
+B<-i> option. For example: 
+
+	ntkd -i wlan0 -i eth0 -i wifi1 -i eth1
+
+=item B<-a>, B<--no_andna> 
+
+Forces B<ntkd> to don't run the ANDNA daemon when started.
+
+=item B<-R>, B<--no_resolv>
+
+When B<NetsukukuD> starts it modifies F</etc/resolv.conf> writing in the first
+line the string "nameserver 127.0.0.1". The old F</etc/resolv.conf> is copied in
+F</etc/resolv.conf.bak>. When the daemon is closed F</etc/resolv.conf> is
+restored. If you want to disable this set use the B<-R> option.
+
+=item B<-r>I<[bool]>, B<--restricted>=I<[bool]>
+
+With this option the daemon will run in restricted mode as specified in
+the Npv7, only IPs of a private class will be chosen. It is used for
+Internet compatibility. 
+If no argument is given to the option, the default restricted private class
+10.0.0.0 is used, otherwise if I<bool> is not zero, the restricted class will
+be 172.16.0.0-172.31.255.255.
+
+=item B<-I>, B<--share-inet>
+
+Tells NetsukukuD to run in restricted mode (see B<-r>) and to share your
+Internet connection. Please check the relative options in
+F</etc/netsukuku/netsukuku.conf>
+
+=item B<-D>, B<--no_daemon> 
+
+This option tells B<ntkd> to don't detach to background and
+daemonizing itself. The daemon will run on foreground instead.
+
+=item B<-c> I<configuration_file>, B<--conf> I<configuration_file> 
+
+Specifies the name of the configuration file. The
+default is /etc/netsukuku/netsukuku.conf. B<ntkd> will not start
+without a configuration file.
+
+=item B<-l> I<logfile>, B<--logfile> I<logfile>
+
+Specifies that B<ntkd> should send all of its messages to the specified file.
+The I<logfile> will be overwritten.
+
+=item B<-d>, B<--debug> 
+
+With this option the daemon will run with displaying its debug messages.
+The more -d you specify the more debug messages you'll get. Sometimes it's
+cool to use it, but be careful and don't go insane ;)
+
+=item B<-h>, B<--help> 
+
+Display a the list of available options and their brief description.
+
+=item B<-v>, B<--version> 
+
+Displays the version of the B<ntkd> daemon.
+
+=back
+
+=head1 EXAMPLES
+
+Usually you'll just want to use B<ntkd> with a wifi device:
+
+	ntk-wifi wlan0
+	ntkd -i wlan0
+
+If you one to use more than one network interface:
+
+	ntkd -i eth0 -i wlan0 -i wifi1 -i eth2
+
+=head1 SIGNALS
+
+When the B<SIGHUP> signal is sent to ntkd(8), the F<andna_hostnames> and
+F<snsd_nodes> files will be reloaded and it will try to register all the new
+added hostnames and snsd records.
+
+When the B<SIGALRM> signal is sent to B<ntkd>, the resolved hostnames
+cache is flushed.
+
+=head1 LOGS
+
+If B<ntkd> is started as a daemon (without the B<-D> option), all the
+logs are sent to syslog under the LOG_DAEMON category.
+
+If the no-daemon option (B<-D>) is used, all the logs are printed to
+F<stderr>.
+
+=head1 FILES
+
+=over
+
+=item F</etc/netsukuku/netsukuku.conf>
+
+It is the default path for the B<ntkd> configuration file. It's
+possible to choose another file using the B<-c> option.
+
+=item F</etc/netsukuku/andna_hostnames>
+
+It is the file where the hostnames to be registerd in ANDNA are kept one per
+line. It's location can be changed by modifying the relative option in the
+F<netsukuku.conf> file.
+
+=item F</etc/netsukuku/snsd_nodes>
+
+The snsd_nodes_file keeps the list of the SNSD records which will be register
+in ANDNA. 
+
+=item F</usr/share/netsukuku/ext_map_file>
+
+=item F</usr/share/netsukuku/int_map_file>
+
+=item F</usr/share/netsukuku/bnode_map_file>
+
+They are the Netsukuku maps saved by the daemon. Their locations can be
+changed in F<netsukuku.conf>.
+
+=item F</usr/share/netsukuku/andna_lcl_keyring>
+
+In this keyring your ANDNA public and secret keys are saved. Handle this file
+with care: without it, you won't be able to update your hostnames, thus 
+you'll definitely lose them.
+
+=item F</usr/share/netsukuku/andna_cache>
+
+=item F</usr/share/netsukuku/andna_lcl_cache>
+
+=item F</usr/share/netsukuku/andna_rh_cache>
+
+=item F</usr/share/netsukuku/andna_counter_cache>
+
+They are the saved ANDNA caches. Their locations can be changed in
+F<netsukuku.conf>.
+
+=item F</etc/netsukuku/ip_masquerade.sh>
+
+This script is launched by NetsukukuD, at its start, when it shares the Internet
+connection. The script will activate the IP masquerading.
+The script is also used to disable the IP masquerading when B<ntkd> is closed.
+
+=item F</etc/netsukuku/tc_shaper.sh>
+
+This script manages the traffic shaping for the upload bandwidth.
+It is executed by B<ntkd> at its start if its relative option has been
+enabled.
+
+=item F</var/run/ntkd.pid>
+
+It is the lock file created by ntkd at its start, it is used to check if other
+instances of ntkd are already running.
+Only one instance is allowed.
+
+=back
+
+=head1 KERNEL DEPENDENCIES
+
+On Linux be sure to have the following options set in your kernel .config.
+These options are taken from linux-2.6.14.
+ 
+ 
+	#
+	# Networking options
+	#
+	CONFIG_PACKET=y
+	CONFIG_UNIX=y
+	CONFIG_INET=y
+	CONFIG_IP_MULTICAST=y
+	CONFIG_IP_ADVANCED_ROUTER=y
+	CONFIG_IP_MULTIPLE_TABLES=y
+	CONFIG_IP_ROUTE_MULTIPATH=y
+	CONFIG_NET_IPIP=y
+	CONFIG_NETFILTER=y
+
+and these from linux-2.6.16.19.
+
+	#
+	# Core Netfilter Configuration
+	#
+
+	CONFIG_NETFILTER_XT_MATCH_CONNTRACK=y
+	NETFILTER_XT_TARGET_CONNMARK=y
+
+	#
+	# IP: Netfilter Configuration
+	#
+
+	CONFIG_IP_NF_IPTABLES=y
+	CONFIG_IP_NF_FILTER=y
+	CONFIG_IP_NF_TARGET_REJECT=y
+	CONFIG_IP_NF_NAT=y
+	CONFIG_IP_NF_NAT_NEEDED=y
+	CONFIG_IP_NF_TARGET_MASQUERADE=y
+
+If you are using modules you have to load them before launching the daemon.
+
+=head1 BUGS
+
+{ Don't panic! }
+
+If you encounter any bug, please report it.
+Use the online bug track system: 
+    L<http://bugs.dyne.org/> 
+
+or the mailing list:
+    L<http://lists.dyne.org/netsukuku/>
+
+and explain what the problem is and if possible a way to reproduce it.
+
+=head1 CONTACTS
+
+Subscrive to the netsukuku mailing to get help, be updated on the latest news
+and discuss on its development.
+
+To subscribe to the list, send a message to:
+    L<netsukuku-subscribe@lists.dyne.org>
+   
+We live night and day in IRC, come to see us in:
+#netsukuku 
+on the FreeNode irc server (irc.freenode.org).
+
+=head1 AUTHORS
+
+Main authors and maintainers:
+
+Andrea Lo Pumo aka AlpT <alpt@freaknet.org>
+
+Main contributors:
+
+Andrea Leofreddi <andrea.leofreddi@gmail.com>, Katolaz <katolaz@freaknet.org>,
+Federico Tomassini <effetom@gmail.com>
+
+For a complete list read the AUTHORS file or visit:
+    L<http://netsukuku.freaknet.org/?p=Contacts>
+
+=head1 SEE ALSO
+
+For more information about Netsukuku visit:
+    L<http://netsukuku.freaknet.org>
+
+netsukuku.conf(5), ntk-wifi(8), andna(8), iproute2(8), route(8)

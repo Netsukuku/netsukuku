@@ -1,0 +1,300 @@
+=head1 NAME
+
+netsukuku.conf - Netsukuku daemon configuration file
+
+=head1 SYNOPSIS
+
+/etc/netsukuku/netsukuku.conf
+
+=head1 DESCRIPTION
+
+ntkd(8) loads its options from the command line and from B<netsukuku.conf>.
+The options that are changed infrequently resides in the configuration file.
+The B<netsukuku.conf> file is typically installed at /etc/netsukuku/netsukuku.conf.
+
+The comments starts with a '#'.
+If an option is commented, B<ntkd> will use its default value.
+
+The character '=' is used to assign a value to an option.
+
+All the options will be overridden by their command line equivalent.
+
+=head1 OPTIONS
+
+=head2 RESTRICTED MODE
+
+=over
+
+=item B<ntk_restricted_mode> = I<bool>
+
+When set to 1, B<ntkd> will be started in restricted mode to be compatible
+with Internet. In the restricted mode, only IPs of the largest private subnet,
+i.e. 10.x.x.x are chosen.
+
+Default: I<0>
+
+=item B<ntk_restricted_class> = I<bool>
+
+When set to 1 the IPs will be chosen from the 172.16.0.0-172.31.255.255 range
+(use this option only if you can't use the 10.x.x.x class).
+
+Default: I<0>
+
+=back
+
+=head2 INTERNET CONNECTION
+
+All these Internet options requires B<ntk_restricted_mode> set to 1.
+
+=over
+
+=item B<internet_connection> = I<bool>
+
+When set to 1, it specifies that this computer has an active Internet
+connection. Note that B<ntkd> will overwrite any default route if this
+option is set to 0 and the shared Internet connections of other nodes are
+used.
+
+Default: I<0>
+
+=item B<internet_gateway> = I<IP:interface>
+
+It specifies the default gateway used by I<localhost> to reach the Internet.
+This option is necessary only if you don't have the default route set when you
+run B<ntkd> (i.e. you haven't connected yet).
+If this option isn't specified, B<ntkd> will automatically retrieve the
+default Internet gateway from the routing table.
+Example: 
+	internet_gateway = 192.168.1.1:eth0
+
+Default: I<(null)>
+
+=item B<internet_download_rate> = I<Kb>
+
+This option is required if the B<internet_connection> option has been set to
+1. It must be set to the download rate of the Internet connection in
+KiloBytes. Example:
+
+	internet_download_rate = 640
+
+Default: I<(null)>
+
+=item B<internet_upload_rate> = I<Kb>
+
+This option is required if the B<internet_connection> option has been set to
+1. It must be set to the upload rate of the Internet connection in
+KiloBytes. Example:
+
+	internet_upload_rate = 30
+
+Default: I<(null)>
+
+=item B<internet_ping_hosts> = I<host1:host2:host3:...>
+
+Specifies a list of Internet hostnames which B<ntkd> will ping periodically to
+verify the status of the Internet connection. If all the hosts specified
+aren't reachable, it will assume that the Internet connection isn't available
+anymore. When one them becoms pingable, B<ntkd> will enable again the
+Internet Gateway Search. Example:
+
+	internet_ping_hosts = google.com:cisco.com:sourceforge.net:dyne.org
+
+This option hasn't a default value, it must be specified in the
+B<netsukuku.conf> file.
+
+=item B<share_internet> = I<bool>
+
+When set to 1, B<ntkd> shares the Internet connection among all the other
+Netsukuku nodes.
+
+Default: I<1>
+
+=item B<shape_internet> = I<bool>
+
+Specifies if B<ntkd> will execute the F</etc/netsukuku/tc_shaper.sh> script to
+activate the traffic shaping of the Internet connection.
+
+Default: I<0>
+
+=item B<use_shared_internet> = I<bool>
+
+Specifies if B<ntkd> will load balance the Internet traffic of this host using
+the Inet connections shared by the Netsukuku nodes.
+When set to 0, localhost (this machine) uses only its local Internet
+connection (if any).
+
+Default: I<1>
+
+=back
+
+=head2 ANDNA
+
+=over
+
+=item B<disable_andna> = I<bool>
+
+When set to 1, B<ntkd> won't load the ANDNA(8) daemon.
+Note that when the ANDNA daemon is disabled, the andna system will not work at
+all, so it will be impossible to resolve, register or update hostnames.
+
+Default: I<0>
+
+=item B<disable_resolvconf> = I<bool>
+
+When B<ntkd> starts it modifies F</etc/resolv.conf> writing in the first
+line "nameserver 127.0.0.1". The old F</etc/resolv.conf> is copied in
+F</etc/resolv.conf.bak>. When the daemon is closed F</etc/resolv.conf> is
+restored. If you want to disable this set disable_resolvconf to 1.
+If it is disabled you won't be able to resolve hostnames!
+
+Default: I<0>
+
+=back
+
+=head2 LIMITS
+
+Note: in the current B<ntkd> version these limits aren't effective.
+
+=over
+
+=item B<ntk_max_connections> = I<number>
+
+How many connection the netsukuku daemons can simultaneusly handle.
+
+Default: I<512>
+
+=item B<ntk_max_accepts_per_host> = I<number>
+
+How many simultaneusly connections to the daemons from a single host are
+allowed.
+
+Default: I<16>
+
+=item B<max_accepts_per_host_time> = I<seconds>
+
+The wait time necessary for a host to reconnect to the daemons after all the
+ntk_max_accepts_per_host were used.
+
+Default: I<4>
+
+=back
+
+=head2 FILES
+
+=over
+
+=item B<pid_file> = I<filename>
+
+B<ntkd> will save its process id in this file. 
+It is used to check if other instances of ntkd are already running.
+Only one instance is allowed.
+
+Default: I</var/run/ntkd.pid>
+
+=item B<ntk_ext_map_file> = I<filename>
+
+=item B<ntk_int_map_file> = I<filename>
+
+=item B<ntk_bnode_map_file> = I<filename>
+
+Specify the paths of the maps saved by the daemon.
+
+Default: I</usr/share/netsukuku/ext_map_file>
+
+Default: I</usr/share/netsukuku/int_map_file>
+
+Default: I</usr/share/netsukuku/bnode_map_file>
+
+=item B<andna_hnames_file> = I<filename>
+
+Specify the path of the file which keeps the ANDNA hostnames of the local
+host. These hostnames will be registerd in ANDNA.
+
+Default: I</etc/netsukuku/andna_hostnames>
+
+=item B<snsd_nodes_file> = I<filename>
+
+The snsd_nodes_file keeps the list of the SNSD records which will be register
+in ANDNA.
+
+Default: I</etc/netsukuku/snsd_nodes>
+
+=item B<andna_lclkey_file> = I<filename>
+
+Specifies the location of the I<local keyring> file.
+In this keyring the ANDNA public and secret keys are saved. Handle this file
+with care: without it, you won't be able to update your hostnames, thus you'll
+definitely lose them.
+
+Default: I</usr/share/netsukuku/andna_lcl_keyring>
+
+=item B<andna_cache_file> = I<filename>
+
+=item B<andna_lcl_file> = I<filename>
+
+=item B<andna_rhc_file> = I<filename>
+
+=item B<andna_counter_c_file> = I<filename>
+
+Specify the paths of the caches used by the ANDNA daemon.
+
+Default: I</usr/share/netsukuku/andna_cache>
+
+Default: I</usr/share/netsukuku/andna_lcl_cache>
+
+Default: I</usr/share/netsukuku/andna_rh_cache>
+
+Default: I</usr/share/netsukuku/andna_counter_cache>
+
+=item B<ip_masquerade_script> = I<filename>
+
+Specifies the path of the IP masquerading script.
+This script is launched by NetsukukuD, at its start, when it shares the Internet
+connection. The script will activate the IP masquerading.
+The script is also used to disable the IP masquerading when B<ntkd> is closed.
+
+Default: I</etc/netsukuku/ip_masquerade.sh>
+
+=item B<tc_shaper_script> = I<filename>
+
+Specifies the path of the traffic shaping script.
+This script manages the traffic shaping for the upload bandwidth.
+It is executed by B<ntkd> at its start if its relative option has been
+enabled.
+
+Default: I</etc/netsukuku/tc_shaper.sh>
+
+=back
+
+=head1 CONTACTS
+
+Subscribe to the netsukuku mailing to get help, be updated on the latest news
+and discuss on its development.
+
+To subscribe to the list, send a message to:
+    L<netsukuku-subscribe@lists.dyne.org>
+   
+We live night and day in IRC, come to see us in:
+#netsukuku 
+on the FreeNode irc server (irc.freenode.org).
+
+=head1 AUTHORS
+
+Main authors and maintainers:
+
+Andrea Lo Pumo aka AlpT <alpt@freaknet.org>
+
+Main contributors:
+
+Andrea Leofreddi <andrea.leofreddi@gmail.com>, Katolaz <katolaz@freaknet.org>,
+Federico Tomassini <effetom@gmail.com>
+
+For a complete list read the AUTHORS file or visit:
+    L<http://netsukuku.freaknet.org/?p=Contacts>
+
+=head1 SEE ALSO
+
+For more information about Netsukuku visit:
+    L<http://netsukuku.freaknet.org>
+
+ntkd(8), ntk-wifi(8), andna(8), iproute2(8), route(8)

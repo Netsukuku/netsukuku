@@ -1,0 +1,147 @@
+Internet connection sharing in Netsukuku HOWTO
+
+This document describes how to configure a Netsukuku node to share its
+Internet connection and how to configure another node that will use the shared
+connection.
+
+--
+
+	* Internet Gateway Search
+	
+	* Prerequisites
+	
+	* How to share your Internet connection
+	
+	* How to connect to the Internet using a shared connection
+	
+	* Some nice feature you want to know
+
+--
+
+**
+*** Internet Gateway Search
+**
+
+If the nodes are in restricted mode (compatibility with the Internet), they
+can share their Internet connection. This can be easily done, in fact, if a
+node X, connected to the Internet, activates the masquerading, it is possible
+for the other nodes to connect by setting as the default gateway their rnode
+which lead to the node X.
+
+This can be automated by Netsukuku itself.
+The node which is sharing its connection will tell to the Netsukuku daemon to
+masquerade its connection and to set a specific flag in the QSPN packets.
+The other nodes in restricted mode will automatically know their nearest
+Netsukuku Internet gateway and set it in their default route.
+
+For more information read http://lab.dyne.org/Ntk_IGS .
+
+
+**
+*** Prerequisites
+**
+
+The IGS code of Netsukuku depends on the IPIP tunnel code of the kernel, so if
+you are using Linux be sure to have the `CONFIG_NET_IPIP' option set as a
+module or built-in.
+
+
+**
+*** How to share your Internet connection
+**
+
+First of all modify the /etc/netsukuku/netsukuku.conf file.
+
+Set `internet_connection' to 1.
+
+Set the `internet_gateway' option to the IP of the gateway you use to reach 
+the Internet and specify the network interface too, for example:
+"internet_gateway = 192.168.1.1:eth0". This option is necessary only if you
+don't have the default route set when you run NetsukukuD (i.e. you haven't
+connected yet), otherwise, leave it commented.
+
+You have also to set your upload and download bandwidth in 
+`internet_upload_rate' and `internet_download_rate'. It is expressed in Kb/s,
+so if you have a line which maximum can do: 640 Kb/s in dwload and 30 Kb/s in 
+upload, set them to 640 and 30.
+
+`internet_ping_hosts' is a list of Internet hosts which will be pinged to
+verify if the connection is alive, you can use the default hosts.
+
+Finally, If you want to share your Internet connection among other Netsukuku
+nodes, set `share_internet' to 1.
+
+Ah, and you can set `shape_internet' to 1 if you want to shape your outgoing
+Internet traffic.
+
+---- netsukuku.conf snip ----
+internet_connection	= 1
+internet_gateway	= 192.168.1.1:eth0
+internet_download_rate  = 640
+internet_upload_rate	= 30
+internet_ping_hosts	= google.com:cisco.com:sourceforge.net:dyne.org
+share_internet		= 1
+shape_internet		= 1
+----       snip end      ----
+
+Now you are ready to launch the Netsukuku daemon. You have just to append the -I
+option in the command line. For example:
+
+# ntkd -i wlan0 -r -I
+
+
+**
+*** How to connect to the Internet using a shared connection
+**
+
+Just start the daemon in restricted mode, f.e:
+
+# ntkd -i wlan0 -r
+
+If you have an Internet connection and you don't want to share it, you have to
+set the correct options in netsukuku.conf:
+
+---- netsukuku.conf snip ----
+internet_connection     = 1
+internet_gateway        = 192.168.1.1:eth0
+internet_download_rate  = 640
+internet_upload_rate    = 30
+internet_ping_hosts     = google.com:cisco.com:sourceforge.net:dyne.org
+share_internet          = 0
+----       snip end      ----
+
+If you don't, your Internet connection default route will be overwritten with
+that of another node.
+
+
+**
+*** Some nice feature you want to know
+**
+
+NetsukukuD supports a routing method called "multi inet gateway", this means
+that your node can connect to the Internet using, at the same time, multiple
+node which share their connection.
+If there are 5 nodes which share their 640Kb/s connections, you can have 5
+parallel downloads at 640Kb/s. Isn't it juicy?
+There's more: if you decide to share your Internet connection, you will always
+use the Internet connections shared by the other nodes, in this way you donate
+your bandwidth but, at the same time, you receive donations from other users.
+
+The other nice feature is the traffic shaping of your Internet connection (it
+doesn't matter if you're sharing it or not).
+If you decide to enable the relative option (shape_internet=1), NetsukukuD
+will execute the /etc/netsukuku/tc_shaper.sh script. 
+This script shapes your Internet connection, this means that the traffic
+generated from your private LAN (192.168.x.x) and the low delay traffic (i.e.
+DNS, ssh...) are prioritised.
+The benefits are:
+* Even if you share your Internet connection to other Netsukuku nodes, your
+  traffic will have the maximum priority, therefore you won't notices any
+  slowdown
+* Even if you are downloading a big file, your lowdelay traffic will have the
+  priority, therefor your ssh connections won't slow a bit
+
+PS: for more information read: http://lab.dyne.org/Ntk_IGS
+
+That's all,
+enjoy ^_^

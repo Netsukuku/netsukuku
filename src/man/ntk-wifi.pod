@@ -1,0 +1,65 @@
+=head1 NAME
+
+ntk-wifi - configures the specified wifi card to join Netsukuku
+
+=head1 SYNOPSIS
+
+ntk-wifi I<wifi_interface>
+
+=head1 DESCRIPTION
+
+B<Netsukuku_wifi> is a shell script, which takes as its first argument the name
+of the wifi network interface to be used in order to join in Netsukuku. Then
+it sets the wifi interface in Ad-Hoc mode and its essid to "netsukuku".
+At this point the B<ntkd> daemon is ready to be launched,
+
+=head1 EXAMPLES
+
+
+ntk-wifi wlan0
+
+=head1 BUGS
+
+{ Don't panic! }
+
+If you encounter any bug, please report it.
+Use the online bug track system: 
+    L<http://bugs.dyne.org/> 
+
+or the mailing list:
+    L<http://lists.dyne.org/netsukuku/>
+
+and explain what the problem is and if possible a way to reproduce it.
+
+=head1 CONTACTS
+
+Subscribe to the netsukuku mailing to get help, be updated on the latest news
+and discuss on its development.
+
+To subscribe to the list, send a message to:
+    L<netsukuku-subscribe@lists.dyne.org>
+
+We live night and day in IRC, come to see us in:
+#netsukuku 
+on the FreeNode irc server (irc.freenode.org).
+
+=head1 AUTHORS
+
+Main authors and maintainers:
+
+Andrea Lo Pumo aka AlpT <alpt@freaknet.org>
+
+Main contributors:
+
+Andrea Leofreddi <andrea.leofreddi@gmail.com>, Katolaz <katolaz@freaknet.org>,
+Federico Tomassini <effetom@gmail.com>
+
+For a complete list read the AUTHORS file or visit:
+    L<http://netsukuku.freaknet.org/?p=Contacts>
+
+=head1 SEE ALSO
+
+For more information about Netsukuku visit:
+    L<http://netsukuku.freaknet.org>
+
+ntkd(8), andna(8), iproute2(8), route(8)

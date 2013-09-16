@@ -1,0 +1,10 @@
+#define CONF_DIR "%(CONF_DIR)s"
+#define DATA_DIR "%(DATA_DIR)s"
+#define PID_DIR "%(PID_DIR)s"
+
+#if %(debug)d
+#	undef  DEBUG
+#	define DEBUG
+#endif
+
+#define VERSION "%(VERSION)s"

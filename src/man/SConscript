@@ -1,0 +1,8 @@
+Import('env')
+
+idir_man   = '$destdir' + '$MAN_DIR/man8'
+idir_man5   = '$destdir' + '$MAN_DIR/man5'
+
+env.Install(idir_man, ['ntkd.8', 'ntk-wifi.8', 'ntk-resolv.8', 'andna.8'])
+env.Install(idir_man5, ['netsukuku.conf.5'])
+env.Alias('install', [idir_man, idir_man5])

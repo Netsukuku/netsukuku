@@ -1,0 +1,64 @@
+== NTK_RFC 0008 ==
+
+Subject: Private IP classes in restricted mode
+
+----
+This text describes a change to the Npv7.
+It will be included in the final documentation, so feel free to correct it.
+But if you want to change the system here described, please contact us first.
+----
+
+The user can decide to use, in restricted mode, a different private IP
+class from the default one ( 10.x.x.x ). This is useful if the 10.x.x.x class
+cannot be used, for example in Russia, it is very popular to provide Internet
+access through big LANs which use the 10.x.x.x class.
+
+The other available classes are:
+{{{
+172.16.0.0  - 172.31.255.255    = 16*2^16 = 1048576 IPs
+192.168.0.0 - 192.168.255.255   =    2^16 = 65536   IPs
+}}}
+
+The 192.168.x.x class cannot be used as an alternate restricted mode IP class
+because it is the default Netsukuku private class, thus the only alternative
+to 10.x.x.x is the "172.16.0.0 - 172.31.255.255" IP class.
+However it is adviced to always use the default class.
+
+== Netsukuku private classes ==
+
+It necessary to provide at least one private IP class inside Netsukuku to
+allow the creation of private LANs which are connected to Netsukuku with just
+one node.
+
+The default Netsukuku private class is 192.168.x.x.
+The random IPs choosen by the nodes will be never one of that class.
+The default private class is valid both in normal and restricted mode.
+
+Only in normal mode the "172.16.0.0 - 172.31.255.255" class becomes private.
+This class is assigned to very large private networks.
+
+The 10.x.x.x class IS NOT private since it is too big and it would be just a
+waste of IP addresses to use it as a private class.
+Note also that for each Netsukuku node you can have a private network,
+therefore with just 16 Netsukuku nodes you can form a private network of
+16777216 nodes, which is equivalent to a 10.x.x.x class.
+
+== Notes on the restricted mode ==
+
+A node which runs in restricted mode cannot be compatible with normal mode
+nodes, for this reason a restricted node will drop any packets coming from a
+normal node.
+
+While in restricted mode the "172.16.0.0 - 172.31.255.255" class IS NOT
+private.
+
+In restricted mode, when two different networks which use different
+private classes (say 10.x.x.x and 192.168.x.x) are linked, nothing happens and
+they will not rehook, this is necessary because it's assumed that the specified
+private class is the only choice the user can utilize.
+This leds to some problems, consider this scenario:
+{{{
+		10.0.0.0 <-> 172.16.0.0
+}}}
+In this case the rehook isn't launched, so it is possible that there will be a
+lot of collision.

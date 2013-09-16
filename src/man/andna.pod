@@ -1,0 +1,203 @@
+=head1 NAME
+
+ANDNA - Abnormal Netsukuku Domain Name Anarchy
+
+=head1 DESCRIPTION
+
+
+ANDNA is the distributed, non hierarchical and decentralised system of hostname
+management in Netsukuku. It substitutes the DNS.
+The ANDNA database is scattered inside all the Netsukuku net and in the worst 
+case every node will have to use about some hundreds Kb of memory.
+
+In order to join ANDNA it is necessary to be hooked at Netsukuku with the
+ntkd(8) daemon.
+
+For more information about ANDNA visit:
+L<http://netsukuku.freaknet.org>
+
+=head1 USAGE
+
+
+First of all be sure to have the ntkd(8) daemon up and running.
+
+=head2 HOSTNAME REGISTRATION
+
+You can register up to 256 hostnames. Each hostname can be a string of maximum
+512 bytes, which contains a newline (\n) only at its end.
+
+The hostnames to be registered must be listed, one per line, in the
+F<andna_hostnames> file, which is by default in
+F</etc/netsukuku/andna_hostnames>.
+
+The ntkd(8) daemon reads it when it is started and when it receives the
+SIGHUP signal. So if you've added a hostname while ntkd was running,
+just do: 
+
+	killall -HUP ntkd
+
+All the hostnames, which are already registered by other nodes, are
+added in the queue, in this way, when the other nodes won't update them, your
+hostnames will automatically be the first in the queue.
+
+An hostname expires after 3 days, if it isn't updated. B<ntkd>
+automatically updates the registered hostnames, therefore your hostnames will
+expire only if you aren't present in the Netsukuku for 3 entire days.
+
+If you want to know the result of a registration read the B<ntkd>
+logs.
+
+=head2 HOSTNAME RESOLUTION
+
+The ntkd(8) daemon runs also a DNS wrapper which receives standard DNS
+queries for hostnames resolution. The hostnames are resolved in ANDNA, then the
+DNS wrapper will reply to the requester.
+
+When the ntkd(8) daemon is started it copies /etc/resolv.conf in
+/etc/resolv.conf.bak and adds in the first line of /etc/resolv.conf the
+"nameserver 127.0.0.1" string. When it is closed it moves back
+/etc/resolv.conf.bak to /etc/resolv.conf. Use the B<-R> option if you want to
+disable this behaviour.
+
+All the resolved hostnames are kept, until their expiration date, in the
+C<resolved hostnames cache>. The entire cache is flushed each time the
+ntkd(8) daemon receives the SIGALRM signal.
+
+That's all.
+
+=head2 IP RESOLUTION
+
+It is possible to know the list of hostnames registered by a node. You have to
+simply reverse resolve its ip. For example:
+
+	dig -x 127.0.0.2
+
+This command shows your currently registered hostnames. You can use it to know
+what hostnames have been already registered. Note the 127.0.0.2 ip. If you use
+127.0.0.1 you get only the local hostname written in /etc/hosts.
+
+=head2 SCATTERED NAME SERVICE DISGREGATION
+
+The Scattered Name Service Disgregation is the ANDNA equivalent of the
+SRV Record of the Internet Domain Name System.
+For a complete description of the SNSD read the NTK_RFC 0009:
+L<http://lab.dyne.org/Ntk_SNSD>
+
+=head3 SNSD NODE REGISTRATION
+
+ * Modify the /etc/netsukuku/snsd_nodes file.
+ * Copy the needed public keys
+ * Send a SIGHUP to the NetsukukuD of the register node:
+
+=head3 SNSD NODE DELETION
+
+Not implemented
+
+=head3 SNSD HNAME RESOLUTION
+
+The utility ntk-resolv(8) can be used to resolve SNSD hostnames. Examples:
+	
+	ntk-resolv -s 53/udp host
+	ntk-resolv -s http host
+
+=head1 SIGNALS
+
+When the B<SIGHUP> signal is sent to ntkd(8), the F<andna_hostnames> and
+F<snsd_nodes> files will be reloaded and it will try to register all the new
+added hostnames and snsd records.
+
+When the B<SIGALRM> signal is sent to ntkd(8), the resolved hostnames
+cache will be flushed.
+
+=head1 FILES
+
+=over 
+
+=item F</etc/netsukuku/andna_hostnames>
+
+It is the file where the hostnames to be registerd in ANDNA are kept one per
+line. It's location can be changed by modifying its option in the
+F<netsukuku.conf> file.
+
+=back
+
+=over
+
+=item F</etc/netsukuku/snsd_nodes>
+
+The snsd_nodes file keeps the list of the SNSD records which will be register
+in ANDNA.
+
+=back
+
+=over
+
+=item
+F</usr/share/netsukuku/andna_lcl_keyring>
+
+In this keyring your ANDNA public and secret keys are saved. Handle this file
+with care: without it, you won't be able to update your hostnames, thus 
+you'll definitely lose them.
+
+=item
+F</usr/share/netsukuku/andna_cache>
+
+=item
+F</usr/share/netsukuku/andna_lcl_cache>
+
+=item
+F</usr/share/netsukuku/andna_rh_cache>
+
+=item
+F</usr/share/netsukuku/andna_counter_cache>
+
+They are the saved ANDNA caches.  Their locations can be 
+changed in F<netsukuku.conf>.
+
+=back
+
+=head1 BUGS
+
+{ Don't panic! }
+
+If you encounter any bug, please report it.
+Use the online bug track system: 
+    L<http://bugs.dyne.org/> 
+
+or the mailing list:
+    L<http://lists.dyne.org/netsukuku/>
+
+and explain what the problem is and if possible a way to reproduce it.
+
+=head1 CONTACTS
+
+Subscribe to the netsukuku mailing to get help, be updated on the latest news
+and discuss on its development.
+
+To subscribe to the list, send a message to:
+    L<netsukuku-subscribe@lists.dyne.org>
+   
+We live night and day in IRC, come to see us in:
+#netsukuku 
+on the FreeNode irc server (irc.freenode.org).
+
+=head1 AUTHORS
+
+Main authors and maintainers:
+
+Andrea Lo Pumo aka AlpT <alpt@freaknet.org>
+
+Main contributors:
+
+Andrea Leofreddi <andrea.leofreddi@gmail.com>, Katolaz <katolaz@freaknet.org>,
+Federico Tomassini <effetom@gmail.com>
+
+For a complete list read the AUTHORS file or visit:
+    L<http://netsukuku.freaknet.org/?p=Contacts>
+
+=head1 SEE ALSO
+
+For more information about Netsukuku visit:
+    L<http://netsukuku.freaknet.org>
+
+ntkd(8), ntk-wifi(8), iproute2(8), route(8)

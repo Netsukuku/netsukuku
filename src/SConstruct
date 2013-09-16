@@ -1,0 +1,215 @@
+# This file is part of Netsukuku
+# (c) Copyright 2005 Andrea Lo Pumo aka AlpT <alpt@freaknet.org>
+#
+# This source code is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Public License as published 
+# by the Free Software Foundation; either version 2 of the License,
+# or (at your option) any later version.
+#
+# This source code is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# Please refer to the GNU Public License for more details.
+#
+# You should have received a copy of the GNU Public License along with
+# this source code; if not, write to:
+# Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+import sys
+import os
+
+NTK_VERSION="0.0.9b"
+
+#
+#	Sources and libs
+#
+
+sources_common    = Split('xmalloc.c log.c misc.c buffer.c endianness.c')
+sources_qspn      = Split('qspn-empiric.c') + sources_common
+sources_netsukuku = Split("""accept.c llist.c ipv6-gmp.c inet.c request.c map.c
+		   gmap.c bmap.c pkts.c radar.c hook.c rehook.c tracer.c qspn.c 
+		   hash.c daemon.c crypto.c snsd_cache.c
+		   andna_cache.c andna.c andns_lib.c err_errno.c
+		   dnslib.c andns.c andns_net.c andns_snsd.c
+		   ll_map.c libnetlink.c if.c krnl_route.c krnl_rule.c
+		   iptunnel.c route.c conf.c dns_wrapper.c igs.c mark.c 
+		   libiptc/libip4tc.c libping.c netsukuku.c""") + sources_common
+sources_ntkresolv = sources_common + Split("""andns_lib.c ntkresolv.c andns_net.c
+					      crypto.c snsd_cache.c inet.c
+					      ll_map.c libnetlink.c
+					      err_errno.c""") 
+
+libs = ['gmp', 'pthread', 'crypto', 'z']
+
+#
+#	Command line options and help
+#
+
+opts = Options('build.conf')
+opts.AddOptions(('CONF_DIR', """Directory where the Netsukuku configuration files will be installed""",
+				'/etc/netsukuku'),
+		('DATA_DIR', 'Directory to install data files',	
+				'/usr/share/netsukuku'),
+		('MAN_DIR',  'Where the manuals will be installed', 
+				'/usr/man'),
+		('BIN_DIR' , 'Directory to install the binaries',
+				'/usr/bin'),
+		('PID_DIR',  'Specify location of ntkd.pid file',
+				'/var/run'),
+		('destdir', 'SCons will copy all the files under destdir during installation',
+				'/'),
+		EnumOption('debug', 'build the debug code', 'no', 
+			allowed_values=('yes', 'no', '1', '0'), map={},
+			ignorecase=0),
+		EnumOption('static', 'build statically the binaries', 'no', 
+			allowed_values=('yes', 'no', '1', '0'), map={},
+			ignorecase=0))
+opts.Add('CC', 'The C compiler.')
+opts.Add('CXX', 'The C++ compiler.')
+
+env = Environment(options = opts, ENV = os.environ, CCFLAGS = ' -Wall')
+
+if ("yes" in env['debug']) or ("1" in env['debug']):
+	debug = 1
+	env.Append(CPPDEFINES={'DEBUG' : '${debug}'}, CCFLAGS = ' -ggdb -Wall', CXXFLAGS = '-g')
+#CCFLAGS = ' -ggdb -Wall -DDMALLOC_FUNC_CHECK'
+#	libs+=['dmalloc', 'dmallocth']
+	os.system("echo Cscoping and ctagging...; cscope -b; ctags *")
+else:
+	debug  = 0
+if ("yes" in env['static']) or ("1" in env['static']):
+	static = 1
+	env.Append(CCFLAGS = ' -static', CXXFLAGS = '-static')
+else:
+	static = 0
+if (env['destdir'] == "/"):
+	env['destdir']=""
+
+opts.Save('build.conf', env)
+
+if os.path.exists("conf/netsukuku.conf") and env.GetOption('clean'):
+	Execute(Delete('conf/netsukuku.conf'))
+if os.path.exists("config.h") and env.GetOption('clean'):
+	Execute(Delete('config.h'))
+if os.path.exists("config.log") and env.GetOption('clean'):
+	Execute(Delete('config.log'))
+	
+Help("""
+*** Usage
+      'scons' to build the ntkd binary,
+      'scons debug=yes' to build the debug version.
+      'scons install' to install it in the system.
+      
+*** General options
+""" + opts.GenerateHelpText(env))
+
+if ARGUMENTS.get('install'):
+		print "you aren't root"
+
+#
+#	Configure
+#
+
+if not os.path.exists("config.log") and not env.GetOption('clean'):
+	print 'Configuring... '
+	conf = Configure(env)
+	if not conf.CheckLib('gmp'): 
+		print 'Did not find libgmp.a or gmp.lib, exiting!'
+		Execute(Delete('config.log'))
+		Exit(1)
+	if not conf.CheckCHeader([ "gmp.h" ]):
+		print 'Did not find the gmp headers, exiting!'
+		Execute(Delete('config.log'))
+		Exit(1)
+	if not conf.CheckCHeader([ "zlib.h" ]):
+		print 'Did not find the zlib headers, exiting!'
+		Execute(Delete('config.log'))
+		Exit(1)
+	if not conf.CheckLib('pthread'):
+       		print 'Did not find pthread.a or pthread.lib, exiting!'
+		Execute(Delete('config.log'))
+		Exit(1)
+	if not conf.CheckLib('crypto'): 
+		print 'Did not find the openssl libcrypto.a or libcrypto.lib, exiting!'
+		Execute(Delete('config.log'))
+		Exit(1)
+	if not conf.CheckCHeader([ "openssl/bio.h", "openssl/evp.h",
+			"openssl/crypto.h", "openssl/x509.h",
+			"openssl/engine.h", "openssl/err.h", "openssl/rand.h",
+			"openssl/rsa.h", "openssl/pem.h" ]):
+		print 'Did not find the openssl headers, exiting!'
+		Execute(Delete('config.log'))
+		Exit(1)
+		
+	env = conf.Finish()
+
+def conf_build(target, source, env):
+    conf_defines = {
+        "CONF_DIR": env["CONF_DIR"],
+	"DATA_DIR": env["DATA_DIR"],
+	"PID_DIR": env["PID_DIR"],
+	"VERSION": NTK_VERSION,
+        "debug": debug # this is an int.  1 for true, 0 for false
+    }
+
+    conf = file(str(target), "w")
+    conf_in = file(str(source), "r")
+    conf.write(conf_in.read() % conf_defines)
+    conf_in.close()
+    conf.close()
+
+def build_config_files(target = None, source = None, env = None):
+	if not os.path.exists("config.h") and not env.GetOption('clean'):
+		print 'Generating config.h from config_scons.h.in'
+		conf_build('config.h', 'config_scons.h.in', env)
+		conf = file("config.h", "a")
+		if sys.platform == 'linux2' or sys.platform == 'linux-i386':
+			conf.write("#define GNU_LINUX\n")
+		elif sys.platform == 'darwin':
+			conf.write("#define DARWIN\n")
+		elif string.find (sys.platform, 'sunos') != -1:
+			conf.write("#define SUNOS\n")
+		elif sys.platform=='openbsd3':
+			conf.write("#define OPEN_BSD\n")
+		elif string.find (sys.platform, 'irix') != -1:
+			conf.write("#define IRIX\n")
+		conf.close()
+
+	if not os.path.exists("conf/netsukuku.conf") and not env.GetOption('clean'):
+		print 'Generating conf/netsukuku.conf from conf/ntk_scons.conf.in'
+		conf_build('conf/netsukuku.conf', 'conf/ntk_scons.conf.in', env)
+	
+	return 0
+
+build_config_files(env = env)
+
+#
+#	Build
+#
+
+ntkd 	= env.Program('ntkd', sources_netsukuku, LIBS = libs, CPPPATH = '.')
+qspn    = env.Program('qspn-empiric', sources_qspn, LIBS = libs, CPPPATH = '.')
+ntkresolv = env.Program('ntk-resolv', sources_ntkresolv, LIBS = libs, CPPPATH = '.')
+
+Default(ntkd, ntkresolv)
+
+
+#
+#	Install 
+#
+
+SConscript(['man/SConscript', 'scripts/SConscript', 'conf/SConscript'], 'env')
+
+# Here are our installation paths:
+idir_bin    = '$destdir' + '$BIN_DIR'
+idir_data   = '$destdir' + '$DATA_DIR'
+idir_conf   = '$destdir' + '$CONF_DIR'
+idir_pid    = '$destdir' + '$PID_DIR'
+
+env.Install(idir_bin, [ntkd])
+env.Install(idir_bin, [ntkresolv])
+env.Alias('install', [idir_bin, idir_conf])
+
+#Dirty hack ;( Why GetOption("install") doesn't work?
+#if not os.path.exists(env["DATA_DIR"]) and os.path.exists(env["CONF_DIR"]):
+#	Execute(Mkdir(env["DATA_DIR"]))

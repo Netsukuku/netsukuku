@@ -1,0 +1,1616 @@
+
+
+				    Netsukuku
+			
+			- Close the world, txEn eht nepO -
+
+
+
+--								
+
+  0. Preface
+
+  1. The old wired
+
+  2. The Netsukuku wired
+  
+	2.1  Gandhi
+  	2.2  No name, no identity
+	2.3  So, WTF is it?
+	2.4  Other implementations
+  	2.5  The born
+
+  3. Netukuku Protocol v7: the seventh son of Ipv7
+
+	3.1  #define Npv7
+	
+  4. Npv7_II: Laser Broadcast
+  
+  5. Npv7 Hybrid Theory: the final way
+  
+  	5.1  QSPN: Quantum Shortest Path Netsukuku
+  		5.1.1  QSPN screenshot
+	  	5.1.2  Continual qspn starters
+		5.1.3  The Qspn sickness: RequestForRoute
+		5.1.4  Qspn round
+		
+	5.2  Npv7_HT Hook & Unhook
+		5.2.1  Qspn Hook & Unhook
+		
+	5.3  The truly Gnode^n for n<=INFINITE
+		5.3.1  Groupnode: one entity
+		5.3.2  Gnode fusion
+	
+  6. Broadcast: There can be only one!
+  
+	6.1  Tracer pkt: one flood, one route
+	
+  7. ANDNA: Abnormal Netsukuku Domain Name Anarchy
+ 
+ 	7.1  ANDNA Metalloid elements: registration recipe
+  		7.1.1  ANDNA hook
+		7.1.2  Don't rob my hostname!
+		7.1.3  Count again
+		7.1.4  Registration step by step
+		7.1.5  Endless rest and rebirth
+		7.1.6  Hash_gnodes mutation
+		7.1.7  Yaq: Yet another queue
+		
+  	7.8  Hostname resolution
+		7.8.1  Distributed cache for hostname resolution
+		7.8.2  noituloser emantsoh esreveR
+		
+	7.9  dns wrapper
+
+	7.10  Scattered Name Service Disgregation
+		7.10.1 Service, priority and weight number
+  			7.10.1.1 Service number 
+	  		7.10.1.2 Priority
+  			7.10.1.3 Weight
+
+  		7.10.2 SNSD Registration
+  			7.10.2.1 Zero SNSD IP
+	  		7.10.2.2 SNSD chain
+	  
+  8. Heavy Load: flood your ass!
+  
+  9. Spoof the Wired: happy kiddies
+  
+  10. /dev/Accessibility
+  
+  11. Internet compatibility
+  
+	11.1  Private IP classes in restricted mode
+  		11.1.1 Netsukuku private classes
+  		11.1.2 Notes on the restricted mode
+  
+  	11.2  Internet Gateway Search
+  		11.2.1 Multi-gateways
+	  		11.2.1.1 Anti loop multi-inet_gw shield
+		11.2.2 Load sharing
+		11.2.3 The bad
+		11.2.4 MASQUERADING
+		11.2.5 Traffic shaping
+		11.2.6 Sharing willingness
+		11.2.7 See also
+
+  12. Implementation: let's code
+  
+  13. What to do
+  
+  14. The smoked ones who made Netsukuku
+  
+--
+
+  0.  Preface
+
+  This document and the relative source code are available on:
+  http://netsukuku.freaknet.org
+
+  Future extensions to this document can be found and added here:
+  http://lab.dyne.org/Netsukuku
+
+
+  1.  The old wired
+  
+  The Internet is a hierarchic network managed by multinational companies and 
+  organizations supported by governments. Each bit of Internet traffic passes
+  through proprietary backbones and routers.
+  The Internet Service Providers give the connectivity to all the users, who
+  are in the lowest rank of this hierarchic pyramid. There is no way to share
+  the ownership of Internet and people can join the Net only in accordance
+  with conditions and terms imposed by the Majors.
+  The Internet represents, today, the means to access information, knowledge
+  and communication. About 1 billion of people can connect to this great
+  proprietary network, but the remaining 5 billion of people, which don't have
+  enough economic resource, are still waiting the multinationals to supply a
+  service with in their reach.
+  
+  The Internet was born with the intent of warranting a secure and
+  unattackable communication between the various nodes of the network, but
+  now, paradoxally, when an ISP decide to stop to provide its service, entire
+  nations are immediately cut out of the Internet.
+  
+  Beside that, Internet is not anonymous: the ISP and the multinationals can
+  trace back and analyse the traffic of data going through their servers,
+  without any limits.
+ 
+  The centralised and hierarchical structure of Internet creates, as a
+  consequence, other identical systems, based on it, i.e. the DNS.  
+  The servers of the Domain Name System are managed by different ISPs, as well
+  and the domains are literally sold through a similar centralised system.
+  This kind of structures allows, in a very simple and efficient way, to
+  physically localise any computers, which are connected to the Internet, in a
+  very short time and without any particular efforts.
+  
+  In China, the whole net is constantly watched by several computers filtering
+  the Internet traffic: a Chinese will never be able to see or came to know
+  about a site containing some keywords, such as "democracy", censored by
+  the government. Beside that, he'll never be able to express his own ideas on
+  the net, e.g. about his government's policy, without risking till the death
+  penalty.
+
+  Internet was born to satisfy the military needs of security for the
+  administration of the American defence, not to ensure freedom of
+  communication and information: in order to communicate each other the
+  Internet users are obliged to submit themselves to the control and to the
+  support of big multinationals, whose only aim is to expand their own
+  hegemony.  
+  As long as all the efforts to bring more freedom, privacy and accessibility
+  in the Internet face aversions, fears, contrary interests of governments and
+  private companies, the very alternative solution to this problem is to let
+  the users migrate toward a distributed, decentralised and fully efficient
+  net, in which all the users interact at the same level, with no privilege
+  and no conditioning means, as authentic citizens of a free world wide
+  community.
+ 
+  2.  The Netsukuku wired
+
+  Netsukuku is a mesh network or a p2p net system that generates and sustains
+  itself autonomously. It is designed to handle an unlimited number of nodes
+  with minimal CPU and memory resources. Thanks to this feature it can be
+  easily used to build a worldwide distributed, anonymous and not controlled
+  network, separated from the Internet, without the support of any servers,
+  ISPs or authority controls.
+  This net is composed by computers linked physically each other, therefore
+  it isn't build upon any existing network. Netsukuku builds only the routes
+  which connects all the computers of the net.
+  In other words, Netsukuku replaces the level 3 of the model iso/osi with
+  another routing protocol.
+
+  Being Netsukuku a distributed and decentralised net, it is possible to
+  implement real distributed systems on it, e.g. the Abnormal Netsukuku Domain
+  Name Anarchy (ANDNA) which will replace the actual hierarchic and
+  centralized system of DNS.
+  
+  2.1  Gandhi
+
+  Netsukuku is self-managed. It generates itself and can stand alone.
+  A node hooks to Netsukuku, the net automatically rewrites itself and all the
+  other nodes known which are the fastest and more efficient routes to
+  communicate with the new arrived.
+  The nodes don't have privileges or limitation, when compared with other
+  nodes, they are part of the net and give their contribution to its expansion
+  and efficiency.
+  The more they increase in number the more the net grows and becomes
+  efficient.
+  In Netsukuku there is no any differences among private and public nets and
+  talking about LAN became meaningless.
+  
+  It can be neither controlled nor destroyed because it is totally
+  decentralised and distributed.
+  The only way to control or demolish Netsukuku is knocking physically down
+  each single node which is part of it.
+  
+  2.2  No name, no identity
+  
+  Inside Netsukuku everyone, in any place, at any moment, can hook immediately
+  to the net without coming trough any bureaucratic or legal compliance.
+  Moreover, every elements of the net is extremely dynamic and it's never the
+  same. The ip address which identify a computer is chosen randomly,
+  therefore it's impossible to associate it to a particular physical place,
+  and the routes themselves, been composed by a huge number of node, show the
+  tendence to have such a high complexity and density to make the trace of a
+  node a titanic task.
+  Since there isn't any contract with any organisations, the speed of the data
+  transfer is uniquely limited by the actual tecnology of the network cards.
+
+  2.3  So, WTF is it?
+  
+  Netsukuku is a mesh network or a p2p net composed by a net protocol for
+  dynamic routing called Npv7_HT.
+  Currently there is wide number of protocols and algorithms for the dynamic
+  routing, but they differ from the Npv7_HT, 'cause they are solely utilized
+  to  create small and medium nets. The routers of Internet are also managed
+  by different protocols as the OSPF, the RIP, or the BGP, based on different
+  classical algorithms, able to find out the best path to reach a node in the
+  net.
+  These protocols require a very high waste of cpu and memory, this is the
+  reason why the Internet routers are computers specifically dedicated to
+  this purpose. It would be impossible to implement one these protocols in
+  order to create and maintain such a net as Netsukuku is, where every each
+  node is a router by itself, because the map of all the routes would require
+  a space, on each pc connected to the net, of about ten Gb.
+  
+  The Npv7 structures the entire net as a fractal and, in order to calculate
+  all the needed routes which are necessary to connect a node to all the other
+  nodes, it makes use of a particular algorithm called
+  Quantum Shortest Path Netsukuku (QSPN).
+  A fractal is a mathematical structure which can be compressed up to the
+  infinite, because inside it, every part itself is composed by the same
+  fractal. Thus there is a high compression of a structure which can be
+  infinitely expanded. This means that we need just a few Kb to keep the whole
+  Netsukuku map.
+  The map structure of Netsukuku can be also defined more precisely by
+  calling it a highly clusterised graph of nodes.
+  
+  On the other hand, the QSPN is a meta-algorithm in the sense that it
+  doesn't follow any predefined mathematical instructions but exploits the
+  chance and the chaos, which both don't need any heavy computation.
+  The QSPN has to be executed on a real (or simulated) network. The nodes have
+  to send the QSPN packets in order to "execute" it.
+  For this reason it is not always true that a determinated pkt will be sent
+  before another one. 
+  
+  2.4  Other implementations
+
+  Netsukuku is not restricted solely to the creation of a net of computers, it
+  is a protocol which implements a mesh net, and alike every net protocol can
+  be used in all the situations in which it's necessary to connect different
+  nodes to each other.
+ 
+  Let's take in exam the case of mobile phones. Also the mobile phone net is a
+  hierarchic and centralised net. Thousands of nodes hook to a same cell,
+  which will sort the traffic to the other cells and these, finally, will send
+  the data to the destination-nodes. Well, Netsukuku can be used also by
+  mobile phones, making pointless the existence of all the mobile
+  telecommunication companies.
+
+  This can be applied to all the systems of communication which are used
+  nowadays. 
+  
+  2.5  The born
+
+  The story of how the idea of Netsukuku was born is quite a long and
+  complicated story.
+  During a historical transmission of radio Cybernet at the Hackmeeting 2000,
+  the idea of Ipv7, nocoder, nocrypt came to life. They were absurd theoric
+  jokes about a IP protocols, intelligent compiler and crypto programs.
+  In the far 2003, a crew of crazy freaks continued to expand the concepts of
+  the Ipv7: a net in which all the packets were sent in broadcasted, compressed
+  with the zlib7, an algorithm which could compress all the existent Internet
+  into just 32 byte ( See http://idiki.dyne.org/wiki/Zlib7 ).
+  In Ipv7 the nodes were devoid of an ip address, it was an extremely
+  decentralised and totally free net. Those people were really happy after the
+  first draft of the RFC.
+  One year later, the project was lost in the infinite forks of time, but after
+  some time, the dust was shaked off the great Ipv7 book.
+  We started to delineate the idea of the implementation of a pure net. Month
+  by month the net became more and more refined, and the project became
+  something concrete.
+  <<But it has also to support a sort of anti-flood and anti-spoofing>>.
+  <<Yep! And the main target is to make the routes always different from each
+  other >>.
+  <<Yea, yea, and why don't we make found out a way to abolish all the central
+  servers?>>.
+  Other three months passed by and after many mystical meditations, the
+  theoretical kernel was ready. The algorithms were defined.
+  We started to code. The curse of the protocols coders of Pharaon
+  Mortedelprimogenito invaded the Netsukuku code. The delirium is the right
+  reward to all those who dare to create protocols of pure nets.
+  In spite of all, exactly after one year and after fourteen thousand lines of
+  code, Netsukuku Beta version was ready and immediately presented at the
+  National Hackmeeting 2005 in Naples. The ANDNA was completed and
+  documented. 
+  In October, the first public version of Netsukuku was released.
+  By now, in May 2006, the protocol has been greatly improved, and feature
+  after feature the daemon has reached forty thousand lines of code.
+  What's left sleeps in our minds and still have to become.
+
+
+--								            --
+
+
+ 			     The Netsukuku Protocol
+				     Npv7
+ 
+
+
+  3.   Netsukukuku protocol v7
+
+  Netsukuku uses its own protocol, the Npv7 (Netsukuku protocol version 7),
+  which derives from three different previous versions.
+  The first one was quite similar to the current dynamic routing protocols:
+  the network was in fact divided into several groups of nodes, and every
+  single node had a distinct map of the entire network.
+  This system, absolutely not optimal, cannot be employed by Netsukuku 'cause
+  it needs continuous and subsequent updates of the early map, and each update
+  will bring an overload in the net.
+  Moreover, each time the map changes, it's necessary to recalculate all the
+  routes.
+
+  Future extensions to the Npv7 can be found and added here:
+  http://lab.dyne.org/Netsukuku_RFC
+ 
+
+  3.1  #define Npv7
+
+  The basic definitions used in Netsukuku are: 
+
+  src_node: Source node. It is the node who send a packet to the dst_node.
+  dst_node: Destination node. It is the node which receives the packet from
+	    the src_node.
+  
+  r_node: Remote node, given a node X, it is any other node directly linked to
+	  X.
+  g_node: Group node, a group of nodes, or a group of a group of nodes, and so
+  	  on.
+  b_node: Border node, a node connected to rnodes of different gnode.
+  h_node: Hooking node, a node hooking to Netsukuku.
+  
+  int_map: Internal map. The internal map of the node X contains the
+	   informations about the gnode, which the node X belongs to.
+  ext_map: External map. The external map contains the informations about the
+	   gnodes.
+  bmap / bnode_map: Border node map. It's the map which keeps the list of
+		    border_nodes.
+
+  quadro_group: A node or a groupnode located at any level, disassembled in
+	        its essential parts. 
+
+
+  4.   Npv7_II: Laser Broadcast
+
+  Npv7_II is the second version of the Npv7.
+  Netsukuku is divided into many smaller groupnodes, which contains up to six
+  hundred nodes each and every node will solely have an external map.
+  All the groupnodes are grouped into multi-groupnodes, calle quadro
+  groupnodes.
+  In order to create a new route and connect to a given dst_node, the
+  src_node, using the external map, firstly tries to find out the best path to
+  reach the destination gnode, which the dst_node belongs to.
+  In this way the founded route is stored in the pkt broadcasted inside the
+  gnode, which the src_node belongs to.
+  The border_nodes of the gnode of the src_node receive the pkt and check if
+  the next gnode, to which the pkt has to be broadcasted, is the proper
+  neighbor gnode. If the condition is true, the border_nodes broadcast the pkt
+  to that same neighbor gnode. Otherwise the pkt is dropped.
+  And so on...
+  In this way the packet will reach the destination gnode.
+  When the dst_node receives the pkt it has just to set an inverse route, using
+  the route already stored in the pkt.
+  The Npv7_II and its previous version are not utilised, but they are just the
+  theoretical base of the Npv7_HT, the present version of the Netsukuku
+  protocol.
+
+  5.   Npv7 Hybrid Theory: the final way
+
+  From the union of the Npv7 and Npv7_II 
+  Npv7 Hybrid Theory was born from the union of the Npv7 and Npv7_II.
+  This new version, exploits the advantages of both the internal map and the
+  laser broadcast and in this way it can overpass their limits.
+  In Npv7_HT the maximum number of nodes, present in a group node
+  (MAXGROUPNODE) is equal to 2^8, thus the groupnodes are relatively small.
+  The main change in Npv7_HT is about its own essence, in fact, it's based on a
+  algorithm appositely created for Netsukuku, which is called
+  Quantum Shortest Path Netsukuku, which allows to obtain at once all the
+  informations related to the complete situation of the gnode, all the best
+  routes, the reduction of the load of the gnode, an efficient
+  management of high dynamic gnodes and moreover it's not even necessary to
+  authenticate each node.
+  
+  5.1   QSPN: Quantum Shortest Path Netsukuku
+
+
+  In Netsukuku, as well as in Nature, there is no any need of using
+  mathematical schemes. Does a stream calculate the best route to reach the
+  sea when it is still at the top of the mountain?
+  The stream simply flows and its flux will always find its ideal route.
+  
+  Netsukuku exploits the same chaotic principle. The result of its net
+  discovery algorithm can be different each time, even if the net hasn't
+  changed at all. This is because the discovery algorithm is "executed" by the
+  net itself.
+  
+  The use of a map, for a protocol of dynamic nets, creates a lot of
+  troubles, since it has to be continuously updated. The solution is simple: to
+  avoid totally the use of maps and make every broadcasted request a
+  tracer_pkt (See 6.1 Tracer pkt).
+  In this way every node, which will receive the pkt, will known the best
+  route to reach the src_node and all the nodes which are at the middle of the
+  route itself, it will record these informations inside its internal map, it
+  will add its own entry inside the tracer_pkt and will continue to broadcast
+  the pkt.
+  The left problem is: in order to obtain all the routes for all the nodes
+  it's necessary that all the nodes broadcast a tracer_pkt. Currently this
+  problem doesn't exist at all. In fact, with the tracer_pkt we can obtain
+  also the routes for the middle-nodes: that means we need a smaller number
+  of n packets, where n is the number of nodes.
+
+  If every time a node receives a tracer_pkt, it sends it back to the
+  src_node, in this way we are sure that all the nodes can receive all the
+  possible routes. By using this system we obtain the same result achieved by
+  making every node send a tracer_pkt.
+
+  Those who already know the physic of waves, can easily understand how the
+  qspn works. If we throw a pebble at a mirror of water, contained in a
+  basin, circular waves begin to propagate themself from the point of impact.
+  Each wave generates a child wave that continues to spread and to generate
+  child waves, as well, which generate children, and so on...
+  When a wave hits the borders of the basin, it is reflected and goes back to
+  the start point. The same happens if the wave meets an obstacle.
+  The qspn_starter is the pebble thrown inside the groupnode and each wave is a
+  tracer_pkt. Each child wave carries with itself the information of the
+  parent wave. When the wave arrives at an extreme_node (an obstacle or a dead
+  road), the qspn_open (the reflected wave) starts.
+  
+  The QSPN is based on this principle. To begin the tracing of the gnode, any
+  node sends a qspn_pkt called qspn_close and then this node becomes a
+  qspn_starter.
+  A qspn_pkt is a normal tracer_pkt, but its broadcasting method is lightly
+  different from the normal one.
+  Each node, which receives a qspn_close "closes" the link the pkt was
+  received and sends the pkt to all its other links. All the following
+  qspn_close pkts, which will arrive to the node, will be sent to all the
+  links, which have not been already closed.
+  When the qspn_close is totally diffused, some nodes will have all their
+  links closed. These nodes will be the extreme_nodes, which will send another
+  qspn_pkt (called qspn_open) in order to reply. The qspn_open contains all
+  the information already stored in the last qspn_close receveid. The
+  extreme_nodes will send the qspn_open to all their links, except the one
+  from which they have received the last qspn_close and to which they'll send
+  an empty qspn_open.
+  The qspn_open is a normal qspn_pkt, so it "opens" all the links in the same
+  way of the qpsn_close. The nodes, which will have all their links opened
+  will do absolutely nothing, in this way the end of the qspn_close is
+  warranted.
+  A qspn_open pkt has also a sub_id, a number that identifies, in the internal
+  map, the extreme node, which has generated the qspn_open pkt itself. The
+  sub_id, which remains unmodified in all the child qspn_open pkts, generated
+  from the first packet, is used to manage simultaneusly more qspn_pkts, since
+  each extreme_node generates one qspn_open and each of them has to be
+  independent from the others.
+  Indeed all the nodes, which have only one link, are surely e_nodes (extreme
+  nodes), in fact, when they receive a qspn_close they are already closed.
+
+  A node, after sending a qspn_open, cannot reply anymore to any qspn_pkts that
+  it is going to receive and so it will send no more qspn_pkts.
+  The qspn_starter, the node which has triggered the qspn, acts as a normal
+  node but will not send qspn_opens, since it already sent the very first
+  qspn_close. Moreover, in order to update its own map, it will use all the
+  qspn_closes which are going to be received, excepting those which have been
+  already sent by the qspn_starter and those which already crossed more than
+  one hop. In this way, even if there is more than one qspn_starter, the
+  stability is maintained. 
+  The in-depth description of the qspn_starter is in the following paragraph
+  5.1.1.
+
+  At the end, the total number of packets, which are sent in broadcast are equal
+  to the number of e_nodes, exactly 2 per cyclic net segment and 1 per single
+  non-cyclic segment.
+
+  Every time a tracer_pkt goes trough the net, the information about the
+  crossed routes, which it carries, are stored by all the nodes which receive
+  the tracer_pkt.
+  A node will probably receive different routes to reach the same node, but it
+  will memorize only the best MAXROUTES (10) routes. 
+  
+  The qspn_pkt id, which is stored in the pkt itself, is at the beginning set
+  as 1 and is incremented by 1 every time a new qspn_pkt is sent by any nodes.
+  Because of that, all the nodes know the current qspn_pkt id. Each time a
+  node desires to globally update the internal or external map, it sends a
+  qspn_close, but only if it hasn't received, in the previous QSPN_WAIT
+  seconds, another qspn_close yet.
+  If two nodes send, at the same time, a qspn_close, they will use the same
+  pkt id 'cause they don't know that another qspn_close, with the same id, was
+  already sent; in this case the way of working of the qspn doesn't change, in
+  fact, if the two qspn_pkt were sent from very distant places, the qspn_pkt
+  will spread more rapidly.
+
+  When a node downloads the internal map from another node, it has to restore
+  the map before making use of it. To do that the node has to just to insert the
+  r_node, from which it has downloaded the map, to the beginning of all the
+  routes. If the node downloads the map from more than one rnode, it will have
+  to compare all the routes and choose the best one. The resulting map will
+  have all the best routes.
+  
+  The routes of the internal and external maps will be always copied in the
+  kernel routing table. In this way, it will not be necessary to create every
+  time different routes to reach different destination nodes.
+  
+  5.1.1  QSPN screenshot
+    
+        (A)-----(B)
+      /  | \     |  \
+   (E)   |   \   |  (F)
+      \  |     \ |  /
+        (C)-----(D)
+  
+  Let's recap, then! All the extreme nodes shall send a tracer_pkt, but we
+  cannot know which are they. In the above picture it's easy to point them
+  out, because, indeed, they are drawn in a map, but in reality (inside the
+  Netsukuku code) a topologic map doesn't exist at all, so we cannot know
+  where a group of nodes begins and where it ends.
+  
+  This is what will happen, in a theoretical simulation, if the node E sends a
+  qspn_close:
+  E has sent the first qspn_close of a new qspn_round, so it is now a
+  qspn_starter.
+  Let's consider the case when the node A receives before C the qspn_close.
+  A closes the link E and sends the pkt to B, C and D.
+  C receives the pkt, closes the link E and sends it to A and D.
+  C receives the pkt from A and closes the link.
+
+  B e D have received the pkt and close the respective links.
+  Let's consider the case when B sends the pkt before F.
+  D, immediately, sends it to F, but at the same time F sends it to D.
+  D receives the pkt from B, too.
+  D and F have all the links closed.
+  They send a qspn_open.
+  The qspn_open propagates itself in the opposite sense.
+  The qspn_open ends.
+  Each node has the routes to reach all the other nodes.
+
+  In general, the basic topology of a map for the qspn is a rhomb with the
+  nodes at the vertexes, then, to have a more complex topology it's possible
+  to add other rhombs united each other from the vertexes.
+
+  5.1.2  Continual qspn starters
+
+  If more qspn_starters, which launch a qspn, are contiguous among them, so
+  the way of working of the qspn is slightly different.
+  A group of qspn_starter nodes is contiguous when all its nodes are linked to
+  other nodes, which are qspn_starters, as well. In this scenary the
+  qspn_starters continue to mutually forward solely the qspn_closes sent by
+  the qspn_starters; in fact, they acts as normal nodes, but whenever they
+  receive pkts coming from outside of the contiguous group of qspn_starters,
+  they follow again their basic instructions. So, if A sends a qspn_close and
+  B has already sent a qspn_close, as well, when B receives the qspn_close of
+  A, B forwards it as a normal tracer_pkt with the BCAST_TRACER_STARTERS flag,
+  which will spread only among the other starters.
+  The reason why all this happens is that in the contiguous group of nodes,
+  every single node send a tracer_pkt, therefore, the qspn_pkts are
+  declassified as normal tracer_pkts.
+
+  5.1.3  The Qspn sickness: RequestForRoute
+  
+  /* To code, and maybe not really necessary */
+  The only big hole in the qspn is the impossibility of having a vast number
+  of routes in order to reach the same node. With the qspn we are sure to
+  obtain just the best routes, but currently qspn can also generate uncountable
+  routes, all what we need is to let the broadcast working forever, without
+  interruption. Surely, it's unthinkable to wait for the eternity, that's why
+  we use the RequestForRoute! The RFR will be used all the time a node gets
+  connected to another node.
+  This is what happens:
+  the node sends to all its rnodes a RFR request for a specific route. This
+  request contains also the number of sub-requests (total_routes), which the
+  rnodes have to send to their rnodes. Practically, the node decides how many
+  routes wants to receive and calculates the number of sub-requests, which its
+  rnode will send: subrfr=(total_routes-r_node.links)/r_node.links.
+  After that it sends the rfr request. After having sent the route, used to
+  reach the dst_node specified inside the rfr_pkt, its rnodes sends, in the
+  same way, an rfr with the number of total_routes equal to the number of
+  subrfr. The rnodes of the rnodes will execute the same procedure and will
+  directly answer to the requester node.
+  
+  5.1.4  Qspn round
+
+  If a node finds a change around itself, e.g. one of its rnodes is dead, or
+  the rtt, between it and its rnode, has considerably changed, then it will
+  send a qspn. In order to avoid to continuously generate qspns the node must
+  firstly verify that QSPN_WAIT_ROUND (60 seconds) has expired. The
+  QSPN_WAIT_ROUND expires at the same moment for all the nodes belonging to
+  the same gnode. In order to make the nodes which hook to the gnode
+  synchronised to the nodes of the gnode itself, the rnodes give to the
+  hooking nodes the number of seconds passed since the previous qspn, in this
+  way all the nodes will know when the next deadline will be, i.e. it will be
+  after (current_time-prev_qspn_round)+QSPN_WAIT_ROUND seconds.
+  When a qspn_starter sends a new qspn_pkt, it increases by 1 the id of the
+  qspn_round.
+  If a node receiving a qspn_pkt notices that its id is greater than the
+  previous already recorded qspn_round id, it means that it has received a new
+  qspn_round. In this case it will update its local id and its qspn_time (the
+  variable, which indicates when the last qspn has been received or sent).
+  For updating the qspn_tim, it has to set it on
+  current_time - sum_of_the_rtt_contained_in_the_tracer_pkt.
+
+  5.2  Npv7_HT Hook & Unhook
+ 
+  In order to make a node join Netsukuku, it has to be hooked to its rnodes. 
+  Hook in Netsukuku doesn't refer to a physical hooking to the net, 'cause we
+  assume that a node has been already physically linked to other (r)_nodes.
+  The hooking of a node is the way the node communicate to its nearest rnodes,
+  if it doesn't receive any answer it will choose another rnode. Practically
+  during the hooking, the node gains the internal map, the external one, the
+  border node map and chooses a free ip. Now it is officially a member of the
+  net, therefore it sends a normal tracer_pkt and its rnodes will send, later,
+  a qspn.
+  
+  This is in details what really happens:
+  The node chooses an ip included in 10.0.0.1 <= x <= 10.0.0.1+256,
+  removes the loopback nets from the routing table and sets as default gateway
+  the choosen ip.
+  The step number one is to launch the first radar to see what its rnodes are.
+  If there are no rnodes, it creates a new gnode and the hooking ends here.
+  Then it asks to nearest rnode the list of all the available free nodes
+  (free_nodes) presents inside the gnode of the rnode. If the rnode rejects
+  the request (the gnode might be full), the node asks for the list of another
+  rnode. 
+  It chooses an ip from all the received free_nodes and sets it on the network
+  interface, modifying the default gw.
+  The step number two is to ask the external map to the same rnode from which
+  it obtained the list of free nodes. Using this list it checks if it has to
+  create a new gnode. If it found it unnecessary it downloads the int_map from
+  every rnode.
+  Then, it joins all the received int_map into a unique map, in this way it
+  knows all the routes. At the end, it gets the bnode_map.
+  If everything has worked properly, it re-launch a second radar, sends a
+  simple tracer_pkt and updates its routing table. Fin.
+  
+  5.2.1  Qspn Hook & Unhook
+
+  After having been hooked to a gnode, what the node has to do is to send a
+  tracer_pkt. In this way all the nodes will already have an exact route to
+  reach it, so they will update some routes and they will be happy. Then for
+  what the secondary routes may concern the match will be played at the next
+  qspn round.
+  When a node dies or un-hooks itself from Netsukuku, doesn't warn anyone.
+  When its rnodes notice its death, they will send a new qspn round.
+
+  5.3  The truly Gnode^n for n<=INFINITE
+
+  In the world there are 6*10^9 people and if we colonize other planets they
+  will increase to about (6*10^9)^n, where n is a random number > 0.
+  It is also true that they will extinguish themself with one of the usual
+  stupid war. Practically, Netsukuku has to manage a HUGE number of nodes and
+  for this reason, as you already are aware, the gnodes are used.
+  But they are not enough, 'cause, even using them, it would be still
+  necessary to have an external and internal map of 300Mb. How can the problem
+  be solved then?
+  The gnodes are divided in further groups, which doesn't contain normal nodes
+  but, on the contrary, whole gnodes. The contained gnodes are considered as
+  single nodes... Continuing recursively with groups of groups, Netsukuku can
+  contain about an infinite number of nodes with a small effort.
+  The way of working of all the Netsukuku system remains unchanged.
+  In order to implement the fractal gnodes we use more than one extern map,
+  which will contain information about these groups of groups. A "group of
+  group" is still called "groupnode".
+  Every map of groupnodes belong to a specific level, thus the basic
+  groupnode, which includes the single nodes, is in level 0. The map of
+  the first groupnodes of groupnodes of nodes is located in level 1 and the map
+  of the groupnodes of groupnodes of groupnoes is in the second level, and so
+  on.
+  
+  A node, in order to reach any other node it must only have its internal map,
+  which is the map of level 0 and all the maps of all the upper levels where
+  it belongs to.
+  With simple calculations, it's easy to know that to use all the IPs of the
+  ipv4, the total number of levels is 3 (considering a group composed by
+  MAXGROUPNODE of members). In the ipv6, instead, there are a huge number of
+  IPs, therefore the number of levels if 16. A simple estimation tells us
+  that, in the ipv4, all the maps needs 144K of memory, while in the ipv6
+  1996K are required. 
+  
+  As usual, the QSPN is utilised to find all the routes, which connects the
+  groupnodes. The QSPN will be restricted and started in each level, in this
+  way, for example, it will find all the routes which links the gnodes
+  belonging to the second level.
+  The use of the levels isn't so complicated, just think about the way of
+  working of the internal map, then apply it recursively to the external maps.
+  Just consider every groupnode a single node.
+  In order to use a route to reach a gnode, we store in the routing table
+  range of ips (i.e. from ip x to ip y), instead of a single ip. In this way,
+  the total number of routes necessary to reach all the nodes of Netsukuku is
+  about is about MAXGROUPNODE*(levels+1). Let's take in exam the case of the
+  ipv4 which has 3 levels. First of all, a node must have all the routes to
+  reach every node of its groupnode at level 0, thus we have MAXGROUPNODE
+  routes, then we have to add all the routes to reach the groupnodes of its
+  upper level, so we add other MAXGROUPNODE routes. Continuing we arrive at
+  the last level and we finally have MAXGROUPNODE*(3+1) routes. In the end we
+  have 1024 routes for the ipv4 and 4352 for the ipv6. All of them are kept in
+  the routing table of the kernel.
+  
+  5.3.1 Groupnode: one entity
+  
+  The real QSPN of groupnodes changes a bit.
+  The difference between a groupnode and a single node is subtle: the node is
+  a single entity, which maintains its links directly by itself, the
+  groupnode, instead, is a node composed by more nodes and its links are
+  managed by other nodes, which are the border nodes.
+  In order to transform the gnode in a single entity the bnodes of the
+  gnode have to communicate each other. When a bnode receives a qspn_close
+  from another gnode, it closes its links, then it will communicate to the
+  other bnode of the same gnode when all its links to the external gnodes are
+  closed. The other bnodes, of that gnode, will do the same. In this way, the
+  qspn_open will be sent only when _all_ the bnodes have all their external
+  links closed.
+  The situation changes again when we consider gnode of high level, because
+  the bnode aren't anymore a single node but a complete gnode. The procedure
+  remains the same: the bnode-gnode is formed by all its internal bnodes.
+  How is possible for the bnode to communicate each other?
+  Obviously they talk passively: when a bnode closes all its external links,
+  having received a qspn_close, it sets in the tracer_pkt, which is going to be
+  forwarded, the BNODE_CLOSED flag, in this way all the other bnodes, noticing
+  that flag, will increment their counter of closed bnodes. When the number of
+  closed bnodes is equal to the that of the total bnodes, which are in the same
+  gnode, then the bnodes will send the qspn_open.
+  One last trick: when a bnode receives a qspn_close sent from a bnode of its
+  same gnode, then, it considers itself a QSPN_STARTER and forwards the
+  tracer_pkt without adding its entry, that's because the gnode has to appear
+  as a single node. Moreover, the bnodes close and open only the external
+  links, which connect them to the bnodes of the bording gnodes.
+  All this strategy is also valid for the qspn_open.
+
+  5.3.2  Gnode fusion
+
+  When a node creates a new group_node, it will chose it completely randomly,
+  using a random ip. If two gnode, originally isolated, unfortunately have the
+  same groupnode id, (and also the same range of IPs), one of them must
+  change, that means to change the IPs of all the nodes of the gnode.
+  
+  The solution is described in the NTK_RFC 0001:
+  http://lab.dyne.org/Ntk_gnodes_contiguity
+
+  6.   Broadcast: There can be only one!
+  
+  The broadcasted packet, generally, are not sent to being forwarded forever
+  in Netsukuku ;). Each node keeps a cache with MAXGROUPNODE members, which is
+  stored in the internal map. Each member is associated to a node of the
+  gnode and it contains the pkt_id of the last pkt broadcasted from that node
+  itself.
+  When a broadcast pkt is received by a node, first of all, it is analysed:
+  if the pkt_id is less or equal to that memorised in the cache, it will be
+  dropped, because it is surely an old pkt.
+  It's useless to say that the pkt_id of the broadcast pkt being sent are
+  incremented by one each time. If the pkt passes the test, the node executes
+  the action requested by it and forwards it to all its rnode, excluding the
+  one from which it has received the pkt.
+  The number of hops the broadcast pkt has to cross can also be choosen with
+  the ttl (time to live) of the pkt.
+
+  6.1  Tracer pkt: one flood, one route
+
+  The tracer_pkt is just the way to find the best route using the broadcast.
+  If the broadcasted pkt uses the "tracer_pkt" flag, then each crossed node
+  will append in the pkt its ip. In this way the entire route crossed by the
+  pkt is memorised in the pkt itself. The first pkt, which will arrive at
+  destination, will be surely the pkt which has passed through the best route,
+  therefore the dst_node will set the memorised route and it connects to the
+  src_node. 
+  The first tracer_pkt has also another subtle benefit, in fact, the
+  tracer_pkt carries the route to reach all the nodes which are part of the
+  memorised route. That is because, if the pkt has really gone through the
+  best route it has also crossed _all_ the best routes for the middle hops.
+  The conclusion is that a tracer_pkt can memorise the best route to reach the
+  src_node, and thus all the routes to reach all the middle nodes, which have
+  been crossed.
+  The border_node, in order to append their ip in a tracer_pkt, set the
+  "b_node" flag and adds the id of the bording gnode, but only if that gnode
+  belongs to a level higher than the one where the tracer_pkt is spreading.
+
+  In order to optimise the utilised space in a tracer_pkt, the IPs of the
+  nodes are stored in the IP2MAP format, which is equivalent to the IDs of the
+  nodes in the gnode of level 0. With this format only a u_char (one byte) is
+  required, instead of 20.
+  
+  
+  7.   ANDNA: Abnormal Netsukuku Domain Name Anarchy
+
+  ANDNA is the distributed, non hierarchical and decentralised system of
+  hostname management in Netsukuku. It substitutes the DNS.
+  The ANDNA database is scattered inside all the Netsukuku and the worst of
+  cases every node will have to use about 355 Kb of memory.
+  
+  ANDNA works basically in the following way:
+  in order to resolve a hostname we just have to calculate its hash.
+  The hash is nothing more than a number and we consider this number as an ip
+  and the node related to that ip is called andna_hash_node.
+  Practically the hash_node will keep a small database, which associates all
+  the hostnames related to it with the ip of the node, which has registered
+  the same hostnames.
+  
+            
+	    Node X
+      ip: 123.123.123.123
+      hash( hostname: "andna.acus" ) == 11.22.33.44
+					   ||
+					   ||
+					 Node Y
+				     ip: 11.22.33.44
+			   {	[ Andna database of the node Y ]    }
+			   {hash_11.22.33.44 ---> 123.123.123.123}
+
+
+  The revocation requests don't exist, the hostname is automagically deleted
+  when it isn't updated.
+ 
+  7.1  ANDNA Metalloid elements: registration recipe
+  
+  It is very probable that the hash_node doesn't exist at all in the net,
+  'cause it can be one ip among the available 2^32 ips, and even if it is up,
+  it can also die soon and exist from the net. The adopted solution to this
+  ugly problem is to let the hostnames be kept by whole gnodes, in this way
+  the working of the ANDNA and a minum of hostnames backup is warranted.
+  The gnodes related to the hash of the hostname is the hash_gnode. Inside the
+  hash_gnode there is the hash_node too.
+ 
+  Since even the hash_gnodes cannot exist, a approximation strategy is
+  utilised: the nearest gnode to the hash_gnode is the rounded_hash_gnode and
+  it is consider as a normal hash_gnode. For example, if the hash_gnode is the
+  210, the nearest gnode to it will be the 211 or the 209. Generally, when we
+  are referring to the gnode, which has accepted a registration, there is no
+  difference between the two kind of gnodes, they are always called
+  hash_gnode.
+  
+  There are also gnodes, which backup the hash_gnode when it dies. A
+  backup_gnode is always a rounded_gnode, but the number of its nodes, which
+  backup the data is proportional to the total number of its nodes (seeds):
+  	if(seeds > 8) { backup_nodes = (seeds * 32) / MAXGROUPNODE ); }
+		else    { backup_nodes = seeds; }
+  The maximum number of backup_gnodes per hostname is about
+  MAX_ANDNA_BACKUP_GNODES (2). 
+
+  7.1.1	 ANDNA hook
+
+  When a node hooks to Netsukuku becoming automatically part of a ash_gnode,
+  it will also wonder about hooking to ANDNA through the andna_hook.
+  With the andna_hook it will get from its rnodes all the caches and
+  databases, which are  already inside the nodes of that gnode.
+  Obviously it is first necesarry the hooking of the node to Netsukuku.
+
+  7.1.2  Don't rob my hostname!
+  
+  Before making a request to ANDNA, a node generates a couple of RSA keys,
+  i.e. a public one (pub_key) and a private (priv_key). The size of the
+  pub_key will be limitated due to reasons of space.
+  The request of a ostname made to ANDNA will be signed with the private key
+  and in the same request the public key will be attached.
+  In this way, the node will be able to certify the true identity of its
+  future requests.
+
+  7.1.3  Count again
+
+  The maximum number of hostnames, which can be registered is 256, in order to
+  prevent the massive registration of hostnames, formed by common keyword, by
+  spammers.
+  The problem in ANDNA is to count. The system is completely distributed,
+  therefore is cannot know how many hostnames a node has registered. However a
+  there is a solution: a new element will be added, the andna_counter_node.
+  A counter_node is a node with an ip equal to the hash of the public key of
+  the node, which registers its hostnames, in this way there is always a
+  counter_node for each register_node.
+  The counter_node keeps the number of hostnames registered by the
+  register_node related to it. 
+  When a hash_gnode receives a registration request, it contacts the relative
+  counter_node, which reply by telling how many hostnames have been registered
+  by the register_node. If the register_node has not exceeded its limit, the
+  counter_node will increments its counter and the hash_gnode finally register
+  the hostname.
+  A counter_node is activated by the check request the hash_gnode sends. The
+  register_node has to keep the counter_node active following the same rules
+  of the hibernation (see the chapter below). Practically, if the counter_node
+  receives no more chech requests, it will deactivate itself, and all the
+  registered hostnames become invalid and cannot be updated anymore.
+  The same hack of the hash_gnode is used for the counter_node: there will be
+  a whole gnode of counter_nodes, which is called, indeed, counter_gnode.
+  
+  
+  7.1.4  Registration step by step
+
+  Let's see the hostname registration step by step:
+  The node x, which wants to register its hostname, finds the nearest gnode to
+  the hash_gnode, contacts a random node belonging to that gnode (say the node
+  y) and sends it the request.
+  The request includes a public key of its key pair. which is valid for all
+  the future requests. The pkt is also signed with its private key.
+  The node y verifies to be effectively the nearest gnode to the hash_gnode,
+  on the contrary it rejects the request. The signature validity is also
+  checked. The node y contacts the counter_gnode and sends to it the ip, the
+  hostname to be registered and a copy of the registration request itself.
+  The counter_gnode checks the data and gives its ok.
+  The node y, after the affermative reply, accepts the registration request
+  and adds the entry in its database, storing the date of registration.
+  Finally it forwards in broadcast, inside the its gnode, the request.
+  The other nodes of the hash_gnode, which receive the forwarded request, will
+  check its validity and store the entry in their db.
+  At this point the node x sends the request to the backup_gnodes with the
+  same procedure.
+  
+  7.1.5  Endless rest and rebirth
+
+  The hash_gnode keeps the hostname in an hibernated state for about 3 days
+  since the moment of their registration or update.
+  The expiration time is very long to stabilise the domains. In this way, even
+  if someone attacks a node to steal its domain, it will have to wait 3 days
+  to fully have it.
+  When the expiration time runs out, all the expired hostnames are deleted and
+  substituted with the other in queue.
+  A node has to send an update request for each of its hostnames, each time it
+  changes ip and before the hibernation time expires, in this way it's
+  hostname won't be deleted.
+  The packet of the update request has an id, which is equal to the number of
+  updates already sent. The pkt is also signed with the private key of the
+  node to warrant the true identity of the request.
+  The pkt is sent to any node of the hash_gnode, which will send a copy of the
+  request to the counter_gnode, in order to verify if it is still active and
+  that the entry related to the hostname being updated exists. On the
+  contrary, the update request is rejected.
+  If all it's ok, the node of the hash_gnode broadcasts the update request
+  inside its gnode.
+  The register_node has to send the update request to the backup_gnodes too.
+  If the update request is sent too early it will be considered invalid and
+  will be ignored.
+
+  7.1.6  Hash_gnodes mutation
+ 
+  If a generical rounded_gnode is overpassed by a new gnode, which is nearer
+  to the hash_gnode, it will exchange its rule with that of the second one,
+  and so the old rounded_gnode is transformed into the new one.
+  This transition takes place passively: when the register_node will update
+  its hostname, will directly contact the new rounded_gnode and since the
+  hostname stored inside the old rounded_gnode is not up to date, they'll be
+  dropped.
+  In the while, when the hostname has not been updated, all the nodes trying
+  to resolve it, will find the new rounded_gnode as the gnode nearest to the
+  hash_gnode and so they'll send the requests to the new gnode.
+  Since the new rounded_gnode doesn't have the database yet, it will ask to
+  the old hash_gnode to let it get its andna_cache related to the hostname to
+  resolve. Once it receives the cache, it will answer the node and in the
+  while it will broadcast, inside its gnode, the just obtained andna_cache.
+  In this way, the registration of that hostname is automatically transfered
+  into the new gnode.
+  In order to avoid a node to take the hostname away from the legitimate owner
+  before the starting of the transfer, all the nodes of the new hash_gnode,
+  will double check a registration request. In this way, they will come to
+  know if that hostname already exists. In case of positive response, they
+  will start the transfer of the andna_cache and they'll add the node asking
+  for the hname registration in queue.
+ 
+
+  7.1.7  Yaq: Yet another queue
+  
+  Every node is free to choose any hostname, even if the hostname has been
+  already chosen by another node.
+  The node sends a request to the gnode which will keep the hostname, the
+  request is accepted and it is added in the queue, which can have a maximum 
+  of MAX_ANDNA_QUEUE (5) elements. 
+  The node is associated to the registered hostname and the date of the request
+  is memorized by the hash_node.
+  When the hostname on top of the queue expires, it will be automatically
+  substituted by the second hostname, and so on.
+
+  A node which wants to resolve the hostname can also request the list of the
+  nodes stored in the andna_queue. In this way, if the first node is
+  unreacheble, it will try to contact the other ones.
+  
+  7.8	Hostname resolution
+
+  In order to resolve a hostname the X node has to simply find the hash_gnode
+  related to the hostname itself and randomly send to any node of that gnode
+  the resolution request.
+  
+  7.8.1  Distributed cache for hostname resolution
+
+  In order to optimise the resolution of a hostname, a simple strategy is
+  used: a node, each time it resolves a hostname, stores the result in a
+  cache. For each next resolution of the same hostname, the node has already
+  the result in its cache. Since in the resolution packet is written the last
+  time when the hostname has been registered or updated, an entry in the cache
+  expires exactly when that hostname is not valid anymore in ANDNA and has to
+  be updated.
+  The resolved_hnames cache is readable by any node.
+  A node X, exploiting this feature, can ask to any bnode Y randomly choosen
+  insied its same gnode to resolve for itself the given hostname.
+  The bnode Y, will search in its resoved cache the hostname and on negative
+  result the bnode will resolve it in the standard way, sending the result to
+  the node X.
+  These tricks avoid the overload of the hash_gnodes, which keep very famous
+  hostnames.
+  
+  7.8.2  noituloser emantsoh esreveR
+
+  If a node wants to know all the related hostnames associated to an ip, it
+  will directly contact the node which possides that ip.
+
+  7.9  dns wrapper
+
+  The work of a DNS requests wrapper will be to send to the ANDNA daemon the
+  hostnames to resolve and to return the IPs associated to them.
+  Thanks to the wrapper it will be possible to use the ANDNA without modifying
+  any preexistent programs: it will be enough to use its own computer as a dns
+  server.
+  
+  See the ANDNS RFC: http://lab.dyne.org/Ntk_andna_and_dns
+  the andna manual:  http://netsukuku.freaknet.org/doc/manuals/html/andna.html
+ 
+  7.10  Scattered Name Service Disgregation
+
+  --
+  The updated "SNSD" can be found here:
+  http://lab.dyne.org/Ntk_SNSD
+  --
+
+  The Scattered Name Service Disgregation is the ANDNA equivalent of the
+  SRV Record of the Internet Domain Name System, which is defined here:
+  http://www.ietf.org/rfc/rfc2782.txt
+  For a brief explanation you can read:
+  http://en.wikipedia.org/wiki/SRV_record
+  
+  SNSD isn't the same of the "SRV Record", in fact, it has its own unique
+  features.
+  
+  With the SNSD it is possible to associate IPs and hostnames to another
+  hostname.
+  Each assigned record has a service number, in this way the IPs and hostnames
+  which have the same service number are grouped in an array.
+  In the resolution request the client will specify the service number too,
+  therefore it will get the record of the specified service number which is 
+  associated to the hostname. Example:
+  
+  The node X has registered the hostname "angelica".
+  The default IP of "angelica" is 1.2.3.4.
+  X associates the "depausceve" hostname to the `http' service number (80) of
+  "angelica".
+  X associates the "11.22.33.44" IP to the `ftp' service number (21) of
+  "angelica".
+  
+  When the node Y resolves normally "angelica", it gets 1.2.3.4, but when
+  its web browser tries to resolve it, it asks for the record associated to
+  the `http' service, therefore the resolution will return "depausceve".
+  The browser will resolve "depausceve" and will finally contact the server.
+  When the ftp client of Y will try to resolve "angelica", it will get the
+  "11.22.33.44" IP.
+  
+  The node associated to a SNSD record is called "SNSD node". In this example
+  "depausceve" and 11.22.33.44 are SNSD nodes.
+  
+  The node which registers the records and keeps the registration of the main
+  hostname is always called "register node", but it can also be named "Zero SNSD
+  node", in fact, it corresponds to the most general SNSD record: the service
+  number 0.
+  
+  Note that with the SNSD, the NTK_RFC 0004 will be completely deprecated.
+  
+  7.10.1 Service, priority and weight number
+  
+  7.10.1.1 Service number 
+  
+  The service number specifies the scope of a SNSD record. The IP associated to 
+  the service number `x' will be returned only to a resolution request which has
+  the same service number.
+  
+  A service number is the port number of a specific service. The port of the
+  service can be retrieved from /etc/services.
+  
+  The service number 0 corresponds to a normal ANDNA record. The relative IP
+  will be returned to a general resolution request.
+  
+  7.10.1.2 Priority
+  
+  The SNSD record has also a priority number. This number specifies the priority
+  of the record inside its service array.
+  The client will contact first the SNSD nodes which have the higher priority,
+  and only if they are unreachable, it will try to contact the other nodes
+  which have a lower priority.
+  
+  7.10.1.3 Weight
+  
+  The weight number, associated to each SNSD record, is used when there are
+  more than one records which have the same priority number.
+  In this case, this is how the client chooses which record using to contact
+  the servers:
+  
+  The client asks ANDNA the resolution request and it gets, for example, 8
+  different records.
+  The first record which will be used by the client is chosen in a pseudo-random
+  manner: each record has a probability to be picked, which is proportional to its
+  weight number, therefore the records with the heavier weight are more likely to
+  be picked.
+  Note that if the records have the same priority, then the choice is completely
+  random.
+  
+  It is also possible to use a weight equal to zero to disable a record.
+  
+  The weight number has to be less than 128.
+  
+  7.10.2 SNSD Registration
+  
+  The registration method of a SNSD record is similar to that described in the
+  NTK_RFC 0004.
+  
+  It is possible to associate up to 16 records to a single hostname.
+  The maximum number of total records which can be registered is 256.
+  
+  The registration of the SNSD records is performed by the same register_node.
+  The hash_node which receives the registration won't contact the counter_node,
+  because the hostname is already registered and it doesn't need to verify
+  anything about it. It has only to check the validity of the signature.
+  
+  The register node can also choose to use an optional SNSD feature to be sure
+  that a SNSD hostname is always associated to its trusted machine. In this
+  case, the register_node needs the ANDNA pubkey of the SNSD node to send a
+  periodical challenge to the node.
+  If the node fails to reply, the register_node will send to ANDNA a delete
+  request for the relative SNSD record.
+  
+  The registration of SNSD records of hostnames which are only queued in the
+  andna_queue is discarded.
+  
+  Practically, the steps necessary to register a SNSD record are:
+   * Modify the /etc/netsukuku/snsd_nodes file.
+  {{{
+  register_node# cd /etc/netsukuku/ 
+  register_node# cat snsd_nodes
+  #
+  # SNSD nodes file
+  #
+  # The format is:
+  # hostname:snsd_hostname:service:priority:weight[:pub_key_file]
+  # or
+  # hostname:snsd_ip:service:priority:weight[:pub_key_file]
+  #
+  # The `pub_key_file' parameter is optional. If you specify it, NetsukukuD will
+  # check periodically `snsd_hostname' and it will verify if it is always the
+  # same machine. If it isn't, the relative snsd will be deleted.
+  #
+  
+  depausceve:pippo:http:1
+  depausceve:1.2.3.4:21:0
+  
+  angelica:frenzu:ssh:1:/etc/netsukuku/snsd/frenzu.pubk
+  
+  register_node#
+  register_node# scp frenzu:/usr/share/andna_lcl_keyring snsd/frenzu.pubk
+  }}}
+   * Send a SIGHUP to the NetsukukuD of the register node:
+  {{{
+  register_node# killall -HUP ntkd
+  # or, alternatively
+  register_node# rc.ntk reload
+  }}}
+  
+  7.10.2.1 Zero SNSD IP
+  
+  The main IP associated to a normal hostname has these default values:
+  {{{
+  IP	 = register_node IP	# This value can't be changed
+  service  = 0
+  priority = 16
+  weight   = 1
+  }}}
+  
+  It is possible to associate other SNSD records in the service 0, but it isn't
+  allowed to change the main IP. The main IP can only be the IP of the
+  register_node.
+  Although it isn't possible to set a different association for the main IP, it
+  can be disabled by setting its weight number to 0.
+  
+  The string used to change the priority and weight value of the main IP is:
+  {{{
+  hostname:hostname:0:priority:weight
+  
+  # For example:
+  register_node# echo depausceve:depausceve:0:23:12 >> /etc/netsukuku/snsd_nodes
+  }}}
+  
+  
+  7.10.2.2 SNSD chain
+  
+  Since it is possible to assign different aliases and backup IPs to the zero
+  record, there is the possibility to create a SNSD chain.
+  For example:
+  
+  {{{
+  depausceve registers: depausceve:80 --> pippo
+  pippo registers:      pippo:0  --> frenzu
+  frenzu registers:     frenzu:0 --> angelica
+  }}}
+  
+  However the SNSD chains are ignored, only the first resolution is considered
+  valid. Since in the zero service there's always the main IP, the resolution is
+  always performed.
+  In this case ("depausceve:80 --> pippo:0") the resolution will return the main
+  IP of "pippo:0".
+
+  The reply to a resolution request of service zero, returns always IPs and not
+  hostnames.
+
+  8.   Heavy Load: flood your ass!
+
+  The routes set by Netsukuku are created with the nexthop support, which
+  allows a node to reach another node using more than one route simultaneusly
+  (multipath), warranting a balanced sorting of the pkts traffic.
+  The anti-flood shield is a consequence of this multipath routes system, in
+  fact, also when a node is bombed by a continuous and consistent flux of
+  data, it receives that flux subdivided into different routes and links,
+  therefore it is always be able to communicate with other nodes.
+  
+  9.   Spoof the Wired: happy kiddies
+
+  If a node hooks Netsukuku spoofing an ip, it will obtain nothing simply
+  because no nodes will know how to reach it, as the exact route to reach the
+  true node is already known.
+  Moreover, the rnodes will not allow a hooking an ip which was already
+  present inside the maps.
+  
+  10.  /dev/accessibility
+  
+  The best medium to make the nodes linked each other is, obviously, the wifi,
+  but any kind of links, which connects two nodes can be used for the same
+  purpose.
+  The mobile phones are a great device, where Netsukuku can run.
+  Some of the newest models use Linux as kernel.
+  
+  11.  Internet compatibility
+
+  Netsukuku cannot instantaneusly spread and it's impossibile to imagine to
+  move from the Internet to Netsukuku immediately.
+  Currently, during its early phase of diffusion, we need to make it compatible
+  with the old Internet and the only way is to temporarily limitate the
+  growing of Netsukuku.
+
+  A node which uses Netsukuku cannot enter inside the Internet because when
+  ntkd is launched, it can take any random ip and there's an high probability
+  of a collision with an IP address of the Internet. For example it can take
+  the IP 195.169.149.142, but that, in the Internet, is the IP of
+  195.169.149.142.
+  
+  In order to keep the compatibility with the Internet, Netsukuku has to be
+  restricted to a subclass of ip, so that it doesn't interfere with the
+  normal default classes of the Internet. 
+  We use the private A class of ip for the ipv4 and the Site-Local class for
+  the ipv6.
+  
+  The passage from the restricted Netsukuku to the complete one is easy:
+  at the same moment the user decides to abandon the Internet, he will
+  restart NetsukukuD without any options of restriction.
+  
+  Obviously all the other private classes are not influenced, to let the user
+  create a LAN with just one gw/node Netsukuku.
+
+  11.1  Private IP classes in restricted mode
+
+  --
+  The updated "Restricted IP classes" can be found here:
+  http://lab.dyne.org/Ntk_restricted_ip_classes
+  --
+  
+  The user can decide to use, in restricted mode, a different private IP
+  class from the default one ( 10.x.x.x ). This is useful if the 10.x.x.x class
+  cannot be used, for example in Russia, it is very popular to provide Internet
+  access through big LANs which use the 10.x.x.x class.
+
+  The other available classes are:
+  
+  172.16.0.0  - 172.31.255.255    = 16*2^16 = 1048576 IPs
+  192.168.0.0 - 192.168.255.255   =    2^16 = 65536   IPs
+  
+  The 192.168.x.x class cannot be used as an alternate restricted mode IP class
+  because it is the default Netsukuku private class, thus the only alternative
+  to 10.x.x.x is the "172.16.0.0 - 172.31.255.255" IP class.
+  However it is adviced to always use the default class.
+  
+  11.1.1 Netsukuku private classes
+  
+  It necessary to provide at least one private IP class inside Netsukuku to
+  allow the creation of private LANs which are connected to Netsukuku with just
+  one node.
+  
+  The default Netsukuku private class is 192.168.x.x.
+  The random IPs choosen by the nodes will be never one of that class.
+  The default private class is valid both in normal and restricted mode.
+  
+  Only in normal mode the "172.16.0.0 - 172.31.255.255" class becomes private.
+  This class is assigned to very large private networks.
+
+  The 10.x.x.x class IS NOT private since it is too big and it would be just a
+  waste of IP addresses to use it as a private class.
+  Note also that for each Netsukuku node you can have a private network,
+  therefore with just 16 Netsukuku nodes you can form a private network of
+  16777216 nodes, which is equivalent to a 10.x.x.x class.
+  
+  11.1.2 Notes on the restricted mode
+  
+  A node which runs in restricted mode cannot be compatible with normal mode
+  nodes, for this reason a restricted node will drop any packets coming from a
+  normal node.
+  
+  While in restricted mode the "172.16.0.0 - 172.31.255.255" class IS NOT
+  private.
+  
+  In restricted mode, when two different networks which use different
+  private classes (say 10.x.x.x and 192.168.x.x) are linked, nothing happens
+  and they will not rehook, this is necessary because it's assumed that the
+  specified private class is the only choice the user can utilize.
+  This leds to some problems, consider this scenario:
+		
+		10.0.0.0 <-> 172.16.0.0
+  
+  In this case the rehook isn't launched, so it is possible that there will be
+  a lot of collision.
+
+
+  11.2  Internet Gateway Search
+  
+  --
+  The updated "Internet Gateway Search" can be found here:
+  http://lab.dyne.org/Ntk_IGS
+  --
+  
+  If the nodes are in restricted mode (compatibility with the Internet), they
+  should share their Internet connection. This can be easily done, in fact, if
+  a node X, connected to the Internet, activates the masquerading, it is
+  possible for the other nodes to connect by setting as the default gateway
+  their rnode which lead to the node X.
+  
+  This can be automated by Netsukuku itself and it requires small changes in the
+  code: it is just necessary that the nodes connected to the Internet set a flag
+  in the qspn_pkt, in this way the other nodes will know the routes to reach the
+  Internet.
+  
+  11.2.1 Multi-gateways
+  
+  The situation becomes a little complex when there is more than one node which
+  shares its internet connection. Let's consider this scenario:
+  
+  		   A(gw)      B(gw)
+  		    \	       /
+  		     \___  ___/
+  		         \/
+  		      Ntk nodes (10.x.x.x)
+  
+  A and B are nodes which shares their internet connection, we call them
+  gateways. Let's call X the node which wants to connect to an Internet host.
+  In this case, the nodes near A, might find useful to use A itself to
+  reach the Internet, the same happens for the nodes near B.
+  Instead, the nodes in the middle don't know what is the best choice and they
+  might continuosly change their gw. This means that a tcp connection
+  (to an inet host), which was established trough A, when is then routed trough
+  B dies because A and B have different public IPs on the Internet.
+  
+  The node X has to create an IPIP tunnel to the gateway it wants to use, and
+  set as default gw the tunnel. In this way, the node X is sure to always use
+  the same gateway while the routing of the packets between it and the gw is
+  made transparently by the other Netsukuku nodes.
+  
+  11.2.1.1 Anti loop multi-inet_gw shield
+  
+  An inet-gw is a normal node like all the other, therefore it can use the
+  Internet connections of the other inet-gws in conjunction with its own one.
+  
+  Consider the previous scenario, A and B are two inet-gw. 
+  A sets in his internet default route the adsl modem and B.
+  B does the same, but sets A as the second default route.
+  
+  What would happen if the default route, written in the routing cache of A, is
+  B and, at the same time, the default route set in the routing cache of B is A?
+  The packets would jump endlessy in a infinite loop loosing themself forever.
+  
+  That's why we need the "anti loop multi-inet_gw shield".
+  It's working way is simple: each inet-gw has a netfilter rule which marks
+  all the packets coming from the outside and directed to the Internet. These
+  packets are then routed directly to the Internet without being sent, again, to
+  an inet-gw. In the example:
+  A wants to send a packet to the Internet and its looks in its routing cache.
+  It decide to forward the packet to B. B receives the packet, recognizes it is
+  an extern packet directed to the Internet and shoots it on its modem.
+  
+  11.2.2 Load sharing
+  
+  Let's consider the previous scenario.
+  
+  The node X can also decide to use both A and B to reach the Internet, using
+  at the same time their connections! Even the gw A can use at the same time
+  its own line and the connection of the gw B.
+  
+  The procedure to implement this is what follows:
+  
+   * X creates a tunnel to A and another one to B
+   
+   * X adds in the routing table the default route using A and B as multipath
+     gateways. The gateway for the connections is chosen randomly.
+  
+   * X adds a rule in the routing table to route all the packets of established
+     connections trough the same gateway used to create the same connection.
+     The rule is linked to some netfilter rules which track and mark each
+     connection. The method is described in details here:
+     https://lists.netfilter.org/pipermail/netfilter/2006-March/065005.html
+  
+  11.2.3 The bad
+  
+  The implementation of the Load sharing is very Linux specific, so it will be
+  very difficult to port it to other kernels, therefore this feature will be
+  available only to nodes which run Linux (ehi, one more reason to use Linux ;).
+  
+  11.2.4 MASQUERADING
+  
+  Each node sharing the Internet connection (inet-gw) has to masquerade its
+  interfaces, so iptables must be used.
+  In order to keep the daemon portable, NetsukukuD will launch the script found
+  at /etc/netsukuku/masquerade.sh, which in Linux will be a simple script that
+  executes "iptables -A POSTROUTING -t nat -j MASQUERADE".
+  When NetsukukuD is closed the added firewall rules are flushed with 
+  "/etc/netsukuku/masquerade.sh close"
+  
+  11.2.5 Traffic shaping
+  
+  The inet-gw can also shape its internet connection in order to prioritize its
+  local outgoing traffic (the traffic coming from its 192.168.x.x LAN). 
+  In this way, even if it shares its Internet connection, it won't notice any
+  difference 'cause it will have the first priority. Moreover with the traffic
+  shaper, the inet-gw can also prioritize some protocol, i.e. SSH.
+  
+  The traffic shaper will activated at the start of NetsukukuD. The daemon will
+  run the /etc/netsukuku/tc_shaper.sh script, which in Linux utilizes the
+  iproute2 userspace utility.
+  When the daemon is closed the traffic shaping will be disabled with
+  "/etc/netsukuku/tc_shaper.sh close".
+  
+  11.2.6 Sharing willingness
+  
+  If your ISP isn't very kind, it might decide to ban you because your sharing
+  your Internet connection.
+  It's a pity, but it is for your ISP, not for you, that's because probably
+  someone is also sharing its Inet connection and you can use it too.
+  
+  What if you want to be completely sure that you'll have a backup connection?
+  An idea would be to share your Inet connection only when you're sure that you
+  can reach someone which is doing the same. In this way you won't share it
+  when you are still alone in your area and you can't contact other Netsukuku
+  nodes. This is a good compromise: until another node doesn't guarantees you a
+  backup connection, you won't share your.
+  
+  This can be done automatically by activating the `share_on_backup' option in
+  netsukuku.conf. NetsukukuD will start to share your Internet connection _only_
+  when it will be in contact with another node which is sharing, or it is willingly
+  to share, its own connection.
+  
+  11.2.7 See also
+  
+  For more information on the necessity of using ipip tunnels in an adhoc
+  network used to share internet connections, you can read this paper:
+  http://www.olsr.org/docs/XA-OLSR-paper-for-ICC04.pdf
+  
+  12.  Implementation: let's code
+    
+  The Netsukuku protocol isn't low-level, 'cause all it has to do is to set
+  the routes in the routing table of the kernel, therefore the daemon
+  NetsukukuD runs in userspace.
+  All the system is, in fact, maintained by the daemon, which runs on every
+  node. NetsukukuD communicates with the other nodes using the tcp and the udp
+  ad sets the routes in the kernel table.
+
+  All the code is written in C and is well commented, thus it should be easy
+  to follow the flux of the program, but, before reading a .c is adviced to
+  peep the relative .h.
+  
+  The code in netsukuku.c launches the main threads.
+  Every port listened by NetsukukuD is owned by a daemon, which runs as a
+  single thread. The used ports are the 269-udp , 269-tcp, 271-udp, 277-udp,
+  277-tcp.
+  All the packets received by the daemons are filtered by accept.c and
+  request.c, which avoid flood attacks using a small table. (accept.c is the
+  same code used to patch the user-level-denial-of-service OpenSSH
+  vulnerability). Secondly, the packets are given to pkts.c/pkt_exec().
+  When all the daemons are up and running, hook.c/netsukuku_hook(), which is
+  the code used to hook at Netsukuku, is called.
+  
+  Hook.c will launch the first radar scan calling radar.c/radar_scan().
+  The radar_scan thread will then launch a radar scan every MAX_RADAR_WAIT
+  seconds. When radar_update_map() notices a change in its rnodes, it sends a
+  new qspn_close with qspn.c/qspn_send().
+  All the code relative to the qspn and the tracer_pkts is in qspn.c and
+  tracer.c
+
+  The ANDNA code was subdivided in andna_cache.c. which contains all the
+  functions used to manage the caches and in andna.c, where the code for the
+  ANDNA packets is written.
+  
+  The sockets, sockaddr, connect,  recv(), send, etc... are all in inet.c and
+  are mainly utilsed by pkts.c.
+  Pkts.c is the code which receives the requests with pkt_exec() and sends
+  them with send_rq(), a front end used to packet and send the majority of
+  requests.
+  Ipv6-gmp.c makes use of GMP (GNU multiple precision arithmetic library) in
+  order to manipulate the 16 bytes of the ipv6, considering them as a unique
+  big number. That is essential for some formulas, which modify directly the
+  ip to know many information, in fact, in Netsukuku, an ip is truly a number.
+  
+  The code for the kernel interface, used to set the routes in the routing
+  table and to configure a network interface is in:
+  krnl_route.c, if.c, ll_map.c, krnl_rule.c, libnetlink.c.
+  Route.c is the middleman between the code of the Netsukuku protocol and the
+  functions which communicates with the kernel.
+
+  The cares of the internal map are up to map.c. All the other maps are based
+  on it and they are:
+  bmap.c for the border node map. gmap.c for the external maps.
+  
+  In order to compile the Netsukuku code, it isn't necessary to use autoconf,
+  automake and the others, but it's just needed the handy scons
+  (http://www.scons.org).
+
+  The latest version of the code is always available on the hinezumilabs cvs:
+
+  cvs -d :pserver:anoncvs@hinezumilabs.org:/home/cvsroot login
+  
+  or give a look on the online web cvs:
+  
+  http://cvs.netsukuku.org/
+  
+  
+  13.  What to do
+
+  - Testing on large Netsukuku and ANDNA.
+  - Complete what is in src/TODO.
+  - Code, code and code.
+  - Something else is always necessary.
+
+  If you wants to get on board, just blow a whistle.
+
+  
+  14.  The smoked ones who made Netsukuku
+
+  Main theory and documentation:
+  
+  Andrea Lo Pumo   	aka    AlpT			<alpt@netsukuku.org>
+ 
+ 
+  The NTK_RFC 0006 "Andna and dns":
+  
+  Federico Tomassini    aka    Efphe			<efphe@netsukuku.org>
+  
+  
+  The NTK_RFC 0001 "Gnode contiguity":
+
+  Andrea Lo Pumo   	aka    AlpT			<alpt@netsukuku.org>
+  Enzo Nicosia		aka    Katolaz               <katolaz@netsukuku.org>
+  Andrea Milazzo	aka    Mancausoft	   <andreamilazzo@gmail.com>
+  Emanuele Cammarata	aka    U scinziatu          <scinziatu@freaknet.org>
+  
+
+  Special thanks to:
+  
+  Valvoline the non-existent entity for the implementation advices,
+  Newmark, the hibernated guy who helped in some ANDNA problems,
+  Crash aka "il nipponico bionico" who takes BSD, breathes the 2.4Ghz and
+        worship the great Disagio,
+  Tomak aka "il magnanimo" who watches everything with his crypto eyes and
+        talks in the unrandomish slang,
+  Asbesto aka "l'iniziatore" who lives to destroy the old to build the new,
+  Nirvana who exists everywhere to bring peace in your data,
+  Ram aka "il maledetto poeta" who builds streams of null filled with the
+	infinite,
+  Quest who taught me to look in the Code,
+  Martin, the immortal coder and our beloved father,
+  Elibus, the eternal packet present in your lines,
+  Pallotron, the biatomic super AI used to build stream of consciousness,
+  Entropika, the Great Mother of Enea,
+  Uscinziatu, the attentive,
+  Shezzan, the holy bard of the two worlds,
+  Katolaz,
+  Gamel,
+  ...
+  the list goes on...
+  V C G R A N Q E M P N E T S U K
+
+  and finally thanks to all the
+  
+  Freaknet  Medialab      <www.freaknet.org>
+  
+  whose we are all part, and the poetry
+
+  Poetry Hacklab          <poetry.freaknet.org - poetry.homelinux.org>
+  
+  
+  About the translator of this document, you have to thank this great guy:
+  
+  Salahuddin, the hurd-nipponese old british one, which is always joyful.
+  
+--
+This file is part of Netsukuku.
+This text is free documentation; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the Free
+Software Foundation; either version 2 of the License, or (at your option) any
+later version. For more information read the COPYING file.

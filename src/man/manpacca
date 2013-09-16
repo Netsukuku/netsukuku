@@ -1,0 +1,21 @@
+#!/bin/sh
+#Converts the *.pod files in the man format
+
+NTK_REPOSITORY="../../"
+
+pod2man -s 8 ntkd.pod -c "" -n "NetsukukuD"  -r "`../ntkd -v`" ntkd.8
+pod2man -s 8 netsukuku.conf.pod -c "" -n "netsukuku.conf" -r "`../ntkd -v`" netsukuku.conf.5
+pod2man -s 8 ntk-wifi.pod -c "" -n "ntk-wifi"  -r "`../ntkd -v`" ntk-wifi.8
+pod2man -s 8 andna.pod -c "" -n "ANDNA"  -r "`../ntkd -v`" andna.8
+pod2man -s 8 ntk-resolv.pod -c "" -n "ntk-resolv" ntk-resolv.8
+
+rm -r man_html man_text
+mkdir man_html/
+mkdir man_text/
+
+for i in `ls -1 *.8`; do man2html $i > man_html/`basename $i .8`.html; done
+for i in `ls -1 *.pod`; do pod2text $i > man_text/`basename $i .pod`; done
+
+#cp -r man_html/ man_text/ $NTK_REPOSITORY/doc/
+#cp -r man_html/* $NTK_REPOSITORY/doc/manuals/html/
+cp -r man_text/*  $NTK_REPOSITORY/doc/manuals/

@@ -1,0 +1,36 @@
+== Internet tunnels and Netsukuku ==
+
+Internet tunnels can be used to link Netsukuku nodes.
+
+Generally, it isn't a good idea because Netsukuku is meant to be a
+physical net, in fact, if the links are based on a lower network (the
+Internet), Netsukuku becomes dependent on it.
+If Netsukuku becomes dependent on another network, all the advantages of
+having a parallel net to the Internet are lost.
+
+However the Internet tunnels can be useful. 
+
+Consider this scenario:
+there two large gnode in two near cities and it is difficult to link the
+cities, f.e. using a wireless hook.
+In this case they can be linked with the use of Internet tunnels.
+
+Some of nodes with the best Internet connection will be linked to the nodes of
+the other city.  In this way the links will be like real physical links,
+because they'll have the same topological meaning, and the delay between the
+two gnode won't be high (the cities are near).
+Moreover the ISPs will be used to connect two large gnode, therefore the
+Netsukuku net will be partially dependent on the Internet.
+These tunnels have to be created manually.
+
+It is important to not create tunnels which undermine the topological meaning
+of physical links, thus you must not create a tunnel between Tokyo and
+Amsterdam.
+
+If there is the danger that the ISPs used to create the tunnels will try to
+tap them, it is possible to create encrypted tunnels, or even better the
+tunnel can be encrypted and routed through different routes using Tor. In the
+latter case the link bandwidth will be heavily afflicted therefore this
+countermeasure must be used with caution.
+
+For an example on how to link two nodes using a tunnel see ["Ntk_vpn_test"].

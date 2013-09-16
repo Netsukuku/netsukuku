@@ -1,0 +1,95 @@
+== Grow Netsukuku ==
+
+Netsukuku is a mesh network.
+The mesh networks depend on the collaboration of each node, in fact, a
+distributed network can grow only with the small contributions of each user.
+
+Don't expect that someone will set up the whole net for you, just
+because Netsukuku is decentralised, anonymous, distributed and independent
+and it will never be possible to anybody to control it.
+
+You have the possibility to be the citizen of a free world wide community,
+where no one will ever be able to limit your digital rights with measures like
+prosecution of file sharing, censorship, data retention, commercial
+connectivity and so on.
+
+=== Joining Netsukuku ===
+
+The first step is to turn your PC into a Netsukuku node:
+        * take a computer
+        * install any distro of GNU/Linux
+        * install Netsukuku
+        * buy a wifi (PCI) card
+        * buy/build an external antenna (with the longest range as possible)
+or
+	* buy an Access Point compatible with the Netsukuku-AP firmware
+        * buy/build an external antenna (with the longest range as possible)
+	* connect the AP to your PC. In this case it doesn't matter anymore 
+	  what OS you've installed and even if your PC is turned off, the AP 
+	  will continue to be an active Netsukuku node..
+
+It's highly probable you will be the first node in your neighborhood,
+but this is normal: someone have to be the first.
+As soon as another user will do the same thing you did, you will be
+automatically connected to each other.
+Waiting doesn't cost you nothing.
+
+In order to shorten your waiting you can help the growth of Netsukuku in your
+neighborhood by following the advises written below.
+
+=== Internet sharing ===
+
+If you have an Internet connection, share it with your neighbours.
+In this way everybody will be able to have a free Internet connection without
+worrying of his or her location. Moreover, when this habit will be common, you
+won't worry too, anywhere and anytime.
+
+Don't worry too much about sharing your bandwidth.
+These are some features of sharing the Internet connection with Netsukuku:
+ * You can connect to the Internet using, at the same time, multiple node
+   which share their connection. For example, if there are 5 nodes sharing
+   their 640Kb/s connections, you can have 5 parallel downloads at 640Kb/s.
+ * If you decide to share your Internet connection, you will always use the
+   Internet connections shared by the other nodes. In this way, you donate
+   your bandwidth, but, at the same time, receive donations from other users.
+ * Even if you share your Internet connection to other Netsukuku nodes, your
+   traffic will have the maximum priority, therefore you won't notice any
+   slowdown.
+
+=== Spread the word ===
+
+It is very important to let your neighbours aware of being inside a
+Netsukuku area.
+You have just to mark in a visible way the area, for example using:
+ * stickers: /* TODO: image and phrase for the sticker URL */
+ * papers: /* TODO: url of the sheet to print */
+ * posters: /* TODO */
+
+For more information on this topic go to:
+http://lab.dyne.org/Ntk_spread_the_word	 /* TODO */
+
+=== City-City link ===
+
+In the same way two nodes close to each other are linked, it is possible to connect 
+two close cities by wireless links.
+Otherwise, if it is impossible to link physically them (f.e. there is a desert
+area between them), they can still be connected with the use of Internet tunnels.
+
+For more information on this topic go to:
+http://lab.dyne.org/Ntk_Internet_tunnels
+
+=== Documentation ===
+
+Another useful thing you can do is writing or translating documentation.
+Use the wiki: http://lab.dyne.org/Netsukuku
+
+=== Code ===
+
+There is a lot to code too! If you are a Kung Foo coder, get on board and
+help the development writing some nice poems. For a start you can take a look
+at the src/TODO file.
+
+=== Misc ===
+
+Finally, every good work you can do is welcomed and it will surely be used,
+for example if you like to draw upload your drawings.

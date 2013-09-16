@@ -1,0 +1,185 @@
+*
+**
+***		HIGH PRIORITY
+**
+*	
+
+* (generally these TODOs are already being implemented at the moment)
+
+- restore the network when NetsukukuD is closed (call /etc/rc.d/rc.inet1 ?)
+
+- Netsukuku WRT firmware:
+	- a configured openwrt release with all the necessary kernel modules
+	  and packages installed
+	- A web interface to configure the /etc/netsukuku/netsukuku.conf file
+	  and to use the rc.ntk script.
+
+- bugs 
+	- comments in resolv.conf are not considered: 
+		NOTE: Do not resolv this BUG: Now It's useful
+
+*
+**
+***		MEDIUM PRIORITY
+**
+*	
+
+- Equalize multipath routes. The `equalize' module is still experimental in
+  the kernel.
+
+- bandwidth measurement
+	- do not delete an inet-gw if there's still bw passing on it.
+
+- Viphilama: http://lab.dyne.org/Ntk_viphilama
+
+- Bandwidth weight for each entry of the qspn (not just rtt and latency):
+	- what to use to get the bandwidth of a network interface?
+	  Use `iperf' to measure once the max link bw, then monitor with
+	  iptables the link and calculate the used bw.
+	- See http://lab.dyne.org/Ntk_bandwidth_measurement
+	  
+- Gnodes contiguity
+	- gnode re-hook
+		- When we have two different gnodes A and C, and
+		  then B hooks to A, nothing happens, since C, doesn't
+		  receive any qspn_pkt
+		- test: two (g)nodes with the same IP
+			- currently only in particular situations the rehook
+			  isn't possible: A - A,  A - B - A.
+	
+	- Challenge
+		- RSA between rnodes: the nodes which are already hooked ask
+		  for the public key to the node which is hooking.
+		- Creation of the problem.
+		- Resolution of the problem.
+		- Diffusion of the reply.
+		- Reject of challenge for X time after a first challenge has
+		  been completed.
+		- Do just one challenge at the same time, reject/delay all the
+		  other which came later.
+		- If the challenge was rejected/delayed wait the right amount
+		  of time and retry.
+		- Ban of gnodes which lost the challenge ?
+		- Challenge between two gnode not contiguous, which have the
+		  same gid.
+
+- turn andns_lib.c into a real shared library
+
+- SNSD
+	- pubkey: automatic deletion request
+
+- A firewall script to turn a ntk node into a routing only node.
+
+
+	              other ntk nodes
+		             |
+			     |
+			     |
+			 _________
+			|    N    |
+    Internet ---------- | WRT ntk | - - w i f i - - - Ntk node A
+			|_________|             \
+			     |                   \
+			     |                    \ Ntk node B
+			   L A N
+			    
+  If N is set to a routing only node, then the nodes A and B will always be
+  able to reach the Internet and the "other ntk nodes" through it, but they 
+  will not be able to reach the LAN connected to the node N.
+  Optionally the node N can leave some "backdoor" ports opened, f.e. it might
+  want to leave a ssh login which accepts keys authentication only.
+
+  The port used by Netsukuku will be leaved open too, in this way the nodes
+  can still communicate between them.
+
+- Can multiple qspn packets be processed concurrently? Or do we need mutexes
+  for them? Only the tests will give answer.
+
+*
+**
+***		LOW PRIORITY
+**
+*	
+
+- Interactive shell/console. Some commands that should be implemented:
+	  "stats" gives statistics, 
+	  "rnodes" show the list of rnodes,
+	  "int_map" dumps the internal map in a ASCIIful way,
+	  "ext_map", "bnode_map", "andna_cache", ...,
+	  "flush rhcache"
+
+- ntk-finger: it would be handy to be able to know some info on a particular
+  node. The user puts his node info in /etc/netsukuku/finger.
+  $ ntk-finger remote_node_ip
+  will print out its /etc/netsukuku/finger.
+  	- why don't we just use fingerd?
+		- too bugged?
+	- and what about a stupid shell script like this: 
+	  while [ 0 ]; do cat /etc/netsukuku/finger | nc -l -p 79; done
+  
+- renice the NetsukukuD process?
+
+- small memory: if the system has <= X Mb of free memory, switch on dumb mode.
+  In this mode NetsukukuD keeps only the list of rnodes and forwards every
+  request to one of them. The lcl_cache is kept too.
+
+- better memory utilisation: see MAXMSGSZ, PKT_MAX_MSG_SZ, pkt_verify_hdr(), 
+			     pkt_uncompress(), andns_uncompress().
+	- The maximum size of an uncompressed or compressed packet must be
+	  proportional to the total free memory reserved to the daemon.
+	- pkt_uncompress() must be able to drop the packet if there's no
+	  free memory available. The same must be done by pkt_recv() and
+	  other similar functions.
+
+- option to disable the modification of the routing table
+
+- option to change on runtime the wait-times of the QSPN, radar, etc...
+	-normal, -high, -low
+
+- option (both on command line and in netsukuku.conf) to disable the saving of
+  caches. (the keyring will always be saved).
+
+- Change with something else the eliminable fatal() calls in netsukuku_hook()
+
+- Ipv6 support: use ff05::23 for multicast. qspn_gnode_count isn't IPv6
+  compatible!
+
+- Test request.c
+
+- Port the kernel route code for *BSD: take a look at rt_ioctl.c and
+  rt_socket.c of quagga.
+
+- use PREFIX in the man pages
+
+- xmalloc.c: Implement a "wrapper heap". We do a big malloc() at the start and
+	     then we manage personally it, in this way we avoid the huge
+	     overhead of malloc.
+
+- Compressed maps: save the files in compressed formats
+
+- API for the syncronization of the maps the daemon. A third party program,
+  might want to have always the latest maps. 
+
+- Write the documentation for the code that can be used by other
+  programs. (By the way it is already commented.)
+
+- krnl_conf.c: it reads /proc/kallsyms and verifies that there are the symbols
+	       used by the modules/builtins kernel code netsukuku is dependent
+	       on. kernel_conf.h will have an array like pkt_op_table (pkts.h).
+	       Each symbol will be checked by the init functions. There will be
+	       also associated an help function that tells what to do when the
+	       symbol is missing in /proc/kallsyms. For example,
+	       mark_rule_init() will do:
+	     		if(krnl_conf_check("netfilter") <0) {
+				krnl_netfilter_usage();
+				return -1
+			}
+
+- Launch a trigger script. Possible events: INET_UP, INET_DOWN, NEW_RNODE,
+  DEAD_RNODE.
+
+- Use bireloc from autopackage
+
+- Use qemu to make Netsukuku run on windows?!?
+
+- /*\ \*/
