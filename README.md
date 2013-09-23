@@ -32,7 +32,7 @@ http://netsukuku.freaknet.org
 **
 
 Netsukuku is an alternative to the internet, It will have all of the features of the internet,
-Such as websites, Instant messaging, File transfers, DNS, Etc. However, It is a
+Such as websites, Instant messaging, File transfers, DNS, Etc. It functions as a
 mesh network or a p2p net system that generates and sustains
 itself autonomously. It is designed to handle an unlimited number of nodes
 with minimal CPU and memory resources. 
