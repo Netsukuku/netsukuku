@@ -31,19 +31,25 @@ http://netsukuku.freaknet.org
 **** 1. What is this?
 **
 
-Netsukuku is a mesh network or a p2p net system that generates and sustains
+Netsukuku is an alternative to the internet, It will have all of the features of the internet,
+Such as websites, Instant messaging, File transfers, DNS, Etc. However, It is a
+mesh network or a p2p net system that generates and sustains
 itself autonomously. It is designed to handle an unlimited number of nodes
-with minimal CPU and memory resources. Thanks to this feature it can be easily
+with minimal CPU and memory resources. 
+
+Thanks to this feature it can be easily
 used to build a worldwide distributed, anonymous and not controlled network,
 separated from the Internet, without the support of any servers, ISPs or
 authority controls.
+
 This net is composed by computers linked physically each other, therefore it
 isn't build upon any existing network. Netsukuku builds only the routes which
 connects all the computers of the net.
 In other words, Netsukuku replaces the level 3 of the model iso/osi with
 another routing protocol.
+
 The Domain Name System is also replaced by a decentralised and distributed
-system: the Abnormal Netsukuku Domain Name Anarchy.
+system, Being the ANDNA system. (A Netsukuku Domain Name Architecture)
 
 The complete features list of Netsukuku is here:
 http://netsukuku.freaknet.org/files/doc/misc/Ntk_features_list
@@ -60,34 +66,6 @@ http://netsukuku.freaknet.org
 **** 2. Get the code!
 **
 
-Get the tarball of the latest stable version from:
-http://netsukuku.freaknet.org/files/
-
-
-If you want to download the development code you have to checkout it from the
-cvs repository:
-(Warning: It is highly probable the development code will not work!)
-
-$ cvs -d :pserver:anoncvs@hinezumilabs.org:/home/cvsroot login
-or
-$ export CVSROOT=":pserver:anoncvs@hinezumilabs.org:/home/cvsroot"
-$ cvs login
-
-then check it out:
-
-$ cvs -z3 -d :pserver:anoncvs@hinezumilabs.org:/home/cvsroot co netsukuku
-or
-$ cvs -z3 co netsukuku
-(providing the CVSROOT variable was set in the previous step)
-
-
-Once you've checked out a copy of the source tree, you can update
-your source tree at any time so it is in sync with the latest and
-greatest by running the command:
-# cvs -z3 update -d -P
-
-Or use github:
-
 $git clone git@github.com:Netsukuku/netsukuku.git 
 
 
@@ -96,6 +74,9 @@ $git clone git@github.com:Netsukuku/netsukuku.git
 **
 **** 3. Build and install
 **
+The dependencies of netsukuku can be gathered by running this command.
+
+# sudo apt-get install zlibc libgmp-dev openssl libgee-dev libpth-dev libgcrypt11-dev autoconf cmake autogen
 
 To compile the code you can use scons or just go with the old school way:
 
@@ -106,10 +87,11 @@ http://www.scons.org/
 (You should have installed at least the 2.4 version of Python in order to
 avoid dirty bugs in scons)
 
+You can go to the libgmp/zlib/openssl websites below if you wish, 
+As they are dependenices of netsukuku. 
 
-The code depends also on the libgmp,zlib and openssl. Generally you have
-already them installed on your system, but eventually you can retrieve them
-here:
+Here they are!
+
 for the libgmp: http://www.swox.com/gmp/
 the openssl library here: http://openssl.org
 and finally the zlibs: http://zlib.net
@@ -144,12 +126,18 @@ If you prefer to just install Netsukuku, without compiling it, you can
 download the static binaries suitable to your platform. They come packed in
 various formats (.tgz, .deb, .ipk).
 The packages repository is at:
-    http://netsukuku.freaknet.org/packages/
+    http://netsukuku.freaknet.org/packages/ (Currently non-functional)
+    
+    https://launchpad.net/~michele-bini/+archive/ppa-mbxxii/+sourcepub/1032974/+listing-archive-extra
+    
+    (This archive contains unoffical packages, However, They have been tested, And function on Ubuntu 12.04 and earlier.)
 
 
 **
 **** 4. Kernel dependencies
 **
+
+(The following probably is already, If not will be soon, Unnecessary/automated.)
 
 On Linux be sure to have the following options set in your kernel .config.
 These options are taken from linux-2.6.14.
