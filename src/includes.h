@@ -27,11 +27,7 @@
 #include <stdarg.h>
 #include <errno.h>
 #include <sys/time.h>
-
-#include <asm/bitops.h>
-#include <asm/types.h>
 #include <sys/types.h>
-
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <sys/sendfile.h>

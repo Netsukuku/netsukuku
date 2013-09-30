@@ -606,9 +606,9 @@ do{                  							\
  *        should be aware of this.
  * 	- it follows the new order of `tmp' and appends each array element in
  * 	  a new llist.
- * 	- the head of the new llist is returned.
+ * 	- the head of the new llist is assigned to _new_head
  */
-#define clist_qsort(_head, _counter, _cmp_func)				\
+#define clist_qsort(_new_head, _head, _counter, _cmp_func)		\
 ({									\
 	l_list *_hcq=(l_list *)(_head), *_ncq, *_hecq, *_tcq;		\
 	int _icq=0, _ccq;						\
@@ -629,7 +629,7 @@ do{                  							\
 	for(_icq=0; _icq<_ccq; _icq++)					\
 		_tcq=(l_list *)list_append(0, _tcq, _tmp_list[_icq]);	\
 									\
-	(typeof((_head)))_hecq;						\
+	_new_head = (typeof((_head)))_hecq;						\
 })									\
 
 #endif /*LLIST_C*/

@@ -1,3 +1,5 @@
+#include <netinet/in.h>
+
 #include "includes.h"
 
 #include "ntkresolv.h"
@@ -295,7 +297,7 @@ void opts_set_question(char *arg)
 				ntkresolv_safe_exit(1);
 			}
 			G_ALIGN(16);
-			memcpy(GQT->qstdata,&i6a.in6_u,16);
+			memcpy(GQT->qstdata,&i6a.__in6_u,16);
 			GQT->ipv=ANDNS_IPV6;
 			return;
 		case QTYPE_G:
@@ -377,7 +379,7 @@ void ip_bin_to_str(void *data,char *dst)
 			via=(void*)(&ia);
 			break;
 		case AF_INET6:
-			memcpy(&(i6a.in6_u),data,16);
+			memcpy(&(i6a.__in6_u),data,16);
 			via=(void*)(&i6a);
 			break;
 		default:
