@@ -658,7 +658,7 @@ void igw_order(inet_gw **igws, int *igws_counter, inet_gw **my_igws, int level)
 	if(!igws_counter[level] || !igws[level])
 		return;
 	
-	new_head=clist_qsort(igws[level], igws_counter[level], igw_cmp);
+	clist_qsort(new_head, igws[level], igws_counter[level], igw_cmp);
 	
 	igw=new_head;
 	list_for(igw) {
