@@ -2,12 +2,10 @@
 #define MARK_H
 
 #include "libiptc/libiptc.h"
-#include <linux/netfilter_ipv4/ip_conntrack.h>
-#include <linux/netfilter_ipv4/ip_conntrack_tuple.h>
+#include <linux/netfilter/nf_conntrack_common.h>
 #include "libiptc/ipt_conntrack.h"
 #include "libiptc/ipt_connmark.h"
 #include "libiptc/ipt_CONNMARK.h"
-
 
 #define MANGLE_TABLE		"mangle"
 #define FILTER_TABLE		"filter"
