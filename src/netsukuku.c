@@ -158,20 +158,20 @@ void usage(void)
 		"     ntkd [-hvaldrRD46] [-i net_interface] [-c conf_file] [-l logfile]\n\n"
 		" -4	ipv4\n"
 		" -6	ipv6\n"
-		" -i	interface\n\n"
-		" -a	do not run the ANDNA daemon\n"
-		" -R	do not edit /etc/resolv.conf\n"
-		" -D	no daemon mode\n"
+		" -i	Specify the interface after this\n\n"
+		" -a	Prevents running the ANDNA daemon\n"
+		" -R	Prevents editting /etc/resolv.conf\n"
+		" -D	Prevents running as daemon (Does not fork to the background)\n"
 		"\n"
-		" -r	run in restricted mode\n"
-		" -m	share your internet connection\n"
+		" -r	Runs in restricted mode\n"
+		" -m	Share your internet connection with other nodes\n"
 		"\n"
 		" -c	configuration file\n"
-		" -l	log to file\n"
+		" -l	Enables logging to file\n"
 		"\n"
-		" -d	debug (more d, more info)\n"
-		" -h	this help\n"
-		" -v	version\n");
+		" -d	Debug (Add more ds to get more info)\n"
+		" -h	Shows this help\n"
+		" -v	Shows the version you are using\n");
 }
 
 /*
