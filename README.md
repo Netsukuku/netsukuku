@@ -42,6 +42,12 @@ http://netsukuku.freaknet.org
 
 
     $git clone git@github.com:Netsukuku/netsukuku.git 
+    
+    If that doesn't work, Try this!
+    
+    $git clone https://github.com/Netsukuku/netsukuku.git
+    
+    If even that doesn't work, Download the .zip from this page.
 
 
 # Build and install
