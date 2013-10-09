@@ -54,7 +54,7 @@ http://netsukuku.freaknet.org
 
 The dependencies of netsukuku can be gathered by running this command.
 
-    # sudo apt-get install zlibc libgmp-dev openssl libgee-dev libpth-dev libgcrypt11-dev autoconf cmake autogen mawk gawk
+    # sudo apt-get install zlibc libgmp-dev openssl libssl-dev libgee-dev libpth-dev libgcrypt11-dev autoconf cmake autogen mawk gawk
 
 To compile the code you can use scons or just go with the old school way:
 
