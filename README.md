@@ -58,7 +58,9 @@ The dependencies of netsukuku can be gathered by running this command.
 
 To compile the code you can use scons or just go with the old school way:
 
-    # ./configure && make && make install
+    # ./autogen.sh
+    # ./configure && make 
+    # sudo make install
 
 But SCons is cooler:
 http://www.scons.org/
