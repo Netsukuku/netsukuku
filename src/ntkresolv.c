@@ -1,5 +1,3 @@
-#include <netinet/in.h>
-
 #include "includes.h"
 
 #include "ntkresolv.h"

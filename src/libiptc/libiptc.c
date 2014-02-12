@@ -59,14 +59,12 @@ static const char *hooknames[]
 #endif
 };
 
-#if 0
 /* Convenience structures */
 struct ipt_error_target
 {
 	STRUCT_ENTRY_TARGET t;
 	char error[TABLE_MAXNAMELEN];
 };
-#endif
 
 struct chain_head;
 struct rule_head;

@@ -5,12 +5,7 @@
 #ifndef _IPT_CONNTRACK_H
 #define _IPT_CONNTRACK_H
 
-#if 0
-#include <linux/netfilter_ipv4/ip_conntrack.h>
-#else
-#include <linux/netfilter/nf_conntrack_common.h>
-#include <linux/netfilter/nf_conntrack_tuple_common.h>
-#endif
+#include <linux/netfilter_ipv4/ipt_conntrack.h>
 
 /* backwards compatibility crap. only exists in userspace - HW */
 #include <linux/version.h>
@@ -25,6 +20,10 @@
 #define IP_CT_DIR_ORIGINAL	0
 #define IP_CT_DIR_REPLY		1
 #define IP_CT_DIR_MAX		2
+#endif
+
+#ifndef IP_CT_DIR_MAX
+#define IP_CT_DIR_MAX 2
 #endif
 
 #define IPT_CONNTRACK_STATE_BIT(ctinfo) (1 << ((ctinfo)%IP_CT_IS_REPLY+1))
