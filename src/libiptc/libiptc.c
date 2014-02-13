@@ -638,10 +638,10 @@ static int iptcc_compile_chain(TC_HANDLE_T h, STRUCT_REPLACE *repl, struct chain
 		head = (void *)repl->entries + c->head_offset;
 		head->e.target_offset = sizeof(STRUCT_ENTRY);
 		head->e.next_offset = IPTCB_CHAIN_START_SIZE;
-		strcpy(head->name.target.u.user.name, ERROR_TARGET);
-		head->name.target.u.target_size = 
+		strcpy(head->name.t.u.user.name, ERROR_TARGET);
+		head->name.t.u.target_size = 
 				ALIGN(sizeof(struct ipt_error_target));
-		strcpy(head->name.errorname, c->name);
+		strcpy(head->name.error, c->name);
 	} else {
 		repl->hook_entry[c->hooknum-1] = c->head_offset;	
 		repl->underflow[c->hooknum-1] = c->foot_offset;
@@ -747,10 +747,10 @@ static int iptcc_compile_table(TC_HANDLE_T h, STRUCT_REPLACE *repl)
 	error = (void *)repl->entries + repl->size - IPTCB_CHAIN_ERROR_SIZE;
 	error->entry.target_offset = sizeof(STRUCT_ENTRY);
 	error->entry.next_offset = IPTCB_CHAIN_ERROR_SIZE;
-	error->target.target.u.user.target_size = 
+	error->target.t.u.user.target_size = 
 		ALIGN(sizeof(struct ipt_error_target));
-	strcpy((char *)&error->target.target.u.user.name, ERROR_TARGET);
-	strcpy((char *)&error->target.errorname, "ERROR");
+	strcpy((char *)&error->target.t.u.user.name, ERROR_TARGET);
+	strcpy((char *)&error->target.error, "ERROR");
 
 	return 1;
 }
