@@ -347,8 +347,11 @@ void init_internet_gateway_search(void)
 	 * If we are sharing our internet connection, activate the
 	 * masquerading.
 	 */
-	if(server_opt.share_internet)
-                igw_exec_masquerade_sh(server_opt.ip_masq_script, 0);
+	if(server_opt.share_internet) {
+	  igw_exec_masquerade_sh(server_opt.ip_masq_script, 0);
+	  if(!server_opt.ip_masq_script)
+	    fatal("No masquerading script was configured!");
+	};
 
 	/*
 	 * Get the default gateway route currently set in the kernel routing
