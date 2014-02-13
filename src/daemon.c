@@ -366,15 +366,18 @@ void *tcp_daemon(void *door)
 		 * While we are accepting the connections we keep the socket non
 		 * blocking.
 		 */
-		if(set_nonblock_sk(dev_sk[i]))
-			return NULL;
-
-		/* Shhh, it's listening... */
-		if(listen(dev_sk[i], 5) == -1) {
-			inet_close(&dev_sk[i]);
-			return NULL;
+		if(set_nonblock_sk(dev_sk[i])) {
+		  pthread_mutex_unlock(&tcp_daemon_lock);
+		  return NULL;
 		}
-	}
+		
+ 		/* Shhh, it's listening... */
+  		if(listen(dev_sk[i], 5) == -1) {
+  			inet_close(&dev_sk[i]);
+			pthread_mutex_unlock(&tcp_daemon_lock);
+  			return NULL;
+  		}
+  	}
 	
 	debug(DBG_NORMAL, "Tcp daemon on port %d up & running", tcp_port);
 	pthread_mutex_unlock(&tcp_daemon_lock);
