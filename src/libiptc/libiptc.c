@@ -9,7 +9,7 @@
  */
 
 /* (C) 1999 Paul ``Rusty'' Russell - Placed under the GNU GPL (See
- * COPYING for details). 
+ * COPYING for details).
  * (C) 2000-2004 by the Netfilter Core Team <coreteam@netfilter.org>
  *
  * 2003-Jun-20: Harald Welte <laforge@netfilter.org>:
@@ -17,7 +17,7 @@
  * 2003-Jun-23: Harald Welte <laforge@netfilter.org>:
  * 	- performance optimization, sponsored by Astaro AG (http://www.astaro.com/)
  * 	  don't rebuild the chain cache after every operation, instead fix it
- * 	  up after a ruleset change.  
+ * 	  up after a ruleset change.
  * 2004-Aug-18: Harald Welte <laforge@netfilter.org>:
  * 	- futher performance work: total reimplementation of libiptc.
  * 	- libiptc now has a real internal (linked-list) represntation of the
@@ -26,6 +26,8 @@
  */
 #include <sys/types.h>
 #include <sys/socket.h>
+
+#include <linux/version.h>
 
 #include "linux_list.h"
 
@@ -43,6 +45,7 @@
 #ifndef IPT_LIB_DIR
 #define IPT_LIB_DIR "/usr/local/lib/iptables"
 #endif
+
 
 static int sockfd = -1;
 static int sockfd_use = 0;
@@ -130,7 +133,7 @@ STRUCT_TC_HANDLE
 	int changed;			 /* Have changes been made? */
 
 	struct list_head chains;
-	
+
 	struct chain_head *chain_iterator_cur;
 	struct rule_head *rule_iterator_cur;
 
@@ -370,14 +373,14 @@ static int __iptcc_p_del_policy(TC_HANDLE_T h, unsigned int num)
 			h->chain_iterator_cur->rules.prev;
 
 		/* save verdict */
-		h->chain_iterator_cur->verdict = 
+		h->chain_iterator_cur->verdict =
 			*(int *)GET_TARGET(pr->entry)->data;
 
 		/* save counter and counter_map information */
-		h->chain_iterator_cur->counter_map.maptype = 
+		h->chain_iterator_cur->counter_map.maptype =
 						COUNTER_MAP_NORMAL_MAP;
 		h->chain_iterator_cur->counter_map.mappos = num-1;
-		memcpy(&h->chain_iterator_cur->counters, &pr->entry->counters, 
+		memcpy(&h->chain_iterator_cur->counters, &pr->entry->counters,
 			sizeof(h->chain_iterator_cur->counters));
 
 		/* foot_offset points to verdict rule */
@@ -423,13 +426,13 @@ static void __iptcc_p_add_chain(TC_HANDLE_T h, struct chain_head *c,
 	c->index = *num;
 
 	iptc_insert_chain(h, c);
-	
+
 	h->chain_iterator_cur = c;
 }
 
 /* main parser function: add an entry from the blob to the cache */
-static int cache_add_entry(STRUCT_ENTRY *e, 
-			   TC_HANDLE_T h, 
+static int cache_add_entry(STRUCT_ENTRY *e,
+			   TC_HANDLE_T h,
 			   STRUCT_ENTRY **prev,
 			   unsigned int *num)
 {
@@ -453,9 +456,9 @@ static int cache_add_entry(STRUCT_ENTRY *e,
 	 * target, or a hook entry point */
 
 	if (strcmp(GET_TARGET(e)->u.user.name, ERROR_TARGET) == 0) {
-		struct chain_head *c = 
+		struct chain_head *c =
 			iptcc_alloc_chain_head((const char *)GET_TARGET(e)->data, 0);
-		DEBUGP_C("%u:%u:new userdefined chain %s: %p\n", *num, offset, 
+		DEBUGP_C("%u:%u:new userdefined chain %s: %p\n", *num, offset,
 			(char *)c->name, c);
 		if (!c) {
 			errno = -ENOMEM;
@@ -466,9 +469,9 @@ static int cache_add_entry(STRUCT_ENTRY *e,
 
 	} else if ((builtin = iptcb_ent_is_hook_entry(e, h)) != 0) {
 		struct chain_head *c =
-			iptcc_alloc_chain_head((char *)hooknames[builtin-1], 
+			iptcc_alloc_chain_head((char *)hooknames[builtin-1],
 						builtin);
-		DEBUGP_C("%u:%u new builtin chain: %p (rules=%p)\n", 
+		DEBUGP_C("%u:%u new builtin chain: %p (rules=%p)\n",
 			*num, offset, c, &c->rules);
 		if (!c) {
 			errno = -ENOMEM;
@@ -486,7 +489,7 @@ static int cache_add_entry(STRUCT_ENTRY *e,
 		struct rule_head *r;
 new_rule:
 
-		if (!(r = iptcc_alloc_rule(h->chain_iterator_cur, 
+		if (!(r = iptcc_alloc_rule(h->chain_iterator_cur,
 					   e->next_offset))) {
 			errno = ENOMEM;
 			return -1;
@@ -619,7 +622,7 @@ static inline int iptcc_compile_rule (TC_HANDLE_T h, STRUCT_REPLACE *repl, struc
 		t = (STRUCT_STANDARD_TARGET *)GET_TARGET(r->entry);
 		t->verdict = r->offset + r->size;
 	}
-	
+
 	/* copy entry from cache to blob */
 	memcpy((char *)repl->entries+r->offset, r->entry, r->size);
 
@@ -634,6 +637,25 @@ static int iptcc_compile_chain(TC_HANDLE_T h, STRUCT_REPLACE *repl, struct chain
 	struct iptcb_chain_start *head;
 	struct iptcb_chain_foot *foot;
 
+#if LINUX_VERSION_CODE <= KERNEL_VERSION(2, 7, 0)
+
+	/* only user-defined chains have heaer */
+	if (!iptcc_is_builtin(c)) {
+		/* put chain header in place */
+		head = (void *)repl->entries + c->head_offset;
+		head->e.target_offset = sizeof(STRUCT_ENTRY);
+		head->e.next_offset = IPTCB_CHAIN_START_SIZE;
+		strcpy(head->name.t.u.user.name, ERROR_TARGET);
+        head->name.t.u.target_size =
+				ALIGN(sizeof(struct ipt_error_target));
+		strcpy(head->name.error, c->name);
+	} else {
+		repl->hook_entry[c->hooknum-1] = c->head_offset;
+		repl->underflow[c->hooknum-1] = c->foot_offset;
+	}
+#endif
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 0, 0)
 	/* only user-defined chains have heaer */
 	if (!iptcc_is_builtin(c)) {
 		/* put chain header in place */
@@ -641,13 +663,14 @@ static int iptcc_compile_chain(TC_HANDLE_T h, STRUCT_REPLACE *repl, struct chain
 		head->e.target_offset = sizeof(STRUCT_ENTRY);
 		head->e.next_offset = IPTCB_CHAIN_START_SIZE;
 		strcpy(head->name.target.u.user.name, ERROR_TARGET);
-		head->name.target.u.target_size = 
+        head->name.target.u.target_size =
 				ALIGN(sizeof(struct ipt_error_target));
-		strcpy(head->name.errorname, c->name);
+		strcpy(head->name.error, c->name);
 	} else {
-		repl->hook_entry[c->hooknum-1] = c->head_offset;	
+		repl->hook_entry[c->hooknum-1] = c->head_offset;
 		repl->underflow[c->hooknum-1] = c->foot_offset;
 	}
+#endif
 
 	/* iterate over rules */
 	list_for_each_entry(r, &c->rules, list) {
@@ -685,7 +708,7 @@ static int iptcc_compile_chain_offsets(TC_HANDLE_T h, struct chain_head *c,
 
 	if (!iptcc_is_builtin(c))  {
 		/* Chain has header */
-		*offset += sizeof(STRUCT_ENTRY) 
+		*offset += sizeof(STRUCT_ENTRY)
 			     + ALIGN(sizeof(struct ipt_error_target));
 		(*num)++;
 	}
@@ -698,7 +721,7 @@ static int iptcc_compile_chain_offsets(TC_HANDLE_T h, struct chain_head *c,
 		(*num)++;
 	}
 
-	DEBUGP("%s; chain_foot %u, offset=%u, index=%u\n", c->name, *num, 
+	DEBUGP("%s; chain_foot %u, offset=%u, index=%u\n", c->name, *num,
 		*offset, *num);
 	c->foot_offset = *offset;
 	c->foot_index = *num;
@@ -744,16 +767,27 @@ static int iptcc_compile_table(TC_HANDLE_T h, STRUCT_REPLACE *repl)
 		if (ret < 0)
 			return ret;
 	}
-
+#if LINUX_VERSION_CODE <= KERNEL_VERSION(2, 7, 0)
 	/* Append error rule at end of chain */
 	error = (void *)repl->entries + repl->size - IPTCB_CHAIN_ERROR_SIZE;
 	error->entry.target_offset = sizeof(STRUCT_ENTRY);
 	error->entry.next_offset = IPTCB_CHAIN_ERROR_SIZE;
-	error->target.target.u.user.target_size = 
+	error->target.t.u.user.target_size =
 		ALIGN(sizeof(struct ipt_error_target));
-	strcpy((char *)&error->target.target.u.user.name, ERROR_TARGET);
-	strcpy((char *)&error->target.errorname, "ERROR");
+    strcpy((char *)&error->target.t.u.user.name, ERROR_TARGET);
+    strcpy((char *)&error->target.error, "ERROR");
+#endif
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 0, 0)
+    	/* Append error rule at end of chain */
+	error = (void *)repl->entries + repl->size - IPTCB_CHAIN_ERROR_SIZE;
+	error->entry.target_offset = sizeof(STRUCT_ENTRY);
+	error->entry.next_offset = IPTCB_CHAIN_ERROR_SIZE;
+	error->target.target.u.user.target_size =
+		ALIGN(sizeof(struct ipt_error_target));
+    strcpy((char *)&error->target.target.u.user.name, ERROR_TARGET);
+    strcpy((char *)&error->target.errorname, "ERROR");
+#endif
 	return 1;
 }
 
@@ -809,7 +843,7 @@ TC_INIT(const char *tablename)
 		errno = EINVAL;
 		return NULL;
 	}
-	
+
 	if (sockfd_use == 0) {
 		sockfd = socket(TC_AF, SOCK_RAW, IPPROTO_RAW);
 		if (sockfd < 0)
@@ -853,7 +887,7 @@ TC_INIT(const char *tablename)
 
 #ifdef IPTC_DEBUG2
 	{
-		int fd = open("/tmp/libiptc-so_get_entries.blob", 
+		int fd = open("/tmp/libiptc-so_get_entries.blob",
 				O_CREAT|O_WRONLY);
 		if (fd >= 0) {
 			write(fd, h->entries, tmp);
@@ -911,7 +945,7 @@ print_match(const STRUCT_ENTRY_MATCH *m)
 }
 
 /*static int dump_entry(STRUCT_ENTRY *e, const TC_HANDLE_T handle);*/
- 
+
 void
 TC_DUMP_ENTRIES(const TC_HANDLE_T handle)
 {
@@ -953,7 +987,7 @@ static void iptcc_chain_iterator_advance(TC_HANDLE_T handle)
 	if (c->list.next == &handle->chains)
 		handle->chain_iterator_cur = NULL;
 	else
-		handle->chain_iterator_cur = 
+		handle->chain_iterator_cur =
 			list_entry(c->list.next, struct chain_head, list);
 }
 
@@ -993,7 +1027,7 @@ TC_NEXT_CHAIN(TC_HANDLE_T *handle)
 	}
 
 	iptcc_chain_iterator_advance(*handle);
-	
+
 	DEBUGP(": returning `%s'\n", c->name);
 	return c->name;
 }
@@ -1041,13 +1075,13 @@ TC_NEXT_RULE(const STRUCT_ENTRY *prev, TC_HANDLE_T *handle)
 		DEBUGP_C("returning NULL\n");
 		return NULL;
 	}
-	
-	r = list_entry((*handle)->rule_iterator_cur->list.next, 
+
+	r = list_entry((*handle)->rule_iterator_cur->list.next,
 			struct rule_head, list);
 
 	iptc_fn = TC_NEXT_RULE;
 
-	DEBUGP_C("next=%p, head=%p...", &r->list, 
+	DEBUGP_C("next=%p, head=%p...", &r->list,
 		&(*handle)->rule_iterator_cur->chain->rules);
 
 	if (&r->list == &(*handle)->rule_iterator_cur->chain->rules) {
@@ -1076,7 +1110,7 @@ TC_NUM_RULES(const char *chain, TC_HANDLE_T *handle)
 		errno = ENOENT;
 		return (unsigned int)-1;
 	}
-	
+
 	return c->num_rules;
 }
 
@@ -1086,7 +1120,7 @@ const STRUCT_ENTRY *TC_GET_RULE(const char *chain,
 {
 	struct chain_head *c;
 	struct rule_head *r;
-	
+
 	iptc_fn = TC_GET_RULE;
 
 	CHECK(*handle);
@@ -1163,7 +1197,7 @@ int
 TC_BUILTIN(const char *chain, const TC_HANDLE_T handle)
 {
 	struct chain_head *c;
-	
+
 	iptc_fn = TC_BUILTIN;
 
 	c = iptcc_find_label(chain, handle);
@@ -1537,7 +1571,7 @@ TC_DELETE_ENTRY(const IPT_CHAINLABEL chain,
 		 * current iterator, move rule iterator back.  next
 		 * pointer will then point to real next node */
 		if (i == (*handle)->rule_iterator_cur) {
-			(*handle)->rule_iterator_cur = 
+			(*handle)->rule_iterator_cur =
 				list_entry((*handle)->rule_iterator_cur->list.prev,
 					   struct rule_head, list);
 		}
@@ -1588,7 +1622,7 @@ TC_DELETE_NUM_ENTRY(const IPT_CHAINLABEL chain,
 	 * iterator, move rule iterator back.  next pointer will then
 	 * point to real next node */
 	if (r == (*handle)->rule_iterator_cur) {
-		(*handle)->rule_iterator_cur = 
+		(*handle)->rule_iterator_cur =
 			list_entry((*handle)->rule_iterator_cur->list.prev,
 				   struct rule_head, list);
 	}
@@ -1691,7 +1725,7 @@ TC_ZERO_COUNTER(const IPT_CHAINLABEL chain,
 {
 	struct chain_head *c;
 	struct rule_head *r;
-	
+
 	iptc_fn = TC_ZERO_COUNTER;
 	CHECK(*handle);
 
@@ -1713,7 +1747,7 @@ TC_ZERO_COUNTER(const IPT_CHAINLABEL chain,
 	return 1;
 }
 
-int 
+int
 TC_SET_COUNTER(const IPT_CHAINLABEL chain,
 	       unsigned int rulenum,
 	       STRUCT_COUNTERS *counters,
@@ -1892,7 +1926,7 @@ int TC_RENAME_CHAIN(const IPT_CHAINLABEL oldname,
 	}
 
 	strncpy(c->name, newname, sizeof(IPT_CHAINLABEL));
-	
+
 	set_changed(*handle);
 
 	return 1;
@@ -2092,7 +2126,7 @@ TC_COMMIT(TC_HANDLE_T *handle)
 
 #ifdef IPTC_DEBUG2
 	{
-		int fd = open("/tmp/libiptc-so_set_replace.blob", 
+		int fd = open("/tmp/libiptc-so_set_replace.blob",
 				O_CREAT|O_WRONLY);
 		if (fd >= 0) {
 			write(fd, repl, sizeof(*repl) + repl->size);
@@ -2125,12 +2159,12 @@ TC_COMMIT(TC_HANDLE_T *handle)
 				break;
 			case COUNTER_MAP_NORMAL_MAP:
 				counters_normal_map(newcounters, repl,
-						    c->foot_index, 
+						    c->foot_index,
 						    c->counter_map.mappos);
 				break;
 			case COUNTER_MAP_ZEROED:
 				counters_map_zeroed(newcounters, repl,
-						    c->foot_index, 
+						    c->foot_index,
 						    c->counter_map.mappos,
 						    &c->counters);
 				break;
@@ -2150,7 +2184,7 @@ TC_COMMIT(TC_HANDLE_T *handle)
 
 			case COUNTER_MAP_NORMAL_MAP:
 				counters_normal_map(newcounters, repl,
-						    r->index, 
+						    r->index,
 						    r->counter_map.mappos);
 				break;
 
@@ -2187,7 +2221,7 @@ TC_COMMIT(TC_HANDLE_T *handle)
 
 #ifdef IPTC_DEBUG2
 	{
-		int fd = open("/tmp/libiptc-so_set_add_counters.blob", 
+		int fd = open("/tmp/libiptc-so_set_add_counters.blob",
 				O_CREAT|O_WRONLY);
 		if (fd >= 0) {
 			write(fd, newcounters, counterlen);
@@ -2232,7 +2266,7 @@ TC_STRERROR(int err)
 	} table [] =
 	  { { TC_INIT, EPERM, "Permission denied (you must be root)" },
 	    { TC_INIT, EINVAL, "Module is wrong version" },
-	    { TC_INIT, ENOENT, 
+	    { TC_INIT, ENOENT,
 		    "Table does not exist (do you need to insmod?)" },
 	    { TC_DELETE_CHAIN, ENOTEMPTY, "Chain is not empty" },
 	    { TC_DELETE_CHAIN, EINVAL, "Can't delete built-in chain" },
