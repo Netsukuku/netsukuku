@@ -1,0 +1,33 @@
+<map id="snsd_find_node_by_record" name="snsd_find_node_by_record">
+<area shape="rect" id="node3" href="$d6/d2e/snsd__cache_8h.html#adde1a6d9c793272ccc091767f41523a2" title="snsd_add_node" alt="" coords="263,166,375,195"/>
+<area shape="rect" id="node58" href="$d6/d2e/snsd__cache_8h.html#a446f79bf0a568ca1bd7dca03e8a33bda" title="snsd_record_del_selected" alt="" coords="232,219,405,248"/>
+<area shape="rect" id="node61" href="$d6/d2e/snsd__cache_8h.html#a0bd824b6550c076d5c18ba966553e7fd" title="snsd_merge_node" alt="" coords="255,87,383,116"/>
+<area shape="rect" id="node5" href="$d7/d74/andna__cache_8h.html#ae30431f21d44516e3c006ae361578d9c" title="load_snsd" alt="" coords="491,271,571,300"/>
+<area shape="rect" id="node20" href="$d7/d48/snsd__cache_8c.html#adee28e80a4860ebec6a5e383e5282cc6" title="snsd_add_first_node" alt="" coords="460,167,601,196"/>
+<area shape="rect" id="node22" href="$d6/d2e/snsd__cache_8h.html#a6f223de1e43e379d34a6321b904ea44d" title="snsd_add_mainip" alt="" coords="469,114,592,143"/>
+<area shape="rect" id="node7" href="$d5/d05/andna_8h.html#afc0f24a5b798975732d4f238dccc42ef" title="andna_load_caches" alt="" coords="657,247,793,276"/>
+<area shape="rect" id="node15" href="$d4/d3b/netsukuku_8c.html#a678f7ec6e159e6bee076921c8d709847" title="reload_hostname_thread" alt="" coords="844,299,1007,328"/>
+<area shape="rect" id="node9" href="$d5/d05/andna_8h.html#aa7b53282a673cbc82c998a3cf4e5aff2" title="andna_init" alt="" coords="885,246,965,275"/>
+<area shape="rect" id="node11" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="1075,246,1181,275"/>
+<area shape="rect" id="node13" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1293,272,1344,302"/>
+<area shape="rect" id="node17" href="$d4/d3b/netsukuku_8c.html#a207b25374e65f083a666cdfaca49bb99" title="sighup_handler" alt="" coords="1073,299,1183,328"/>
+<area shape="rect" id="node24" href="$d5/d05/andna_8h.html#a5da3518ba270f03f8d087c3c1cb25115" title="andna_recv_reg_rq" alt="" coords="660,194,791,223"/>
+<area shape="rect" id="node27" href="$d4/d18/andna_8c.html#af8449aa760529b5de85e4fa75190bfd7" title="andna_resolve_hash\l_locally" alt="" coords="1248,110,1389,157"/>
+<area shape="rect" id="node29" href="$d5/d05/andna_8h.html#a1ce60180d15ab89d473eb45928ee6ee5" title="andna_resolve_hash" alt="" coords="1437,84,1579,114"/>
+<area shape="rect" id="node31" href="$d5/d05/andna_8h.html#aa3b87d2348a3a7cdb6e2d95c66fdfb6f" title="andna_resolve_hname" alt="" coords="1627,6,1779,35"/>
+<area shape="rect" id="node39" href="$dd/dd9/andns_8h.html#a77c1322dbf52a1bacabe97028c9ce8d2" title="nk_rslv" alt="" coords="2247,126,2311,155"/>
+<area shape="rect" id="node42" href="$d1/dd5/andns__snsd_8h.html#a5f5ed255a4e4e2604045525ee8acb7fb" title="snsd_main_ip" alt="" coords="1652,84,1753,114"/>
+<area shape="rect" id="node33" href="$dd/dd9/andns_8h.html#a81431a7e5716758c3bbefd17f8e68898" title="inet_rslv" alt="" coords="2244,32,2313,62"/>
+<area shape="rect" id="node35" href="$dd/dd9/andns_8h.html#ad55d591cf7a444daa6b9cea7f8ae29bc" title="andns_rslv" alt="" coords="2363,64,2448,94"/>
+<area shape="rect" id="node37" href="$db/d6b/dns__wrapper_8c.html#ae858f92cfdc42ee9f2ba357a4021b59e" title="dns_exec_pkt" alt="" coords="2497,64,2599,94"/>
+<area shape="rect" id="node44" href="$d1/dd5/andns__snsd_8h.html#a86f72d27da5b908d5ce023c778ad4b74" title="snsd_node_to_data" alt="" coords="1835,160,1968,190"/>
+<area shape="rect" id="node50" href="$d1/dd5/andns__snsd_8h.html#af1703129169f7152c3a4c38604bf9ea9" title="snsd_service_to_aansws" alt="" coords="2025,96,2193,126"/>
+<area shape="rect" id="node53" href="$d1/dd5/andns__snsd_8h.html#a1fcd0373d93db849bf72644fc21e5087" title="snsd_node_to_dansw" alt="" coords="1828,32,1975,62"/>
+<area shape="rect" id="node47" href="$d1/dd5/andns__snsd_8h.html#a016db13b6c9aea169159e1e69d926ff3" title="snsd_prio_to_aansws" alt="" coords="2036,155,2183,184"/>
+<area shape="rect" id="node55" href="$d1/dd5/andns__snsd_8h.html#a1debec61ed4edba1c3f0b2161314c18d" title="snsd_prio_to_dansws" alt="" coords="2036,32,2183,62"/>
+<area shape="rect" id="node63" href="$d6/d2e/snsd__cache_8h.html#af908b3a5062fa0b46a508b29aee52105" title="snsd_node_llist_merge" alt="" coords="453,52,608,82"/>
+<area shape="rect" id="node65" href="$d6/d2e/snsd__cache_8h.html#a966854fa587f73c225f8bdcfd0d7264e" title="snsd_merge_prio" alt="" coords="665,51,785,80"/>
+<area shape="rect" id="node67" href="$d6/d2e/snsd__cache_8h.html#a767a463523b064153b129166749150dc" title="snsd_prio_llist_merge" alt="" coords="852,51,999,80"/>
+<area shape="rect" id="node69" href="$d6/d2e/snsd__cache_8h.html#a766b91d2ea6696e3c58fe4ce4f3f877c" title="snsd_merge_service" alt="" coords="1057,50,1199,79"/>
+<area shape="rect" id="node71" href="$d6/d2e/snsd__cache_8h.html#a6555d8f1d85434e72f1b2f8dd32e46c4" title="snsd_service_llist\l_merge" alt="" coords="1256,41,1381,88"/>
+</map>

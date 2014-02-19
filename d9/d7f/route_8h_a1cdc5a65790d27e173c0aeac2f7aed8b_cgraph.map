@@ -1,0 +1,30 @@
+<map id="rt_add_gw" name="rt_add_gw">
+<area shape="rect" id="node3" href="$df/dbf/route_8c.html#ae8e765370816d77b674ca4ca895fe604" title="rt_exec_gw" alt="" coords="137,111,225,140"/>
+<area shape="rect" id="node13" href="$d8/d91/krnl__route_8c.html#af266584d8f7f7cff38288d461b419271" title="route_add" alt="" coords="143,320,220,349"/>
+<area shape="rect" id="node5" href="$da/d89/inet_8c.html#a75c2848f706809db4a3a8999d46118dc" title="inet_htonl" alt="" coords="280,111,357,140"/>
+<area shape="rect" id="node11" href="$da/d89/inet_8c.html#a284a1d36cd80931c6d96aba2e6a6ae46" title="inet_copy" alt="" coords="280,57,357,87"/>
+<area shape="rect" id="node7" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="413,57,493,87"/>
+<area shape="rect" id="node9" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="576,5,664,35"/>
+<area shape="rect" id="node15" href="$d8/d91/krnl__route_8c.html#a4cda4862ee9002730e4a8b8a12ae78c6" title="route_exec" alt="" coords="276,399,361,428"/>
+<area shape="rect" id="node17" href="$d4/dab/libnetlink_8c.html#af6a834b458ad515cfe591cd720b5a3fd" title="rtnl_open" alt="" coords="416,424,491,453"/>
+<area shape="rect" id="node21" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="920,448,968,477"/>
+<area shape="rect" id="node25" href="$d1/d71/ll__map_8c.html#ac4adbf41fc1b3fd4d880768bf45b1f4c" title="ll_init_map" alt="" coords="412,241,495,271"/>
+<area shape="rect" id="node46" href="$d4/dab/libnetlink_8c.html#a308c9418a2d83e4e9ba8d8ed0b7bbe28" title="addattr_l" alt="" coords="769,685,841,715"/>
+<area shape="rect" id="node49" href="$d1/d71/ll__map_8c.html#a3ccff7ca25a76d2c7d2a1dbcafb2678e" title="ll_name_to_index" alt="" coords="744,789,867,819"/>
+<area shape="rect" id="node52" href="$d4/dab/libnetlink_8c.html#ab9339d56ad1804972e905306791fabbc" title="addattr32" alt="" coords="768,475,843,504"/>
+<area shape="rect" id="node55" href="$d8/d91/krnl__route_8c.html#a5ac018a9fffaefc7cf7ad94e794d7c18" title="add_nexthops" alt="" coords="569,581,671,611"/>
+<area shape="rect" id="node71" href="$d4/dab/libnetlink_8c.html#a1e674ac9211ad8a2bd6200b04860b203" title="rtnl_talk" alt="" coords="772,216,839,245"/>
+<area shape="rect" id="node75" href="$d4/dab/libnetlink_8c.html#abe941df1a4b224511e5aba5fbeda5373" title="rtnl_close" alt="" coords="415,188,492,217"/>
+<area shape="rect" id="node19" href="$d4/dab/libnetlink_8c.html#adcef0338bcf67064f61e984ea6542a4f" title="rtnl_open_byproto" alt="" coords="557,424,683,453"/>
+<area shape="rect" id="node23" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="1037,448,1107,477"/>
+<area shape="rect" id="node27" href="$d4/dab/libnetlink_8c.html#ae723f19314cbb031a26abaee33928b84" title="rtnl_wilddump_request" alt="" coords="544,268,696,297"/>
+<area shape="rect" id="node29" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="921,189,967,219"/>
+<area shape="rect" id="node34" href="$d4/dab/libnetlink_8c.html#a0c981a8de14fd51a25027ef407e799ca" title="rtnl_dump_filter" alt="" coords="751,163,860,192"/>
+<area shape="rect" id="node38" href="$d1/d71/ll__map_8c.html#aa74dd48e5206c9a8c5b36307e023fa58" title="ll_remember_index" alt="" coords="555,215,685,244"/>
+<area shape="rect" id="node32" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="1021,189,1123,219"/>
+<area shape="rect" id="node40" href="$d4/dab/libnetlink_8c.html#aed575cd447219f8c2f67e2011aaee4d8" title="parse_rtattr" alt="" coords="761,320,849,349"/>
+<area shape="rect" id="node43" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="772,109,839,139"/>
+<area shape="rect" id="node61" href="$d4/dab/libnetlink_8c.html#accbfecaa74aaf78e2c0ca021954bdad9" title="rta_addattr32" alt="" coords="756,528,855,557"/>
+<area shape="rect" id="node64" href="$d4/dab/libnetlink_8c.html#a9788836cab7c0fa68a06532af4c91e19" title="rta_addattr_l" alt="" coords="759,581,852,611"/>
+<area shape="rect" id="node68" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="916,632,972,661"/>
+</map>

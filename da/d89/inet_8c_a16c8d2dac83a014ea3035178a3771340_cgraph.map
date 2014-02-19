@@ -1,0 +1,11 @@
+<map id="sockaddr_to_inet" name="sockaddr_to_inet">
+<area shape="rect" id="node3" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="192,5,240,35"/>
+<area shape="rect" id="node7" href="$da/d89/inet_8c.html#ac0a02d49e9909bae32638e61ce18be9f" title="inet_setip" alt="" coords="177,59,255,88"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="605,5,675,35"/>
+<area shape="rect" id="node9" href="$da/d89/inet_8c.html#a9c6d94fc49adc3223bb0df762343784d" title="inet_setip_raw" alt="" coords="304,59,411,88"/>
+<area shape="rect" id="node16" href="$da/d89/inet_8c.html#a385963363f8d2ee7012a4c919b9b7b80" title="inet_ntohl" alt="" coords="319,112,396,141"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="477,59,523,88"/>
+<area shape="rect" id="node14" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="589,59,691,88"/>
+<area shape="rect" id="node18" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="460,112,540,141"/>
+<area shape="rect" id="node20" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="596,112,684,141"/>
+</map>

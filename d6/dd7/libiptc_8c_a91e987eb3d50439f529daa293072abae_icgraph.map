@@ -1,0 +1,7 @@
+<map id="iptcc_map_target" name="iptcc_map_target">
+<area shape="rect" id="node3" href="$d6/dd7/libiptc_8c.html#aa9fc5848183e96cd3d8ccdbf7427750c" title="TC_INSERT_ENTRY" alt="" coords="183,5,332,35"/>
+<area shape="rect" id="node7" href="$d6/dd7/libiptc_8c.html#ade0a6c01e729491188f70078cef806a3" title="TC_REPLACE_ENTRY" alt="" coords="176,59,339,88"/>
+<area shape="rect" id="node10" href="$d6/dd7/libiptc_8c.html#a18298788b51418c936d6557e047951f9" title="TC_APPEND_ENTRY" alt="" coords="180,112,335,141"/>
+<area shape="rect" id="node12" href="$d6/dd7/libiptc_8c.html#aebe11c9e250fe9cc800e331dde41f6d5" title="TC_DELETE_ENTRY" alt="" coords="181,165,333,195"/>
+<area shape="rect" id="node5" href="$d6/dd7/libiptc_8c.html#a62e972b7995de2ebbda29fcde37042da" title="TC_STRERROR" alt="" coords="387,59,509,88"/>
+</map>

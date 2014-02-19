@@ -1,0 +1,8 @@
+<map id="ifs_get_pos" name="ifs_get_pos">
+<area shape="rect" id="node3" href="$d3/df5/radar_8h.html#a53c4effb3e65bf66af71f5e2507d3f21" title="radar_exec_reply" alt="" coords="145,7,265,36"/>
+<area shape="rect" id="node13" href="$d3/df5/radar_8h.html#a7a73bfef9b57006bbe0327107e991c74" title="radard" alt="" coords="345,59,404,88"/>
+<area shape="rect" id="node5" href="$d3/df5/radar_8h.html#a313fa73e5d2e0f4dccc9ae5463c6d45a" title="radar_recv_reply" alt="" coords="316,5,433,35"/>
+<area shape="rect" id="node7" href="$d3/df5/radar_8h.html#a94450b9b9f2e120fa2f592344ef66f80" title="first_init_radar" alt="" coords="483,32,587,61"/>
+<area shape="rect" id="node9" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="635,32,741,61"/>
+<area shape="rect" id="node11" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="789,32,840,61"/>
+</map>

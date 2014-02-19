@@ -1,0 +1,8 @@
+<map id="rnode_add" name="rnode_add">
+<area shape="rect" id="node3" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="165,5,232,35"/>
+<area shape="rect" id="node11" href="$d2/dab/xmalloc_8c.html#a95c6a612049c763f0d351481361ad689" title="xrealloc" alt="" coords="165,59,232,88"/>
+<area shape="rect" id="node14" href="$d3/d7a/map_8c.html#aff9aae7d85e1a7a48c160097a20f1dff" title="map_rnode_insert" alt="" coords="136,112,261,141"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="311,32,356,61"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="421,5,491,35"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="405,59,507,88"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="send_qspn_pkt" name="send_qspn_pkt">
+<area shape="rect" id="node3" href="$db/def/qspn-empiric_8c.html#a227bd5c605c1a2a67e9f72b1a3232392" title="store_tracer_pkt" alt="" coords="513,56,628,85"/>
+<area shape="rect" id="node5" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="677,158,744,188"/>
+<area shape="rect" id="node17" href="$db/def/qspn-empiric_8c.html#ad9fb71fc94e2c115224dc88d265fd3bb" title="thread_joint" alt="" coords="527,210,615,240"/>
+<area shape="rect" id="node19" href="$db/def/qspn-empiric_8c.html#a5312bce3c9f0ebde68231a0af51fea76" title="send_qspn_open" alt="" coords="335,134,455,164"/>
+<area shape="rect" id="node24" href="$db/def/qspn-empiric_8c.html#ab6a54cb1210e9270f874a74dbc8b2a68" title="send_qspn_reply" alt="" coords="335,262,455,292"/>
+<area shape="rect" id="node30" href="$db/def/qspn-empiric_8c.html#aed8e325b73bf95d8411acc1c659068bb" title="send_qspn_backpro" alt="" coords="325,81,464,110"/>
+<area shape="rect" id="node36" href="$db/def/qspn-empiric_8c.html#a73274e81ea753f284a5f25a3eaebe5c9" title="send_qspn_pkt" alt="" coords="167,210,276,240"/>
+<area shape="rect" id="node13" href="$d2/dab/xmalloc_8c.html#a95c6a612049c763f0d351481361ad689" title="xrealloc" alt="" coords="677,81,744,110"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="793,120,839,149"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="904,93,973,122"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="888,146,989,176"/>
+</map>

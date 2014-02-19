@@ -1,0 +1,17 @@
+<map id="TC_COMMIT" name="TC_COMMIT">
+<area shape="rect" id="node3" href="$d6/dd7/libiptc_8c.html#af99cb260d65e79e9363639cbb792e7a5" title="iptcc_compile_table_prep" alt="" coords="156,17,324,47"/>
+<area shape="rect" id="node7" href="$d6/dd7/libiptc_8c.html#adda0e58ab046639544a87ffa5beba504" title="iptcc_is_builtin" alt="" coords="575,73,681,103"/>
+<area shape="rect" id="node9" href="$d6/dd7/libiptc_8c.html#a6b6d040749deb095e0e2eaa44aadfd58" title="TC_DUMP_ENTRIES" alt="" coords="164,125,316,155"/>
+<area shape="rect" id="node11" href="$d6/dd7/libiptc_8c.html#ad7f89efcc7c4e59ffcde7c445e1aff4e" title="iptcc_compile_table" alt="" coords="172,179,308,208"/>
+<area shape="rect" id="node23" href="$d6/dd7/libiptc_8c.html#a8e304bd33a39779571b4b4dea3299d97" title="counters_nomap" alt="" coords="181,232,299,261"/>
+<area shape="rect" id="node25" href="$d6/dd7/libiptc_8c.html#ad13486b75c092c85ca41fdf6fb5fccfb" title="counters_normal_map" alt="" coords="165,285,315,315"/>
+<area shape="rect" id="node27" href="$d6/dd7/libiptc_8c.html#a170a11257108cd9b9a65637df753251d" title="counters_map_zeroed" alt="" coords="165,339,315,368"/>
+<area shape="rect" id="node31" href="$d6/dd7/libiptc_8c.html#a943b25a9a0866fcf7885e1e12af771e4" title="counters_map_set" alt="" coords="176,392,304,421"/>
+<area shape="rect" id="node33" href="$d6/dd7/libiptc_8c.html#a7e052637d694c21330de928520bd56f0" title="TC_FREE" alt="" coords="199,445,281,475"/>
+<area shape="rect" id="node5" href="$d6/dd7/libiptc_8c.html#a50b27373f3f98721c5043ec2a70d2f37" title="iptcc_compile_chain\l_offsets" alt="" coords="375,5,513,51"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="420,180,468,209"/>
+<area shape="rect" id="node17" href="$d6/dd7/libiptc_8c.html#a836a8d00cc89f2d58dcc20f9a7a4297d" title="iptcc_compile_chain" alt="" coords="375,127,513,156"/>
+<area shape="rect" id="node15" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="593,180,663,209"/>
+<area shape="rect" id="node20" href="$d6/dd7/libiptc_8c.html#a8e6f7940d29675e5dbba9ad59d10abeb" title="iptcc_compile_rule" alt="" coords="563,127,693,156"/>
+<area shape="rect" id="node29" href="$d6/dd7/libiptc_8c.html#aa11e47fa4c23a5334de56f3d88fee8e6" title="subtract_counters" alt="" coords="381,339,507,368"/>
+</map>

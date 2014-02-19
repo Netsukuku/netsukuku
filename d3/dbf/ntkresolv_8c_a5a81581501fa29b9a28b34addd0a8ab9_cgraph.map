@@ -1,0 +1,10 @@
+<map id="opts_set_service_and_proto" name="opts_set_service_and_proto">
+<area shape="rect" id="node3" href="$d3/dbf/ntkresolv_8c.html#aa31287dfedcfeb069e2c19e9d85cfd11" title="service_and_proto_usage" alt="" coords="203,32,373,61"/>
+<area shape="rect" id="node15" href="$d7/d48/snsd__cache_8c.html#a0175cddaa16e90f5c345578e31329192" title="str_to_snsd_service" alt="" coords="219,85,357,115"/>
+<area shape="rect" id="node5" href="$d3/dbf/ntkresolv_8c.html#a525d73873ebf5621cb96d199b41454df" title="ntkresolv_safe_exit" alt="" coords="423,32,556,61"/>
+<area shape="rect" id="node7" href="$d4/d02/andns__lib_8c.html#ac221d30c29b9c3846c67c6c09511add4" title="destroy_andns_pkt" alt="" coords="607,5,737,35"/>
+<area shape="rect" id="node13" href="$d3/dbf/ntkresolv_8c.html#ad9097259eb78c35bf7252b9e8156f52e" title="ntkresolv_exit" alt="" coords="621,59,723,88"/>
+<area shape="rect" id="node9" href="$d4/d02/andns__lib_8c.html#ab2b78fd0fecd54eb2cb4ba25aaa7499a" title="destroy_andns_pkt_datas" alt="" coords="787,5,957,35"/>
+<area shape="rect" id="node11" href="$d4/d02/andns__lib_8c.html#a9b467f6edffa6791730a90fc1318146c" title="destroy_andns_pkt_data" alt="" coords="1007,5,1169,35"/>
+<area shape="rect" id="node17" href="$d7/d48/snsd__cache_8c.html#a95a252ec0d0dbf78bfa343f45b75f8eb" title="str_to_snsd_proto" alt="" coords="427,85,552,115"/>
+</map>

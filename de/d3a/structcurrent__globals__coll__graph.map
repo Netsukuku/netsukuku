@@ -1,0 +1,10 @@
+<map id="current_globals" name="current_globals">
+<area shape="rect" id="node2" href="$d6/d1c/structmap__node.html" title="map_node" alt="" coords="83,101,165,131"/>
+<area shape="rect" id="node6" href="$d5/d7c/structmap__gnode.html" title="map_gnode" alt="" coords="131,197,219,227"/>
+<area shape="rect" id="node11" href="$dc/d1e/structext__rnode.html" title="ext_rnode" alt="" coords="147,443,224,472"/>
+<area shape="rect" id="node21" href="$d8/daf/structinternet__gateway.html" title="internet_gateway" alt="" coords="391,253,511,283"/>
+<area shape="rect" id="node4" href="$d8/d81/structmap__rnode.html" title="map_rnode" alt="" coords="81,5,167,35"/>
+<area shape="rect" id="node14" href="$d0/d3b/structquadro__group.html" title="quadro_group" alt="" coords="208,309,307,339"/>
+<area shape="rect" id="node9" href="$dc/d3a/structext__rnode__cache.html" title="ext_rnode_cache" alt="" coords="105,544,225,573"/>
+<area shape="rect" id="node17" href="$da/d1d/structinet__prefix.html" title="inet_prefix" alt="" coords="252,197,335,227"/>
+</map>

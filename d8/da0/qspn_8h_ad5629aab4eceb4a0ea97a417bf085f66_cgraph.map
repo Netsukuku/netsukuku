@@ -1,0 +1,6 @@
+<map id="qspn_b_del_all_dead_rnodes" name="qspn_b_del_all_dead_rnodes">
+<area shape="rect" id="node3" href="$db/de6/qspn_8c.html#a7d4488a7a0d0eb767588a5afb7f85e47" title="qspn_set_map_vars" alt="" coords="213,5,352,35"/>
+<area shape="rect" id="node7" href="$db/de6/qspn_8c.html#a3a6fd647a6c1d1d519d16de9a4395678" title="qspn_b_del_dead_rnodes" alt="" coords="199,59,367,88"/>
+<area shape="rect" id="node5" href="$d3/d7a/map_8c.html#a4ca7b0204f961c5dbe35bf7e8fff7ac5" title="pos_from_node" alt="" coords="417,5,527,35"/>
+<area shape="rect" id="node9" href="$d3/d7a/map_8c.html#a72016d6f9d0f367f9b50c13c38a54e47" title="rnode_find" alt="" coords="431,59,513,88"/>
+</map>

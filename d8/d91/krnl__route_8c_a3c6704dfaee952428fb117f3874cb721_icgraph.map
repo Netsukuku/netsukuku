@@ -1,0 +1,8 @@
+<map id="route_get_gw" name="route_get_gw">
+<area shape="rect" id="node3" href="$d7/d0e/krnl__route_8h.html#a4661441ab0b3c68d4525262a39b79c87" title="route_get_exact_prefix_dst" alt="" coords="155,13,333,43"/>
+<area shape="rect" id="node5" href="$d9/d7f/route_8h.html#a9ba09874404dffc38c8afaa32767fcef" title="rt_get_default_gw" alt="" coords="381,13,507,43"/>
+<area shape="rect" id="node7" href="$da/dd7/igs_8h.html#a184ab033bb2e2c1f856df5430ba87a80" title="init_internet_gateway\l_search" alt="" coords="764,5,908,51"/>
+<area shape="rect" id="node13" href="$da/dd7/igs_8h.html#af0c6fb918f055c28c21d5a17fe02db09" title="igw_check_inet_conn_t" alt="" coords="556,39,713,68"/>
+<area shape="rect" id="node9" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="957,13,1064,43"/>
+<area shape="rect" id="node11" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1112,13,1163,43"/>
+</map>

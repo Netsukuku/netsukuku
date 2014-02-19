@@ -1,0 +1,26 @@
+<map id="if_init_all" name="if_init_all">
+<area shape="rect" id="node3" href="$d4/dab/libnetlink_8c.html#af6a834b458ad515cfe591cd720b5a3fd" title="rtnl_open" alt="" coords="152,91,227,121"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="705,157,753,186"/>
+<area shape="rect" id="node12" href="$d1/d71/ll__map_8c.html#ac4adbf41fc1b3fd4d880768bf45b1f4c" title="ll_init_map" alt="" coords="148,238,231,267"/>
+<area shape="rect" id="node33" href="$d7/de2/if_8c.html#a6996d5c570a8cdc3b4cdeef2fe1d9e10" title="get_all_up_ifs" alt="" coords="324,447,425,477"/>
+<area shape="rect" id="node47" href="$d1/d71/ll__map_8c.html#a3ccff7ca25a76d2c7d2a1dbcafb2678e" title="ll_name_to_index" alt="" coords="128,342,251,371"/>
+<area shape="rect" id="node49" href="$d7/de2/if_8c.html#af0a0c8beb31d1b114cdbb60cbd7ae59c" title="set_all_ifs" alt="" coords="149,395,229,425"/>
+<area shape="rect" id="node51" href="$d7/de2/if_8c.html#a062746ee276b608fcd9360c59364d537" title="set_dev_up" alt="" coords="145,158,233,187"/>
+<area shape="rect" id="node59" href="$d4/dab/libnetlink_8c.html#abe941df1a4b224511e5aba5fbeda5373" title="rtnl_close" alt="" coords="151,449,228,478"/>
+<area shape="rect" id="node5" href="$d4/dab/libnetlink_8c.html#adcef0338bcf67064f61e984ea6542a4f" title="rtnl_open_byproto" alt="" coords="312,79,437,109"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="853,314,923,343"/>
+<area shape="rect" id="node14" href="$d4/dab/libnetlink_8c.html#ae723f19314cbb031a26abaee33928b84" title="rtnl_wilddump_request" alt="" coords="299,317,451,346"/>
+<area shape="rect" id="node16" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="707,341,752,370"/>
+<area shape="rect" id="node21" href="$d4/dab/libnetlink_8c.html#a0c981a8de14fd51a25027ef407e799ca" title="rtnl_dump_filter" alt="" coords="505,317,615,346"/>
+<area shape="rect" id="node25" href="$d1/d71/ll__map_8c.html#aa74dd48e5206c9a8c5b36307e023fa58" title="ll_remember_index" alt="" coords="309,213,440,242"/>
+<area shape="rect" id="node19" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="837,367,939,397"/>
+<area shape="rect" id="node27" href="$d4/dab/libnetlink_8c.html#aed575cd447219f8c2f67e2011aaee4d8" title="parse_rtattr" alt="" coords="516,210,604,239"/>
+<area shape="rect" id="node30" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="527,263,593,293"/>
+<area shape="rect" id="node35" href="$d1/d71/ll__map_8c.html#af323c3c7c507db71b8ff21ca3d340ab7" title="ll_nth_up_if" alt="" coords="516,421,604,450"/>
+<area shape="rect" id="node40" href="$d1/d71/ll__map_8c.html#aced8907c33267205072637b09f56c869" title="ll_index_to_name" alt="" coords="499,525,621,554"/>
+<area shape="rect" id="node44" href="$d7/df8/log_8c.html#aea4dca1a8e24794377ba1bf45fbbfce8" title="loginfo" alt="" coords="700,471,759,501"/>
+<area shape="rect" id="node38" href="$d1/d71/ll__map_8c.html#a7925746ce20eeb73393e0570613110ed" title="ll_index_to_flags" alt="" coords="671,418,788,447"/>
+<area shape="rect" id="node42" href="$d1/d71/ll__map_8c.html#ad3726eb503a42ed32a53f65a9aa0c252" title="ll_idx_n2a" alt="" coords="689,525,769,554"/>
+<area shape="rect" id="node53" href="$d7/de2/if_8c.html#a8ae45d4359817648686b7b13713508a4" title="set_flags" alt="" coords="337,157,412,186"/>
+<area shape="rect" id="node55" href="$da/d89/inet_8c.html#a49b750fe581d1da5e169adf3c7a14af1" title="new_socket" alt="" coords="515,157,605,186"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="is_hgnode_excluded" name="is_hgnode_excluded">
+<area shape="rect" id="node3" href="$da/d89/inet_8c.html#a9c6d94fc49adc3223bb0df762343784d" title="inet_setip_raw" alt="" coords="195,5,301,35"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="351,59,407,88"/>
+<area shape="rect" id="node14" href="$d9/d45/gmap_8c.html#a94609b8ed9b174e8cd3c1a2b98b9006e" title="iptogid" alt="" coords="219,109,277,139"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="356,5,401,35"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="472,59,541,88"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="456,5,557,35"/>
+</map>

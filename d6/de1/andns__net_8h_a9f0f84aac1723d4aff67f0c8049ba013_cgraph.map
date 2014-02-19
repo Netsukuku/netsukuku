@@ -1,0 +1,6 @@
+<map id="w_socket" name="w_socket">
+<area shape="rect" id="node3" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="140,59,185,88"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="135,5,191,35"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="256,5,325,35"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="240,59,341,88"/>
+</map>

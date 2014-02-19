@@ -1,0 +1,13 @@
+<map id="tpingthost" name="tpingthost">
+<area shape="rect" id="node3" href="$df/d9c/libping_8c.html#a0ac8200b876bd54e8af3a4715a103e47" title="ping_priv_default" alt="" coords="133,5,253,35"/>
+<area shape="rect" id="node5" href="$df/d9c/libping_8c.html#a8d19aa4db5571649ce14ad5e39cd101d" title="myping" alt="" coords="161,59,225,88"/>
+<area shape="rect" id="node7" href="$df/d9c/libping_8c.html#a7698ebb4671ed34f4251e5dcbf1a62f3" title="send_ping" alt="" coords="311,59,391,88"/>
+<area shape="rect" id="node22" href="$df/d9c/libping_8c.html#a7e6ed87a89b2362608660300e4ba023e" title="elapsed_time" alt="" coords="301,5,400,35"/>
+<area shape="rect" id="node25" href="$df/d9c/libping_8c.html#a8f7f1c39174accd1cf2c6ab418e94034" title="recv_ping" alt="" coords="312,112,389,141"/>
+<area shape="rect" id="node9" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="464,5,531,35"/>
+<area shape="rect" id="node17" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="469,112,525,141"/>
+<area shape="rect" id="node20" href="$df/d9c/libping_8c.html#a5414b3905e57ddbdf81f61b66837089c" title="in_checksum" alt="" coords="448,59,547,88"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="596,12,641,41"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="707,72,776,101"/>
+<area shape="rect" id="node15" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="691,12,792,41"/>
+</map>

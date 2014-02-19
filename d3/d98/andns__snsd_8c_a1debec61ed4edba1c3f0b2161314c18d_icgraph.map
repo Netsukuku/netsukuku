@@ -1,0 +1,5 @@
+<map id="snsd_prio_to_dansws" name="snsd_prio_to_dansws">
+<area shape="rect" id="node3" href="$dd/dd9/andns_8h.html#a81431a7e5716758c3bbefd17f8e68898" title="inet_rslv" alt="" coords="204,5,273,35"/>
+<area shape="rect" id="node5" href="$dd/dd9/andns_8h.html#ad55d591cf7a444daa6b9cea7f8ae29bc" title="andns_rslv" alt="" coords="323,5,408,35"/>
+<area shape="rect" id="node7" href="$db/d6b/dns__wrapper_8c.html#ae858f92cfdc42ee9f2ba357a4021b59e" title="dns_exec_pkt" alt="" coords="457,5,559,35"/>
+</map>

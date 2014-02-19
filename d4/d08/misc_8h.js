@@ -1,0 +1,26 @@
+var misc_8h =
+[
+    [ "_return", "d4/d08/misc_8h.html#a8449f7a49a9aac590496ca70bfc11e55", null ],
+    [ "CLR_BIT", "d4/d08/misc_8h.html#a3dddc03c8e6df49ea7615405cc1faf4f", null ],
+    [ "FIND_PTR", "d4/d08/misc_8h.html#aaf9df6e3c9d68033ee6162c4738e3ee1", null ],
+    [ "MILLISEC", "d4/d08/misc_8h.html#a196a8d532345b158a150af01f196c242", null ],
+    [ "MILLISEC_TO_TV", "d4/d08/misc_8h.html#aa911c93eee2bd5b1312317ba2d75af35", null ],
+    [ "NMEMB", "d4/d08/misc_8h.html#a1aaef027c2540c4b3848ab5603c97adf", null ],
+    [ "SET_BIT", "d4/d08/misc_8h.html#a57ad79bbf1da2778f9352732771339b9", null ],
+    [ "TEST_BIT", "d4/d08/misc_8h.html#a5339af2eb805f73f3c78db430e03d719", null ],
+    [ "check_and_create_dir", "d4/d08/misc_8h.html#a00e04a1d03772af465554e244ab28870", null ],
+    [ "do_nothing", "d4/d08/misc_8h.html#ad3dd98cde966bc68b438e72af3c68527", null ],
+    [ "exec_root_script", "d4/d08/misc_8h.html#a8acb91fe62e69e1e7be98dd06b2410a2", null ],
+    [ "file_exist", "d4/d08/misc_8h.html#a928b1da945af8413e422d1749058d33a", null ],
+    [ "find_int", "d4/d08/misc_8h.html#aec37f76b7523c94cbf893daa3011d561", null ],
+    [ "last_token", "d4/d08/misc_8h.html#ae13480d8227e14c4ea764297d170d39c", null ],
+    [ "rand_range", "d4/d08/misc_8h.html#af7f747ea1b353be8609df593dc0a629a", null ],
+    [ "split_string", "d4/d08/misc_8h.html#afa3287a0852a49ffaeb854b3a43efeeb", null ],
+    [ "strip_char", "d4/d08/misc_8h.html#a1b81740c73bef5d3a6c69149d2c66378", null ],
+    [ "swap_array", "d4/d08/misc_8h.html#acb6548d316f7cd3f28e77c2bd4eb3e33", null ],
+    [ "swap_ints", "d4/d08/misc_8h.html#a7b5a2df1e2b36c954653fd3e786a5405", null ],
+    [ "swap_shorts", "d4/d08/misc_8h.html#a98da58b707cfc9acf75f8105a3508b89", null ],
+    [ "xor_int", "d4/d08/misc_8h.html#ad1aea1bae314b44e08b53a5b5bf30394", null ],
+    [ "xsrand", "d4/d08/misc_8h.html#a22bf64b8d655a21a09fc4a5bca7ddd2b", null ],
+    [ "xtimer", "d4/d08/misc_8h.html#acb47fac99a597857da46e5527954ed11", null ]
+];

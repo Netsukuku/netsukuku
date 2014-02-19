@@ -1,0 +1,14 @@
+<map id="elapsed_time" name="elapsed_time">
+<area shape="rect" id="node3" href="$df/d9c/libping_8c.html#a8d19aa4db5571649ce14ad5e39cd101d" title="myping" alt="" coords="152,85,216,115"/>
+<area shape="rect" id="node5" href="$d1/d64/libping_8h.html#a8607f45baf68c8774b2c30473d212f69" title="pinghost" alt="" coords="269,5,339,35"/>
+<area shape="rect" id="node7" href="$d1/d64/libping_8h.html#a24df2d8c0a25a2d1d0515597943049ac" title="pingthost" alt="" coords="267,59,341,88"/>
+<area shape="rect" id="node25" href="$d1/d64/libping_8h.html#af72477aa43621b62340d7fbde1036dac" title="tpinghost" alt="" coords="267,112,341,141"/>
+<area shape="rect" id="node27" href="$d1/d64/libping_8h.html#a27914918d2a8da494de3916fcc0b58e2" title="tpingthost" alt="" coords="265,165,343,195"/>
+<area shape="rect" id="node9" href="$da/dd7/igs_8h.html#a5855d790f8cd80495bf1962009b6cb7b" title="igw_check_inet_conn" alt="" coords="392,33,539,63"/>
+<area shape="rect" id="node20" href="$d1/d6f/igs_8c.html#a94fb2e3622439b35372a6d3972a6f5e3" title="igw_ping_igw" alt="" coords="617,87,716,116"/>
+<area shape="rect" id="node11" href="$da/dd7/igs_8h.html#a184ab033bb2e2c1f856df5430ba87a80" title="init_internet_gateway\l_search" alt="" coords="796,17,940,63"/>
+<area shape="rect" id="node17" href="$da/dd7/igs_8h.html#af0c6fb918f055c28c21d5a17fe02db09" title="igw_check_inet_conn_t" alt="" coords="588,33,745,63"/>
+<area shape="rect" id="node13" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="989,28,1096,57"/>
+<area shape="rect" id="node15" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1144,56,1195,85"/>
+<area shape="rect" id="node22" href="$da/dd7/igs_8h.html#ac87ed2fc7a66e73c5fef763321862295" title="igw_monitor_igws_t" alt="" coords="800,87,936,116"/>
+</map>

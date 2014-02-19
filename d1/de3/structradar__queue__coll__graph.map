@@ -1,0 +1,8 @@
+<map id="radar_queue" name="radar_queue">
+<area shape="rect" id="node2" href="$d6/d1c/structmap__node.html" title="map_node" alt="" coords="169,101,252,131"/>
+<area shape="rect" id="node8" href="$d5/d7c/structmap__gnode.html" title="map_gnode" alt="" coords="113,197,201,227"/>
+<area shape="rect" id="node4" href="$d8/d81/structmap__rnode.html" title="map_rnode" alt="" coords="168,5,253,35"/>
+<area shape="rect" id="node6" href="$d0/d3b/structquadro__group.html" title="quadro_group" alt="" coords="103,293,201,323"/>
+<area shape="rect" id="node11" href="$da/d1d/structinet__prefix.html" title="inet_prefix" alt="" coords="5,197,88,227"/>
+<area shape="rect" id="node13" href="$d9/dbe/structinterface.html" title="interface" alt="" coords="276,293,348,323"/>
+</map>

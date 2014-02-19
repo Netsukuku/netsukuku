@@ -1,0 +1,13 @@
+<map id="TC_DELETE_ENTRY" name="TC_DELETE_ENTRY">
+<area shape="rect" id="node3" href="$d6/dd7/libiptc_8c.html#a537585c708e6440a6b4c76b0b72ce68e" title="iptcc_find_label" alt="" coords="563,24,675,53"/>
+<area shape="rect" id="node7" href="$d6/dd7/libiptc_8c.html#a93deca1f464725269601d638fbcb94c8" title="iptcc_alloc_rule" alt="" coords="211,51,323,80"/>
+<area shape="rect" id="node9" href="$d6/dd7/libiptc_8c.html#a91e987eb3d50439f529daa293072abae" title="iptcc_map_target" alt="" coords="205,104,328,133"/>
+<area shape="rect" id="node19" href="$d6/dd7/libiptc_8c.html#a7d44a84089b804cf3be6aa1506bb6362" title="set_changed" alt="" coords="397,183,493,212"/>
+<area shape="rect" id="node21" href="$d6/dd7/libiptc_8c.html#ac9c22491bc18dabf3a8f54a6f7592c96" title="is_same" alt="" coords="232,208,301,237"/>
+<area shape="rect" id="node23" href="$d6/dd7/libiptc_8c.html#adf312d9ac75f9766a6522b9a21a6f19a" title="target_same" alt="" coords="220,261,313,291"/>
+<area shape="rect" id="node25" href="$d6/dd7/libiptc_8c.html#a0ca642c976315297fc0b9fb6245a8f90" title="iptcc_delete_rule" alt="" coords="207,315,327,344"/>
+<area shape="rect" id="node5" href="$da/d00/linux__list_8h.html#a6601e54d8f27ab290ee6819f7e2127b7" title="list_empty" alt="" coords="723,24,805,53"/>
+<area shape="rect" id="node11" href="$d6/dd7/libiptc_8c.html#ae66562e291ab66ed10312a16172d9fa5" title="iptcc_standard_map" alt="" coords="376,76,515,105"/>
+<area shape="rect" id="node13" href="$d6/dd7/libiptc_8c.html#a4333074027c3913b1d64ea4173759658" title="TC_BUILTIN" alt="" coords="396,129,495,159"/>
+<area shape="rect" id="node16" href="$d6/dd7/libiptc_8c.html#adda0e58ab046639544a87ffa5beba504" title="iptcc_is_builtin" alt="" coords="565,129,672,159"/>
+</map>

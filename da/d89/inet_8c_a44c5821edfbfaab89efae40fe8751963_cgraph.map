@@ -1,0 +1,12 @@
+<map id="inet_getpeername" name="inet_getpeername">
+<area shape="rect" id="node3" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="365,5,413,35"/>
+<area shape="rect" id="node7" href="$da/d89/inet_8c.html#a16c8d2dac83a014ea3035178a3771340" title="sockaddr_to_inet" alt="" coords="180,57,300,87"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="779,5,848,35"/>
+<area shape="rect" id="node10" href="$da/d89/inet_8c.html#ac0a02d49e9909bae32638e61ce18be9f" title="inet_setip" alt="" coords="351,59,428,88"/>
+<area shape="rect" id="node12" href="$da/d89/inet_8c.html#a9c6d94fc49adc3223bb0df762343784d" title="inet_setip_raw" alt="" coords="477,59,584,88"/>
+<area shape="rect" id="node19" href="$da/d89/inet_8c.html#a385963363f8d2ee7012a4c919b9b7b80" title="inet_ntohl" alt="" coords="492,112,569,141"/>
+<area shape="rect" id="node14" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="651,59,696,88"/>
+<area shape="rect" id="node17" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="763,59,864,88"/>
+<area shape="rect" id="node21" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="633,112,713,141"/>
+<area shape="rect" id="node23" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="769,112,857,141"/>
+</map>

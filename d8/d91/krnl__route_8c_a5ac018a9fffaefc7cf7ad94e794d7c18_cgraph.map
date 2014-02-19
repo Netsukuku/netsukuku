@@ -1,0 +1,12 @@
+<map id="add_nexthops" name="add_nexthops">
+<area shape="rect" id="node3" href="$d4/dab/libnetlink_8c.html#a308c9418a2d83e4e9ba8d8ed0b7bbe28" title="addattr_l" alt="" coords="183,5,255,35"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="355,189,403,219"/>
+<area shape="rect" id="node9" href="$d1/d71/ll__map_8c.html#a3ccff7ca25a76d2c7d2a1dbcafb2678e" title="ll_name_to_index" alt="" coords="157,109,280,139"/>
+<area shape="rect" id="node12" href="$d4/dab/libnetlink_8c.html#ab9339d56ad1804972e905306791fabbc" title="addattr32" alt="" coords="181,163,256,192"/>
+<area shape="rect" id="node15" href="$d4/dab/libnetlink_8c.html#accbfecaa74aaf78e2c0ca021954bdad9" title="rta_addattr32" alt="" coords="169,216,268,245"/>
+<area shape="rect" id="node18" href="$d4/dab/libnetlink_8c.html#a9788836cab7c0fa68a06532af4c91e19" title="rta_addattr_l" alt="" coords="172,269,265,299"/>
+<area shape="rect" id="node21" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="196,323,241,352"/>
+<area shape="rect" id="node26" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="351,375,407,404"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="479,269,548,299"/>
+<area shape="rect" id="node24" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="328,321,429,351"/>
+</map>

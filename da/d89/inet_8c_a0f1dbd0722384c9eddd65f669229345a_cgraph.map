@@ -1,0 +1,20 @@
+<map id="new_bcast_conn" name="new_bcast_conn">
+<area shape="rect" id="node3" href="$da/d89/inet_8c.html#a8e51a98ebf31af2e65b949335a06d47a" title="new_dgram_socket" alt="" coords="177,160,311,189"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="589,187,637,216"/>
+<area shape="rect" id="node9" href="$da/d89/inet_8c.html#a2aa626239ab1ad25661dfed01b5f2f89" title="set_broadcast_sk" alt="" coords="181,264,307,293"/>
+<area shape="rect" id="node26" href="$da/d89/inet_8c.html#a8eac5edae4e220edc0f4a974dd5749d3" title="inet_to_sockaddr" alt="" coords="184,371,304,400"/>
+<area shape="rect" id="node36" href="$da/d89/inet_8c.html#ab5a263b2a13ea5c2eb67c8b05bd56564" title="set_bindtodevice_sk" alt="" coords="173,5,315,35"/>
+<area shape="rect" id="node39" href="$d1/d71/ll__map_8c.html#aced8907c33267205072637b09f56c869" title="ll_index_to_name" alt="" coords="183,515,305,544"/>
+<area shape="rect" id="node43" href="$da/d89/inet_8c.html#a7ee487ce5e94550114761abaee2bc334" title="inet_to_str" alt="" coords="203,436,285,465"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="719,233,788,263"/>
+<area shape="rect" id="node12" href="$da/d89/inet_8c.html#ace49c54414750a5e03afb619007af827" title="join_ipv6_multicast" alt="" coords="372,264,505,293"/>
+<area shape="rect" id="node15" href="$da/d89/inet_8c.html#a1cd6901da908a11c445765c7aa42e495" title="set_multicast_loop_sk" alt="" coords="363,317,515,347"/>
+<area shape="rect" id="node18" href="$da/d89/inet_8c.html#a22541324b0b1e8b9b874c5c089296c20" title="set_multicast_if" alt="" coords="381,160,496,189"/>
+<area shape="rect" id="node21" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="416,371,461,400"/>
+<area shape="rect" id="node24" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="563,371,664,400"/>
+<area shape="rect" id="node28" href="$da/d89/inet_8c.html#a75c2848f706809db4a3a8999d46118dc" title="inet_htonl" alt="" coords="575,449,652,479"/>
+<area shape="rect" id="node30" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="713,449,793,479"/>
+<area shape="rect" id="node32" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="844,449,932,479"/>
+<area shape="rect" id="node41" href="$d1/d71/ll__map_8c.html#ad3726eb503a42ed32a53f65a9aa0c252" title="ll_idx_n2a" alt="" coords="399,528,479,557"/>
+<area shape="rect" id="node45" href="$da/d89/inet_8c.html#a9d2fb5508608cf4b8f5347d2edbb276b" title="ipraw_to_str" alt="" coords="392,475,485,504"/>
+</map>

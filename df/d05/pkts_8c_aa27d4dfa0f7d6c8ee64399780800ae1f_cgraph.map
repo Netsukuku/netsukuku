@@ -1,0 +1,22 @@
+<map id="pkt_send" name="pkt_send">
+<area shape="rect" id="node3" href="$df/d05/pkts_8c.html#ae6409550716070c3ff80141d94dab212" title="pkt_pack" alt="" coords="160,189,235,219"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="547,244,592,273"/>
+<area shape="rect" id="node31" href="$da/d89/inet_8c.html#a8eac5edae4e220edc0f4a974dd5749d3" title="inet_to_sockaddr" alt="" coords="137,111,257,140"/>
+<area shape="rect" id="node37" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="169,568,225,597"/>
+<area shape="rect" id="node40" href="$da/d89/inet_8c.html#aa65a7052b4c6746a997c4e3743f14fbe" title="inet_sendto_timeout" alt="" coords="128,447,267,476"/>
+<area shape="rect" id="node43" href="$da/d89/inet_8c.html#af7e76f47a0583d67182cdf5bbb4dd22a" title="inet_sendto" alt="" coords="344,523,432,552"/>
+<area shape="rect" id="node48" href="$da/d89/inet_8c.html#a57d824182ed85de297e6f32640708b7f" title="inet_send_timeout" alt="" coords="133,343,261,372"/>
+<area shape="rect" id="node51" href="$da/d89/inet_8c.html#ac92b07ae7dc3ae1234665e052a8e6792" title="inet_send" alt="" coords="349,395,427,424"/>
+<area shape="rect" id="node5" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="355,163,421,192"/>
+<area shape="rect" id="node13" href="$d9/dfc/endianness_8c.html#aed4f03aa2dac4cdc67d1e9cdf66bb850" title="ints_host_to_network" alt="" coords="315,59,461,88"/>
+<area shape="rect" id="node26" href="$df/d05/pkts_8c.html#a9067b2b1019f0e577ba4baaba5005d56" title="pkt_compress" alt="" coords="336,216,440,245"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="693,395,763,424"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="677,244,779,273"/>
+<area shape="rect" id="node15" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="529,5,609,35"/>
+<area shape="rect" id="node19" href="$d0/ddb/misc_8c.html#a98da58b707cfc9acf75f8105a3508b89" title="swap_shorts" alt="" coords="521,165,617,195"/>
+<area shape="rect" id="node22" href="$d9/dfc/endianness_8c.html#a1a256f4a240590c9338842ccf89cef71" title="ints_array_htonl" alt="" coords="512,112,627,141"/>
+<area shape="rect" id="node24" href="$d9/dfc/endianness_8c.html#adba3e27303d1342689cbb377921aee3f" title="ints_array_htons" alt="" coords="511,59,628,88"/>
+<area shape="rect" id="node17" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="684,85,772,115"/>
+<area shape="rect" id="node28" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="545,395,593,424"/>
+<area shape="rect" id="node33" href="$da/d89/inet_8c.html#a75c2848f706809db4a3a8999d46118dc" title="inet_htonl" alt="" coords="349,5,427,35"/>
+</map>

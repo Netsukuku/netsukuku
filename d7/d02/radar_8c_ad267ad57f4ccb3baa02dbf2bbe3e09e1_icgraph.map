@@ -1,0 +1,29 @@
+<map id="rnl_del" name="rnl_del">
+<area shape="rect" id="node3" href="$d3/df5/radar_8h.html#a7af513cd53e492b69510bc823c384abb" title="rnl_reset" alt="" coords="164,165,236,195"/>
+<area shape="rect" id="node56" href="$d7/d02/radar_8c.html#a0f07428e5e015d840e1ccdf9c4493045" title="rnl_del_dead_rnode" alt="" coords="335,5,468,35"/>
+<area shape="rect" id="node61" href="$d7/d02/radar_8c.html#aa307bc45b5cdb225a72f6e98345c30ae" title="rnl_del_dev" alt="" coords="156,219,244,248"/>
+<area shape="rect" id="node63" href="$d7/d02/radar_8c.html#a9bc9b47956aec5ef6225ba654f4bfaee" title="rnl_update_devs" alt="" coords="141,112,259,141"/>
+<area shape="rect" id="node69" href="$d7/d02/radar_8c.html#a94b39741ffea4a0e3fef007399f9ee02" title="radar_remove_old_rnodes" alt="" coords="115,59,285,88"/>
+<area shape="rect" id="node5" href="$d3/df5/radar_8h.html#af02a5a423429d8a737973cfaaf292441" title="last_close_radar" alt="" coords="928,304,1045,333"/>
+<area shape="rect" id="node14" href="$d3/df5/radar_8h.html#a49490440fa81e7b4c8ed18a9250ae8ed" title="reset_radar" alt="" coords="359,136,444,165"/>
+<area shape="rect" id="node21" href="$d2/d42/rehook_8h.html#ae6ae2d4b03e5a8cc1891cbf553ebb913" title="rehook" alt="" coords="1115,212,1176,241"/>
+<area shape="rect" id="node7" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="2132,276,2263,305"/>
+<area shape="rect" id="node9" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="2312,276,2427,305"/>
+<area shape="rect" id="node11" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="2475,172,2525,201"/>
+<area shape="rect" id="node16" href="$d3/dc7/hook_8c.html#a7503e6bf75bee5edba1dd37e8878911a" title="hook_first_radar_scan" alt="" coords="729,107,879,136"/>
+<area shape="rect" id="node45" href="$d3/dc7/hook_8c.html#a5e32a215ed05b1ef1f870ce105f67640" title="hook_finish" alt="" coords="760,160,848,189"/>
+<area shape="rect" id="node48" href="$d3/df5/radar_8h.html#a3d46b80b3ad27f86a02c0586617f18cc" title="radar_scan" alt="" coords="556,59,641,88"/>
+<area shape="rect" id="node18" href="$d6/d34/hook_8h.html#af10a487801fab9a28a3cfb6759fe138f" title="netsukuku_hook" alt="" coords="928,107,1045,136"/>
+<area shape="rect" id="node23" href="$df/dba/rehook_8c.html#aeb32663f186f840edf41bb43d1f82459" title="new_rehook_thread" alt="" coords="1247,212,1380,241"/>
+<area shape="rect" id="node25" href="$d2/d42/rehook_8h.html#acd9ab3b97734c31a06ae3dcf475a1b39" title="new_rehook" alt="" coords="1431,212,1521,241"/>
+<area shape="rect" id="node27" href="$d6/d62/tracer_8c.html#a8bab813b90267e0e25592821248d7158" title="tracer_check_node_collision" alt="" coords="1571,239,1757,268"/>
+<area shape="rect" id="node29" href="$da/db5/tracer_8h.html#a12c03f2eaa97e2c644dcdd892e0fa758" title="tracer_store_pkt" alt="" coords="1807,212,1921,241"/>
+<area shape="rect" id="node31" href="$d8/da0/qspn_8h.html#ab70abece99b6ae77b078ec100c35912a" title="qspn_close" alt="" coords="1983,159,2071,188"/>
+<area shape="rect" id="node38" href="$d8/da0/qspn_8h.html#a6df687dad6a64c0807fbfc105cf244c5" title="qspn_open" alt="" coords="1984,212,2069,241"/>
+<area shape="rect" id="node41" href="$da/db5/tracer_8h.html#ab53c5821a9d4215b3d5ba16fd95e8297" title="tracer_pkt_recv" alt="" coords="1971,265,2083,295"/>
+<area shape="rect" id="node33" href="$d8/da0/qspn_8h.html#a6c5c062e24ec079201aea53899af3e28" title="qspn_init" alt="" coords="2160,185,2235,215"/>
+<area shape="rect" id="node35" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="2316,172,2423,201"/>
+<area shape="rect" id="node52" href="$d3/df5/radar_8h.html#ac9d1b53d63e675b260906e91850b588c" title="radar_daemon" alt="" coords="1093,55,1197,84"/>
+<area shape="rect" id="node58" href="$d3/df5/radar_8h.html#aa589f34d936b21665c16fca95f06092f" title="refresh_hook_root_node" alt="" coords="519,5,679,35"/>
+<area shape="rect" id="node65" href="$d3/df5/radar_8h.html#a6908f30023e15ac38b957dc8f3941f37" title="radar_update_map" alt="" coords="337,59,465,88"/>
+</map>

@@ -1,0 +1,29 @@
+<map id="destroy_andns_pkt_data" name="destroy_andns_pkt_data">
+<area shape="rect" id="node3" href="$da/d94/andns__lib_8h.html#af907edbde8bd60a53714835fc76fc690" title="andns_del_answ" alt="" coords="245,697,363,727"/>
+<area shape="rect" id="node13" href="$da/d94/andns__lib_8h.html#ab2b78fd0fecd54eb2cb4ba25aaa7499a" title="destroy_andns_pkt_datas" alt="" coords="219,593,389,623"/>
+<area shape="rect" id="node5" href="$dd/dd9/andns_8h.html#a1220da16c538185a3258cedab47c254a" title="dpanswtoapansw" alt="" coords="443,723,565,752"/>
+<area shape="rect" id="node7" href="$dd/dd9/andns_8h.html#a36956c4fc77c5a1b3dfcda3cc0a9051e" title="nk_forward" alt="" coords="845,684,931,713"/>
+<area shape="rect" id="node9" href="$dd/dd9/andns_8h.html#ad55d591cf7a444daa6b9cea7f8ae29bc" title="andns_rslv" alt="" coords="1053,629,1139,659"/>
+<area shape="rect" id="node11" href="$db/d6b/dns__wrapper_8c.html#ae858f92cfdc42ee9f2ba357a4021b59e" title="dns_exec_pkt" alt="" coords="1220,629,1321,659"/>
+<area shape="rect" id="node15" href="$da/d94/andns__lib_8h.html#ac221d30c29b9c3846c67c6c09511add4" title="destroy_andns_pkt" alt="" coords="439,580,569,609"/>
+<area shape="rect" id="node17" href="$dd/dd9/andns_8h.html#a77c1322dbf52a1bacabe97028c9ce8d2" title="nk_rslv" alt="" coords="655,580,719,609"/>
+<area shape="rect" id="node21" href="$da/d94/andns__lib_8h.html#a1741ef8f9940010d3f4f0a310f607973" title="a_u" alt="" coords="665,527,708,556"/>
+<area shape="rect" id="node25" href="$d9/d88/ntkresolv_8h.html#aa95ce7a8d4506ae83dd9b76933d7c6ba" title="do_command" alt="" coords="839,527,937,556"/>
+<area shape="rect" id="node29" href="$da/d94/andns__lib_8h.html#aa81f323a0d18821cb8b37b74cb89e56b" title="a_p" alt="" coords="665,633,708,663"/>
+<area shape="rect" id="node34" href="$d9/d88/ntkresolv_8h.html#a525d73873ebf5621cb96d199b41454df" title="ntkresolv_safe_exit" alt="" coords="620,263,753,292"/>
+<area shape="rect" id="node27" href="$d3/dbf/ntkresolv_8c.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1245,272,1296,301"/>
+<area shape="rect" id="node36" href="$d9/d88/ntkresolv_8h.html#af986bd0575ec9b913dfab4b8422509ae" title="version" alt="" coords="1064,5,1128,35"/>
+<area shape="rect" id="node39" href="$d3/dbf/ntkresolv_8c.html#ae8605e2b78cd4a81b6c6b5c30cb7366a" title="usage" alt="" coords="1068,60,1124,89"/>
+<area shape="rect" id="node42" href="$d9/d88/ntkresolv_8h.html#a878d850445a499c5a529a50309f704fa" title="qt_usage" alt="" coords="851,105,925,135"/>
+<area shape="rect" id="node47" href="$d9/d88/ntkresolv_8h.html#ae226936b7b54e18fd0142cec3fb75891" title="realm_usage" alt="" coords="840,159,936,188"/>
+<area shape="rect" id="node52" href="$d9/d88/ntkresolv_8h.html#a618d6dfb1e757d0b6cc7e14e85961d3d" title="proto_usage" alt="" coords="841,316,935,345"/>
+<area shape="rect" id="node57" href="$d9/d88/ntkresolv_8h.html#aa31287dfedcfeb069e2c19e9d85cfd11" title="service_and_proto_usage" alt="" coords="803,369,973,399"/>
+<area shape="rect" id="node62" href="$d9/d88/ntkresolv_8h.html#a55b7bc0916e754d54b95471def57e94f" title="opts_set_port" alt="" coords="1045,421,1147,451"/>
+<area shape="rect" id="node65" href="$d9/d88/ntkresolv_8h.html#a4fe23240617e7ebb55aca663b64e95ad" title="opts_set_ns" alt="" coords="841,473,935,503"/>
+<area shape="rect" id="node68" href="$d9/d88/ntkresolv_8h.html#a4aa3684915c89eb76081f2e5e6c6f336" title="opts_set_question" alt="" coords="824,263,952,292"/>
+<area shape="rect" id="node70" href="$d9/d88/ntkresolv_8h.html#af8db000da6d4c6009e8af4b927f818a5" title="opts_finish" alt="" coords="1053,245,1139,275"/>
+<area shape="rect" id="node44" href="$d9/d88/ntkresolv_8h.html#a63d87b859b08cbb60c867d78293adc54" title="opts_set_qt" alt="" coords="1051,117,1141,147"/>
+<area shape="rect" id="node49" href="$d9/d88/ntkresolv_8h.html#a33446b4052c109032876b7423849f082" title="opts_set_realm" alt="" coords="1041,177,1151,207"/>
+<area shape="rect" id="node54" href="$d9/d88/ntkresolv_8h.html#a53dc39e8aa18066a1fd3a0c5e991fd96" title="opts_set_proto" alt="" coords="1043,299,1149,328"/>
+<area shape="rect" id="node59" href="$d9/d88/ntkresolv_8h.html#a5a81581501fa29b9a28b34addd0a8ab9" title="opts_set_service_and\l_proto" alt="" coords="1021,351,1171,398"/>
+</map>

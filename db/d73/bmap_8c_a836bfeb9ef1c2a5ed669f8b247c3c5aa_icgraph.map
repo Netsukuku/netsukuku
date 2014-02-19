@@ -1,0 +1,28 @@
+<map id="bmap_counter_reset" name="bmap_counter_reset">
+<area shape="rect" id="node3" href="$d5/dbf/bmap_8h.html#ae52670571abab59c3b815dfc9c822867" title="bmap_levels_init" alt="" coords="196,96,313,125"/>
+<area shape="rect" id="node45" href="$d5/dbf/bmap_8h.html#aec0994460c2835a92979f625d66893f8" title="bmap_counter_init" alt="" coords="364,5,492,35"/>
+<area shape="rect" id="node48" href="$d8/da0/qspn_8h.html#ab2f4bfac6bcea3379068bf4aab92e381" title="qspn_new_round" alt="" coords="195,212,315,241"/>
+<area shape="rect" id="node5" href="$d5/dbf/bmap_8h.html#aade6d459f779e4b70ecd48aa3b5ff6a9" title="unpack_all_bmaps" alt="" coords="363,109,493,139"/>
+<area shape="rect" id="node9" href="$d4/d3b/netsukuku_8c.html#aeda777559abec4e7ff375954117a918e" title="ntk_load_maps" alt="" coords="725,83,835,112"/>
+<area shape="rect" id="node7" href="$d5/dbf/bmap_8h.html#a233c188952c33778f3c4b085540b9f77" title="load_bmap" alt="" coords="565,109,651,139"/>
+<area shape="rect" id="node15" href="$d3/dc7/hook_8c.html#ab5fcc9e0c459e229bee016a7698e08ee" title="get_bnode_map" alt="" coords="723,160,837,189"/>
+<area shape="rect" id="node11" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="2368,265,2475,295"/>
+<area shape="rect" id="node13" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="2523,371,2573,400"/>
+<area shape="rect" id="node17" href="$d3/dc7/hook_8c.html#a0513b13a5cbb9ed7d89f6594e639b264" title="hook_get_bnode_map" alt="" coords="887,264,1036,293"/>
+<area shape="rect" id="node19" href="$d6/d34/hook_8h.html#af10a487801fab9a28a3cfb6759fe138f" title="netsukuku_hook" alt="" coords="1085,317,1203,347"/>
+<area shape="rect" id="node22" href="$d2/d42/rehook_8h.html#ae6ae2d4b03e5a8cc1891cbf553ebb913" title="rehook" alt="" coords="1251,317,1312,347"/>
+<area shape="rect" id="node24" href="$df/dba/rehook_8c.html#aeb32663f186f840edf41bb43d1f82459" title="new_rehook_thread" alt="" coords="1361,317,1495,347"/>
+<area shape="rect" id="node26" href="$d2/d42/rehook_8h.html#acd9ab3b97734c31a06ae3dcf475a1b39" title="new_rehook" alt="" coords="1545,317,1636,347"/>
+<area shape="rect" id="node28" href="$d6/d62/tracer_8c.html#a8bab813b90267e0e25592821248d7158" title="tracer_check_node_collision" alt="" coords="1685,265,1872,295"/>
+<area shape="rect" id="node30" href="$da/db5/tracer_8h.html#a12c03f2eaa97e2c644dcdd892e0fa758" title="tracer_store_pkt" alt="" coords="1921,265,2036,295"/>
+<area shape="rect" id="node32" href="$d8/da0/qspn_8h.html#ab70abece99b6ae77b078ec100c35912a" title="qspn_close" alt="" coords="2097,212,2185,241"/>
+<area shape="rect" id="node37" href="$d8/da0/qspn_8h.html#a6df687dad6a64c0807fbfc105cf244c5" title="qspn_open" alt="" coords="2099,319,2184,348"/>
+<area shape="rect" id="node40" href="$da/db5/tracer_8h.html#ab53c5821a9d4215b3d5ba16fd95e8297" title="tracer_pkt_recv" alt="" coords="2085,265,2197,295"/>
+<area shape="rect" id="node34" href="$d8/da0/qspn_8h.html#a6c5c062e24ec079201aea53899af3e28" title="qspn_init" alt="" coords="2245,265,2320,295"/>
+<area shape="rect" id="node50" href="$d8/da0/qspn_8h.html#a0c2ef8efd5611e3ed71086a267af7915" title="qspn_send" alt="" coords="385,317,471,347"/>
+<area shape="rect" id="node52" href="$d7/d02/radar_8c.html#ab10b73e523085803cf8a5863ed9994f9" title="radar_qspn_send_t" alt="" coords="543,331,673,360"/>
+<area shape="rect" id="node54" href="$d3/df5/radar_8h.html#a3d46b80b3ad27f86a02c0586617f18cc" title="radar_scan" alt="" coords="737,357,823,387"/>
+<area shape="rect" id="node56" href="$d3/dc7/hook_8c.html#a7503e6bf75bee5edba1dd37e8878911a" title="hook_first_radar_scan" alt="" coords="887,317,1036,347"/>
+<area shape="rect" id="node59" href="$d3/dc7/hook_8c.html#a5e32a215ed05b1ef1f870ce105f67640" title="hook_finish" alt="" coords="917,371,1005,400"/>
+<area shape="rect" id="node62" href="$d3/df5/radar_8h.html#ac9d1b53d63e675b260906e91850b588c" title="radar_daemon" alt="" coords="1092,421,1196,451"/>
+</map>

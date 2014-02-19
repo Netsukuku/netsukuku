@@ -1,0 +1,8 @@
+<map id="sockets_all_ifs" name="sockets_all_ifs">
+<area shape="rect" id="node3" href="$dc/d21/daemon_8c.html#a71a44ef24ad390d8bfd927ed826d42eb" title="prepare_listen_socket" alt="" coords="163,87,312,117"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="549,87,597,117"/>
+<area shape="rect" id="node9" href="$da/d89/inet_8c.html#ab5a263b2a13ea5c2eb67c8b05bd56564" title="set_bindtodevice_sk" alt="" coords="360,34,501,63"/>
+<area shape="rect" id="node12" href="$da/d89/inet_8c.html#a428a881d9fbb4d8b4fa5224962fcdd03" title="inet_close" alt="" coords="391,87,471,117"/>
+<area shape="rect" id="node14" href="$da/d89/inet_8c.html#a14ce403ca9d8516dc8d71796362a6d48" title="set_reuseaddr_sk" alt="" coords="368,141,493,170"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="647,87,716,117"/>
+</map>

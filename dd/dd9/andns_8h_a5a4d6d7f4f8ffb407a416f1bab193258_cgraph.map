@@ -1,0 +1,11 @@
+<map id="andns_init" name="andns_init">
+<area shape="rect" id="node3" href="$de/d85/andns_8c.html#a412c450840e3bb78ac14b32b3db878a8" title="collect_resolv_conf" alt="" coords="137,99,271,128"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="336,5,384,35"/>
+<area shape="rect" id="node15" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="461,139,517,168"/>
+<area shape="rect" id="node19" href="$df/d11/andns__net_8c.html#ad2b329c25bb65c423d20f4b1e7691961" title="idp_inet_ntop" alt="" coords="155,216,253,245"/>
+<area shape="rect" id="node22" href="$d7/df8/log_8c.html#aea4dca1a8e24794377ba1bf45fbbfce8" title="loginfo" alt="" coords="460,243,519,272"/>
+<area shape="rect" id="node9" href="$d0/ddb/misc_8c.html#a1b81740c73bef5d3a6c69149d2c66378" title="strip_char" alt="" coords="321,59,399,88"/>
+<area shape="rect" id="node13" href="$de/d85/andns_8c.html#a06279c082d2dfb4436b0b575ee0bf485" title="store_ns" alt="" coords="324,112,396,141"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="580,139,649,168"/>
+<area shape="rect" id="node11" href="$d0/ddb/misc_8c.html#ae13480d8227e14c4ea764297d170d39c" title="last_token" alt="" coords="448,59,531,88"/>
+</map>

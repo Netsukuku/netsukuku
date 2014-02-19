@@ -1,0 +1,14 @@
+<map id="igw_check_inet_conn" name="igw_check_inet_conn">
+<area shape="rect" id="node3" href="$df/d9c/libping_8c.html#a24df2d8c0a25a2d1d0515597943049ac" title="pingthost" alt="" coords="200,32,275,61"/>
+<area shape="rect" id="node5" href="$df/d9c/libping_8c.html#a0ac8200b876bd54e8af3a4715a103e47" title="ping_priv_default" alt="" coords="323,5,443,35"/>
+<area shape="rect" id="node7" href="$df/d9c/libping_8c.html#a8d19aa4db5571649ce14ad5e39cd101d" title="myping" alt="" coords="351,59,415,88"/>
+<area shape="rect" id="node9" href="$df/d9c/libping_8c.html#a7698ebb4671ed34f4251e5dcbf1a62f3" title="send_ping" alt="" coords="500,59,580,88"/>
+<area shape="rect" id="node24" href="$df/d9c/libping_8c.html#a7e6ed87a89b2362608660300e4ba023e" title="elapsed_time" alt="" coords="491,5,589,35"/>
+<area shape="rect" id="node27" href="$df/d9c/libping_8c.html#a8f7f1c39174accd1cf2c6ab418e94034" title="recv_ping" alt="" coords="501,112,579,141"/>
+<area shape="rect" id="node11" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="653,5,720,35"/>
+<area shape="rect" id="node19" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="659,112,715,141"/>
+<area shape="rect" id="node22" href="$df/d9c/libping_8c.html#a5414b3905e57ddbdf81f61b66837089c" title="in_checksum" alt="" coords="637,59,736,88"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="785,12,831,41"/>
+<area shape="rect" id="node15" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="896,72,965,101"/>
+<area shape="rect" id="node17" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="880,12,981,41"/>
+</map>

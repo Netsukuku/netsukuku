@@ -1,0 +1,14 @@
+<map id="ai_send_recv_close" name="ai_send_recv_close">
+<area shape="rect" id="node3" href="$df/d11/andns__net_8c.html#a1f054a28fc118379cc55dd455a5cc39a" title="ai_connect" alt="" coords="192,139,277,168"/>
+<area shape="rect" id="node24" href="$df/d11/andns__net_8c.html#a47d34cf4c1f9bf2edfea1d4410dbe2d8" title="w_send_timeout" alt="" coords="480,249,597,279"/>
+<area shape="rect" id="node28" href="$df/d11/andns__net_8c.html#a817c42151172f843cbc695820c85641d" title="w_send" alt="" coords="652,197,719,227"/>
+<area shape="rect" id="node33" href="$df/d11/andns__net_8c.html#a89a79c4f515c2c8ab1e8841dc24966c1" title="w_recv_timeout" alt="" coords="481,453,596,483"/>
+<area shape="rect" id="node37" href="$df/d11/andns__net_8c.html#a0f43c36471630ec8c3775908acf3c2f9" title="w_recv" alt="" coords="653,403,717,432"/>
+<area shape="rect" id="node5" href="$df/d11/andns__net_8c.html#a4f93b369bf1954796a452384355d423d" title="serial_connect" alt="" coords="325,113,432,143"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="780,107,825,136"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="775,236,831,265"/>
+<area shape="rect" id="node16" href="$df/d11/andns__net_8c.html#a50a2a14b83ff471e7374fa7b731be19b" title="w_connect" alt="" coords="496,107,581,136"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="896,211,965,240"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="880,107,981,136"/>
+<area shape="rect" id="node18" href="$df/d11/andns__net_8c.html#a9f0f84aac1723d4aff67f0c8049ba013" title="w_socket" alt="" coords="647,93,724,123"/>
+</map>

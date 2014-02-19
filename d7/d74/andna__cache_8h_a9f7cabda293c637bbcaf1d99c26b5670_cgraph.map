@@ -1,0 +1,11 @@
+<map id="counter_c_add" name="counter_c_add">
+<area shape="rect" id="node3" href="$d2/de6/andna__cache_8c.html#abd1eabe1fca433e9130a7ab6da0e19e4" title="counter_c_del_expired" alt="" coords="160,5,312,35"/>
+<area shape="rect" id="node9" href="$d2/de6/andna__cache_8c.html#a57b6910145403bc64b51a24b0d1a468e" title="counter_c_findpubk" alt="" coords="169,59,303,88"/>
+<area shape="rect" id="node11" href="$d2/dab/xmalloc_8c.html#ad7ead2fc5daad78a7f124e173863b16e" title="xzalloc" alt="" coords="205,112,267,141"/>
+<area shape="rect" id="node5" href="$d2/de6/andna__cache_8c.html#a722ac79afb3bd791d1c832de7ed859b8" title="cc_hashes_del_expired" alt="" coords="361,5,519,35"/>
+<area shape="rect" id="node7" href="$d2/de6/andna__cache_8c.html#a94e094855fbaf75e90036aafba38bb8b" title="cc_hashes_del" alt="" coords="568,5,677,35"/>
+<area shape="rect" id="node13" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="407,112,473,141"/>
+<area shape="rect" id="node15" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="600,112,645,141"/>
+<area shape="rect" id="node17" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="741,85,811,115"/>
+<area shape="rect" id="node19" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="725,139,827,168"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="pack_inet_prefix" name="pack_inet_prefix">
+<area shape="rect" id="node3" href="$d7/d3b/gmap_8h.html#a70ce90c9c90ffba9965aca7863badae2" title="pack_quadro_group" alt="" coords="172,84,305,113"/>
+<area shape="rect" id="node5" href="$d7/d3b/gmap_8h.html#ad3b5a9f9d1ee7be33ede21a83479450c" title="pack_extmap" alt="" coords="356,84,455,113"/>
+<area shape="rect" id="node7" href="$d7/d3b/gmap_8h.html#a4fe1c9b16dc69e8bc0b59126fcc76e4b" title="save_extmap" alt="" coords="505,57,604,87"/>
+<area shape="rect" id="node18" href="$d6/d34/hook_8h.html#aa99944b9d6345e33be0bf1c850380228" title="put_ext_map" alt="" coords="663,109,759,139"/>
+<area shape="rect" id="node9" href="$d4/d3b/netsukuku_8c.html#aa8275f5b6804020ee48f40462a95d389" title="ntk_save_maps" alt="" coords="653,56,768,85"/>
+<area shape="rect" id="node11" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="817,56,948,85"/>
+<area shape="rect" id="node13" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="997,5,1112,35"/>
+<area shape="rect" id="node15" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1160,57,1211,87"/>
+<area shape="rect" id="node20" href="$d6/d34/hook_8h.html#af541d5ab5dd6596b12342140f4094dee" title="hook_init" alt="" coords="845,109,920,139"/>
+<area shape="rect" id="node22" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="1001,109,1108,139"/>
+</map>

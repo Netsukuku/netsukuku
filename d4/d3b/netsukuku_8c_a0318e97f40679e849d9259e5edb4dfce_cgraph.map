@@ -1,0 +1,11 @@
+<map id="parse_options" name="parse_options">
+<area shape="rect" id="node3" href="$d4/d3b/netsukuku_8c.html#ae8605e2b78cd4a81b6c6b5c30cb7366a" title="usage" alt="" coords="171,5,227,35"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="411,109,456,139"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#aea4dca1a8e24794377ba1bf45fbbfce8" title="loginfo" alt="" coords="404,215,463,244"/>
+<area shape="rect" id="node14" href="$d2/dab/xmalloc_8c.html#aa0d9692e0141edaf2b2f748d630b5485" title="xstrndup" alt="" coords="163,109,235,139"/>
+<area shape="rect" id="node19" href="$d7/df8/log_8c.html#a5696077659f78f01928e949726d9b53e" title="log_to_file" alt="" coords="159,163,239,192"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="528,163,597,192"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="512,109,613,139"/>
+<area shape="rect" id="node16" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="288,109,355,139"/>
+<area shape="rect" id="node21" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="297,163,345,192"/>
+</map>

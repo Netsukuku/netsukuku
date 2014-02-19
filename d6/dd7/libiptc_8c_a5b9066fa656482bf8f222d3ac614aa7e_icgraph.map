@@ -1,0 +1,6 @@
+<map id="iptcc_get_rule_num_reverse" name="iptcc_get_rule_num_reverse">
+<area shape="rect" id="node3" href="$d6/dd7/libiptc_8c.html#aa9fc5848183e96cd3d8ccdbf7427750c" title="TC_INSERT_ENTRY" alt="" coords="211,5,360,35"/>
+<area shape="rect" id="node7" href="$d6/dd7/libiptc_8c.html#ade0a6c01e729491188f70078cef806a3" title="TC_REPLACE_ENTRY" alt="" coords="204,59,367,88"/>
+<area shape="rect" id="node10" href="$d6/dd7/libiptc_8c.html#a272decda58f7f0b063934de1480a7006" title="TC_DELETE_NUM_ENTRY" alt="" coords="191,112,380,141"/>
+<area shape="rect" id="node5" href="$d6/dd7/libiptc_8c.html#a62e972b7995de2ebbda29fcde37042da" title="TC_STRERROR" alt="" coords="429,59,552,88"/>
+</map>

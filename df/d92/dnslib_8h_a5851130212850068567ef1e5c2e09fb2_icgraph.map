@@ -1,0 +1,9 @@
+<map id="swap_straddr" name="swap_straddr">
+<area shape="rect" id="node3" href="$df/d92/dnslib_8h.html#a1b42acd03b0557a3849dd46e95adabed" title="swapped_straddr" alt="" coords="171,5,291,35"/>
+<area shape="rect" id="node11" href="$df/d92/dnslib_8h.html#a32b90ae5be1ca9761e1f94a18d06fd5a" title="swapped_straddr_pref" alt="" coords="156,59,305,88"/>
+<area shape="rect" id="node5" href="$dd/dd9/andns_8h.html#a81431a7e5716758c3bbefd17f8e68898" title="inet_rslv" alt="" coords="511,5,580,35"/>
+<area shape="rect" id="node7" href="$dd/dd9/andns_8h.html#ad55d591cf7a444daa6b9cea7f8ae29bc" title="andns_rslv" alt="" coords="637,32,723,61"/>
+<area shape="rect" id="node9" href="$db/d6b/dns__wrapper_8c.html#ae858f92cfdc42ee9f2ba357a4021b59e" title="dns_exec_pkt" alt="" coords="772,32,873,61"/>
+<area shape="rect" id="node13" href="$dd/dd9/andns_8h.html#ace63c5b658eb33f8b5076fa0506e8afb" title="apqsttodpqst" alt="" coords="356,59,452,88"/>
+<area shape="rect" id="node15" href="$dd/dd9/andns_8h.html#a36956c4fc77c5a1b3dfcda3cc0a9051e" title="nk_forward" alt="" coords="503,59,588,88"/>
+</map>

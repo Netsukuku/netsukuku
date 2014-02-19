@@ -1,0 +1,13 @@
+<map id="radar_update_bmap" name="radar_update_bmap">
+<area shape="rect" id="node3" href="$db/de6/qspn_8c.html#a7d4488a7a0d0eb767588a5afb7f85e47" title="qspn_set_map_vars" alt="" coords="189,5,328,35"/>
+<area shape="rect" id="node7" href="$db/d73/bmap_8c.html#aa8aef82f1c7172f7d8314b2f3ccb9653" title="map_find_bnode" alt="" coords="200,59,317,88"/>
+<area shape="rect" id="node9" href="$db/d73/bmap_8c.html#a4cb9464f4d1d4b9cdbf155cd8bff044b" title="map_add_bnode" alt="" coords="200,112,317,141"/>
+<area shape="rect" id="node22" href="$d3/d7a/map_8c.html#a72016d6f9d0f367f9b50c13c38a54e47" title="rnode_find" alt="" coords="217,165,300,195"/>
+<area shape="rect" id="node24" href="$d3/d7a/map_8c.html#a739f2953fdd9ba9f9d383ee0ea094b27" title="rnode_add" alt="" coords="217,219,300,248"/>
+<area shape="rect" id="node5" href="$d3/d7a/map_8c.html#a4ca7b0204f961c5dbe35bf7e8fff7ac5" title="pos_from_node" alt="" coords="377,5,487,35"/>
+<area shape="rect" id="node11" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="399,85,465,115"/>
+<area shape="rect" id="node19" href="$d2/dab/xmalloc_8c.html#a95c6a612049c763f0d351481361ad689" title="xrealloc" alt="" coords="399,139,465,168"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="537,112,583,141"/>
+<area shape="rect" id="node15" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="648,85,717,115"/>
+<area shape="rect" id="node17" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="632,139,733,168"/>
+</map>

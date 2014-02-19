@@ -1,0 +1,34 @@
+<map id="rt_build_nexthop_gw" name="rt_build_nexthop_gw">
+<area shape="rect" id="node3" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="829,7,896,36"/>
+<area shape="rect" id="node11" href="$d3/d7a/map_8c.html#ab4c5fb4d30e7d21c05dce334b85cb2e9" title="maptoip" alt="" coords="423,375,489,404"/>
+<area shape="rect" id="node23" href="$da/d89/inet_8c.html#a75c2848f706809db4a3a8999d46118dc" title="inet_htonl" alt="" coords="225,480,303,509"/>
+<area shape="rect" id="node29" href="$df/dbf/route_8c.html#acfabb4cf9852b37e208273d61b2c255e" title="find_rnode_dev_and\l_retry" alt="" coords="195,533,333,579"/>
+<area shape="rect" id="node37" href="$df/dbf/route_8c.html#a34a380e2ec58df564730b06f150141ec" title="get_gw_ips" alt="" coords="220,325,308,355"/>
+<area shape="rect" id="node69" href="$da/d89/inet_8c.html#a284a1d36cd80931c6d96aba2e6a6ae46" title="inet_copy" alt="" coords="417,428,495,457"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="1045,7,1091,36"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="1216,59,1285,88"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="1200,5,1301,35"/>
+<area shape="rect" id="node13" href="$d3/d7a/map_8c.html#a4ca7b0204f961c5dbe35bf7e8fff7ac5" title="pos_from_node" alt="" coords="1196,349,1305,379"/>
+<area shape="rect" id="node15" href="$d3/d7a/map_8c.html#a6664a07adc9bcf23216bc5086ffa8b93" title="postoip" alt="" coords="625,428,689,457"/>
+<area shape="rect" id="node17" href="$da/d89/inet_8c.html#afd1e5fe1ebde3b0578f839267fc48e39" title="inet_copy_ipdata_raw" alt="" coords="789,428,936,457"/>
+<area shape="rect" id="node19" href="$dd/db1/ipv6-gmp_8c.html#a4d742184ea835ee6517b7c00352c0d4a" title="sum_int" alt="" coords="829,481,896,511"/>
+<area shape="rect" id="node21" href="$dd/db1/ipv6-gmp_8c.html#a6da8f9ac5a74b4c469307c4e3cfefc03" title="sum_128" alt="" coords="1031,481,1105,511"/>
+<area shape="rect" id="node25" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="416,481,496,511"/>
+<area shape="rect" id="node27" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="613,481,701,511"/>
+<area shape="rect" id="node31" href="$d7/d02/radar_8c.html#ad509fe62baca86ee9bf17802ad3efeb5" title="rnl_get_dev" alt="" coords="412,537,500,567"/>
+<area shape="rect" id="node35" href="$d7/d02/radar_8c.html#a593e03eb8b5f285712ad9bcc8f921d95" title="radar_wait_new_scan" alt="" coords="383,591,529,620"/>
+<area shape="rect" id="node33" href="$d7/d02/radar_8c.html#a642a13cee6514a86fed1130d901107e0" title="rnl_find_node" alt="" coords="608,537,707,567"/>
+<area shape="rect" id="node39" href="$df/dbf/route_8c.html#a6150155996af94410ba3116f0c41e7ef" title="get_gw_gnode" alt="" coords="403,139,509,168"/>
+<area shape="rect" id="node41" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="633,112,681,141"/>
+<area shape="rect" id="node44" href="$d2/dab/xmalloc_8c.html#ad7ead2fc5daad78a7f124e173863b16e" title="xzalloc" alt="" coords="627,59,688,88"/>
+<area shape="rect" id="node47" href="$df/dbf/route_8c.html#abbe040eb10fb43323e36bc2e456a29ce" title="get_gw_gnode_recurse" alt="" coords="580,165,735,195"/>
+<area shape="rect" id="node49" href="$d0/ddb/misc_8c.html#aec37f76b7523c94cbf893daa3011d561" title="find_int" alt="" coords="831,111,895,140"/>
+<area shape="rect" id="node51" href="$d0/ddb/misc_8c.html#af7f747ea1b353be8609df593dc0a629a" title="rand_range" alt="" coords="820,164,905,193"/>
+<area shape="rect" id="node53" href="$df/dbf/route_8c.html#a59dc8e3d1c0d989d95f8012f08d82019" title="get_gw_bnode_recurse" alt="" coords="785,217,940,247"/>
+<area shape="rect" id="node55" href="$db/d73/bmap_8c.html#a61bdcdcc5f2bd5cf6e35df84dbd89ffd" title="map_find_bnode_rnode" alt="" coords="991,217,1145,247"/>
+<area shape="rect" id="node59" href="$d3/d7a/map_8c.html#a35cb995501f7278fdaaff8a730dcc6db" title="node_from_pos" alt="" coords="1013,271,1123,300"/>
+<area shape="rect" id="node61" href="$d9/d45/gmap_8c.html#a31edfce8493c6d503bff5f88a235e480" title="gnode_from_pos" alt="" coords="1009,111,1127,140"/>
+<area shape="rect" id="node63" href="$db/de6/qspn_8c.html#a7d4488a7a0d0eb767588a5afb7f85e47" title="qspn_set_map_vars" alt="" coords="999,324,1137,353"/>
+<area shape="rect" id="node66" href="$d9/d45/gmap_8c.html#ae66a241d66f63a51912c7be857f38a9c" title="erc_find_gnode" alt="" coords="1013,164,1123,193"/>
+<area shape="rect" id="node57" href="$d3/d7a/map_8c.html#a72016d6f9d0f367f9b50c13c38a54e47" title="rnode_find" alt="" coords="1209,217,1292,247"/>
+</map>

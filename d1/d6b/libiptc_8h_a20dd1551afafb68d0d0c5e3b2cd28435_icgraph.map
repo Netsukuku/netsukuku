@@ -1,0 +1,12 @@
+<map id="iptc_flush_entries" name="iptc_flush_entries">
+<area shape="rect" id="node3" href="$d3/de6/mark_8h.html#acc021e7bc72ddf7254f266632ffa8a52" title="ntk_mark_chain_init" alt="" coords="179,16,317,45"/>
+<area shape="rect" id="node13" href="$d3/de6/mark_8h.html#a155288a49eecef45917d64c265010e02" title="delete_ntk_forward\l_chain" alt="" coords="183,70,313,117"/>
+<area shape="rect" id="node5" href="$d3/de6/mark_8h.html#a1241770376c64ee1ee386784a6e6c1d0" title="mark_init" alt="" coords="373,15,448,44"/>
+<area shape="rect" id="node7" href="$da/dd7/igs_8h.html#a184ab033bb2e2c1f856df5430ba87a80" title="init_internet_gateway\l_search" alt="" coords="512,5,656,51"/>
+<area shape="rect" id="node9" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="897,13,1004,43"/>
+<area shape="rect" id="node11" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1056,65,1107,95"/>
+<area shape="rect" id="node15" href="$d3/de6/mark_8h.html#abce88ee61b36a36e1e58278165d6004d" title="mark_close" alt="" coords="367,83,455,112"/>
+<area shape="rect" id="node17" href="$da/dd7/igs_8h.html#a69dec3b6ff9453bc64d5b98f6b40e2aa" title="close_internet_gateway\l_search" alt="" coords="505,74,663,121"/>
+<area shape="rect" id="node19" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="713,83,844,112"/>
+<area shape="rect" id="node21" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="893,117,1008,147"/>
+</map>

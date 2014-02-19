@@ -1,0 +1,12 @@
+<map id="add_accept" name="add_accept">
+<area shape="rect" id="node3" href="$d6/da2/accept_8c.html#a70224e39ebc9db020557c615688ada67" title="is_ip_acpt_free" alt="" coords="145,112,255,141"/>
+<area shape="rect" id="node17" href="$d6/da2/accept_8c.html#a5a4be13a1f36281b9c268aa9c507b70e" title="new_accept" alt="" coords="155,192,245,221"/>
+<area shape="rect" id="node5" href="$d6/da2/accept_8c.html#a97f5d05130305618f3acfa5e28b86ab8" title="update_accept_tbl" alt="" coords="304,32,432,61"/>
+<area shape="rect" id="node13" href="$d6/da2/accept_8c.html#a8c4bc9a7a82822dff37e2014a9c3b802" title="find_ip_acpt" alt="" coords="323,85,413,115"/>
+<area shape="rect" id="node15" href="$d6/da2/accept_8c.html#a29e19093e403323930dcd5a4b1fb8bfb" title="find_first_free" alt="" coords="317,139,419,168"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="495,5,551,35"/>
+<area shape="rect" id="node11" href="$d6/da2/accept_8c.html#a48bc8f11f2f84c027d6fd7fe820857df" title="del_accept" alt="" coords="480,59,565,88"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="615,5,684,35"/>
+<area shape="rect" id="node19" href="$d6/da2/accept_8c.html#a6da65f33355cabe5993fab2dff5941b4" title="find_free_acp_t" alt="" coords="313,192,423,221"/>
+<area shape="rect" id="node21" href="$da/d89/inet_8c.html#a284a1d36cd80931c6d96aba2e6a6ae46" title="inet_copy" alt="" coords="329,245,407,275"/>
+</map>

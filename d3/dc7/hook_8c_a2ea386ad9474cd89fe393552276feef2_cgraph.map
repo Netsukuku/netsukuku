@@ -1,0 +1,37 @@
+<map id="hook_set_all_ips" name="hook_set_all_ips">
+<area shape="rect" id="node3" href="$da/d89/inet_8c.html#a7ee487ce5e94550114761abaee2bc334" title="inet_to_str" alt="" coords="203,43,285,72"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#aea4dca1a8e24794377ba1bf45fbbfce8" title="loginfo" alt="" coords="383,653,441,683"/>
+<area shape="rect" id="node17" href="$d7/de2/if_8c.html#af0a0c8beb31d1b114cdbb60cbd7ae59c" title="set_all_ifs" alt="" coords="204,475,284,504"/>
+<area shape="rect" id="node19" href="$d7/de2/if_8c.html#abea5b6f5cd28944310eae2ab32026a4a" title="set_dev_down" alt="" coords="191,317,297,347"/>
+<area shape="rect" id="node29" href="$d7/de2/if_8c.html#a062746ee276b608fcd9360c59364d537" title="set_dev_up" alt="" coords="200,264,288,293"/>
+<area shape="rect" id="node32" href="$d7/de2/if_8c.html#af89c37cb6be1f1b417dc057eda5e1520" title="ip_addr_flush_all_ifs" alt="" coords="175,371,313,400"/>
+<area shape="rect" id="node47" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="1079,211,1124,240"/>
+<area shape="rect" id="node80" href="$d7/de2/if_8c.html#a80c11a2ffa82194213b455980e54d2bd" title="set_all_dev_ip" alt="" coords="192,160,296,189"/>
+<area shape="rect" id="node82" href="$d7/de2/if_8c.html#a29300a7fc292e542e82b441736978c3d" title="set_dev_ip" alt="" coords="369,185,455,215"/>
+<area shape="rect" id="node5" href="$da/d89/inet_8c.html#a9d2fb5508608cf4b8f5347d2edbb276b" title="ipraw_to_str" alt="" coords="365,17,459,47"/>
+<area shape="rect" id="node7" href="$da/d89/inet_8c.html#a75c2848f706809db4a3a8999d46118dc" title="inet_htonl" alt="" coords="736,5,813,35"/>
+<area shape="rect" id="node9" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="908,5,988,35"/>
+<area shape="rect" id="node11" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="1057,5,1145,35"/>
+<area shape="rect" id="node15" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="1211,417,1280,447"/>
+<area shape="rect" id="node21" href="$d7/de2/if_8c.html#a8ae45d4359817648686b7b13713508a4" title="set_flags" alt="" coords="375,264,449,293"/>
+<area shape="rect" id="node23" href="$da/d89/inet_8c.html#a49b750fe581d1da5e169adf3c7a14af1" title="new_socket" alt="" coords="540,211,631,240"/>
+<area shape="rect" id="node25" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="1077,417,1125,447"/>
+<area shape="rect" id="node34" href="$d7/de2/if_8c.html#a7042bfd9ad72adafd35f817b9363df06" title="ip_addr_flush" alt="" coords="363,496,461,525"/>
+<area shape="rect" id="node36" href="$d4/dab/libnetlink_8c.html#af6a834b458ad515cfe591cd720b5a3fd" title="rtnl_open" alt="" coords="548,680,623,709"/>
+<area shape="rect" id="node41" href="$d4/dab/libnetlink_8c.html#ae723f19314cbb031a26abaee33928b84" title="rtnl_wilddump_request" alt="" coords="509,523,661,552"/>
+<area shape="rect" id="node44" href="$d4/dab/libnetlink_8c.html#a0c981a8de14fd51a25027ef407e799ca" title="rtnl_dump_filter" alt="" coords="893,211,1003,240"/>
+<area shape="rect" id="node52" href="$d7/de2/if_8c.html#a7d20f80c943e313bca2b9aad74151cc9" title="store_nlmsg" alt="" coords="539,419,632,448"/>
+<area shape="rect" id="node62" href="$d1/d71/ll__map_8c.html#a3ccff7ca25a76d2c7d2a1dbcafb2678e" title="ll_name_to_index" alt="" coords="524,315,647,344"/>
+<area shape="rect" id="node64" href="$d7/de2/if_8c.html#a0a117ed7d8433d84671dd55204719739" title="print_addrinfo" alt="" coords="725,601,824,631"/>
+<area shape="rect" id="node72" href="$d7/de2/if_8c.html#afb4a27f296cddb900349e541af556648" title="flush_update" alt="" coords="900,731,996,760"/>
+<area shape="rect" id="node78" href="$d4/dab/libnetlink_8c.html#abe941df1a4b224511e5aba5fbeda5373" title="rtnl_close" alt="" coords="547,576,624,605"/>
+<area shape="rect" id="node38" href="$d4/dab/libnetlink_8c.html#adcef0338bcf67064f61e984ea6542a4f" title="rtnl_open_byproto" alt="" coords="712,680,837,709"/>
+<area shape="rect" id="node50" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="1195,211,1296,240"/>
+<area shape="rect" id="node54" href="$d1/d71/ll__map_8c.html#aa74dd48e5206c9a8c5b36307e023fa58" title="ll_remember_index" alt="" coords="709,419,840,448"/>
+<area shape="rect" id="node56" href="$d4/dab/libnetlink_8c.html#aed575cd447219f8c2f67e2011aaee4d8" title="parse_rtattr" alt="" coords="904,469,992,499"/>
+<area shape="rect" id="node59" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="915,315,981,344"/>
+<area shape="rect" id="node68" href="$d1/d71/ll__map_8c.html#ad3726eb503a42ed32a53f65a9aa0c252" title="ll_idx_n2a" alt="" coords="908,576,988,605"/>
+<area shape="rect" id="node70" href="$da/d89/inet_8c.html#abddde4d60b8a9c38fbde3ed7e198efca" title="inet_addr_match" alt="" coords="889,523,1007,552"/>
+<area shape="rect" id="node74" href="$d4/dab/libnetlink_8c.html#a37dd14a3e1c6b6f3a6eacb586fafb13b" title="rtnl_send" alt="" coords="1064,731,1139,760"/>
+<area shape="rect" id="node86" href="$da/d89/inet_8c.html#a8eac5edae4e220edc0f4a974dd5749d3" title="inet_to_sockaddr" alt="" coords="525,56,645,85"/>
+</map>

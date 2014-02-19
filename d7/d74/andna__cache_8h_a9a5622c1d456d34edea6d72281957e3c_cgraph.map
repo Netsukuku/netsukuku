@@ -1,0 +1,8 @@
+<map id="add_resolv_conf" name="add_resolv_conf">
+<area shape="rect" id="node3" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="285,57,333,87"/>
+<area shape="rect" id="node7" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="171,111,237,140"/>
+<area shape="rect" id="node14" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="176,5,232,35"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="397,57,467,87"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="287,111,332,140"/>
+<area shape="rect" id="node12" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="381,111,483,140"/>
+</map>

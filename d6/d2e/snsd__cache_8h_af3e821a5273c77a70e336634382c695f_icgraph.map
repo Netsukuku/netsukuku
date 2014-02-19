@@ -1,0 +1,30 @@
+<map id="snsd_find_prio" name="snsd_find_prio">
+<area shape="rect" id="node3" href="$d6/d2e/snsd__cache_8h.html#a1ae593116752066889521f8b62340dce" title="snsd_add_prio" alt="" coords="193,108,300,137"/>
+<area shape="rect" id="node56" href="$d6/d2e/snsd__cache_8h.html#a446f79bf0a568ca1bd7dca03e8a33bda" title="snsd_record_del_selected" alt="" coords="160,161,333,191"/>
+<area shape="rect" id="node59" href="$d6/d2e/snsd__cache_8h.html#a966854fa587f73c225f8bdcfd0d7264e" title="snsd_merge_prio" alt="" coords="187,215,307,244"/>
+<area shape="rect" id="node5" href="$d7/d74/andna__cache_8h.html#ae30431f21d44516e3c006ae361578d9c" title="load_snsd" alt="" coords="416,56,496,85"/>
+<area shape="rect" id="node20" href="$d6/d2e/snsd__cache_8h.html#a6f223de1e43e379d34a6321b904ea44d" title="snsd_add_mainip" alt="" coords="395,109,517,139"/>
+<area shape="rect" id="node7" href="$d5/d05/andna_8h.html#afc0f24a5b798975732d4f238dccc42ef" title="andna_load_caches" alt="" coords="583,57,719,87"/>
+<area shape="rect" id="node15" href="$d4/d3b/netsukuku_8c.html#a678f7ec6e159e6bee076921c8d709847" title="reload_hostname_thread" alt="" coords="772,5,935,35"/>
+<area shape="rect" id="node9" href="$d5/d05/andna_8h.html#aa7b53282a673cbc82c998a3cf4e5aff2" title="andna_init" alt="" coords="813,59,893,88"/>
+<area shape="rect" id="node11" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="1001,59,1108,88"/>
+<area shape="rect" id="node13" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1200,16,1251,45"/>
+<area shape="rect" id="node17" href="$d4/d3b/netsukuku_8c.html#a207b25374e65f083a666cdfaca49bb99" title="sighup_handler" alt="" coords="1000,5,1109,35"/>
+<area shape="rect" id="node22" href="$d5/d05/andna_8h.html#a5da3518ba270f03f8d087c3c1cb25115" title="andna_recv_reg_rq" alt="" coords="585,161,716,191"/>
+<area shape="rect" id="node25" href="$d4/d18/andna_8c.html#af8449aa760529b5de85e4fa75190bfd7" title="andna_resolve_hash\l_locally" alt="" coords="783,118,924,165"/>
+<area shape="rect" id="node27" href="$d5/d05/andna_8h.html#a1ce60180d15ab89d473eb45928ee6ee5" title="andna_resolve_hash" alt="" coords="984,203,1125,232"/>
+<area shape="rect" id="node29" href="$d5/d05/andna_8h.html#aa3b87d2348a3a7cdb6e2d95c66fdfb6f" title="andna_resolve_hname" alt="" coords="1544,308,1696,337"/>
+<area shape="rect" id="node37" href="$dd/dd9/andns_8h.html#a77c1322dbf52a1bacabe97028c9ce8d2" title="nk_rslv" alt="" coords="1748,176,1812,205"/>
+<area shape="rect" id="node40" href="$d1/dd5/andns__snsd_8h.html#a5f5ed255a4e4e2604045525ee8acb7fb" title="snsd_main_ip" alt="" coords="1175,203,1276,232"/>
+<area shape="rect" id="node31" href="$dd/dd9/andns_8h.html#a81431a7e5716758c3bbefd17f8e68898" title="inet_rslv" alt="" coords="1745,255,1815,284"/>
+<area shape="rect" id="node33" href="$dd/dd9/andns_8h.html#ad55d591cf7a444daa6b9cea7f8ae29bc" title="andns_rslv" alt="" coords="1864,216,1949,245"/>
+<area shape="rect" id="node35" href="$db/d6b/dns__wrapper_8c.html#ae858f92cfdc42ee9f2ba357a4021b59e" title="dns_exec_pkt" alt="" coords="1999,216,2100,245"/>
+<area shape="rect" id="node42" href="$d1/dd5/andns__snsd_8h.html#a86f72d27da5b908d5ce023c778ad4b74" title="snsd_node_to_data" alt="" coords="1344,149,1477,179"/>
+<area shape="rect" id="node48" href="$d1/dd5/andns__snsd_8h.html#af1703129169f7152c3a4c38604bf9ea9" title="snsd_service_to_aansws" alt="" coords="1327,203,1495,232"/>
+<area shape="rect" id="node51" href="$d1/dd5/andns__snsd_8h.html#a1fcd0373d93db849bf72644fc21e5087" title="snsd_node_to_dansw" alt="" coords="1337,256,1484,285"/>
+<area shape="rect" id="node45" href="$d1/dd5/andns__snsd_8h.html#a016db13b6c9aea169159e1e69d926ff3" title="snsd_prio_to_aansws" alt="" coords="1547,149,1693,179"/>
+<area shape="rect" id="node53" href="$d1/dd5/andns__snsd_8h.html#a1debec61ed4edba1c3f0b2161314c18d" title="snsd_prio_to_dansws" alt="" coords="1547,255,1693,284"/>
+<area shape="rect" id="node61" href="$d6/d2e/snsd__cache_8h.html#a767a463523b064153b129166749150dc" title="snsd_prio_llist_merge" alt="" coords="383,215,529,244"/>
+<area shape="rect" id="node63" href="$d6/d2e/snsd__cache_8h.html#a766b91d2ea6696e3c58fe4ce4f3f877c" title="snsd_merge_service" alt="" coords="580,215,721,244"/>
+<area shape="rect" id="node65" href="$d6/d2e/snsd__cache_8h.html#a6555d8f1d85434e72f1b2f8dd32e46c4" title="snsd_service_llist\l_merge" alt="" coords="791,199,916,246"/>
+</map>

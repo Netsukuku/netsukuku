@@ -1,0 +1,9 @@
+<map id="store_nlmsg" name="store_nlmsg">
+<area shape="rect" id="node3" href="$d1/d71/ll__map_8c.html#aa74dd48e5206c9a8c5b36307e023fa58" title="ll_remember_index" alt="" coords="147,32,277,61"/>
+<area shape="rect" id="node5" href="$d4/dab/libnetlink_8c.html#aed575cd447219f8c2f67e2011aaee4d8" title="parse_rtattr" alt="" coords="325,5,413,35"/>
+<area shape="rect" id="node11" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="336,59,403,88"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="461,5,509,35"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="573,5,643,35"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="463,59,508,88"/>
+<area shape="rect" id="node16" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="557,59,659,88"/>
+</map>

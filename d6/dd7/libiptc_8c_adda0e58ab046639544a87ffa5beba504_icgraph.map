@@ -1,0 +1,18 @@
+<map id="iptcc_is_builtin" name="iptcc_is_builtin">
+<area shape="rect" id="node3" href="$d6/dd7/libiptc_8c.html#a836a8d00cc89f2d58dcc20f9a7a4297d" title="iptcc_compile_chain" alt="" coords="164,5,303,35"/>
+<area shape="rect" id="node7" href="$d6/dd7/libiptc_8c.html#a6c5965f0569b3d7f35ece38a346c3f50" title="TC_COMMIT" alt="" coords="601,5,703,35"/>
+<area shape="rect" id="node9" href="$d6/dd7/libiptc_8c.html#a50b27373f3f98721c5043ec2a70d2f37" title="iptcc_compile_chain\l_offsets" alt="" coords="164,109,303,155"/>
+<area shape="rect" id="node14" href="$d6/dd7/libiptc_8c.html#a4333074027c3913b1d64ea4173759658" title="TC_BUILTIN" alt="" coords="184,179,283,208"/>
+<area shape="rect" id="node35" href="$d6/dd7/libiptc_8c.html#a2df96f156004ca01a55e776904426ec6" title="TC_GET_POLICY" alt="" coords="168,232,299,261"/>
+<area shape="rect" id="node37" href="$d6/dd7/libiptc_8c.html#a4a5a14d5e3d4141a7b471170f3c0817c" title="TC_SET_POLICY" alt="" coords="169,303,297,332"/>
+<area shape="rect" id="node5" href="$d6/dd7/libiptc_8c.html#ad7f89efcc7c4e59ffcde7c445e1aff4e" title="iptcc_compile_table" alt="" coords="369,5,505,35"/>
+<area shape="rect" id="node11" href="$d6/dd7/libiptc_8c.html#af99cb260d65e79e9363639cbb792e7a5" title="iptcc_compile_table_prep" alt="" coords="353,109,521,139"/>
+<area shape="rect" id="node16" href="$d6/dd7/libiptc_8c.html#a91e987eb3d50439f529daa293072abae" title="iptcc_map_target" alt="" coords="376,163,499,192"/>
+<area shape="rect" id="node30" href="$d6/dd7/libiptc_8c.html#a1d8401d070e298356e246974baa96a84" title="TC_DELETE_CHAIN" alt="" coords="363,216,512,245"/>
+<area shape="rect" id="node33" href="$d6/dd7/libiptc_8c.html#ab9d1b99e0007fc1e8cdd1ce401e1f93e" title="TC_RENAME_CHAIN" alt="" coords="360,269,515,299"/>
+<area shape="rect" id="node18" href="$d6/dd7/libiptc_8c.html#aa9fc5848183e96cd3d8ccdbf7427750c" title="TC_INSERT_ENTRY" alt="" coords="577,59,727,88"/>
+<area shape="rect" id="node22" href="$d6/dd7/libiptc_8c.html#ade0a6c01e729491188f70078cef806a3" title="TC_REPLACE_ENTRY" alt="" coords="571,112,733,141"/>
+<area shape="rect" id="node25" href="$d6/dd7/libiptc_8c.html#a18298788b51418c936d6557e047951f9" title="TC_APPEND_ENTRY" alt="" coords="575,165,729,195"/>
+<area shape="rect" id="node27" href="$d6/dd7/libiptc_8c.html#aebe11c9e250fe9cc800e331dde41f6d5" title="TC_DELETE_ENTRY" alt="" coords="576,219,728,248"/>
+<area shape="rect" id="node20" href="$d6/dd7/libiptc_8c.html#a62e972b7995de2ebbda29fcde37042da" title="TC_STRERROR" alt="" coords="781,219,904,248"/>
+</map>

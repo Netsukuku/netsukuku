@@ -1,0 +1,7 @@
+<map id="qt_usage" name="qt_usage">
+<area shape="rect" id="node3" href="$d3/dbf/ntkresolv_8c.html#a525d73873ebf5621cb96d199b41454df" title="ntkresolv_safe_exit" alt="" coords="129,32,263,61"/>
+<area shape="rect" id="node5" href="$d4/d02/andns__lib_8c.html#ac221d30c29b9c3846c67c6c09511add4" title="destroy_andns_pkt" alt="" coords="313,5,444,35"/>
+<area shape="rect" id="node11" href="$d3/dbf/ntkresolv_8c.html#ad9097259eb78c35bf7252b9e8156f52e" title="ntkresolv_exit" alt="" coords="328,59,429,88"/>
+<area shape="rect" id="node7" href="$d4/d02/andns__lib_8c.html#ab2b78fd0fecd54eb2cb4ba25aaa7499a" title="destroy_andns_pkt_datas" alt="" coords="493,5,664,35"/>
+<area shape="rect" id="node9" href="$d4/d02/andns__lib_8c.html#a9b467f6edffa6791730a90fc1318146c" title="destroy_andns_pkt_data" alt="" coords="713,5,876,35"/>
+</map>

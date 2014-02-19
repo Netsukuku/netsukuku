@@ -1,0 +1,9 @@
+<map id="init_my_igws" name="init_my_igws">
+<area shape="rect" id="node3" href="$d1/d6f/igs_8c.html#aab1091590ed4414ea138fedb0d2982e3" title="init_igws" alt="" coords="169,5,241,35"/>
+<area shape="rect" id="node15" href="$d1/d6f/igs_8c.html#a625d6b7c80cf35070eb68f83615cf8f7" title="igw_add_node" alt="" coords="153,59,257,88"/>
+<area shape="rect" id="node5" href="$d2/dab/xmalloc_8c.html#ad7ead2fc5daad78a7f124e173863b16e" title="xzalloc" alt="" coords="308,32,369,61"/>
+<area shape="rect" id="node7" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="419,32,485,61"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="535,32,580,61"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="645,5,715,35"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="629,59,731,88"/>
+</map>

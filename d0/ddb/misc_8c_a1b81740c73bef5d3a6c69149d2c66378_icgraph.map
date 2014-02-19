@@ -1,0 +1,11 @@
+<map id="strip_char" name="strip_char">
+<area shape="rect" id="node3" href="$dd/dd9/andns_8h.html#a412c450840e3bb78ac14b32b3db878a8" title="collect_resolv_conf" alt="" coords="135,32,268,61"/>
+<area shape="rect" id="node5" href="$d5/d05/andna_8h.html#a90aee78fd7b0472165aca317c1a18721" title="andna_resolvconf_restore" alt="" coords="317,59,488,88"/>
+<area shape="rect" id="node21" href="$dd/dd9/andns_8h.html#a5a4d6d7f4f8ffb407a416f1bab193258" title="andns_init" alt="" coords="363,5,443,35"/>
+<area shape="rect" id="node7" href="$d5/d05/andna_8h.html#aa7b53282a673cbc82c998a3cf4e5aff2" title="andna_init" alt="" coords="544,5,624,35"/>
+<area shape="rect" id="node13" href="$d5/d05/andna_8h.html#ad741f07b1bbda88076dfc6116707ba01" title="andna_close" alt="" coords="537,59,631,88"/>
+<area shape="rect" id="node9" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="865,5,972,35"/>
+<area shape="rect" id="node11" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1024,57,1075,87"/>
+<area shape="rect" id="node15" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="681,59,812,88"/>
+<area shape="rect" id="node17" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="861,109,976,139"/>
+</map>

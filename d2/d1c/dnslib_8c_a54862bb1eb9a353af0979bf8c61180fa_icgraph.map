@@ -1,0 +1,17 @@
+<map id="nametolbl" name="nametolbl">
+<area shape="rect" id="node3" href="$df/d92/dnslib_8h.html#ab77a8691b1324284d5672f304e959fca" title="d_qst_p" alt="" coords="135,67,201,96"/>
+<area shape="rect" id="node31" href="$df/d92/dnslib_8h.html#a0858e261d809f0c9c655f16b55f387a4" title="d_a_p" alt="" coords="140,120,196,149"/>
+<area shape="rect" id="node5" href="$df/d92/dnslib_8h.html#a1c7dc24a700e19b82f1c557a120afd68" title="d_qsts_p" alt="" coords="251,67,325,96"/>
+<area shape="rect" id="node7" href="$df/d92/dnslib_8h.html#af2a40837180b81fd6635f0fe21466aaa" title="d_p" alt="" coords="373,93,416,123"/>
+<area shape="rect" id="node9" href="$dd/dd9/andns_8h.html#ad2d760371a7d8f72ee021dcf12997c2d" title="andns_gethostbyname" alt="" coords="465,13,617,43"/>
+<area shape="rect" id="node19" href="$dd/dd9/andns_8h.html#aae58fed9c96a1eb5a5411c76510ba3ac" title="dns_forward" alt="" coords="495,67,588,96"/>
+<area shape="rect" id="node25" href="$dd/dd9/andns_8h.html#a81431a7e5716758c3bbefd17f8e68898" title="inet_rslv" alt="" coords="507,120,576,149"/>
+<area shape="rect" id="node28" href="$dd/dd9/andns_8h.html#a36956c4fc77c5a1b3dfcda3cc0a9051e" title="nk_forward" alt="" coords="499,173,584,203"/>
+<area shape="rect" id="node11" href="$d1/d6f/igs_8c.html#a29026505ec5e0465ebe99a7077ff6d49" title="internet_hosts_to_ip" alt="" coords="667,13,805,43"/>
+<area shape="rect" id="node13" href="$da/dd7/igs_8h.html#a184ab033bb2e2c1f856df5430ba87a80" title="init_internet_gateway\l_search" alt="" coords="855,5,999,51"/>
+<area shape="rect" id="node15" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="1048,13,1155,43"/>
+<area shape="rect" id="node17" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1203,13,1253,43"/>
+<area shape="rect" id="node21" href="$dd/dd9/andns_8h.html#ad55d591cf7a444daa6b9cea7f8ae29bc" title="andns_rslv" alt="" coords="693,120,779,149"/>
+<area shape="rect" id="node23" href="$db/d6b/dns__wrapper_8c.html#ae858f92cfdc42ee9f2ba357a4021b59e" title="dns_exec_pkt" alt="" coords="876,120,977,149"/>
+<area shape="rect" id="node33" href="$df/d92/dnslib_8h.html#aac9016fc8df6043f5e7de50d562edd15" title="d_as_p" alt="" coords="256,120,320,149"/>
+</map>

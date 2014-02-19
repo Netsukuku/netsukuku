@@ -1,0 +1,23 @@
+<map id="src/daemon.c" name="src/daemon.c">
+<area shape="rect" id="node3" href="$d1/d0b/includes_8h.html" title="includes.h" alt="" coords="1339,160,1419,189"/>
+<area shape="rect" id="node57" href="$dc/d54/common_8h.html" title="common.h" alt="" coords="2344,83,2427,112"/>
+<area shape="rect" id="node68" href="$d6/d4a/inet_8h.html" title="inet.h" alt="" coords="2841,547,2895,576"/>
+<area shape="rect" id="node74" href="$d4/d43/request_8h.html" title="request.h" alt="" coords="2513,160,2588,189"/>
+<area shape="rect" id="node77" href="$dc/d8d/if_8h.html" title="if.h" alt="" coords="2704,315,2744,344"/>
+<area shape="rect" id="node81" href="$d5/d89/pkts_8h.html" title="pkts.h" alt="" coords="2613,83,2672,112"/>
+<area shape="rect" id="node87" href="$d5/dbf/bmap_8h.html" title="bmap.h" alt="" coords="2832,315,2896,344"/>
+<area shape="rect" id="node95" href="$d0/d51/daemon_8h.html" title="daemon.h" alt="" coords="3031,83,3108,112"/>
+<area shape="rect" id="node97" href="$db/d93/netsukuku_8h.html" title="netsukuku.h" alt="" coords="2764,83,2857,112"/>
+<area shape="rect" id="node108" href="$da/d68/accept_8h.html" title="accept.h" alt="" coords="3132,83,3204,112"/>
+<area shape="rect" id="node59" href="$d4/d08/misc_8h.html" title="misc.h" alt="" coords="2520,237,2581,267"/>
+<area shape="rect" id="node61" href="$d5/d08/buffer_8h.html" title="buffer.h" alt="" coords="2423,160,2489,189"/>
+<area shape="rect" id="node63" href="$d8/de3/xmalloc_8h.html" title="xmalloc.h" alt="" coords="2196,160,2273,189"/>
+<area shape="rect" id="node65" href="$d7/d7f/log_8h.html" title="log.h" alt="" coords="2297,160,2348,189"/>
+<area shape="rect" id="node70" href="$dc/d3e/endianness_8h.html" title="endianness.h" alt="" coords="2819,624,2917,653"/>
+<area shape="rect" id="node85" href="$d4/de1/llist_8c.html" title="llist.c" alt="" coords="2761,469,2815,499"/>
+<area shape="rect" id="node89" href="$d7/d3b/gmap_8h.html" title="gmap.h" alt="" coords="2797,392,2861,421"/>
+<area shape="rect" id="node92" href="$dc/db7/map_8h.html" title="map.h" alt="" coords="2839,469,2897,499"/>
+<area shape="rect" id="node99" href="$db/d16/config_8h.html" title="config.h" alt="" coords="2839,160,2905,189"/>
+<area shape="rect" id="node101" href="$da/dd7/igs_8h.html" title="igs.h" alt="" coords="2764,160,2815,189"/>
+<area shape="rect" id="node103" href="$d9/d7f/route_8h.html" title="route.h" alt="" coords="2764,237,2825,267"/>
+</map>

@@ -1,0 +1,21 @@
+<map id="unpack_acq_llist" name="unpack_acq_llist">
+<area shape="rect" id="node3" href="$d2/dab/xmalloc_8c.html#ad7ead2fc5daad78a7f124e173863b16e" title="xzalloc" alt="" coords="1403,267,1464,296"/>
+<area shape="rect" id="node13" href="$d9/dfc/endianness_8c.html#a629226f9f754987898be147e82b2321c" title="ints_network_to_host" alt="" coords="1360,112,1507,141"/>
+<area shape="rect" id="node26" href="$d7/d48/snsd__cache_8c.html#a36e689670df34e28fd0ff259a55c63c0" title="snsd_unpack_all_service" alt="" coords="173,265,341,295"/>
+<area shape="rect" id="node44" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="436,369,492,399"/>
+<area shape="rect" id="node5" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="1581,273,1648,303"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="1745,297,1791,327"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="1877,356,1947,385"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="1861,297,1963,327"/>
+<area shape="rect" id="node15" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="1575,165,1655,195"/>
+<area shape="rect" id="node19" href="$d0/ddb/misc_8c.html#a98da58b707cfc9acf75f8105a3508b89" title="swap_shorts" alt="" coords="1567,5,1663,35"/>
+<area shape="rect" id="node22" href="$d9/dfc/endianness_8c.html#a29c401e27b50dda7df6e6714d801020d" title="ints_array_ntohl" alt="" coords="1557,59,1672,88"/>
+<area shape="rect" id="node24" href="$d9/dfc/endianness_8c.html#acbced2f124c85ac91411e02a9165d095" title="ints_array_ntohs" alt="" coords="1556,112,1673,141"/>
+<area shape="rect" id="node17" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="1724,85,1812,115"/>
+<area shape="rect" id="node28" href="$d7/d48/snsd__cache_8c.html#a35991d5fdd856d295f70b217e4eed072" title="snsd_unpack_service" alt="" coords="391,265,537,295"/>
+<area shape="rect" id="node31" href="$d7/d48/snsd__cache_8c.html#aec0debb1fa0d6ab91e75ed63c428d75c" title="snsd_unpack_all_prios" alt="" coords="587,215,741,244"/>
+<area shape="rect" id="node33" href="$d7/d48/snsd__cache_8c.html#a2fd8e8be8a3afd2f3879edef729e5948" title="snsd_unpack_prio" alt="" coords="791,215,916,244"/>
+<area shape="rect" id="node36" href="$d7/d48/snsd__cache_8c.html#afbd5d467a74b5b5ed6a74741a81dc4fd" title="snsd_unpack_all_nodes" alt="" coords="967,164,1127,193"/>
+<area shape="rect" id="node38" href="$d7/d48/snsd__cache_8c.html#ab3c2185212fc4fcdd8c1d497051f0342" title="snsd_unpack_node" alt="" coords="1177,164,1311,193"/>
+<area shape="rect" id="node41" href="$da/d89/inet_8c.html#a385963363f8d2ee7012a4c919b9b7b80" title="inet_ntohl" alt="" coords="1395,165,1472,195"/>
+</map>

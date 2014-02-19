@@ -1,0 +1,11 @@
+<map id="myping" name="myping">
+<area shape="rect" id="node3" href="$df/d9c/libping_8c.html#a7698ebb4671ed34f4251e5dcbf1a62f3" title="send_ping" alt="" coords="127,59,207,88"/>
+<area shape="rect" id="node18" href="$df/d9c/libping_8c.html#a7e6ed87a89b2362608660300e4ba023e" title="elapsed_time" alt="" coords="117,5,216,35"/>
+<area shape="rect" id="node21" href="$df/d9c/libping_8c.html#a8f7f1c39174accd1cf2c6ab418e94034" title="recv_ping" alt="" coords="128,112,205,141"/>
+<area shape="rect" id="node5" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="280,5,347,35"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="285,112,341,141"/>
+<area shape="rect" id="node16" href="$df/d9c/libping_8c.html#a5414b3905e57ddbdf81f61b66837089c" title="in_checksum" alt="" coords="264,59,363,88"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="412,12,457,41"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="523,72,592,101"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="507,12,608,41"/>
+</map>

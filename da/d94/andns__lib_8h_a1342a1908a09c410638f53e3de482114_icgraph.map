@@ -1,0 +1,12 @@
+<map id="create_andns_pkt_data" name="create_andns_pkt_data">
+<area shape="rect" id="node3" href="$da/d94/andns__lib_8h.html#a59841c5dcf628766466cbe6553f1d80b" title="andns_add_answ" alt="" coords="211,40,333,69"/>
+<area shape="rect" id="node5" href="$dd/dd9/andns_8h.html#a1220da16c538185a3258cedab47c254a" title="dpanswtoapansw" alt="" coords="381,11,504,40"/>
+<area shape="rect" id="node13" href="$da/d94/andns__lib_8h.html#a5ddeffd9e29677aa568ee674a2507d48" title="a_answ_u" alt="" coords="403,69,483,99"/>
+<area shape="rect" id="node7" href="$dd/dd9/andns_8h.html#a36956c4fc77c5a1b3dfcda3cc0a9051e" title="nk_forward" alt="" coords="689,5,775,35"/>
+<area shape="rect" id="node9" href="$dd/dd9/andns_8h.html#ad55d591cf7a444daa6b9cea7f8ae29bc" title="andns_rslv" alt="" coords="832,17,917,47"/>
+<area shape="rect" id="node11" href="$db/d6b/dns__wrapper_8c.html#ae858f92cfdc42ee9f2ba357a4021b59e" title="dns_exec_pkt" alt="" coords="975,17,1076,47"/>
+<area shape="rect" id="node15" href="$da/d94/andns__lib_8h.html#a4d06dfd1b127ce60289c63809371c705" title="a_answs_u" alt="" coords="552,81,640,111"/>
+<area shape="rect" id="node17" href="$da/d94/andns__lib_8h.html#a1741ef8f9940010d3f4f0a310f607973" title="a_u" alt="" coords="711,83,753,112"/>
+<area shape="rect" id="node21" href="$d9/d88/ntkresolv_8h.html#aa95ce7a8d4506ae83dd9b76933d7c6ba" title="do_command" alt="" coords="825,83,924,112"/>
+<area shape="rect" id="node23" href="$d3/dbf/ntkresolv_8c.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1000,83,1051,112"/>
+</map>

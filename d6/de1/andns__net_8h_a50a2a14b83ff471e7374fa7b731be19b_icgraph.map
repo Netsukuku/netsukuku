@@ -1,0 +1,19 @@
+<map id="w_connect" name="w_connect">
+<area shape="rect" id="node3" href="$d6/de1/andns__net_8h.html#a4f93b369bf1954796a452384355d423d" title="serial_connect" alt="" coords="139,68,245,97"/>
+<area shape="rect" id="node5" href="$d6/de1/andns__net_8h.html#aa577f4e612c57b8ee36d7ee144e4454e" title="host_connect" alt="" coords="295,40,393,69"/>
+<area shape="rect" id="node13" href="$d6/de1/andns__net_8h.html#a1f054a28fc118379cc55dd455a5cc39a" title="ai_connect" alt="" coords="301,96,387,125"/>
+<area shape="rect" id="node7" href="$d6/de1/andns__net_8h.html#a283bd5c64ce0d9183389ad4693f502a8" title="hn_send_recv_close" alt="" coords="443,36,584,65"/>
+<area shape="rect" id="node9" href="$d9/d88/ntkresolv_8h.html#aa95ce7a8d4506ae83dd9b76933d7c6ba" title="do_command" alt="" coords="643,9,741,39"/>
+<area shape="rect" id="node11" href="$d3/dbf/ntkresolv_8c.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="852,5,903,35"/>
+<area shape="rect" id="node15" href="$d6/de1/andns__net_8h.html#a7af4b0897c6b267464dce4bd247d6e82" title="ai_send_recv_close" alt="" coords="445,103,581,132"/>
+<area shape="rect" id="node17" href="$dd/dd9/andns_8h.html#a65c36ebb80b180a09b9a78c73ee5c106" title="ns_general_send" alt="" coords="632,109,752,139"/>
+<area shape="rect" id="node19" href="$dd/dd9/andns_8h.html#ad2d760371a7d8f72ee021dcf12997c2d" title="andns_gethostbyname" alt="" coords="801,59,953,88"/>
+<area shape="rect" id="node29" href="$dd/dd9/andns_8h.html#aae58fed9c96a1eb5a5411c76510ba3ac" title="dns_forward" alt="" coords="831,112,924,141"/>
+<area shape="rect" id="node35" href="$dd/dd9/andns_8h.html#a36956c4fc77c5a1b3dfcda3cc0a9051e" title="nk_forward" alt="" coords="835,165,920,195"/>
+<area shape="rect" id="node21" href="$d1/d6f/igs_8c.html#a29026505ec5e0465ebe99a7077ff6d49" title="internet_hosts_to_ip" alt="" coords="1003,59,1141,88"/>
+<area shape="rect" id="node23" href="$da/dd7/igs_8h.html#a184ab033bb2e2c1f856df5430ba87a80" title="init_internet_gateway\l_search" alt="" coords="1191,50,1335,97"/>
+<area shape="rect" id="node25" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="1384,59,1491,88"/>
+<area shape="rect" id="node27" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1539,59,1589,88"/>
+<area shape="rect" id="node31" href="$dd/dd9/andns_8h.html#ad55d591cf7a444daa6b9cea7f8ae29bc" title="andns_rslv" alt="" coords="1029,143,1115,172"/>
+<area shape="rect" id="node33" href="$db/d6b/dns__wrapper_8c.html#ae858f92cfdc42ee9f2ba357a4021b59e" title="dns_exec_pkt" alt="" coords="1212,143,1313,172"/>
+</map>

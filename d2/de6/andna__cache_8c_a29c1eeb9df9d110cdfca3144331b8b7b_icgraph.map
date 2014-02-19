@@ -1,0 +1,13 @@
+<map id="pack_single_andna_cache" name="pack_single_andna_cache">
+<area shape="rect" id="node3" href="$d7/d74/andna__cache_8h.html#a0d9f1fef5d898612fcabd13b79b486ba" title="pack_andna_cache" alt="" coords="231,59,364,88"/>
+<area shape="rect" id="node5" href="$d5/d05/andna_8h.html#a518d5d1d638386131f4e1ca4b5e2edb6" title="put_single_acache" alt="" coords="416,5,547,35"/>
+<area shape="rect" id="node13" href="$d5/d05/andna_8h.html#a288580e9a1dfc745225f740d4afb9f6d" title="put_andna_cache" alt="" coords="420,59,543,88"/>
+<area shape="rect" id="node16" href="$d7/d74/andna__cache_8h.html#ae02422c831311cf5357e92febb94925f" title="save_andna_cache" alt="" coords="415,112,548,141"/>
+<area shape="rect" id="node7" href="$d5/d05/andna_8h.html#aa7b53282a673cbc82c998a3cf4e5aff2" title="andna_init" alt="" coords="628,33,708,63"/>
+<area shape="rect" id="node9" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="944,33,1051,63"/>
+<area shape="rect" id="node11" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1275,84,1325,113"/>
+<area shape="rect" id="node18" href="$d5/d05/andna_8h.html#a55ec39a1613388c867100206d61c9fae" title="andna_save_caches" alt="" coords="597,112,739,141"/>
+<area shape="rect" id="node20" href="$d5/d05/andna_8h.html#ad741f07b1bbda88076dfc6116707ba01" title="andna_close" alt="" coords="788,112,881,141"/>
+<area shape="rect" id="node22" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="932,112,1063,141"/>
+<area shape="rect" id="node24" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="1112,136,1227,165"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="map_del_bnode_rnode" name="map_del_bnode_rnode">
+<area shape="rect" id="node3" href="$d3/d7a/map_8c.html#a72016d6f9d0f367f9b50c13c38a54e47" title="rnode_find" alt="" coords="221,5,304,35"/>
+<area shape="rect" id="node5" href="$d3/d7a/map_8c.html#a2087a6f2eec0f8b5e8818b45a93745df" title="rnode_del" alt="" coords="224,59,301,88"/>
+<area shape="rect" id="node18" href="$db/d73/bmap_8c.html#ad5e42fe96459ba88f0babdb9aada0edf" title="map_bnode_del" alt="" coords="207,112,319,141"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="552,60,597,89"/>
+<area shape="rect" id="node13" href="$d3/d7a/map_8c.html#aaee623e9e997e2f0af492c7798025195" title="rnode_swap" alt="" coords="376,59,467,88"/>
+<area shape="rect" id="node15" href="$d2/dab/xmalloc_8c.html#a95c6a612049c763f0d351481361ad689" title="xrealloc" alt="" coords="388,112,455,141"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="691,33,760,63"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="675,87,776,116"/>
+<area shape="rect" id="node20" href="$d3/d7a/map_8c.html#af84db9c45e68185e01758672797886a8" title="map_node_del" alt="" coords="368,165,475,195"/>
+<area shape="rect" id="node22" href="$d3/d7a/map_8c.html#a1e73cdacfca52085146dcc475aa4bef7" title="rnode_destroy" alt="" coords="523,165,627,195"/>
+</map>

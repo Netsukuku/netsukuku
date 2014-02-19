@@ -1,0 +1,7 @@
+<map id="add_accept" name="add_accept">
+<area shape="rect" id="node3" href="$dc/d21/daemon_8c.html#afc47801db3abdd5d408c48044643018d" title="udp_exec_pkt" alt="" coords="145,7,247,36"/>
+<area shape="rect" id="node12" href="$d0/d51/daemon_8h.html#a6bfa338bfc8ec41ee95e77a666e26114" title="tcp_daemon" alt="" coords="297,59,391,88"/>
+<area shape="rect" id="node5" href="$d0/d51/daemon_8h.html#a40481bac75cf84001629622bb8a5f2c0" title="udp_daemon" alt="" coords="296,5,392,35"/>
+<area shape="rect" id="node7" href="$d5/d05/andna_8h.html#ae8a0abdfc416da1b04dafe5c30fb14c3" title="andna_main" alt="" coords="441,32,532,61"/>
+<area shape="rect" id="node9" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="581,32,632,61"/>
+</map>

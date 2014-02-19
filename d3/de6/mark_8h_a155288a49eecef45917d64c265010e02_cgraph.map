@@ -1,0 +1,8 @@
+<map id="delete_ntk_forward_chain" name="delete_ntk_forward_chain">
+<area shape="rect" id="node3" href="$d1/d6b/libiptc_8h.html#a1aabca201f7a386daeacd404f7b55925" title="iptc_is_chain" alt="" coords="200,5,299,35"/>
+<area shape="rect" id="node5" href="$d1/d6b/libiptc_8h.html#a20dd1551afafb68d0d0c5e3b2cd28435" title="iptc_flush_entries" alt="" coords="188,59,311,88"/>
+<area shape="rect" id="node7" href="$d1/d6b/libiptc_8h.html#a83f9235c6f1058c4b99deab56ecde875" title="iptc_delete_chain" alt="" coords="188,112,311,141"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="225,165,273,195"/>
+<area shape="rect" id="node13" href="$d1/d6b/libiptc_8h.html#acea4cb1fbf2aa22554757cc703643f4b" title="iptc_strerror" alt="" coords="204,219,295,248"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="361,165,431,195"/>
+</map>

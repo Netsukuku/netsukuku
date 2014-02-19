@@ -1,0 +1,10 @@
+<map id="a_answs_u" name="a_answs_u">
+<area shape="rect" id="node3" href="$d4/d02/andns__lib_8c.html#a5ddeffd9e29677aa568ee674a2507d48" title="a_answ_u" alt="" coords="143,7,223,36"/>
+<area shape="rect" id="node17" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="309,59,357,88"/>
+<area shape="rect" id="node5" href="$d4/d02/andns__lib_8c.html#a59841c5dcf628766466cbe6553f1d80b" title="andns_add_answ" alt="" coords="272,5,395,35"/>
+<area shape="rect" id="node7" href="$d4/d02/andns__lib_8c.html#a1342a1908a09c410638f53e3de482114" title="create_andns_pkt_data" alt="" coords="443,5,600,35"/>
+<area shape="rect" id="node9" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="648,5,715,35"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="764,5,809,35"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="875,59,944,88"/>
+<area shape="rect" id="node15" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="859,5,960,35"/>
+</map>

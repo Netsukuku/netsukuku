@@ -1,0 +1,29 @@
+<map id="rt_get_default_gw" name="rt_get_default_gw">
+<area shape="rect" id="node3" href="$da/d89/inet_8c.html#addb0c4631b9f6d90718cddc6d8f04469" title="inet_setip_anyaddr" alt="" coords="405,665,536,694"/>
+<area shape="rect" id="node22" href="$d8/d91/krnl__route_8c.html#abd8cd64c2dff2dcf75fa734f999359f9" title="route_get_exact_prefix_dst" alt="" coords="179,274,357,303"/>
+<area shape="rect" id="node5" href="$da/d89/inet_8c.html#ac0a02d49e9909bae32638e61ce18be9f" title="inet_setip" alt="" coords="621,665,699,694"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="976,453,1021,482"/>
+<area shape="rect" id="node7" href="$da/d89/inet_8c.html#a9c6d94fc49adc3223bb0df762343784d" title="inet_setip_raw" alt="" coords="793,611,900,641"/>
+<area shape="rect" id="node15" href="$da/d89/inet_8c.html#a385963363f8d2ee7012a4c919b9b7b80" title="inet_ntohl" alt="" coords="808,665,885,694"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="1104,298,1173,327"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="1088,453,1189,482"/>
+<area shape="rect" id="node17" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="959,665,1039,694"/>
+<area shape="rect" id="node19" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="1095,665,1183,694"/>
+<area shape="rect" id="node24" href="$d8/d91/krnl__route_8c.html#a19266dbb40db503595db35b02ce89fd1" title="route_reset_filter" alt="" coords="412,222,529,251"/>
+<area shape="rect" id="node26" href="$d4/dab/libnetlink_8c.html#af6a834b458ad515cfe591cd720b5a3fd" title="rtnl_open" alt="" coords="433,62,508,91"/>
+<area shape="rect" id="node30" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="975,298,1023,327"/>
+<area shape="rect" id="node33" href="$d1/d71/ll__map_8c.html#ac4adbf41fc1b3fd4d880768bf45b1f4c" title="ll_init_map" alt="" coords="429,377,512,406"/>
+<area shape="rect" id="node35" href="$d4/dab/libnetlink_8c.html#ae723f19314cbb031a26abaee33928b84" title="rtnl_wilddump_request" alt="" coords="584,297,736,326"/>
+<area shape="rect" id="node38" href="$d4/dab/libnetlink_8c.html#a0c981a8de14fd51a25027ef407e799ca" title="rtnl_dump_filter" alt="" coords="605,454,715,483"/>
+<area shape="rect" id="node53" href="$d8/d91/krnl__route_8c.html#a3c6704dfaee952428fb117f3874cb721" title="route_get_gw" alt="" coords="421,558,520,587"/>
+<area shape="rect" id="node63" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="971,114,1027,143"/>
+<area shape="rect" id="node66" href="$da/d89/inet_8c.html#a284a1d36cd80931c6d96aba2e6a6ae46" title="inet_copy" alt="" coords="432,115,509,145"/>
+<area shape="rect" id="node68" href="$d4/dab/libnetlink_8c.html#abe941df1a4b224511e5aba5fbeda5373" title="rtnl_close" alt="" coords="432,169,509,198"/>
+<area shape="rect" id="node28" href="$d4/dab/libnetlink_8c.html#adcef0338bcf67064f61e984ea6542a4f" title="rtnl_open_byproto" alt="" coords="784,114,909,143"/>
+<area shape="rect" id="node42" href="$d1/d71/ll__map_8c.html#aa74dd48e5206c9a8c5b36307e023fa58" title="ll_remember_index" alt="" coords="595,350,725,379"/>
+<area shape="rect" id="node44" href="$d4/dab/libnetlink_8c.html#aed575cd447219f8c2f67e2011aaee4d8" title="parse_rtattr" alt="" coords="803,350,891,379"/>
+<area shape="rect" id="node47" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="813,297,880,326"/>
+<area shape="rect" id="node56" href="$da/d89/inet_8c.html#abddde4d60b8a9c38fbde3ed7e198efca" title="inet_addr_match" alt="" coords="601,558,719,587"/>
+<area shape="rect" id="node59" href="$d1/d71/ll__map_8c.html#aced8907c33267205072637b09f56c869" title="ll_index_to_name" alt="" coords="599,611,721,641"/>
+<area shape="rect" id="node61" href="$d1/d71/ll__map_8c.html#ad3726eb503a42ed32a53f65a9aa0c252" title="ll_idx_n2a" alt="" coords="807,558,887,587"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="pack_extmap" name="pack_extmap">
+<area shape="rect" id="node3" href="$d7/d3b/gmap_8h.html#a4fe1c9b16dc69e8bc0b59126fcc76e4b" title="save_extmap" alt="" coords="156,57,255,87"/>
+<area shape="rect" id="node14" href="$d6/d34/hook_8h.html#aa99944b9d6345e33be0bf1c850380228" title="put_ext_map" alt="" coords="313,109,409,139"/>
+<area shape="rect" id="node5" href="$d4/d3b/netsukuku_8c.html#aa8275f5b6804020ee48f40462a95d389" title="ntk_save_maps" alt="" coords="304,56,419,85"/>
+<area shape="rect" id="node7" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="468,56,599,85"/>
+<area shape="rect" id="node9" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="648,5,763,35"/>
+<area shape="rect" id="node11" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="811,57,861,87"/>
+<area shape="rect" id="node16" href="$d6/d34/hook_8h.html#af541d5ab5dd6596b12342140f4094dee" title="hook_init" alt="" coords="496,109,571,139"/>
+<area shape="rect" id="node18" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="652,109,759,139"/>
+</map>

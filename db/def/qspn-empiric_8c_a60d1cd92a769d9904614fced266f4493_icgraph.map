@@ -1,0 +1,5 @@
+<map id="map_get_rblock" name="map_get_rblock">
+<area shape="rect" id="node3" href="$db/def/qspn-empiric_8c.html#adedb299c04209530f0730bba4c5fb04c" title="pack_map" alt="" coords="168,5,251,35"/>
+<area shape="rect" id="node5" href="$db/def/qspn-empiric_8c.html#a766f7193d569ff69cabe949d29e0b1ef" title="save_map" alt="" coords="299,5,381,35"/>
+<area shape="rect" id="node7" href="$db/def/qspn-empiric_8c.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="429,5,480,35"/>
+</map>

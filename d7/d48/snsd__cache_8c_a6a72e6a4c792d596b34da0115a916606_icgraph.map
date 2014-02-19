@@ -1,0 +1,35 @@
+<map id="snsd_pack_service" name="snsd_pack_service">
+<area shape="rect" id="node3" href="$d5/d05/andna_8h.html#a8aab86a04409ff7c8baef00863464621" title="andna_recv_resolve_rq" alt="" coords="411,189,565,219"/>
+<area shape="rect" id="node11" href="$d6/d2e/snsd__cache_8h.html#aea3f6c274a3770ca095f86632c94f03a" title="snsd_pack_all_services" alt="" coords="191,137,351,167"/>
+<area shape="rect" id="node5" href="$d5/d05/andna_8h.html#aa7b53282a673cbc82c998a3cf4e5aff2" title="andna_init" alt="" coords="1280,116,1360,145"/>
+<area shape="rect" id="node7" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="2353,189,2460,219"/>
+<area shape="rect" id="node9" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="2512,189,2563,219"/>
+<area shape="rect" id="node13" href="$d5/d05/andna_8h.html#a47f535bfa2b7403ded9d8b4a7c19d27d" title="andna_register_hname" alt="" coords="412,271,564,300"/>
+<area shape="rect" id="node53" href="$d2/de6/andna__cache_8c.html#a2d80e94b5ec287281ea7eec6279f9399" title="pack_andna_cache_queue" alt="" coords="400,111,576,140"/>
+<area shape="rect" id="node77" href="$d7/d74/andna__cache_8h.html#a0df1bcedcc94f5eb43bf734603c1f7a5" title="pack_rh_cache" alt="" coords="657,21,767,51"/>
+<area shape="rect" id="node15" href="$d4/d18/andna_8c.html#abac5b6d2df2140ec17abb62d9ce8cbbc" title="andna_min_update_retry" alt="" coords="631,244,793,273"/>
+<area shape="rect" id="node17" href="$d5/d05/andna_8h.html#a22751676386bfd17dd30f88528ee0f12" title="andna_update_hnames" alt="" coords="849,273,1004,303"/>
+<area shape="rect" id="node47" href="$d5/d05/andna_8h.html#ac5e2e3a07b8b99edbc9501aae6e5b1ff" title="andna_maintain_hnames\l_active" alt="" coords="629,347,795,394"/>
+<area shape="rect" id="node19" href="$d4/d3b/netsukuku_8c.html#a678f7ec6e159e6bee076921c8d709847" title="reload_hostname_thread" alt="" coords="1239,304,1401,333"/>
+<area shape="rect" id="node24" href="$d2/d42/rehook_8h.html#ae6ae2d4b03e5a8cc1891cbf553ebb913" title="rehook" alt="" coords="1091,251,1152,280"/>
+<area shape="rect" id="node21" href="$d4/d3b/netsukuku_8c.html#a207b25374e65f083a666cdfaca49bb99" title="sighup_handler" alt="" coords="1451,304,1560,333"/>
+<area shape="rect" id="node26" href="$df/dba/rehook_8c.html#aeb32663f186f840edf41bb43d1f82459" title="new_rehook_thread" alt="" coords="1253,251,1387,280"/>
+<area shape="rect" id="node28" href="$d2/d42/rehook_8h.html#acd9ab3b97734c31a06ae3dcf475a1b39" title="new_rehook" alt="" coords="1460,251,1551,280"/>
+<area shape="rect" id="node30" href="$d6/d62/tracer_8c.html#a8bab813b90267e0e25592821248d7158" title="tracer_check_node_collision" alt="" coords="1608,199,1795,228"/>
+<area shape="rect" id="node32" href="$da/db5/tracer_8h.html#a12c03f2eaa97e2c644dcdd892e0fa758" title="tracer_store_pkt" alt="" coords="1844,199,1959,228"/>
+<area shape="rect" id="node34" href="$d8/da0/qspn_8h.html#ab70abece99b6ae77b078ec100c35912a" title="qspn_close" alt="" coords="2020,199,2108,228"/>
+<area shape="rect" id="node39" href="$d8/da0/qspn_8h.html#a6df687dad6a64c0807fbfc105cf244c5" title="qspn_open" alt="" coords="2021,252,2107,281"/>
+<area shape="rect" id="node42" href="$da/db5/tracer_8h.html#ab53c5821a9d4215b3d5ba16fd95e8297" title="tracer_pkt_recv" alt="" coords="2008,145,2120,175"/>
+<area shape="rect" id="node36" href="$d8/da0/qspn_8h.html#a6c5c062e24ec079201aea53899af3e28" title="qspn_init" alt="" coords="2197,196,2272,225"/>
+<area shape="rect" id="node49" href="$d5/d05/andna_8h.html#ae8a0abdfc416da1b04dafe5c30fb14c3" title="andna_main" alt="" coords="1656,356,1747,385"/>
+<area shape="rect" id="node55" href="$d2/de6/andna__cache_8c.html#a29c1eeb9df9d110cdfca3144331b8b7b" title="pack_single_andna_cache" alt="" coords="625,97,799,127"/>
+<area shape="rect" id="node57" href="$d7/d74/andna__cache_8h.html#a0d9f1fef5d898612fcabd13b79b486ba" title="pack_andna_cache" alt="" coords="860,91,993,120"/>
+<area shape="rect" id="node59" href="$d5/d05/andna_8h.html#a518d5d1d638386131f4e1ca4b5e2edb6" title="put_single_acache" alt="" coords="1056,87,1187,116"/>
+<area shape="rect" id="node62" href="$d5/d05/andna_8h.html#a288580e9a1dfc745225f740d4afb9f6d" title="put_andna_cache" alt="" coords="1060,140,1183,169"/>
+<area shape="rect" id="node65" href="$d7/d74/andna__cache_8h.html#ae02422c831311cf5357e92febb94925f" title="save_andna_cache" alt="" coords="1055,33,1188,63"/>
+<area shape="rect" id="node67" href="$d5/d05/andna_8h.html#a55ec39a1613388c867100206d61c9fae" title="andna_save_caches" alt="" coords="1249,33,1391,63"/>
+<area shape="rect" id="node69" href="$d5/d05/andna_8h.html#ad741f07b1bbda88076dfc6116707ba01" title="andna_close" alt="" coords="1855,39,1948,68"/>
+<area shape="rect" id="node71" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="2169,41,2300,71"/>
+<area shape="rect" id="node73" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="2349,45,2464,75"/>
+<area shape="rect" id="node79" href="$d7/d74/andna__cache_8h.html#aba364b75290b92041b9d27b76dd6c255" title="save_rh_cache" alt="" coords="872,5,981,35"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="ai_connect" name="ai_connect">
+<area shape="rect" id="node3" href="$df/d11/andns__net_8c.html#a4f93b369bf1954796a452384355d423d" title="serial_connect" alt="" coords="139,51,245,80"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="561,5,607,35"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="556,96,612,125"/>
+<area shape="rect" id="node14" href="$df/d11/andns__net_8c.html#a50a2a14b83ff471e7374fa7b731be19b" title="w_connect" alt="" coords="293,51,379,80"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="677,84,747,113"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="661,5,763,35"/>
+<area shape="rect" id="node16" href="$df/d11/andns__net_8c.html#a9f0f84aac1723d4aff67f0c8049ba013" title="w_socket" alt="" coords="428,51,505,80"/>
+</map>

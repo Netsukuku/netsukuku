@@ -1,0 +1,37 @@
+<map id="load_snsd" name="load_snsd">
+<area shape="rect" id="node3" href="$d7/d48/snsd__cache_8c.html#a22cc18982827b92b53a565cc47147a00" title="snsd_service_llist_del" alt="" coords="141,32,291,61"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="927,531,975,560"/>
+<area shape="rect" id="node13" href="$d0/ddb/misc_8c.html#afa3287a0852a49ffaeb854b3a43efeeb" title="split_string" alt="" coords="173,349,259,379"/>
+<area shape="rect" id="node30" href="$d2/de6/andna__cache_8c.html#adb3beca5bbe11507ab53f50abdd69738" title="lcl_cache_find_hname" alt="" coords="141,607,291,636"/>
+<area shape="rect" id="node34" href="$df/dee/crypto_8c.html#a2a88d82c39856dc9a5785b2270477ace" title="hash_md5" alt="" coords="597,581,680,611"/>
+<area shape="rect" id="node38" href="$da/d89/inet_8c.html#a7b648d12a6ba304537ac987a5c55d696" title="str_to_inet" alt="" coords="392,452,475,481"/>
+<area shape="rect" id="node54" href="$da/d89/inet_8c.html#afd1e5fe1ebde3b0578f839267fc48e39" title="inet_copy_ipdata_raw" alt="" coords="143,660,289,689"/>
+<area shape="rect" id="node57" href="$d7/d48/snsd__cache_8c.html#a0175cddaa16e90f5c345578e31329192" title="str_to_snsd_service" alt="" coords="147,713,285,743"/>
+<area shape="rect" id="node61" href="$d7/d48/snsd__cache_8c.html#a91158550b7ecfbacc616969af0b0e3f9" title="snsd_add_service" alt="" coords="153,112,279,141"/>
+<area shape="rect" id="node68" href="$d7/d48/snsd__cache_8c.html#a1ae593116752066889521f8b62340dce" title="snsd_add_prio" alt="" coords="163,165,269,195"/>
+<area shape="rect" id="node73" href="$d7/d48/snsd__cache_8c.html#a5f0235cc565970b1c88792ccbff8601d" title="snsd_count_prio_nodes" alt="" coords="137,767,295,796"/>
+<area shape="rect" id="node77" href="$d7/d48/snsd__cache_8c.html#adde1a6d9c793272ccc091767f41523a2" title="snsd_add_node" alt="" coords="160,219,272,248"/>
+<area shape="rect" id="node5" href="$d7/d48/snsd__cache_8c.html#aab8e0ec126cd07d180099c9ab2ec9b43" title="snsd_prio_llist_del" alt="" coords="369,5,497,35"/>
+<area shape="rect" id="node7" href="$d7/d48/snsd__cache_8c.html#a3f86fdc5d3bce7dd60d8decc76136309" title="snsd_node_llist_del" alt="" coords="571,5,707,35"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="1056,477,1125,507"/>
+<area shape="rect" id="node15" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="775,267,841,296"/>
+<area shape="rect" id="node22" href="$d2/dab/xmalloc_8c.html#ad6142d091f00b2d4543ce7a43e5d0eba" title="xstrdup" alt="" coords="401,272,465,301"/>
+<area shape="rect" id="node27" href="$d2/dab/xmalloc_8c.html#a95c6a612049c763f0d351481361ad689" title="xrealloc" alt="" coords="775,320,841,349"/>
+<area shape="rect" id="node17" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="928,345,973,375"/>
+<area shape="rect" id="node20" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="1040,345,1141,375"/>
+<area shape="rect" id="node24" href="$d2/dab/xmalloc_8c.html#aa0d9692e0141edaf2b2f748d630b5485" title="xstrndup" alt="" coords="603,269,675,299"/>
+<area shape="rect" id="node32" href="$d2/de6/andna__cache_8c.html#a226c42d0738c6be39991cac7dbce175b" title="andna_32bit_hash" alt="" coords="371,607,496,636"/>
+<area shape="rect" id="node36" href="$d1/d04/hash_8c.html#a72fc128c5f9194101194f55562c44155" title="fnv_32_buf" alt="" coords="596,635,681,664"/>
+<area shape="rect" id="node40" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="923,477,979,507"/>
+<area shape="rect" id="node43" href="$da/d89/inet_8c.html#ac0a02d49e9909bae32638e61ce18be9f" title="inet_setip" alt="" coords="600,427,677,456"/>
+<area shape="rect" id="node45" href="$da/d89/inet_8c.html#a9c6d94fc49adc3223bb0df762343784d" title="inet_setip_raw" alt="" coords="755,373,861,403"/>
+<area shape="rect" id="node48" href="$da/d89/inet_8c.html#a385963363f8d2ee7012a4c919b9b7b80" title="inet_ntohl" alt="" coords="769,427,847,456"/>
+<area shape="rect" id="node50" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="911,424,991,453"/>
+<area shape="rect" id="node52" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="1047,424,1135,453"/>
+<area shape="rect" id="node59" href="$d7/d48/snsd__cache_8c.html#a95a252ec0d0dbf78bfa343f45b75f8eb" title="str_to_snsd_proto" alt="" coords="371,713,496,743"/>
+<area shape="rect" id="node63" href="$d7/d48/snsd__cache_8c.html#ab38df9ae637ba49a0546f1cabcc618cb" title="snsd_find_service" alt="" coords="371,59,496,88"/>
+<area shape="rect" id="node65" href="$d2/dab/xmalloc_8c.html#ad7ead2fc5daad78a7f124e173863b16e" title="xzalloc" alt="" coords="403,165,464,195"/>
+<area shape="rect" id="node70" href="$d7/d48/snsd__cache_8c.html#af3e821a5273c77a70e336634382c695f" title="snsd_find_prio" alt="" coords="380,112,487,141"/>
+<area shape="rect" id="node75" href="$d7/d48/snsd__cache_8c.html#a516ac9f73ef729804712b70731b52dfb" title="snsd_count_nodes" alt="" coords="368,767,499,796"/>
+<area shape="rect" id="node79" href="$d7/d48/snsd__cache_8c.html#a1c2a9996b7d7885857618c4b92f02426" title="snsd_find_node_by_record" alt="" coords="345,219,521,248"/>
+</map>

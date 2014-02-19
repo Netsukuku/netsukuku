@@ -1,0 +1,15 @@
+<map id="reset_igw_rules" name="reset_igw_rules">
+<area shape="rect" id="node3" href="$dd/d57/krnl__rule_8c.html#aadededcfcaef4a3aefe5499d6a8142d6" title="rule_flush_table_range" alt="" coords="168,140,320,170"/>
+<area shape="rect" id="node5" href="$d4/dab/libnetlink_8c.html#af6a834b458ad515cfe591cd720b5a3fd" title="rtnl_open" alt="" coords="575,68,649,98"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="877,122,925,151"/>
+<area shape="rect" id="node13" href="$d4/dab/libnetlink_8c.html#ae723f19314cbb031a26abaee33928b84" title="rtnl_wilddump_request" alt="" coords="368,110,520,139"/>
+<area shape="rect" id="node16" href="$d4/dab/libnetlink_8c.html#a0c981a8de14fd51a25027ef407e799ca" title="rtnl_dump_filter" alt="" coords="712,227,821,256"/>
+<area shape="rect" id="node24" href="$dd/d57/krnl__rule_8c.html#a546ccc72b2cdff2b1a4f594ee3a36155" title="rule_flush_table_range\l_filter" alt="" coords="368,162,520,209"/>
+<area shape="rect" id="node34" href="$d4/dab/libnetlink_8c.html#abe941df1a4b224511e5aba5fbeda5373" title="rtnl_close" alt="" coords="573,228,651,258"/>
+<area shape="rect" id="node7" href="$d4/dab/libnetlink_8c.html#adcef0338bcf67064f61e984ea6542a4f" title="rtnl_open_byproto" alt="" coords="704,68,829,98"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="989,122,1059,151"/>
+<area shape="rect" id="node19" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="879,175,924,204"/>
+<area shape="rect" id="node22" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="973,175,1075,204"/>
+<area shape="rect" id="node26" href="$d4/dab/libnetlink_8c.html#aed575cd447219f8c2f67e2011aaee4d8" title="parse_rtattr" alt="" coords="568,122,656,151"/>
+<area shape="rect" id="node30" href="$d4/dab/libnetlink_8c.html#a1e674ac9211ad8a2bd6200b04860b203" title="rtnl_talk" alt="" coords="733,174,800,203"/>
+</map>

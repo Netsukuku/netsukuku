@@ -1,0 +1,12 @@
+<map id="dns_wrapper_daemon" name="dns_wrapper_daemon">
+<area shape="rect" id="node3" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="591,30,647,60"/>
+<area shape="rect" id="node7" href="$dc/d21/daemon_8c.html#a71a44ef24ad390d8bfd927ed826d42eb" title="prepare_listen_socket" alt="" coords="203,108,352,137"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="595,161,643,190"/>
+<area shape="rect" id="node20" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="255,318,300,348"/>
+<area shape="rect" id="node26" href="$da/d89/inet_8c.html#a05650389424947bce88544edfb772033" title="inet_recvfrom" alt="" coords="227,265,328,294"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="697,161,767,190"/>
+<area shape="rect" id="node12" href="$da/d89/inet_8c.html#ab5a263b2a13ea5c2eb67c8b05bd56564" title="set_bindtodevice_sk" alt="" coords="400,54,541,84"/>
+<area shape="rect" id="node15" href="$da/d89/inet_8c.html#a428a881d9fbb4d8b4fa5224962fcdd03" title="inet_close" alt="" coords="431,108,511,137"/>
+<area shape="rect" id="node17" href="$da/d89/inet_8c.html#a14ce403ca9d8516dc8d71796362a6d48" title="set_reuseaddr_sk" alt="" coords="408,161,533,190"/>
+<area shape="rect" id="node23" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="420,316,521,345"/>
+</map>

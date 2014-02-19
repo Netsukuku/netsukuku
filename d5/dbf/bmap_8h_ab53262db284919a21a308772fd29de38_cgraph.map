@@ -1,0 +1,9 @@
+<map id="bmap_del_rnode_by_level" name="bmap_del_rnode_by_level">
+<area shape="rect" id="node3" href="$d9/d45/gmap_8c.html#a86c08151ce74ba918204de55c1f6a89e" title="extmap_find_level" alt="" coords="228,5,353,35"/>
+<area shape="rect" id="node5" href="$d3/d7a/map_8c.html#a2087a6f2eec0f8b5e8818b45a93745df" title="rnode_del" alt="" coords="252,59,329,88"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="545,60,591,89"/>
+<area shape="rect" id="node13" href="$d3/d7a/map_8c.html#aaee623e9e997e2f0af492c7798025195" title="rnode_swap" alt="" coords="404,59,495,88"/>
+<area shape="rect" id="node15" href="$d2/dab/xmalloc_8c.html#a95c6a612049c763f0d351481361ad689" title="xrealloc" alt="" coords="416,112,483,141"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="656,33,725,63"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="640,87,741,116"/>
+</map>

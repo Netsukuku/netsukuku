@@ -1,0 +1,6 @@
+<map id="set_dev_down" name="set_dev_down">
+<area shape="rect" id="node3" href="$d7/de2/if_8c.html#a8ae45d4359817648686b7b13713508a4" title="set_flags" alt="" coords="160,32,235,61"/>
+<area shape="rect" id="node5" href="$da/d89/inet_8c.html#a49b750fe581d1da5e169adf3c7a14af1" title="new_socket" alt="" coords="284,5,375,35"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="424,32,472,61"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="521,32,591,61"/>
+</map>

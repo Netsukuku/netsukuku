@@ -1,0 +1,16 @@
+<map id="parse_table" name="parse_table">
+<area shape="rect" id="node3" href="$d6/dd7/libiptc_8c.html#a7d354e9d7ffb0e9c1dd2da8dee8825a5" title="cache_add_entry" alt="" coords="153,189,273,219"/>
+<area shape="rect" id="node29" href="$d6/dd7/libiptc_8c.html#a38af0a178e8c71ee018028ef407ed4ff" title="iptcc_find_chain_by\l_offset" alt="" coords="145,290,281,337"/>
+<area shape="rect" id="node5" href="$d6/dd7/libiptc_8c.html#af77fbb3fc694244a48002603d63868ae" title="iptcb_entry2offset" alt="" coords="349,5,475,35"/>
+<area shape="rect" id="node7" href="$d6/dd7/libiptc_8c.html#a1979ca19219527647729a1b88beb4a70" title="__iptcc_p_del_policy" alt="" coords="543,109,684,139"/>
+<area shape="rect" id="node11" href="$d6/dd7/libiptc_8c.html#a26e426c2a1bde09eebd3a7115bce38df" title="iptcc_alloc_chain_head" alt="" coords="333,109,491,139"/>
+<area shape="rect" id="node13" href="$d6/dd7/libiptc_8c.html#a027b4f4be877fb5fac76780fffd10416" title="__iptcc_p_add_chain" alt="" coords="340,163,484,192"/>
+<area shape="rect" id="node18" href="$da/d00/linux__list_8h.html#a588bec046f1e9797b33a5c5ab250f447" title="list_add_tail" alt="" coords="748,188,839,217"/>
+<area shape="rect" id="node22" href="$d6/dd7/libiptc_8c.html#a66213422e1c70c830e4a0c8cbba48917" title="iptcb_ent_is_hook_entry" alt="" coords="331,267,493,296"/>
+<area shape="rect" id="node26" href="$d6/dd7/libiptc_8c.html#a93deca1f464725269601d638fbcb94c8" title="iptcc_alloc_rule" alt="" coords="356,320,468,349"/>
+<area shape="rect" id="node9" href="$d6/dd7/libiptc_8c.html#a0ca642c976315297fc0b9fb6245a8f90" title="iptcc_delete_rule" alt="" coords="733,109,853,139"/>
+<area shape="rect" id="node16" href="$d6/dd7/libiptc_8c.html#af130614ad67e104ad214525f45dacc8f" title="iptc_insert_chain" alt="" coords="553,163,673,192"/>
+<area shape="rect" id="node20" href="$da/d00/linux__list_8h.html#a8a28f150a191624bf6923a48cdace7e3" title="__list_add" alt="" coords="903,188,983,217"/>
+<area shape="rect" id="node24" href="$d6/dd7/libiptc_8c.html#aee5d0f48610f0af60c646d7d0c5ca7b1" title="iptcb_get_entry" alt="" coords="559,267,668,296"/>
+<area shape="rect" id="node31" href="$da/d00/linux__list_8h.html#a6601e54d8f27ab290ee6819f7e2127b7" title="list_empty" alt="" coords="371,373,453,403"/>
+</map>

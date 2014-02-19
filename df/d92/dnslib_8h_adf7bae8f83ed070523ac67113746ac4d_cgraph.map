@@ -1,0 +1,13 @@
+<map id="d_a_u" name="d_a_u">
+<area shape="rect" id="node3" href="$d2/d1c/dnslib_8c.html#a1cb78f4d2f731e5145460e5b27c6a3b2" title="dns_add_a" alt="" coords="112,5,197,35"/>
+<area shape="rect" id="node15" href="$d2/d1c/dnslib_8c.html#ad469028422c9e87fc86604ead98e6bb1" title="lbltoname" alt="" coords="116,135,193,164"/>
+<area shape="rect" id="node19" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="424,108,480,137"/>
+<area shape="rect" id="node25" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="428,213,476,243"/>
+<area shape="rect" id="node5" href="$d2/d1c/dnslib_8c.html#ad188026f378b5cc191301677905e520b" title="create_dns_pkt_a" alt="" coords="245,5,371,35"/>
+<area shape="rect" id="node7" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="419,19,485,48"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="535,43,580,72"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="645,108,715,137"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="629,43,731,72"/>
+<area shape="rect" id="node17" href="$d2/d1c/dnslib_8c.html#ad2b243b66c4278a6c632f3f05fee99d9" title="getlblptr" alt="" coords="275,160,341,189"/>
+<area shape="rect" id="node23" href="$d2/d1c/dnslib_8c.html#a86d0df2c58502d9825661c8b742c1429" title="read_label_octet" alt="" coords="249,213,367,243"/>
+</map>

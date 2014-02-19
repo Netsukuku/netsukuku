@@ -1,0 +1,8 @@
+<map id="reset_radar" name="reset_radar">
+<area shape="rect" id="node3" href="$d7/d02/radar_8c.html#a8df4b078a8103d01155a7978ff81f791" title="free_new_node" alt="" coords="143,5,252,35"/>
+<area shape="rect" id="node5" href="$d7/d02/radar_8c.html#a7af513cd53e492b69510bc823c384abb" title="rnl_reset" alt="" coords="161,59,233,88"/>
+<area shape="rect" id="node11" href="$d7/d02/radar_8c.html#a260f15a87fd271e8fdc162d6320b9aeb" title="close_radar" alt="" coords="153,112,241,141"/>
+<area shape="rect" id="node13" href="$d7/d02/radar_8c.html#addfcab69e75918c9edaaf9d27f8923a5" title="init_radar" alt="" coords="160,165,235,195"/>
+<area shape="rect" id="node7" href="$d7/d02/radar_8c.html#ad267ad57f4ccb3baa02dbf2bbe3e09e1" title="rnl_del" alt="" coords="303,59,361,88"/>
+<area shape="rect" id="node9" href="$da/d89/inet_8c.html#a428a881d9fbb4d8b4fa5224962fcdd03" title="inet_close" alt="" coords="412,59,492,88"/>
+</map>

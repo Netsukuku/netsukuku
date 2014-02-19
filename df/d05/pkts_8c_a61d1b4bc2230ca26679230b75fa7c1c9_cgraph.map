@@ -1,0 +1,5 @@
+<map id="pkt_queue_close" name="pkt_queue_close">
+<area shape="rect" id="node3" href="$df/d05/pkts_8c.html#a8ccb46810f5a6b74d733c837dd5f4fbe" title="pkt_q_del" alt="" coords="175,5,252,35"/>
+<area shape="rect" id="node5" href="$df/d05/pkts_8c.html#a3169b3f057f310203a70d49f038f81b7" title="pkt_free" alt="" coords="301,5,371,35"/>
+<area shape="rect" id="node7" href="$da/d89/inet_8c.html#a428a881d9fbb4d8b4fa5224962fcdd03" title="inet_close" alt="" coords="420,5,500,35"/>
+</map>

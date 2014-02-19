@@ -1,0 +1,6 @@
+<map id="iptcc_chain_iterator_advance" name="iptcc_chain_iterator_advance">
+<area shape="rect" id="node3" href="$d6/dd7/libiptc_8c.html#a821ea52a8a8e750fdc4d671b63079eab" title="TC_FIRST_CHAIN" alt="" coords="196,5,332,35"/>
+<area shape="rect" id="node5" href="$d6/dd7/libiptc_8c.html#ab86d5043a43fb70fd021ae3a18c73f72" title="TC_NEXT_CHAIN" alt="" coords="197,59,331,88"/>
+<area shape="rect" id="node7" href="$d6/dd7/libiptc_8c.html#a1d8401d070e298356e246974baa96a84" title="TC_DELETE_CHAIN" alt="" coords="189,112,339,141"/>
+<area shape="rect" id="node9" href="$d6/dd7/libiptc_8c.html#a62e972b7995de2ebbda29fcde37042da" title="TC_STRERROR" alt="" coords="387,112,509,141"/>
+</map>

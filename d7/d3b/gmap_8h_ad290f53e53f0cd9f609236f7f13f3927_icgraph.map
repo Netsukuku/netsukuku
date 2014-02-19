@@ -1,0 +1,19 @@
+<map id="init_extmap" name="init_extmap">
+<area shape="rect" id="node3" href="$d7/d3b/gmap_8h.html#af1e8816c82f2eeaf6b8aee6d51e80709" title="unpack_extmap" alt="" coords="144,57,259,87"/>
+<area shape="rect" id="node7" href="$d4/d3b/netsukuku_8c.html#aeda777559abec4e7ff375954117a918e" title="ntk_load_maps" alt="" coords="465,5,575,35"/>
+<area shape="rect" id="node5" href="$d7/d3b/gmap_8h.html#a750e03b9ac5f9f2e27bc0eb268a36f9b" title="load_extmap" alt="" coords="308,57,404,87"/>
+<area shape="rect" id="node13" href="$d3/dc7/hook_8c.html#a5f70bb451547d6e6fa8d4584bfcb6446" title="get_ext_map" alt="" coords="308,111,404,140"/>
+<area shape="rect" id="node9" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="1917,111,2024,140"/>
+<area shape="rect" id="node11" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="2072,164,2123,193"/>
+<area shape="rect" id="node15" href="$d3/dc7/hook_8c.html#a00d0f0c666be6f5b1d58632b4b5d222c" title="hook_get_ext_map" alt="" coords="455,124,585,153"/>
+<area shape="rect" id="node17" href="$d6/d34/hook_8h.html#af10a487801fab9a28a3cfb6759fe138f" title="netsukuku_hook" alt="" coords="635,124,752,153"/>
+<area shape="rect" id="node20" href="$d2/d42/rehook_8h.html#ae6ae2d4b03e5a8cc1891cbf553ebb913" title="rehook" alt="" coords="800,124,861,153"/>
+<area shape="rect" id="node22" href="$df/dba/rehook_8c.html#aeb32663f186f840edf41bb43d1f82459" title="new_rehook_thread" alt="" coords="911,124,1044,153"/>
+<area shape="rect" id="node24" href="$d2/d42/rehook_8h.html#acd9ab3b97734c31a06ae3dcf475a1b39" title="new_rehook" alt="" coords="1095,124,1185,153"/>
+<area shape="rect" id="node26" href="$d6/d62/tracer_8c.html#a8bab813b90267e0e25592821248d7158" title="tracer_check_node_collision" alt="" coords="1235,136,1421,165"/>
+<area shape="rect" id="node28" href="$da/db5/tracer_8h.html#a12c03f2eaa97e2c644dcdd892e0fa758" title="tracer_store_pkt" alt="" coords="1471,111,1585,140"/>
+<area shape="rect" id="node30" href="$d8/da0/qspn_8h.html#ab70abece99b6ae77b078ec100c35912a" title="qspn_close" alt="" coords="1647,57,1735,87"/>
+<area shape="rect" id="node35" href="$d8/da0/qspn_8h.html#a6df687dad6a64c0807fbfc105cf244c5" title="qspn_open" alt="" coords="1648,111,1733,140"/>
+<area shape="rect" id="node38" href="$da/db5/tracer_8h.html#ab53c5821a9d4215b3d5ba16fd95e8297" title="tracer_pkt_recv" alt="" coords="1635,164,1747,193"/>
+<area shape="rect" id="node32" href="$d8/da0/qspn_8h.html#a6c5c062e24ec079201aea53899af3e28" title="qspn_init" alt="" coords="1795,111,1869,140"/>
+</map>

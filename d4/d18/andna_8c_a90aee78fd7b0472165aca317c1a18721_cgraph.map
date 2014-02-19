@@ -1,0 +1,15 @@
+<map id="andna_resolvconf_restore" name="andna_resolvconf_restore">
+<area shape="rect" id="node3" href="$de/d85/andns_8c.html#a14f73f295437c3ab586d2f19cf20799f" title="reset_andns_ns" alt="" coords="235,17,349,47"/>
+<area shape="rect" id="node5" href="$de/d85/andns_8c.html#a412c450840e3bb78ac14b32b3db878a8" title="collect_resolv_conf" alt="" coords="225,71,359,100"/>
+<area shape="rect" id="node20" href="$d2/de6/andna__cache_8c.html#a9edd08e680358abba0f550b789d58d05" title="del_resolv_conf" alt="" coords="236,151,348,180"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="424,111,472,140"/>
+<area shape="rect" id="node11" href="$d0/ddb/misc_8c.html#a1b81740c73bef5d3a6c69149d2c66378" title="strip_char" alt="" coords="409,57,487,87"/>
+<area shape="rect" id="node15" href="$de/d85/andns_8c.html#a06279c082d2dfb4436b0b575ee0bf485" title="store_ns" alt="" coords="541,5,613,35"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="789,111,859,140"/>
+<area shape="rect" id="node13" href="$d0/ddb/misc_8c.html#ae13480d8227e14c4ea764297d170d39c" title="last_token" alt="" coords="536,59,619,88"/>
+<area shape="rect" id="node17" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="668,32,724,61"/>
+<area shape="rect" id="node22" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="544,164,611,193"/>
+<area shape="rect" id="node29" href="$d2/dab/xmalloc_8c.html#ad7ead2fc5daad78a7f124e173863b16e" title="xzalloc" alt="" coords="417,164,479,193"/>
+<area shape="rect" id="node24" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="673,164,719,193"/>
+<area shape="rect" id="node27" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="773,164,875,193"/>
+</map>

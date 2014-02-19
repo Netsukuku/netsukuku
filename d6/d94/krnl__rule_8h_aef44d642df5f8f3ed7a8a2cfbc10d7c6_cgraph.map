@@ -1,0 +1,13 @@
+<map id="rule_add" name="rule_add">
+<area shape="rect" id="node3" href="$dd/d57/krnl__rule_8c.html#af98206fc094d684741f5badb16bbffce" title="rule_exec" alt="" coords="127,111,204,140"/>
+<area shape="rect" id="node5" href="$d4/dab/libnetlink_8c.html#a308c9418a2d83e4e9ba8d8ed0b7bbe28" title="addattr_l" alt="" coords="408,5,480,35"/>
+<area shape="rect" id="node11" href="$d4/dab/libnetlink_8c.html#ab9339d56ad1804972e905306791fabbc" title="addattr32" alt="" coords="256,57,331,87"/>
+<area shape="rect" id="node14" href="$d4/dab/libnetlink_8c.html#af6a834b458ad515cfe591cd720b5a3fd" title="rtnl_open" alt="" coords="256,111,331,140"/>
+<area shape="rect" id="node19" href="$d4/dab/libnetlink_8c.html#a1e674ac9211ad8a2bd6200b04860b203" title="rtnl_talk" alt="" coords="411,163,477,192"/>
+<area shape="rect" id="node27" href="$d4/dab/libnetlink_8c.html#abe941df1a4b224511e5aba5fbeda5373" title="rtnl_close" alt="" coords="255,215,332,244"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="555,109,603,139"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="667,109,736,139"/>
+<area shape="rect" id="node16" href="$d4/dab/libnetlink_8c.html#adcef0338bcf67064f61e984ea6542a4f" title="rtnl_open_byproto" alt="" coords="381,109,507,139"/>
+<area shape="rect" id="node22" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="556,163,601,192"/>
+<area shape="rect" id="node25" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="651,163,752,192"/>
+</map>

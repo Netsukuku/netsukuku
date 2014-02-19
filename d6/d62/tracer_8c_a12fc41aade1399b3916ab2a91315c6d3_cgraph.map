@@ -1,0 +1,14 @@
+<map id="tracer_build_bentry" name="tracer_build_bentry">
+<area shape="rect" id="node3" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="372,196,420,225"/>
+<area shape="rect" id="node7" href="$d3/d7a/map_8c.html#a4ca7b0204f961c5dbe35bf7e8fff7ac5" title="pos_from_node" alt="" coords="196,37,305,67"/>
+<area shape="rect" id="node9" href="$d9/d45/gmap_8c.html#aae95738707e42a1fa222862d7ba558b3" title="pos_from_gnode" alt="" coords="192,91,309,120"/>
+<area shape="rect" id="node11" href="$db/d73/bmap_8c.html#aa8aef82f1c7172f7d8314b2f3ccb9653" title="map_find_bnode" alt="" coords="192,144,309,173"/>
+<area shape="rect" id="node13" href="$d2/dab/xmalloc_8c.html#ad7ead2fc5daad78a7f124e173863b16e" title="xzalloc" alt="" coords="220,352,281,381"/>
+<area shape="rect" id="node22" href="$d9/d45/gmap_8c.html#a86c08151ce74ba918204de55c1f6a89e" title="extmap_find_level" alt="" coords="188,248,313,277"/>
+<area shape="rect" id="node24" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="479,65,535,95"/>
+<area shape="rect" id="node27" href="$d2/dab/xmalloc_8c.html#a95c6a612049c763f0d351481361ad689" title="xrealloc" alt="" coords="363,299,429,328"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="600,196,669,225"/>
+<area shape="rect" id="node15" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="363,352,429,381"/>
+<area shape="rect" id="node17" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="484,299,529,328"/>
+<area shape="rect" id="node20" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="584,299,685,328"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="find_free_rq_wait" name="find_free_rq_wait">
+<area shape="rect" id="node3" href="$d4/d43/request_8h.html#a5fc8cfc8e378aadc7c5e1da43788ae1e" title="add_rq" alt="" coords="176,32,237,61"/>
+<area shape="rect" id="node5" href="$d5/d89/pkts_8h.html#ad72bbdba1c2025145f30bba79981c11d" title="pkt_exec" alt="" coords="285,32,360,61"/>
+<area shape="rect" id="node7" href="$dc/d21/daemon_8c.html#afc47801db3abdd5d408c48044643018d" title="udp_exec_pkt" alt="" coords="409,5,511,35"/>
+<area shape="rect" id="node16" href="$d0/d51/daemon_8h.html#a5d807bb7bad3c6b6dba9e852f1f401a7" title="tcp_recv_loop" alt="" coords="409,59,511,88"/>
+<area shape="rect" id="node9" href="$d0/d51/daemon_8h.html#a40481bac75cf84001629622bb8a5f2c0" title="udp_daemon" alt="" coords="560,5,656,35"/>
+<area shape="rect" id="node11" href="$d5/d05/andna_8h.html#ae8a0abdfc416da1b04dafe5c30fb14c3" title="andna_main" alt="" coords="705,32,796,61"/>
+<area shape="rect" id="node13" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="845,32,896,61"/>
+<area shape="rect" id="node18" href="$d0/d51/daemon_8h.html#a6bfa338bfc8ec41ee95e77a666e26114" title="tcp_daemon" alt="" coords="561,59,655,88"/>
+</map>

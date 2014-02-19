@@ -1,0 +1,14 @@
+<map id="TC_INSERT_ENTRY" name="TC_INSERT_ENTRY">
+<area shape="rect" id="node3" href="$d6/dd7/libiptc_8c.html#a537585c708e6440a6b4c76b0b72ce68e" title="iptcc_find_label" alt="" coords="576,109,688,138"/>
+<area shape="rect" id="node7" href="$d6/dd7/libiptc_8c.html#aee5af1760158458354d70ad5dfba9cc1" title="iptcc_get_rule_num" alt="" coords="207,39,340,69"/>
+<area shape="rect" id="node9" href="$d6/dd7/libiptc_8c.html#a5b9066fa656482bf8f222d3ac614aa7e" title="iptcc_get_rule_num\l_reverse" alt="" coords="207,92,340,139"/>
+<area shape="rect" id="node11" href="$d6/dd7/libiptc_8c.html#a93deca1f464725269601d638fbcb94c8" title="iptcc_alloc_rule" alt="" coords="217,162,329,191"/>
+<area shape="rect" id="node13" href="$d6/dd7/libiptc_8c.html#a91e987eb3d50439f529daa293072abae" title="iptcc_map_target" alt="" coords="212,215,335,245"/>
+<area shape="rect" id="node23" href="$d6/dd7/libiptc_8c.html#a7d44a84089b804cf3be6aa1506bb6362" title="set_changed" alt="" coords="411,267,507,297"/>
+<area shape="rect" id="node25" href="$da/d00/linux__list_8h.html#a588bec046f1e9797b33a5c5ab250f447" title="list_add_tail" alt="" coords="228,319,319,349"/>
+<area shape="rect" id="node5" href="$da/d00/linux__list_8h.html#a6601e54d8f27ab290ee6819f7e2127b7" title="list_empty" alt="" coords="736,109,819,138"/>
+<area shape="rect" id="node15" href="$d6/dd7/libiptc_8c.html#ae66562e291ab66ed10312a16172d9fa5" title="iptcc_standard_map" alt="" coords="389,161,528,190"/>
+<area shape="rect" id="node17" href="$d6/dd7/libiptc_8c.html#a4333074027c3913b1d64ea4173759658" title="TC_BUILTIN" alt="" coords="409,214,508,243"/>
+<area shape="rect" id="node20" href="$d6/dd7/libiptc_8c.html#adda0e58ab046639544a87ffa5beba504" title="iptcc_is_builtin" alt="" coords="579,214,685,243"/>
+<area shape="rect" id="node27" href="$da/d00/linux__list_8h.html#a8a28f150a191624bf6923a48cdace7e3" title="__list_add" alt="" coords="419,321,499,350"/>
+</map>

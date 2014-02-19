@@ -1,0 +1,12 @@
+<map id="lcl_cache_destroy" name="lcl_cache_destroy">
+<area shape="rect" id="node3" href="$d5/d05/andna_8h.html#ad741f07b1bbda88076dfc6116707ba01" title="andna_close" alt="" coords="193,56,287,85"/>
+<area shape="rect" id="node12" href="$d7/d74/andna__cache_8h.html#a980b534d1201d9557fdb3beba6221ba7" title="load_hostnames" alt="" coords="181,109,299,139"/>
+<area shape="rect" id="node5" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="561,56,692,85"/>
+<area shape="rect" id="node7" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="741,5,856,35"/>
+<area shape="rect" id="node9" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="904,84,955,113"/>
+<area shape="rect" id="node14" href="$d5/d05/andna_8h.html#afc0f24a5b798975732d4f238dccc42ef" title="andna_load_caches" alt="" coords="361,109,497,139"/>
+<area shape="rect" id="node21" href="$d4/d3b/netsukuku_8c.html#a678f7ec6e159e6bee076921c8d709847" title="reload_hostname_thread" alt="" coords="348,163,511,192"/>
+<area shape="rect" id="node16" href="$d5/d05/andna_8h.html#aa7b53282a673cbc82c998a3cf4e5aff2" title="andna_init" alt="" coords="587,109,667,139"/>
+<area shape="rect" id="node18" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="745,109,852,139"/>
+<area shape="rect" id="node23" href="$d4/d3b/netsukuku_8c.html#a207b25374e65f083a666cdfaca49bb99" title="sighup_handler" alt="" coords="744,163,853,192"/>
+</map>

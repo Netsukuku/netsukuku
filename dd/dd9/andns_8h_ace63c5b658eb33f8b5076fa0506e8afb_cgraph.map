@@ -1,0 +1,17 @@
+<map id="apqsttodpqst" name="apqsttodpqst">
+<area shape="rect" id="node3" href="$de/d85/andns_8c.html#a21a8f0e04e19b66f878b3d4536c685ca" title="qtype_a_to_d" alt="" coords="179,5,277,35"/>
+<area shape="rect" id="node5" href="$d2/d1c/dnslib_8c.html#a623922d6a3fab31bf06d4c937f771b84" title="create_dns_pkt" alt="" coords="173,59,283,88"/>
+<area shape="rect" id="node15" href="$d2/d1c/dnslib_8c.html#a44b46d72c38e42680ca2863753f13e9e" title="dns_add_qst" alt="" coords="180,112,276,141"/>
+<area shape="rect" id="node20" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="541,204,597,233"/>
+<area shape="rect" id="node23" href="$d2/d1c/dnslib_8c.html#a32b90ae5be1ca9761e1f94a18d06fd5a" title="swapped_straddr_pref" alt="" coords="153,243,303,272"/>
+<area shape="rect" id="node35" href="$d2/d1c/dnslib_8c.html#a85440e389c69d29b599685b5c03f0b4d" title="destroy_dns_pkt" alt="" coords="169,296,287,325"/>
+<area shape="rect" id="node7" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="536,112,603,141"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="652,125,697,155"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="763,204,832,233"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="747,125,848,155"/>
+<area shape="rect" id="node17" href="$d2/d1c/dnslib_8c.html#a7771bf291d7ddfbb9b9b2f11bc2d83bc" title="create_dns_pkt_qst" alt="" coords="352,112,488,141"/>
+<area shape="rect" id="node25" href="$d2/d1c/dnslib_8c.html#a5851130212850068567ef1e5c2e09fb2" title="swap_straddr" alt="" coords="371,216,469,245"/>
+<area shape="rect" id="node28" href="$d2/d1c/dnslib_8c.html#ac9cbd243ea2b7e352d34b9057f9e383e" title="swap_straddr6" alt="" coords="367,269,473,299"/>
+<area shape="rect" id="node30" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="651,283,699,312"/>
+<area shape="rect" id="node33" href="$d2/d1c/dnslib_8c.html#a7fb033b42337f08d87dbbb2a3e73c0f1" title="add_inv_prefix" alt="" coords="367,373,473,403"/>
+</map>

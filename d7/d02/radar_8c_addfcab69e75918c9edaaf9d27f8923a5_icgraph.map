@@ -1,0 +1,20 @@
+<map id="init_radar" name="init_radar">
+<area shape="rect" id="node3" href="$d3/df5/radar_8h.html#a94450b9b9f2e120fa2f592344ef66f80" title="first_init_radar" alt="" coords="264,11,368,40"/>
+<area shape="rect" id="node9" href="$d3/df5/radar_8h.html#a49490440fa81e7b4c8ed18a9250ae8ed" title="reset_radar" alt="" coords="129,129,215,159"/>
+<area shape="rect" id="node5" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="1899,96,2005,125"/>
+<area shape="rect" id="node7" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="2053,201,2104,231"/>
+<area shape="rect" id="node11" href="$d3/dc7/hook_8c.html#a7503e6bf75bee5edba1dd37e8878911a" title="hook_first_radar_scan" alt="" coords="417,120,567,149"/>
+<area shape="rect" id="node38" href="$d3/dc7/hook_8c.html#a5e32a215ed05b1ef1f870ce105f67640" title="hook_finish" alt="" coords="448,173,536,203"/>
+<area shape="rect" id="node41" href="$d3/df5/radar_8h.html#a3d46b80b3ad27f86a02c0586617f18cc" title="radar_scan" alt="" coords="273,204,359,233"/>
+<area shape="rect" id="node13" href="$d6/d34/hook_8h.html#af10a487801fab9a28a3cfb6759fe138f" title="netsukuku_hook" alt="" coords="616,160,733,189"/>
+<area shape="rect" id="node16" href="$d2/d42/rehook_8h.html#ae6ae2d4b03e5a8cc1891cbf553ebb913" title="rehook" alt="" coords="781,148,843,177"/>
+<area shape="rect" id="node18" href="$df/dba/rehook_8c.html#aeb32663f186f840edf41bb43d1f82459" title="new_rehook_thread" alt="" coords="892,148,1025,177"/>
+<area shape="rect" id="node20" href="$d2/d42/rehook_8h.html#acd9ab3b97734c31a06ae3dcf475a1b39" title="new_rehook" alt="" coords="1076,148,1167,177"/>
+<area shape="rect" id="node22" href="$d6/d62/tracer_8c.html#a8bab813b90267e0e25592821248d7158" title="tracer_check_node_collision" alt="" coords="1216,148,1403,177"/>
+<area shape="rect" id="node24" href="$da/db5/tracer_8h.html#a12c03f2eaa97e2c644dcdd892e0fa758" title="tracer_store_pkt" alt="" coords="1452,96,1567,125"/>
+<area shape="rect" id="node26" href="$d8/da0/qspn_8h.html#ab70abece99b6ae77b078ec100c35912a" title="qspn_close" alt="" coords="1628,96,1716,125"/>
+<area shape="rect" id="node31" href="$d8/da0/qspn_8h.html#a6df687dad6a64c0807fbfc105cf244c5" title="qspn_open" alt="" coords="1629,149,1715,179"/>
+<area shape="rect" id="node34" href="$da/db5/tracer_8h.html#ab53c5821a9d4215b3d5ba16fd95e8297" title="tracer_pkt_recv" alt="" coords="1616,43,1728,72"/>
+<area shape="rect" id="node28" href="$d8/da0/qspn_8h.html#a6c5c062e24ec079201aea53899af3e28" title="qspn_init" alt="" coords="1776,96,1851,125"/>
+<area shape="rect" id="node45" href="$d3/df5/radar_8h.html#ac9d1b53d63e675b260906e91850b588c" title="radar_daemon" alt="" coords="623,239,727,268"/>
+</map>

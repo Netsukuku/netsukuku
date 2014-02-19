@@ -1,0 +1,17 @@
+<map id="set_changed" name="set_changed">
+<area shape="rect" id="node3" href="$d6/dd7/libiptc_8c.html#a91e987eb3d50439f529daa293072abae" title="iptcc_map_target" alt="" coords="167,271,289,300"/>
+<area shape="rect" id="node5" href="$d6/dd7/libiptc_8c.html#aa9fc5848183e96cd3d8ccdbf7427750c" title="TC_INSERT_ENTRY" alt="" coords="376,168,525,197"/>
+<area shape="rect" id="node9" href="$d6/dd7/libiptc_8c.html#ade0a6c01e729491188f70078cef806a3" title="TC_REPLACE_ENTRY" alt="" coords="369,275,532,304"/>
+<area shape="rect" id="node12" href="$d6/dd7/libiptc_8c.html#a18298788b51418c936d6557e047951f9" title="TC_APPEND_ENTRY" alt="" coords="373,221,528,251"/>
+<area shape="rect" id="node14" href="$d6/dd7/libiptc_8c.html#aebe11c9e250fe9cc800e331dde41f6d5" title="TC_DELETE_ENTRY" alt="" coords="375,328,527,357"/>
+<area shape="rect" id="node21" href="$d6/dd7/libiptc_8c.html#a272decda58f7f0b063934de1480a7006" title="TC_DELETE_NUM_ENTRY" alt="" coords="356,392,545,421"/>
+<area shape="rect" id="node24" href="$d6/dd7/libiptc_8c.html#a9d8a4fce8561fd4d3ac9e3fa569c713c" title="TC_FLUSH_ENTRIES" alt="" coords="149,527,307,556"/>
+<area shape="rect" id="node26" href="$d6/dd7/libiptc_8c.html#ad51cc689978226dc859e567d8169f594" title="TC_ZERO_ENTRIES" alt="" coords="153,580,303,609"/>
+<area shape="rect" id="node28" href="$d6/dd7/libiptc_8c.html#a04fcf00be186cb2a9987f41ef75ea17f" title="TC_ZERO_COUNTER" alt="" coords="372,465,529,495"/>
+<area shape="rect" id="node31" href="$d6/dd7/libiptc_8c.html#a4a9b984de637ba61cbfb7f33a0be6f5e" title="TC_SET_COUNTER" alt="" coords="155,633,301,663"/>
+<area shape="rect" id="node33" href="$d6/dd7/libiptc_8c.html#aa6d69e796c7f333c9b8906bf904cd85e" title="TC_CREATE_CHAIN" alt="" coords="375,12,527,41"/>
+<area shape="rect" id="node36" href="$d6/dd7/libiptc_8c.html#a1d8401d070e298356e246974baa96a84" title="TC_DELETE_CHAIN" alt="" coords="153,63,303,92"/>
+<area shape="rect" id="node39" href="$d6/dd7/libiptc_8c.html#ab9d1b99e0007fc1e8cdd1ce401e1f93e" title="TC_RENAME_CHAIN" alt="" coords="151,687,305,716"/>
+<area shape="rect" id="node41" href="$d6/dd7/libiptc_8c.html#a4a5a14d5e3d4141a7b471170f3c0817c" title="TC_SET_POLICY" alt="" coords="164,116,292,145"/>
+<area shape="rect" id="node7" href="$d6/dd7/libiptc_8c.html#a62e972b7995de2ebbda29fcde37042da" title="TC_STRERROR" alt="" coords="595,221,717,251"/>
+</map>

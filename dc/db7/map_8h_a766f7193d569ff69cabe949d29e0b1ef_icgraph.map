@@ -1,0 +1,7 @@
+<map id="save_map" name="save_map">
+<area shape="rect" id="node3" href="$d4/d3b/netsukuku_8c.html#aa8275f5b6804020ee48f40462a95d389" title="ntk_save_maps" alt="" coords="136,32,251,61"/>
+<area shape="rect" id="node12" href="$db/def/qspn-empiric_8c.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="168,85,219,115"/>
+<area shape="rect" id="node5" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="300,32,431,61"/>
+<area shape="rect" id="node7" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="480,5,595,35"/>
+<area shape="rect" id="node9" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="643,32,693,61"/>
+</map>

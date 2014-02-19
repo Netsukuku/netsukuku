@@ -1,0 +1,15 @@
+<map id="in_checksum" name="in_checksum">
+<area shape="rect" id="node3" href="$df/d9c/libping_8c.html#a7698ebb4671ed34f4251e5dcbf1a62f3" title="send_ping" alt="" coords="153,85,233,115"/>
+<area shape="rect" id="node5" href="$df/d9c/libping_8c.html#a8d19aa4db5571649ce14ad5e39cd101d" title="myping" alt="" coords="283,85,347,115"/>
+<area shape="rect" id="node7" href="$d1/d64/libping_8h.html#a8607f45baf68c8774b2c30473d212f69" title="pinghost" alt="" coords="400,5,469,35"/>
+<area shape="rect" id="node9" href="$d1/d64/libping_8h.html#a24df2d8c0a25a2d1d0515597943049ac" title="pingthost" alt="" coords="397,59,472,88"/>
+<area shape="rect" id="node27" href="$d1/d64/libping_8h.html#af72477aa43621b62340d7fbde1036dac" title="tpinghost" alt="" coords="397,112,472,141"/>
+<area shape="rect" id="node29" href="$d1/d64/libping_8h.html#a27914918d2a8da494de3916fcc0b58e2" title="tpingthost" alt="" coords="396,165,473,195"/>
+<area shape="rect" id="node11" href="$da/dd7/igs_8h.html#a5855d790f8cd80495bf1962009b6cb7b" title="igw_check_inet_conn" alt="" coords="523,33,669,63"/>
+<area shape="rect" id="node22" href="$d1/d6f/igs_8c.html#a94fb2e3622439b35372a6d3972a6f5e3" title="igw_ping_igw" alt="" coords="748,87,847,116"/>
+<area shape="rect" id="node13" href="$da/dd7/igs_8h.html#a184ab033bb2e2c1f856df5430ba87a80" title="init_internet_gateway\l_search" alt="" coords="927,17,1071,63"/>
+<area shape="rect" id="node19" href="$da/dd7/igs_8h.html#af0c6fb918f055c28c21d5a17fe02db09" title="igw_check_inet_conn_t" alt="" coords="719,33,876,63"/>
+<area shape="rect" id="node15" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="1120,28,1227,57"/>
+<area shape="rect" id="node17" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1275,56,1325,85"/>
+<area shape="rect" id="node24" href="$da/dd7/igs_8h.html#ac87ed2fc7a66e73c5fef763321862295" title="igw_monitor_igws_t" alt="" coords="931,87,1067,116"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="parse_internet_hosts" name="parse_internet_hosts">
+<area shape="rect" id="node3" href="$d0/ddb/misc_8c.html#afa3287a0852a49ffaeb854b3a43efeeb" title="split_string" alt="" coords="197,27,283,56"/>
+<area shape="rect" id="node5" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="565,27,632,56"/>
+<area shape="rect" id="node13" href="$d2/dab/xmalloc_8c.html#ad6142d091f00b2d4543ce7a43e5d0eba" title="xstrdup" alt="" coords="332,27,396,56"/>
+<area shape="rect" id="node18" href="$d2/dab/xmalloc_8c.html#a95c6a612049c763f0d351481361ad689" title="xrealloc" alt="" coords="448,80,515,109"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="681,53,727,83"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="792,27,861,56"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="776,80,877,109"/>
+<area shape="rect" id="node15" href="$d2/dab/xmalloc_8c.html#aa0d9692e0141edaf2b2f748d630b5485" title="xstrndup" alt="" coords="445,27,517,56"/>
+</map>

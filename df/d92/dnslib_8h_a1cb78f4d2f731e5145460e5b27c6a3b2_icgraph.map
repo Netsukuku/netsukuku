@@ -1,0 +1,14 @@
+<map id="dns_add_a" name="dns_add_a">
+<area shape="rect" id="node3" href="$df/d92/dnslib_8h.html#adf7bae8f83ed070523ac67113746ac4d" title="d_a_u" alt="" coords="140,93,196,123"/>
+<area shape="rect" id="node5" href="$df/d92/dnslib_8h.html#ad4ee48a02add30c858e9707300d412ea" title="d_as_u" alt="" coords="245,93,309,123"/>
+<area shape="rect" id="node7" href="$df/d92/dnslib_8h.html#af6f8ccf019e2ab6a6cf9a6fa04883f07" title="d_u" alt="" coords="357,93,400,123"/>
+<area shape="rect" id="node9" href="$dd/dd9/andns_8h.html#ad2d760371a7d8f72ee021dcf12997c2d" title="andns_gethostbyname" alt="" coords="449,13,601,43"/>
+<area shape="rect" id="node19" href="$dd/dd9/andns_8h.html#aae58fed9c96a1eb5a5411c76510ba3ac" title="dns_forward" alt="" coords="479,67,572,96"/>
+<area shape="rect" id="node21" href="$dd/dd9/andns_8h.html#ad55d591cf7a444daa6b9cea7f8ae29bc" title="andns_rslv" alt="" coords="677,119,763,148"/>
+<area shape="rect" id="node25" href="$dd/dd9/andns_8h.html#a36956c4fc77c5a1b3dfcda3cc0a9051e" title="nk_forward" alt="" coords="483,171,568,200"/>
+<area shape="rect" id="node11" href="$d1/d6f/igs_8c.html#a29026505ec5e0465ebe99a7077ff6d49" title="internet_hosts_to_ip" alt="" coords="651,13,789,43"/>
+<area shape="rect" id="node13" href="$da/dd7/igs_8h.html#a184ab033bb2e2c1f856df5430ba87a80" title="init_internet_gateway\l_search" alt="" coords="839,5,983,51"/>
+<area shape="rect" id="node15" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="1032,13,1139,43"/>
+<area shape="rect" id="node17" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1187,13,1237,43"/>
+<area shape="rect" id="node23" href="$db/d6b/dns__wrapper_8c.html#ae858f92cfdc42ee9f2ba357a4021b59e" title="dns_exec_pkt" alt="" coords="860,119,961,148"/>
+</map>

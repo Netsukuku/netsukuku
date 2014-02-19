@@ -1,0 +1,25 @@
+<map id="destroy_andns_pkt" name="destroy_andns_pkt">
+<area shape="rect" id="node3" href="$dd/dd9/andns_8h.html#a77c1322dbf52a1bacabe97028c9ce8d2" title="nk_rslv" alt="" coords="223,5,287,35"/>
+<area shape="rect" id="node9" href="$dd/dd9/andns_8h.html#a36956c4fc77c5a1b3dfcda3cc0a9051e" title="nk_forward" alt="" coords="413,60,499,89"/>
+<area shape="rect" id="node12" href="$da/d94/andns__lib_8h.html#a1741ef8f9940010d3f4f0a310f607973" title="a_u" alt="" coords="233,187,276,216"/>
+<area shape="rect" id="node16" href="$d9/d88/ntkresolv_8h.html#aa95ce7a8d4506ae83dd9b76933d7c6ba" title="do_command" alt="" coords="407,183,505,212"/>
+<area shape="rect" id="node20" href="$da/d94/andns__lib_8h.html#aa81f323a0d18821cb8b37b74cb89e56b" title="a_p" alt="" coords="233,109,276,139"/>
+<area shape="rect" id="node25" href="$d9/d88/ntkresolv_8h.html#a525d73873ebf5621cb96d199b41454df" title="ntkresolv_safe_exit" alt="" coords="188,445,321,475"/>
+<area shape="rect" id="node5" href="$dd/dd9/andns_8h.html#ad55d591cf7a444daa6b9cea7f8ae29bc" title="andns_rslv" alt="" coords="621,60,707,89"/>
+<area shape="rect" id="node7" href="$db/d6b/dns__wrapper_8c.html#ae858f92cfdc42ee9f2ba357a4021b59e" title="dns_exec_pkt" alt="" coords="788,60,889,89"/>
+<area shape="rect" id="node18" href="$d3/dbf/ntkresolv_8c.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="813,465,864,495"/>
+<area shape="rect" id="node27" href="$d9/d88/ntkresolv_8h.html#af986bd0575ec9b913dfab4b8422509ae" title="version" alt="" coords="632,492,696,521"/>
+<area shape="rect" id="node30" href="$d3/dbf/ntkresolv_8c.html#ae8605e2b78cd4a81b6c6b5c30cb7366a" title="usage" alt="" coords="636,545,692,575"/>
+<area shape="rect" id="node33" href="$d9/d88/ntkresolv_8h.html#a878d850445a499c5a529a50309f704fa" title="qt_usage" alt="" coords="419,599,493,628"/>
+<area shape="rect" id="node38" href="$d9/d88/ntkresolv_8h.html#ae226936b7b54e18fd0142cec3fb75891" title="realm_usage" alt="" coords="408,652,504,681"/>
+<area shape="rect" id="node43" href="$d9/d88/ntkresolv_8h.html#a618d6dfb1e757d0b6cc7e14e85961d3d" title="proto_usage" alt="" coords="409,705,503,735"/>
+<area shape="rect" id="node48" href="$d9/d88/ntkresolv_8h.html#aa31287dfedcfeb069e2c19e9d85cfd11" title="service_and_proto_usage" alt="" coords="371,236,541,265"/>
+<area shape="rect" id="node53" href="$d9/d88/ntkresolv_8h.html#a55b7bc0916e754d54b95471def57e94f" title="opts_set_port" alt="" coords="613,329,715,359"/>
+<area shape="rect" id="node56" href="$d9/d88/ntkresolv_8h.html#a4fe23240617e7ebb55aca663b64e95ad" title="opts_set_ns" alt="" coords="409,340,503,369"/>
+<area shape="rect" id="node59" href="$d9/d88/ntkresolv_8h.html#a4aa3684915c89eb76081f2e5e6c6f336" title="opts_set_question" alt="" coords="392,393,520,423"/>
+<area shape="rect" id="node61" href="$d9/d88/ntkresolv_8h.html#af8db000da6d4c6009e8af4b927f818a5" title="opts_finish" alt="" coords="621,439,707,468"/>
+<area shape="rect" id="node35" href="$d9/d88/ntkresolv_8h.html#a63d87b859b08cbb60c867d78293adc54" title="opts_set_qt" alt="" coords="619,599,709,628"/>
+<area shape="rect" id="node40" href="$d9/d88/ntkresolv_8h.html#a33446b4052c109032876b7423849f082" title="opts_set_realm" alt="" coords="609,652,719,681"/>
+<area shape="rect" id="node45" href="$d9/d88/ntkresolv_8h.html#a53dc39e8aa18066a1fd3a0c5e991fd96" title="opts_set_proto" alt="" coords="611,705,717,735"/>
+<area shape="rect" id="node50" href="$d9/d88/ntkresolv_8h.html#a5a81581501fa29b9a28b34addd0a8ab9" title="opts_set_service_and\l_proto" alt="" coords="589,251,739,298"/>
+</map>

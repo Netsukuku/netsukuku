@@ -1,0 +1,9 @@
+<map id="set_reuseaddr_sk" name="set_reuseaddr_sk">
+<area shape="rect" id="node3" href="$d0/d51/daemon_8h.html#a71a44ef24ad390d8bfd927ed826d42eb" title="prepare_listen_socket" alt="" coords="179,59,328,88"/>
+<area shape="rect" id="node5" href="$dc/d21/daemon_8c.html#a990f15964056fbc0a9289f6fcf5e360c" title="sockets_all_ifs" alt="" coords="396,32,505,61"/>
+<area shape="rect" id="node18" href="$db/d6b/dns__wrapper_8c.html#aeaa4cae89e7a3eefe83d0ae4cc63b35a" title="dns_wrapper_daemon" alt="" coords="376,85,525,115"/>
+<area shape="rect" id="node7" href="$d0/d51/daemon_8h.html#a40481bac75cf84001629622bb8a5f2c0" title="udp_daemon" alt="" coords="573,5,669,35"/>
+<area shape="rect" id="node14" href="$d0/d51/daemon_8h.html#a6bfa338bfc8ec41ee95e77a666e26114" title="tcp_daemon" alt="" coords="575,59,668,88"/>
+<area shape="rect" id="node9" href="$d5/d05/andna_8h.html#ae8a0abdfc416da1b04dafe5c30fb14c3" title="andna_main" alt="" coords="719,32,809,61"/>
+<area shape="rect" id="node11" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="859,32,909,61"/>
+</map>

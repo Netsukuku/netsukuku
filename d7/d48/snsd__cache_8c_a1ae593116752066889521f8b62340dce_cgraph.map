@@ -1,0 +1,8 @@
+<map id="snsd_add_prio" name="snsd_add_prio">
+<area shape="rect" id="node3" href="$d7/d48/snsd__cache_8c.html#af3e821a5273c77a70e336634382c695f" title="snsd_find_prio" alt="" coords="160,5,267,35"/>
+<area shape="rect" id="node5" href="$d2/dab/xmalloc_8c.html#ad7ead2fc5daad78a7f124e173863b16e" title="xzalloc" alt="" coords="183,59,244,88"/>
+<area shape="rect" id="node7" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="315,59,381,88"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="431,59,476,88"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="541,32,611,61"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="525,85,627,115"/>
+</map>

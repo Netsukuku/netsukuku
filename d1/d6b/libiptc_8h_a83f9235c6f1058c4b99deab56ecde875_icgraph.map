@@ -1,0 +1,8 @@
+<map id="iptc_delete_chain" name="iptc_delete_chain">
+<area shape="rect" id="node3" href="$d3/de6/mark_8h.html#a155288a49eecef45917d64c265010e02" title="delete_ntk_forward\l_chain" alt="" coords="177,23,308,70"/>
+<area shape="rect" id="node5" href="$d3/de6/mark_8h.html#abce88ee61b36a36e1e58278165d6004d" title="mark_close" alt="" coords="359,32,447,61"/>
+<area shape="rect" id="node7" href="$da/dd7/igs_8h.html#a69dec3b6ff9453bc64d5b98f6b40e2aa" title="close_internet_gateway\l_search" alt="" coords="497,23,655,70"/>
+<area shape="rect" id="node9" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="705,32,836,61"/>
+<area shape="rect" id="node11" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="885,5,1000,35"/>
+<area shape="rect" id="node13" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1048,32,1099,61"/>
+</map>

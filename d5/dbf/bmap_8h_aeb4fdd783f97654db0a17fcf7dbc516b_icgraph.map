@@ -1,0 +1,6 @@
+<map id="save_bmap" name="save_bmap">
+<area shape="rect" id="node3" href="$d4/d3b/netsukuku_8c.html#aa8275f5b6804020ee48f40462a95d389" title="ntk_save_maps" alt="" coords="144,32,259,61"/>
+<area shape="rect" id="node5" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="308,32,439,61"/>
+<area shape="rect" id="node7" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="488,5,603,35"/>
+<area shape="rect" id="node9" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="651,32,701,61"/>
+</map>

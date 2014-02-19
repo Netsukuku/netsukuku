@@ -1,0 +1,8 @@
+<map id="print_results" name="print_results">
+<area shape="rect" id="node3" href="$d3/dbf/ntkresolv_8c.html#adf498292ef00b9985c9e3a7bd6a48d80" title="print_headers" alt="" coords="177,5,276,35"/>
+<area shape="rect" id="node5" href="$d3/dbf/ntkresolv_8c.html#a63f0bee2b9d27323f626496a5213c8e2" title="print_question" alt="" coords="176,59,277,88"/>
+<area shape="rect" id="node7" href="$d3/dbf/ntkresolv_8c.html#a1e9dbfcdf317a29cc3a93947945f8762" title="print_parsable_answers" alt="" coords="148,112,305,141"/>
+<area shape="rect" id="node13" href="$d3/dbf/ntkresolv_8c.html#a4b38d66e3a7bdcea18a221170b455f86" title="print_answers" alt="" coords="176,165,277,195"/>
+<area shape="rect" id="node9" href="$d3/dbf/ntkresolv_8c.html#a16ab30be9cce526b45a80e549e3e815b" title="answer_data_to_str" alt="" coords="355,139,491,168"/>
+<area shape="rect" id="node11" href="$d3/dbf/ntkresolv_8c.html#a06ffe4a1e6ae3edcadaa101f26796965" title="ip_bin_to_str" alt="" coords="539,139,635,168"/>
+</map>

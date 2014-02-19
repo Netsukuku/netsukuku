@@ -1,0 +1,9 @@
+<map id="set_broadcast_sk" name="set_broadcast_sk">
+<area shape="rect" id="node3" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="405,87,453,116"/>
+<area shape="rect" id="node7" href="$da/d89/inet_8c.html#ace49c54414750a5e03afb619007af827" title="join_ipv6_multicast" alt="" coords="188,34,321,63"/>
+<area shape="rect" id="node10" href="$da/d89/inet_8c.html#a1cd6901da908a11c445765c7aa42e495" title="set_multicast_loop_sk" alt="" coords="179,87,331,116"/>
+<area shape="rect" id="node13" href="$da/d89/inet_8c.html#a22541324b0b1e8b9b874c5c089296c20" title="set_multicast_if" alt="" coords="197,140,312,170"/>
+<area shape="rect" id="node16" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="232,194,277,223"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="529,114,599,143"/>
+<area shape="rect" id="node19" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="379,194,480,223"/>
+</map>

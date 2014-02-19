@@ -1,0 +1,17 @@
+<map id="pkt_recv_tcp" name="pkt_recv_tcp">
+<area shape="rect" id="node3" href="$da/d89/inet_8c.html#a54cfaf4470a9112f7f7df0e923da8cb3" title="inet_recv_timeout" alt="" coords="163,5,288,35"/>
+<area shape="rect" id="node9" href="$da/d89/inet_8c.html#a372c070a318c0a1d854d262711568cd1" title="inet_recv" alt="" coords="369,56,444,85"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="537,96,593,125"/>
+<area shape="rect" id="node15" href="$d9/dfc/endianness_8c.html#a629226f9f754987898be147e82b2321c" title="ints_network_to_host" alt="" coords="152,187,299,216"/>
+<area shape="rect" id="node28" href="$df/d05/pkts_8c.html#a56916d86b390965421fda804d7ee0a3d" title="pkt_verify_hdr" alt="" coords="173,240,277,269"/>
+<area shape="rect" id="node31" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="192,320,259,349"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="541,17,589,47"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="665,96,735,125"/>
+<area shape="rect" id="node17" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="367,160,447,189"/>
+<area shape="rect" id="node21" href="$d0/ddb/misc_8c.html#a98da58b707cfc9acf75f8105a3508b89" title="swap_shorts" alt="" coords="359,213,455,243"/>
+<area shape="rect" id="node24" href="$d9/dfc/endianness_8c.html#a29c401e27b50dda7df6e6714d801020d" title="ints_array_ntohl" alt="" coords="349,267,464,296"/>
+<area shape="rect" id="node26" href="$d9/dfc/endianness_8c.html#acbced2f124c85ac91411e02a9165d095" title="ints_array_ntohs" alt="" coords="348,320,465,349"/>
+<area shape="rect" id="node19" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="521,175,609,204"/>
+<area shape="rect" id="node33" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="384,373,429,403"/>
+<area shape="rect" id="node36" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="515,373,616,403"/>
+</map>

@@ -1,0 +1,35 @@
+<map id="rt_replace_def_gw" name="rt_replace_def_gw">
+<area shape="rect" id="node3" href="$da/d89/inet_8c.html#addb0c4631b9f6d90718cddc6d8f04469" title="inet_setip_anyaddr" alt="" coords="181,149,312,179"/>
+<area shape="rect" id="node22" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="1176,620,1224,649"/>
+<area shape="rect" id="node25" href="$df/dbf/route_8c.html#a5ed8d2627fcb0ff0efd5399bf684ce68" title="rt_replace_gw" alt="" coords="196,332,297,361"/>
+<area shape="rect" id="node5" href="$da/d89/inet_8c.html#ac0a02d49e9909bae32638e61ce18be9f" title="inet_setip" alt="" coords="372,44,449,73"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="1177,279,1223,308"/>
+<area shape="rect" id="node7" href="$da/d89/inet_8c.html#a9c6d94fc49adc3223bb0df762343784d" title="inet_setip_raw" alt="" coords="645,5,752,35"/>
+<area shape="rect" id="node15" href="$da/d89/inet_8c.html#a385963363f8d2ee7012a4c919b9b7b80" title="inet_ntohl" alt="" coords="515,44,592,73"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="1293,620,1363,649"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="1277,279,1379,308"/>
+<area shape="rect" id="node17" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="659,72,739,101"/>
+<area shape="rect" id="node19" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="832,72,920,101"/>
+<area shape="rect" id="node27" href="$df/dbf/route_8c.html#ae8e765370816d77b674ca4ca895fe604" title="rt_exec_gw" alt="" coords="367,279,455,308"/>
+<area shape="rect" id="node34" href="$d8/d91/krnl__route_8c.html#a3890e28e0cd128baa5456865fc8f4af6" title="route_replace" alt="" coords="361,385,460,415"/>
+<area shape="rect" id="node29" href="$da/d89/inet_8c.html#a75c2848f706809db4a3a8999d46118dc" title="inet_htonl" alt="" coords="515,97,592,127"/>
+<area shape="rect" id="node32" href="$da/d89/inet_8c.html#a284a1d36cd80931c6d96aba2e6a6ae46" title="inet_copy" alt="" coords="515,279,592,308"/>
+<area shape="rect" id="node36" href="$d8/d91/krnl__route_8c.html#a4cda4862ee9002730e4a8b8a12ae78c6" title="route_exec" alt="" coords="511,541,596,571"/>
+<area shape="rect" id="node38" href="$d4/dab/libnetlink_8c.html#af6a834b458ad515cfe591cd720b5a3fd" title="rtnl_open" alt="" coords="661,464,736,493"/>
+<area shape="rect" id="node43" href="$d1/d71/ll__map_8c.html#ac4adbf41fc1b3fd4d880768bf45b1f4c" title="ll_init_map" alt="" coords="657,305,740,335"/>
+<area shape="rect" id="node60" href="$d4/dab/libnetlink_8c.html#a308c9418a2d83e4e9ba8d8ed0b7bbe28" title="addattr_l" alt="" coords="1025,620,1097,649"/>
+<area shape="rect" id="node63" href="$d1/d71/ll__map_8c.html#a3ccff7ca25a76d2c7d2a1dbcafb2678e" title="ll_name_to_index" alt="" coords="1000,567,1123,596"/>
+<area shape="rect" id="node66" href="$d4/dab/libnetlink_8c.html#ab9339d56ad1804972e905306791fabbc" title="addattr32" alt="" coords="1024,881,1099,911"/>
+<area shape="rect" id="node69" href="$d8/d91/krnl__route_8c.html#a5ac018a9fffaefc7cf7ad94e794d7c18" title="add_nexthops" alt="" coords="825,723,927,752"/>
+<area shape="rect" id="node85" href="$d4/dab/libnetlink_8c.html#a1e674ac9211ad8a2bd6200b04860b203" title="rtnl_talk" alt="" coords="1028,412,1095,441"/>
+<area shape="rect" id="node89" href="$d4/dab/libnetlink_8c.html#abe941df1a4b224511e5aba5fbeda5373" title="rtnl_close" alt="" coords="660,720,737,749"/>
+<area shape="rect" id="node40" href="$d4/dab/libnetlink_8c.html#adcef0338bcf67064f61e984ea6542a4f" title="rtnl_open_byproto" alt="" coords="813,464,939,493"/>
+<area shape="rect" id="node45" href="$d4/dab/libnetlink_8c.html#ae723f19314cbb031a26abaee33928b84" title="rtnl_wilddump_request" alt="" coords="800,359,952,388"/>
+<area shape="rect" id="node48" href="$d4/dab/libnetlink_8c.html#a0c981a8de14fd51a25027ef407e799ca" title="rtnl_dump_filter" alt="" coords="1007,252,1116,281"/>
+<area shape="rect" id="node52" href="$d1/d71/ll__map_8c.html#aa74dd48e5206c9a8c5b36307e023fa58" title="ll_remember_index" alt="" coords="811,305,941,335"/>
+<area shape="rect" id="node54" href="$d4/dab/libnetlink_8c.html#aed575cd447219f8c2f67e2011aaee4d8" title="parse_rtattr" alt="" coords="1017,359,1105,388"/>
+<area shape="rect" id="node57" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="1028,305,1095,335"/>
+<area shape="rect" id="node75" href="$d4/dab/libnetlink_8c.html#accbfecaa74aaf78e2c0ca021954bdad9" title="rta_addattr32" alt="" coords="1012,775,1111,804"/>
+<area shape="rect" id="node78" href="$d4/dab/libnetlink_8c.html#a9788836cab7c0fa68a06532af4c91e19" title="rta_addattr_l" alt="" coords="1015,828,1108,857"/>
+<area shape="rect" id="node82" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="1172,828,1228,857"/>
+</map>

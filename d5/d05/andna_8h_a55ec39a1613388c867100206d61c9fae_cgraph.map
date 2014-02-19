@@ -1,0 +1,31 @@
+<map id="andna_save_caches" name="andna_save_caches">
+<area shape="rect" id="node3" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="631,5,687,35"/>
+<area shape="rect" id="node7" href="$d2/de6/andna__cache_8c.html#a099662b5e5060fa4eef5a25c0573a325" title="save_lcl_cache" alt="" coords="207,280,319,309"/>
+<area shape="rect" id="node34" href="$d2/de6/andna__cache_8c.html#ae02422c831311cf5357e92febb94925f" title="save_andna_cache" alt="" coords="196,333,329,363"/>
+<area shape="rect" id="node62" href="$d2/de6/andna__cache_8c.html#ab82dc4bb575d3f181457ea7c3076c858" title="save_counter_c" alt="" coords="205,227,320,256"/>
+<area shape="rect" id="node69" href="$d2/de6/andna__cache_8c.html#aba364b75290b92041b9d27b76dd6c255" title="save_rh_cache" alt="" coords="208,173,317,203"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="1065,57,1135,87"/>
+<area shape="rect" id="node9" href="$d2/de6/andna__cache_8c.html#a57cc184f00d4d7dcba8d59428e0c6eb1" title="pack_lcl_cache" alt="" coords="395,333,507,363"/>
+<area shape="rect" id="node31" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="427,227,475,256"/>
+<area shape="rect" id="node11" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="625,315,692,344"/>
+<area shape="rect" id="node18" href="$d9/dfc/endianness_8c.html#aed4f03aa2dac4cdc67d1e9cdf66bb850" title="ints_host_to_network" alt="" coords="1027,368,1173,397"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="860,109,905,139"/>
+<area shape="rect" id="node16" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="1049,111,1151,140"/>
+<area shape="rect" id="node20" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="2257,341,2337,371"/>
+<area shape="rect" id="node24" href="$d0/ddb/misc_8c.html#a98da58b707cfc9acf75f8105a3508b89" title="swap_shorts" alt="" coords="1436,419,1532,448"/>
+<area shape="rect" id="node27" href="$d9/dfc/endianness_8c.html#a1a256f4a240590c9338842ccf89cef71" title="ints_array_htonl" alt="" coords="1240,393,1355,423"/>
+<area shape="rect" id="node29" href="$d9/dfc/endianness_8c.html#adba3e27303d1342689cbb377921aee3f" title="ints_array_htons" alt="" coords="1239,289,1356,319"/>
+<area shape="rect" id="node22" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="2388,373,2476,403"/>
+<area shape="rect" id="node36" href="$d2/de6/andna__cache_8c.html#a0d9f1fef5d898612fcabd13b79b486ba" title="pack_andna_cache" alt="" coords="384,408,517,437"/>
+<area shape="rect" id="node40" href="$d2/de6/andna__cache_8c.html#a29c1eeb9df9d110cdfca3144331b8b7b" title="pack_single_andna_cache" alt="" coords="572,419,745,448"/>
+<area shape="rect" id="node43" href="$d2/de6/andna__cache_8c.html#a2d80e94b5ec287281ea7eec6279f9399" title="pack_andna_cache_queue" alt="" coords="795,393,971,423"/>
+<area shape="rect" id="node46" href="$d7/d48/snsd__cache_8c.html#aea3f6c274a3770ca095f86632c94f03a" title="snsd_pack_all_services" alt="" coords="1020,236,1180,265"/>
+<area shape="rect" id="node48" href="$d7/d48/snsd__cache_8c.html#a6a72e6a4c792d596b34da0115a916606" title="snsd_pack_service" alt="" coords="1231,236,1364,265"/>
+<area shape="rect" id="node50" href="$d7/d48/snsd__cache_8c.html#acc74354df68d0ea3e4b93e59eb333ed7" title="snsd_pack_all_prios" alt="" coords="1415,243,1553,272"/>
+<area shape="rect" id="node52" href="$d7/d48/snsd__cache_8c.html#a472f122efb54c5cbf24cd3b2e919af41" title="snsd_pack_prio" alt="" coords="1604,269,1716,299"/>
+<area shape="rect" id="node54" href="$d7/d48/snsd__cache_8c.html#af765c375ebd690fdf1fa844ec7e1c0d6" title="snsd_pack_all_nodes" alt="" coords="1765,283,1912,312"/>
+<area shape="rect" id="node56" href="$d7/d48/snsd__cache_8c.html#a0d50c4944d234d5bf4cadd84cede4fc1" title="snsd_pack_node" alt="" coords="1960,285,2080,315"/>
+<area shape="rect" id="node58" href="$da/d89/inet_8c.html#a75c2848f706809db4a3a8999d46118dc" title="inet_htonl" alt="" coords="2129,288,2207,317"/>
+<area shape="rect" id="node64" href="$d2/de6/andna__cache_8c.html#a35b354e37cffa71b841eac414548e31d" title="pack_counter_cache" alt="" coords="380,280,521,309"/>
+<area shape="rect" id="node71" href="$d2/de6/andna__cache_8c.html#a0df1bcedcc94f5eb43bf734603c1f7a5" title="pack_rh_cache" alt="" coords="396,173,505,203"/>
+</map>

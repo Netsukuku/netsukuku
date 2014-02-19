@@ -1,0 +1,11 @@
+<map id="snsd_count_nodes" name="snsd_count_nodes">
+<area shape="rect" id="node3" href="$d6/d2e/snsd__cache_8h.html#a5f0235cc565970b1c88792ccbff8601d" title="snsd_count_prio_nodes" alt="" coords="185,63,343,92"/>
+<area shape="rect" id="node5" href="$d7/d74/andna__cache_8h.html#ae30431f21d44516e3c006ae361578d9c" title="load_snsd" alt="" coords="421,32,501,61"/>
+<area shape="rect" id="node20" href="$d6/d2e/snsd__cache_8h.html#a05c6106c53bbb0ceb3978ce6b068adbf" title="snsd_count_service\l_nodes" alt="" coords="392,85,531,131"/>
+<area shape="rect" id="node7" href="$d5/d05/andna_8h.html#afc0f24a5b798975732d4f238dccc42ef" title="andna_load_caches" alt="" coords="580,7,716,36"/>
+<area shape="rect" id="node15" href="$d4/d3b/netsukuku_8c.html#a678f7ec6e159e6bee076921c8d709847" title="reload_hostname_thread" alt="" coords="767,59,929,88"/>
+<area shape="rect" id="node9" href="$d5/d05/andna_8h.html#aa7b53282a673cbc82c998a3cf4e5aff2" title="andna_init" alt="" coords="808,5,888,35"/>
+<area shape="rect" id="node11" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="980,5,1087,35"/>
+<area shape="rect" id="node13" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1136,32,1187,61"/>
+<area shape="rect" id="node17" href="$d4/d3b/netsukuku_8c.html#a207b25374e65f083a666cdfaca49bb99" title="sighup_handler" alt="" coords="979,59,1088,88"/>
+</map>

@@ -1,0 +1,24 @@
+<map id="src/dns_wrapper.c" name="src/dns_wrapper.c">
+<area shape="rect" id="node3" href="$d1/d0b/includes_8h.html" title="includes.h" alt="" coords="1332,237,1412,267"/>
+<area shape="rect" id="node57" href="$d6/d4a/inet_8h.html" title="inet.h" alt="" coords="2719,392,2772,421"/>
+<area shape="rect" id="node59" href="$dc/d3e/endianness_8h.html" title="endianness.h" alt="" coords="2535,469,2633,499"/>
+<area shape="rect" id="node64" href="$dc/db7/map_8h.html" title="map.h" alt="" coords="3068,315,3127,344"/>
+<area shape="rect" id="node67" href="$d7/d3b/gmap_8h.html" title="gmap.h" alt="" coords="3065,237,3129,267"/>
+<area shape="rect" id="node72" href="$d5/dbf/bmap_8h.html" title="bmap.h" alt="" coords="3065,160,3129,189"/>
+<area shape="rect" id="node75" href="$d9/d7f/route_8h.html" title="route.h" alt="" coords="2989,83,3051,112"/>
+<area shape="rect" id="node83" href="$d4/d43/request_8h.html" title="request.h" alt="" coords="2808,237,2883,267"/>
+<area shape="rect" id="node85" href="$d5/d89/pkts_8h.html" title="pkts.h" alt="" coords="2868,160,2927,189"/>
+<area shape="rect" id="node90" href="$da/db5/tracer_8h.html" title="tracer.h" alt="" coords="2899,83,2965,112"/>
+<area shape="rect" id="node94" href="$d8/da0/qspn_8h.html" title="qspn.h" alt="" coords="3271,160,3332,189"/>
+<area shape="rect" id="node97" href="$d3/df5/radar_8h.html" title="radar.h" alt="" coords="3075,83,3136,112"/>
+<area shape="rect" id="node99" href="$db/d93/netsukuku_8h.html" title="netsukuku.h" alt="" coords="3160,83,3253,112"/>
+<area shape="rect" id="node101" href="$d0/d51/daemon_8h.html" title="daemon.h" alt="" coords="3277,83,3355,112"/>
+<area shape="rect" id="node103" href="$da/da0/crypto_8h.html" title="crypto.h" alt="" coords="2512,237,2581,267"/>
+<area shape="rect" id="node106" href="$d7/d74/andna__cache_8h.html" title="andna_cache.h" alt="" coords="2601,160,2711,189"/>
+<area shape="rect" id="node112" href="$d5/d05/andna_8h.html" title="andna.h" alt="" coords="2656,83,2723,112"/>
+<area shape="rect" id="node116" href="$dd/dd9/andns_8h.html" title="andns.h" alt="" coords="2249,237,2316,267"/>
+<area shape="rect" id="node122" href="$d0/d34/dns__wrapper_8h.html" title="dns_wrapper.h" alt="" coords="3581,83,3688,112"/>
+<area shape="rect" id="node124" href="$dc/d54/common_8h.html" title="common.h" alt="" coords="3712,83,3795,112"/>
+<area shape="rect" id="node69" href="$d4/de1/llist_8c.html" title="llist.c" alt="" coords="2887,315,2940,344"/>
+<area shape="rect" id="node79" href="$dc/d8d/if_8h.html" title="if.h" alt="" coords="2957,237,2997,267"/>
+</map>

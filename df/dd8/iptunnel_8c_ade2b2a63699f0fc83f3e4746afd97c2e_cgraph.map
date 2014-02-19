@@ -1,0 +1,15 @@
+<map id="del_all_tunnel_ifs" name="del_all_tunnel_ifs">
+<area shape="rect" id="node3" href="$df/dd8/iptunnel_8c.html#a2ad06b901b6a0d7c0f59f82c9762a27f" title="do_get" alt="" coords="461,64,523,93"/>
+<area shape="rect" id="node7" href="$df/dd8/iptunnel_8c.html#ac4140773b9400374d8142caa1cc14b55" title="del_tunnel_if" alt="" coords="177,189,271,219"/>
+<area shape="rect" id="node5" href="$df/dd8/iptunnel_8c.html#aea667cde17b521176760c01bfa180537" title="do_get_ioctl" alt="" coords="757,5,848,35"/>
+<area shape="rect" id="node9" href="$df/dd8/iptunnel_8c.html#a770f08840a609f19a4db7cfc47e66778" title="tunnel_del" alt="" coords="327,163,407,192"/>
+<area shape="rect" id="node24" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="947,164,995,193"/>
+<area shape="rect" id="node31" href="$df/dd8/iptunnel_8c.html#ae2688c7c3ee7d1d10a646644e08f66b5" title="tun_del_tunl" alt="" coords="321,267,412,296"/>
+<area shape="rect" id="node11" href="$df/dd8/iptunnel_8c.html#a3d7c2cc0202361dd1af1c18cd0cd5604" title="do_del" alt="" coords="463,163,521,192"/>
+<area shape="rect" id="node13" href="$df/dd8/iptunnel_8c.html#a883fef533cc97f76ab55c913e5758622" title="fill_tunnel_parm" alt="" coords="572,84,684,113"/>
+<area shape="rect" id="node27" href="$df/dd8/iptunnel_8c.html#a4627dc08c8aea426c59b94f85b339c0f" title="do_del_ioctl" alt="" coords="583,163,673,192"/>
+<area shape="rect" id="node16" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="780,59,825,88"/>
+<area shape="rect" id="node22" href="$df/dd8/iptunnel_8c.html#ae30c8ce1aa0a2b6bdce5e67310941fa6" title="do_ioctl_get_ifindex" alt="" coords="735,112,871,141"/>
+<area shape="rect" id="node18" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="1071,112,1140,141"/>
+<area shape="rect" id="node20" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="920,111,1021,140"/>
+</map>

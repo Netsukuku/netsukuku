@@ -1,0 +1,10 @@
+<map id="andna_resolvconf_modify" name="andna_resolvconf_modify">
+<area shape="rect" id="node3" href="$d7/df8/log_8c.html#aea4dca1a8e24794377ba1bf45fbbfce8" title="loginfo" alt="" coords="505,5,564,35"/>
+<area shape="rect" id="node7" href="$d2/de6/andna__cache_8c.html#a9a5622c1d456d34edea6d72281957e3c" title="add_resolv_conf" alt="" coords="224,109,341,139"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#ac33c8a42a58a6379397850b60be22028" title="error" alt="" coords="399,57,447,87"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="629,84,699,113"/>
+<area shape="rect" id="node12" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="389,161,456,191"/>
+<area shape="rect" id="node19" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="507,109,563,139"/>
+<area shape="rect" id="node14" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="512,163,557,192"/>
+<area shape="rect" id="node17" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="613,163,715,192"/>
+</map>

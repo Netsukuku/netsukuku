@@ -1,0 +1,14 @@
+<map id="tracer_add_entry" name="tracer_add_entry">
+<area shape="rect" id="node3" href="$d2/dab/xmalloc_8c.html#ad7ead2fc5daad78a7f124e173863b16e" title="xzalloc" alt="" coords="203,5,264,35"/>
+<area shape="rect" id="node13" href="$d3/d7a/map_8c.html#a35cb995501f7278fdaaff8a730dcc6db" title="node_from_pos" alt="" coords="179,59,288,88"/>
+<area shape="rect" id="node15" href="$d3/d7a/map_8c.html#a72016d6f9d0f367f9b50c13c38a54e47" title="rnode_find" alt="" coords="341,215,424,244"/>
+<area shape="rect" id="node17" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="473,104,529,133"/>
+<area shape="rect" id="node20" href="$d9/d45/gmap_8c.html#a31edfce8493c6d503bff5f88a235e480" title="gnode_from_pos" alt="" coords="175,213,292,243"/>
+<area shape="rect" id="node22" href="$d9/d45/gmap_8c.html#a02f18a004fabe26b791362ba2023ceaa" title="g_rnode_find" alt="" coords="185,267,281,296"/>
+<area shape="rect" id="node25" href="$d3/d7a/map_8c.html#a4ca7b0204f961c5dbe35bf7e8fff7ac5" title="pos_from_node" alt="" coords="179,320,288,349"/>
+<area shape="rect" id="node27" href="$d9/d45/gmap_8c.html#aae95738707e42a1fa222862d7ba558b3" title="pos_from_gnode" alt="" coords="175,373,292,403"/>
+<area shape="rect" id="node5" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="349,12,416,41"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="479,37,524,67"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="595,97,664,127"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="579,37,680,67"/>
+</map>

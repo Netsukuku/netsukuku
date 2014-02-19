@@ -1,0 +1,6 @@
+<map id="add_rq" name="add_rq">
+<area shape="rect" id="node3" href="$dd/d23/request_8c.html#a438a494dcfe71d942b55538d988518e7" title="is_rq_full" alt="" coords="139,32,213,61"/>
+<area shape="rect" id="node9" href="$dd/d23/request_8c.html#a666975aa9beed1798e6b1fb19fa54228" title="find_free_rq_wait" alt="" coords="116,85,236,115"/>
+<area shape="rect" id="node5" href="$dd/d23/request_8c.html#a544592715c1fa859a8a108d1b3734d5b" title="rq_verify" alt="" coords="300,5,372,35"/>
+<area shape="rect" id="node7" href="$dd/d23/request_8c.html#a33390565a774719e0197951fa99879d1" title="update_rq_tbl" alt="" coords="287,59,385,88"/>
+</map>

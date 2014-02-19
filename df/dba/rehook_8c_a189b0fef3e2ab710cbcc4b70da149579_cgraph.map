@@ -1,0 +1,8 @@
+<map id="wait_new_rnode" name="wait_new_rnode">
+<area shape="rect" id="node3" href="$d7/df8/log_8c.html#a983d6ac9e7105eb38445c20ff5e72135" title="debug" alt="" coords="217,5,273,35"/>
+<area shape="rect" id="node7" href="$d9/d45/gmap_8c.html#a558e1bec08c2060b80372ac25cd8d8f2" title="iptogids" alt="" coords="212,59,279,88"/>
+<area shape="rect" id="node11" href="$d9/d45/gmap_8c.html#ab086e11ba60ae3d1d2e0c6a5562dd385" title="gids_cmp" alt="" coords="207,112,284,141"/>
+<area shape="rect" id="node13" href="$d7/d02/radar_8c.html#a593e03eb8b5f285712ad9bcc8f921d95" title="radar_wait_new_scan" alt="" coords="172,165,319,195"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="369,5,439,35"/>
+<area shape="rect" id="node9" href="$d9/d45/gmap_8c.html#a94609b8ed9b174e8cd3c1a2b98b9006e" title="iptogid" alt="" coords="375,59,433,88"/>
+</map>

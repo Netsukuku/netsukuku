@@ -1,0 +1,13 @@
+<map id="src/netsukuku.h" name="src/netsukuku.h">
+<area shape="rect" id="node3" href="$d4/d18/andna_8c.html" title="src/andna.c" alt="" coords="5,83,96,112"/>
+<area shape="rect" id="node5" href="$dc/d21/daemon_8c.html" title="src/daemon.c" alt="" coords="120,83,221,112"/>
+<area shape="rect" id="node7" href="$db/d6b/dns__wrapper_8c.html" title="src/dns_wrapper.c" alt="" coords="245,83,373,112"/>
+<area shape="rect" id="node9" href="$d3/dc7/hook_8c.html" title="src/hook.c" alt="" coords="397,83,480,112"/>
+<area shape="rect" id="node11" href="$d1/d6f/igs_8c.html" title="src/igs.c" alt="" coords="504,83,576,112"/>
+<area shape="rect" id="node13" href="$d4/d3b/netsukuku_8c.html" title="src/netsukuku.c" alt="" coords="600,83,715,112"/>
+<area shape="rect" id="node15" href="$db/de6/qspn_8c.html" title="src/qspn.c" alt="" coords="739,83,821,112"/>
+<area shape="rect" id="node17" href="$d7/d02/radar_8c.html" title="src/radar.c" alt="" coords="845,83,928,112"/>
+<area shape="rect" id="node19" href="$df/dba/rehook_8c.html" title="src/rehook.c" alt="" coords="952,83,1045,112"/>
+<area shape="rect" id="node21" href="$df/dbf/route_8c.html" title="src/route.c" alt="" coords="1069,83,1152,112"/>
+<area shape="rect" id="node23" href="$d6/d62/tracer_8c.html" title="src/tracer.c" alt="" coords="1176,83,1264,112"/>
+</map>

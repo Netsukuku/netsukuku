@@ -1,0 +1,33 @@
+<map id="do_del" name="do_del">
+<area shape="rect" id="node3" href="$d7/d0e/iptunnel_8h.html#a770f08840a609f19a4db7cfc47e66778" title="tunnel_del" alt="" coords="116,288,196,317"/>
+<area shape="rect" id="node5" href="$d7/d0e/iptunnel_8h.html#ac4140773b9400374d8142caa1cc14b55" title="del_tunnel_if" alt="" coords="247,288,340,317"/>
+<area shape="rect" id="node7" href="$da/dd7/igs_8h.html#a51d86ef21953a6f2d0231b9c83701ce6" title="igw_replace_def_igws" alt="" coords="391,164,540,193"/>
+<area shape="rect" id="node65" href="$d7/d0e/iptunnel_8h.html#ade2b2a63699f0fc83f3e4746afd97c2e" title="del_all_tunnel_ifs" alt="" coords="1659,416,1781,445"/>
+<area shape="rect" id="node9" href="$d3/dc7/hook_8c.html#a5e32a215ed05b1ef1f870ce105f67640" title="hook_finish" alt="" coords="1491,60,1579,89"/>
+<area shape="rect" id="node39" href="$da/dd7/igs_8h.html#ac87ed2fc7a66e73c5fef763321862295" title="igw_monitor_igws_t" alt="" coords="1137,8,1273,37"/>
+<area shape="rect" id="node42" href="$da/dd7/igs_8h.html#a68583c93468fa447635d641f93b040ce" title="igw_store_bblock" alt="" coords="781,337,904,367"/>
+<area shape="rect" id="node47" href="$db/de6/qspn_8c.html#aaf014079dd9e527ab38f3b21c547489b" title="qspn_remove_deads" alt="" coords="591,164,732,193"/>
+<area shape="rect" id="node11" href="$d6/d34/hook_8h.html#af10a487801fab9a28a3cfb6759fe138f" title="netsukuku_hook" alt="" coords="1661,164,1779,193"/>
+<area shape="rect" id="node13" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="3288,228,3339,257"/>
+<area shape="rect" id="node15" href="$d2/d42/rehook_8h.html#ae6ae2d4b03e5a8cc1891cbf553ebb913" title="rehook" alt="" coords="1879,287,1940,316"/>
+<area shape="rect" id="node17" href="$df/dba/rehook_8c.html#aeb32663f186f840edf41bb43d1f82459" title="new_rehook_thread" alt="" coords="2044,287,2177,316"/>
+<area shape="rect" id="node19" href="$d2/d42/rehook_8h.html#acd9ab3b97734c31a06ae3dcf475a1b39" title="new_rehook" alt="" coords="2239,287,2329,316"/>
+<area shape="rect" id="node21" href="$d6/d62/tracer_8c.html#a8bab813b90267e0e25592821248d7158" title="tracer_check_node_collision" alt="" coords="2384,317,2571,347"/>
+<area shape="rect" id="node23" href="$da/db5/tracer_8h.html#a12c03f2eaa97e2c644dcdd892e0fa758" title="tracer_store_pkt" alt="" coords="2620,305,2735,335"/>
+<area shape="rect" id="node25" href="$d8/da0/qspn_8h.html#ab70abece99b6ae77b078ec100c35912a" title="qspn_close" alt="" coords="2796,239,2884,268"/>
+<area shape="rect" id="node32" href="$d8/da0/qspn_8h.html#a6df687dad6a64c0807fbfc105cf244c5" title="qspn_open" alt="" coords="2797,292,2883,321"/>
+<area shape="rect" id="node35" href="$da/db5/tracer_8h.html#ab53c5821a9d4215b3d5ba16fd95e8297" title="tracer_pkt_recv" alt="" coords="2784,345,2896,375"/>
+<area shape="rect" id="node27" href="$d8/da0/qspn_8h.html#a6c5c062e24ec079201aea53899af3e28" title="qspn_init" alt="" coords="2973,292,3048,321"/>
+<area shape="rect" id="node29" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="3129,292,3236,321"/>
+<area shape="rect" id="node44" href="$d6/d62/tracer_8c.html#a3a5faa1eb3192e2c783c87912f8c6251" title="tracer_store_bblock" alt="" coords="952,360,1088,389"/>
+<area shape="rect" id="node49" href="$d8/da0/qspn_8h.html#ab2f4bfac6bcea3379068bf4aab92e381" title="qspn_new_round" alt="" coords="783,164,903,193"/>
+<area shape="rect" id="node51" href="$d8/da0/qspn_8h.html#a0c2ef8efd5611e3ed71086a267af7915" title="qspn_send" alt="" coords="977,139,1063,168"/>
+<area shape="rect" id="node53" href="$d7/d02/radar_8c.html#ab10b73e523085803cf8a5863ed9994f9" title="radar_qspn_send_t" alt="" coords="1140,132,1271,161"/>
+<area shape="rect" id="node55" href="$d3/df5/radar_8h.html#a3d46b80b3ad27f86a02c0586617f18cc" title="radar_scan" alt="" coords="1324,125,1409,155"/>
+<area shape="rect" id="node57" href="$d3/dc7/hook_8c.html#a7503e6bf75bee5edba1dd37e8878911a" title="hook_first_radar_scan" alt="" coords="1460,164,1609,193"/>
+<area shape="rect" id="node61" href="$d3/df5/radar_8h.html#ac9d1b53d63e675b260906e91850b588c" title="radar_daemon" alt="" coords="2232,112,2336,141"/>
+<area shape="rect" id="node67" href="$da/dd7/igs_8h.html#a184ab033bb2e2c1f856df5430ba87a80" title="init_internet_gateway\l_search" alt="" coords="2039,411,2183,458"/>
+<area shape="rect" id="node70" href="$da/dd7/igs_8h.html#a69dec3b6ff9453bc64d5b98f6b40e2aa" title="close_internet_gateway\l_search" alt="" coords="1831,470,1988,517"/>
+<area shape="rect" id="node72" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="2945,472,3076,501"/>
+<area shape="rect" id="node74" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="3125,452,3240,481"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="snsd_main_ip" name="snsd_main_ip">
+<area shape="rect" id="node3" href="$d1/dd5/andns__snsd_8h.html#a86f72d27da5b908d5ce023c778ad4b74" title="snsd_node_to_data" alt="" coords="165,29,299,59"/>
+<area shape="rect" id="node14" href="$d1/dd5/andns__snsd_8h.html#af1703129169f7152c3a4c38604bf9ea9" title="snsd_service_to_aansws" alt="" coords="356,81,524,111"/>
+<area shape="rect" id="node17" href="$d1/dd5/andns__snsd_8h.html#a1fcd0373d93db849bf72644fc21e5087" title="snsd_node_to_dansw" alt="" coords="159,135,305,164"/>
+<area shape="rect" id="node6" href="$d1/dd5/andns__snsd_8h.html#a016db13b6c9aea169159e1e69d926ff3" title="snsd_prio_to_aansws" alt="" coords="367,28,513,57"/>
+<area shape="rect" id="node8" href="$dd/dd9/andns_8h.html#a77c1322dbf52a1bacabe97028c9ce8d2" title="nk_rslv" alt="" coords="577,81,641,111"/>
+<area shape="rect" id="node10" href="$dd/dd9/andns_8h.html#ad55d591cf7a444daa6b9cea7f8ae29bc" title="andns_rslv" alt="" coords="693,108,779,137"/>
+<area shape="rect" id="node12" href="$db/d6b/dns__wrapper_8c.html#ae858f92cfdc42ee9f2ba357a4021b59e" title="dns_exec_pkt" alt="" coords="828,108,929,137"/>
+<area shape="rect" id="node19" href="$d1/dd5/andns__snsd_8h.html#a1debec61ed4edba1c3f0b2161314c18d" title="snsd_prio_to_dansws" alt="" coords="367,135,513,164"/>
+<area shape="rect" id="node21" href="$dd/dd9/andns_8h.html#a81431a7e5716758c3bbefd17f8e68898" title="inet_rslv" alt="" coords="575,135,644,164"/>
+</map>

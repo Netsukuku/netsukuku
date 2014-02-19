@@ -1,0 +1,21 @@
+<map id="get_rnode_block" name="get_rnode_block">
+<area shape="rect" id="node3" href="$d9/d45/gmap_8c.html#a0cfcbd0c066943fa75267cb34af05f9c" title="gmap_get_rblock" alt="" coords="172,189,292,219"/>
+<area shape="rect" id="node27" href="$dc/db7/map_8h.html#a60d1cd92a769d9904614fced266f4493" title="map_get_rblock" alt="" coords="175,136,289,165"/>
+<area shape="rect" id="node5" href="$d9/d45/gmap_8c.html#a5d8085eab648579a7d1f199f911db8ce" title="extmap_get_rblock" alt="" coords="343,189,473,219"/>
+<area shape="rect" id="node7" href="$d7/d3b/gmap_8h.html#ad3b5a9f9d1ee7be33ede21a83479450c" title="pack_extmap" alt="" coords="532,241,631,271"/>
+<area shape="rect" id="node9" href="$d7/d3b/gmap_8h.html#a4fe1c9b16dc69e8bc0b59126fcc76e4b" title="save_extmap" alt="" coords="696,295,795,324"/>
+<area shape="rect" id="node20" href="$d6/d34/hook_8h.html#aa99944b9d6345e33be0bf1c850380228" title="put_ext_map" alt="" coords="697,241,793,271"/>
+<area shape="rect" id="node11" href="$d4/d3b/netsukuku_8c.html#aa8275f5b6804020ee48f40462a95d389" title="ntk_save_maps" alt="" coords="851,188,965,217"/>
+<area shape="rect" id="node13" href="$d4/d3b/netsukuku_8c.html#a235b6034c5756ff428377a300e9be15d" title="destroy_netsukuku" alt="" coords="1015,161,1145,191"/>
+<area shape="rect" id="node15" href="$d4/d3b/netsukuku_8c.html#a785106d5f7144641d79c5f5e9ddc2135" title="sigterm_handler" alt="" coords="1195,109,1309,139"/>
+<area shape="rect" id="node17" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1357,109,1408,139"/>
+<area shape="rect" id="node22" href="$d6/d34/hook_8h.html#af541d5ab5dd6596b12342140f4094dee" title="hook_init" alt="" coords="871,33,945,63"/>
+<area shape="rect" id="node24" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="1199,53,1305,83"/>
+<area shape="rect" id="node29" href="$dc/db7/map_8h.html#adedb299c04209530f0730bba4c5fb04c" title="pack_map" alt="" coords="367,111,449,140"/>
+<area shape="rect" id="node31" href="$d5/dbf/bmap_8h.html#ae8c6ea7090b72e0e8bb5b84052897f49" title="pack_all_bmaps" alt="" coords="524,84,639,113"/>
+<area shape="rect" id="node39" href="$d6/d34/hook_8h.html#ab08a91850a188145dc3f039300aeca8b" title="put_int_map" alt="" coords="535,5,628,35"/>
+<area shape="rect" id="node42" href="$dc/db7/map_8h.html#a766f7193d569ff69cabe949d29e0b1ef" title="save_map" alt="" coords="540,137,623,167"/>
+<area shape="rect" id="node33" href="$d5/dbf/bmap_8h.html#aeb4fdd783f97654db0a17fcf7dbc516b" title="save_bmap" alt="" coords="701,84,789,113"/>
+<area shape="rect" id="node36" href="$d6/d34/hook_8h.html#a63187dcc3bfeb1895aed9385c06ed714" title="put_bnode_map" alt="" coords="688,31,803,60"/>
+<area shape="rect" id="node45" href="$db/def/qspn-empiric_8c.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="720,137,771,167"/>
+</map>

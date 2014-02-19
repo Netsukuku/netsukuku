@@ -1,0 +1,16 @@
+<map id="w_recv_timeout" name="w_recv_timeout">
+<area shape="rect" id="node3" href="$d6/de1/andns__net_8h.html#a283bd5c64ce0d9183389ad4693f502a8" title="hn_send_recv_close" alt="" coords="168,36,309,65"/>
+<area shape="rect" id="node9" href="$d6/de1/andns__net_8h.html#a7af4b0897c6b267464dce4bd247d6e82" title="ai_send_recv_close" alt="" coords="171,103,307,132"/>
+<area shape="rect" id="node5" href="$d9/d88/ntkresolv_8h.html#aa95ce7a8d4506ae83dd9b76933d7c6ba" title="do_command" alt="" coords="368,9,467,39"/>
+<area shape="rect" id="node7" href="$d3/dbf/ntkresolv_8c.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="577,5,628,35"/>
+<area shape="rect" id="node11" href="$dd/dd9/andns_8h.html#a65c36ebb80b180a09b9a78c73ee5c106" title="ns_general_send" alt="" coords="357,109,477,139"/>
+<area shape="rect" id="node13" href="$dd/dd9/andns_8h.html#ad2d760371a7d8f72ee021dcf12997c2d" title="andns_gethostbyname" alt="" coords="527,59,679,88"/>
+<area shape="rect" id="node23" href="$dd/dd9/andns_8h.html#aae58fed9c96a1eb5a5411c76510ba3ac" title="dns_forward" alt="" coords="556,112,649,141"/>
+<area shape="rect" id="node29" href="$dd/dd9/andns_8h.html#a36956c4fc77c5a1b3dfcda3cc0a9051e" title="nk_forward" alt="" coords="560,165,645,195"/>
+<area shape="rect" id="node15" href="$d1/d6f/igs_8c.html#a29026505ec5e0465ebe99a7077ff6d49" title="internet_hosts_to_ip" alt="" coords="728,59,867,88"/>
+<area shape="rect" id="node17" href="$da/dd7/igs_8h.html#a184ab033bb2e2c1f856df5430ba87a80" title="init_internet_gateway\l_search" alt="" coords="916,50,1060,97"/>
+<area shape="rect" id="node19" href="$d4/d3b/netsukuku_8c.html#a110d67ecacf72375eea84dc00338030c" title="init_netsukuku" alt="" coords="1109,59,1216,88"/>
+<area shape="rect" id="node21" href="$d9/d88/ntkresolv_8h.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1264,59,1315,88"/>
+<area shape="rect" id="node25" href="$dd/dd9/andns_8h.html#ad55d591cf7a444daa6b9cea7f8ae29bc" title="andns_rslv" alt="" coords="755,143,840,172"/>
+<area shape="rect" id="node27" href="$db/d6b/dns__wrapper_8c.html#ae858f92cfdc42ee9f2ba357a4021b59e" title="dns_exec_pkt" alt="" coords="937,143,1039,172"/>
+</map>

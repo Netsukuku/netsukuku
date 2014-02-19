@@ -1,0 +1,13 @@
+<map id="store_rnode_block" name="store_rnode_block">
+<area shape="rect" id="node3" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="221,59,288,88"/>
+<area shape="rect" id="node11" href="$d9/dfc/endianness_8c.html#a629226f9f754987898be147e82b2321c" title="ints_network_to_host" alt="" coords="181,139,328,168"/>
+<area shape="rect" id="node24" href="$d3/d7a/map_8c.html#a2be409f266726bbbae4b73cd1087635f" title="mod_rnode_addr" alt="" coords="196,192,313,221"/>
+<area shape="rect" id="node5" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="413,32,459,61"/>
+<area shape="rect" id="node7" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="560,5,629,35"/>
+<area shape="rect" id="node9" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="544,59,645,88"/>
+<area shape="rect" id="node13" href="$d0/ddb/misc_8c.html#a7b5a2df1e2b36c954653fd3e786a5405" title="swap_ints" alt="" coords="396,85,476,115"/>
+<area shape="rect" id="node17" href="$d0/ddb/misc_8c.html#a98da58b707cfc9acf75f8105a3508b89" title="swap_shorts" alt="" coords="388,139,484,168"/>
+<area shape="rect" id="node20" href="$d9/dfc/endianness_8c.html#a29c401e27b50dda7df6e6714d801020d" title="ints_array_ntohl" alt="" coords="379,192,493,221"/>
+<area shape="rect" id="node22" href="$d9/dfc/endianness_8c.html#acbced2f124c85ac91411e02a9165d095" title="ints_array_ntohs" alt="" coords="377,245,495,275"/>
+<area shape="rect" id="node15" href="$d0/ddb/misc_8c.html#acb6548d316f7cd3f28e77c2bd4eb3e33" title="swap_array" alt="" coords="551,125,639,155"/>
+</map>

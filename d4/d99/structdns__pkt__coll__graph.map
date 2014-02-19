@@ -1,0 +1,5 @@
+<map id="dns_pkt" name="dns_pkt">
+<area shape="rect" id="node2" href="$d4/d99/structdns__pkt__hdr.html" title="dns_pkt_hdr" alt="" coords="5,5,99,35"/>
+<area shape="rect" id="node4" href="$d1/dc9/structdns__pkt__a.html" title="dns_pkt_a" alt="" coords="123,5,205,35"/>
+<area shape="rect" id="node7" href="$d6/d40/structdns__pkt__qst.html" title="dns_pkt_qst" alt="" coords="283,5,376,35"/>
+</map>

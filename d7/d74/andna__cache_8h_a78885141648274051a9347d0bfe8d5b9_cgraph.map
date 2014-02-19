@@ -1,0 +1,13 @@
+<map id="lcl_get_registered_hnames" name="lcl_get_registered_hnames">
+<area shape="rect" id="node3" href="$d2/de6/andna__cache_8c.html#ac268eec18472d8373b339cb4c0a01a18" title="is_lcl_hname_registered" alt="" coords="179,5,341,35"/>
+<area shape="rect" id="node5" href="$d2/dab/xmalloc_8c.html#ad6142d091f00b2d4543ce7a43e5d0eba" title="xstrdup" alt="" coords="228,59,292,88"/>
+<area shape="rect" id="node17" href="$d7/d48/snsd__cache_8c.html#af314938a99eac1d0f265b5d2381d01ea" title="snsd_service_llist_copy" alt="" coords="180,112,340,141"/>
+<area shape="rect" id="node7" href="$d2/dab/xmalloc_8c.html#aa0d9692e0141edaf2b2f748d630b5485" title="xstrndup" alt="" coords="432,59,504,88"/>
+<area shape="rect" id="node9" href="$d2/dab/xmalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490" title="xmalloc" alt="" coords="635,59,701,88"/>
+<area shape="rect" id="node11" href="$d7/df8/log_8c.html#a677da14e8c4326bde43622f233f1ead3" title="fatal" alt="" coords="791,59,836,88"/>
+<area shape="rect" id="node13" href="$d7/df8/log_8c.html#a3bd4b0345d9f0035edbe68f3795319de" title="print_log" alt="" coords="901,32,971,61"/>
+<area shape="rect" id="node15" href="$d7/df8/log_8c.html#a32f684e2d9d47ca24806b88e58498931" title="close_log_file" alt="" coords="885,85,987,115"/>
+<area shape="rect" id="node19" href="$d7/d48/snsd__cache_8c.html#ad152e716af865c594e7feb5e81fd84b1" title="is_equal_to_serv_proto" alt="" coords="391,112,545,141"/>
+<area shape="rect" id="node21" href="$d7/d48/snsd__cache_8c.html#aa9d5e9651d0ccdd8c6a3a89ddddb9e82" title="snsd_prio_llist_copy" alt="" coords="399,165,537,195"/>
+<area shape="rect" id="node23" href="$d7/d48/snsd__cache_8c.html#af0f30f3ad7e920a3eb7641a116f86a05" title="snsd_node_llist_copy" alt="" coords="595,165,741,195"/>
+</map>
