@@ -665,7 +665,7 @@ static int iptcc_compile_chain(TC_HANDLE_T h, STRUCT_REPLACE *repl, struct chain
 		strcpy(head->name.target.u.user.name, ERROR_TARGET);
         head->name.target.u.target_size =
 				ALIGN(sizeof(struct ipt_error_target));
-		strcpy(head->name.error, c->name);
+		strcpy(head->name.errorname, c->name);
 	} else {
 		repl->hook_entry[c->hooknum-1] = c->head_offset;
 		repl->underflow[c->hooknum-1] = c->foot_offset;

@@ -2,7 +2,7 @@
  * (c) Copyright 2005 Andrea Lo Pumo aka AlpT <alpt@freaknet.org>
  *
  * This source code is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as published 
+ * modify it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
  *
@@ -76,14 +76,14 @@ int is_ntkd_already_running(void)
 
 	if(!(fd=fopen(server_opt.pid_file, "r"))) {
 		if(errno != ENOENT)
-			error("Cannot read pid file \"%s\": %s", 
+			error("Cannot read pid file \"%s\": %s",
 					server_opt.pid_file, strerror(errno));
 		return 0;
 	}
 
 	fscanf(fd, "ntkd %d\n", &oldpid);
         if(ferror(fd)) {
-		error("error reading pid file \"%s\": %s\n", 
+		error("error reading pid file \"%s\": %s\n",
 				server_opt.pid_file, strerror(errno));
 		fclose(fd);
 		return 0;
@@ -95,14 +95,14 @@ int is_ntkd_already_running(void)
 
 int ntk_load_maps(void)
 {
-	if(file_exist(server_opt.int_map_file) && 
+	if(file_exist(server_opt.int_map_file) &&
 				(me.int_map=load_map(server_opt.int_map_file,
 						     &me.cur_node)))
 		debug(DBG_NORMAL, "Internal map loaded");
 	else
 		me.int_map=init_map(0);
 
-#if 0 
+#if 0
 	/* Don't load the bnode map, it's useless */
 	if((me.bnode_map=load_bmap(server_opt.bnode_map_file, me.ext_map,
 					FAMILY_LVLS, &me.bmap_nodes))) {
@@ -111,16 +111,16 @@ int ntk_load_maps(void)
 #endif
 	bmap_levels_init(BMAP_LEVELS(FAMILY_LVLS), &me.bnode_map,
 				&me.bmap_nodes);
-	bmap_counter_init(BMAP_LEVELS(FAMILY_LVLS), &me.bmap_nodes_closed, 
+	bmap_counter_init(BMAP_LEVELS(FAMILY_LVLS), &me.bmap_nodes_closed,
 			&me.bmap_nodes_opened);
 
-	if(file_exist(server_opt.ext_map_file) && 
-			(me.ext_map=load_extmap(server_opt.ext_map_file, 
+	if(file_exist(server_opt.ext_map_file) &&
+			(me.ext_map=load_extmap(server_opt.ext_map_file,
 						&me.cur_quadg)))
 		debug(DBG_NORMAL, "External map loaded");
 	else
 		me.ext_map=init_extmap(FAMILY_LVLS, 0);
-	
+
 	return 0;
 }
 
@@ -131,12 +131,12 @@ int ntk_save_maps(void)
 
 #ifdef DEBUG
 	debug(DBG_NORMAL, "Saving the border nodes map");
-	save_bmap(me.bnode_map, me.bmap_nodes, me.ext_map, me.cur_quadg, 
+	save_bmap(me.bnode_map, me.bmap_nodes, me.ext_map, me.cur_quadg,
 			server_opt.bnode_map_file);
 #endif
-	
+
 	debug(DBG_NORMAL, "Saving the external map");
-	save_extmap(me.ext_map, MAXGROUPNODE, &me.cur_quadg, 
+	save_extmap(me.ext_map, MAXGROUPNODE, &me.cur_quadg,
 			server_opt.ext_map_file);
 
 	return 0;
@@ -164,7 +164,7 @@ void usage(void)
 		" -D	Prevents running as daemon (Does not fork to the background)\n"
 		"\n"
 		" -r	Runs in restricted mode\n"
-		" -m	Share your internet connection with other nodes\n"
+		" -I	Share your internet connection with other nodes\n"
 		"\n"
 		" -c	configuration file\n"
 		" -l	Enables logging to file\n"
@@ -180,9 +180,9 @@ void usage(void)
 void fill_default_options(void)
 {
 	setzero(&server_opt, sizeof(server_opt));
-	
+
 	server_opt.family=AF_INET;
-	
+
 	server_opt.config_file=NTK_CONFIG_FILE;
 	server_opt.pid_file=NTK_PID_FILE;
 
@@ -250,7 +250,7 @@ void fill_loaded_cfg_options(void)
 
 	CONF_GET_INT_VALUE ( CONF_NTK_INTERNET_CONNECTION, server_opt.inet_connection);
 	if((value=CONF_GET_VALUE(CONF_NTK_INTERNET_GW))) {
-		if(str_to_inet_gw(value, &server_opt.inet_gw, 
+		if(str_to_inet_gw(value, &server_opt.inet_gw,
 					&server_opt.inet_gw_dev))
 			fatal("Malformed `%s' option: \"%s\". Its syntax is \"IP:dev\"",
 					config_str[CONF_NTK_INTERNET_GW], value);
@@ -262,7 +262,7 @@ void fill_loaded_cfg_options(void)
 			bandwidth_in_8bit((server_opt.my_upload_bw+server_opt.my_dnload_bw)/2);
 
 	if((value=CONF_GET_VALUE(CONF_NTK_INTERNET_PING_HOSTS))) {
-		server_opt.inet_hosts=parse_internet_hosts(value, 
+		server_opt.inet_hosts=parse_internet_hosts(value,
 				&server_opt.inet_hosts_counter);
 		if(!server_opt.inet_hosts)
 			fatal("Malformed `%s' option: \"%s\". "
@@ -282,7 +282,7 @@ void fill_loaded_cfg_options(void)
 void free_server_opt(void)
 {
 	int i;
-	
+
 	if(server_opt.config_file != NTK_CONFIG_FILE)
 		xfree(server_opt.config_file);
 	if(server_opt.pid_file != NTK_PID_FILE)
@@ -341,16 +341,16 @@ void parse_options(int argc, char **argv)
 			{"no_andna",	0, 0, 'a'},
 			{"no_daemon", 	0, 0, 'D'},
 			{"no_resolv",   0, 0, 'R'},
-			
+
 			{"restricted", 	0, 0, 'r'},
 			{"share-inet",	0, 0, 'I'},
-			
+
 			{"debug", 	0, 0, 'd'},
 			{"version",	0, 0, 'v'},
 			{0, 0, 0, 0}
 		};
 
-		c = getopt_long (argc, argv,"i:c:l:hvd64DRrIa", long_options, 
+		c = getopt_long (argc, argv,"i:c:l:hvd64DRrIa", long_options,
 				&option_index);
 		if (c == -1)
 			break;
@@ -359,7 +359,7 @@ void parse_options(int argc, char **argv)
 		{
 			case 'v':
 				printf("%s\n",VERSION_STR);
-				exit(0); 
+				exit(0);
 				break;
 			case 'h':
 				usage();
@@ -376,14 +376,14 @@ void parse_options(int argc, char **argv)
 						"development, nothing is assured to work.");
 				server_opt.family=AF_INET6;
 				break;
-			case 'c': 
+			case 'c':
 				server_opt.config_file=xstrndup(optarg, NAME_MAX-1);
 				break;
 			case 'l':
 				if(log_to_file(optarg) < 0)
 					fatal(0);
 				break;
-			case 'i': 
+			case 'i':
 				if(server_opt.ifs_n+1 >= MAX_INTERFACES)
 					fatal("The maximum number of interfaces is %d",
 							MAX_INTERFACES);
@@ -407,7 +407,7 @@ void parse_options(int argc, char **argv)
 				 *
 				 * This is the problem:
 				 * 	ntkd -abcrdefg
-				 * If 'r' is an element that specifies an 
+				 * If 'r' is an element that specifies an
 				 * optional argument, then the "defg" string
 				 * is taken as its arg, but this is not what
 				 * we want because in this case '-r' is
@@ -463,7 +463,7 @@ void check_conflicting_options(void)
 #define FATAL_NOT_SPECIFIED(str) 	fatal("You didn't specified the `%s' " \
 						"option in netsukuku.conf",    \
 							(str));		       \
-	
+
 	if(!server_opt.pid_file)
 		FATAL_NOT_SPECIFIED("pid_file");
 
@@ -471,12 +471,12 @@ void check_conflicting_options(void)
 		FATAL_NOT_SPECIFIED("internet_ping_hosts");
 
 
-	if(server_opt.restricted && server_opt.share_internet && 
+	if(server_opt.restricted && server_opt.share_internet &&
 			!file_exist(server_opt.ip_masq_script))
 		fatal("ip_masquerade_script \"%s\" is inexistent",
 				server_opt.ip_masq_script);
 
-	if(server_opt.shape_internet && 
+	if(server_opt.shape_internet &&
 			!file_exist(server_opt.tc_shaper_script))
 		fatal("tc_shaper_script \"%s\" is inexistent",
 				server_opt.ip_masq_script);
@@ -485,8 +485,8 @@ void check_conflicting_options(void)
 		fatal("inet_connection=1 but ntk_restricted_mode=0. If you "
 			"want to be compatible with the Internet, "
 			"set the restricted mode in the options");
-				
-	if(!server_opt.restricted && 
+
+	if(!server_opt.restricted &&
 		(server_opt.share_internet))
 		fatal("You want to share your Internet connection,"
 			"but I am not running in restricted mode (-r), "
@@ -498,7 +498,7 @@ void check_conflicting_options(void)
 			"your bandwidth is just TOO small. Do not share "
 			"it, or your connection will be saturated");
 
-	if(!server_opt.inet_connection && server_opt.share_internet) {	
+	if(!server_opt.inet_connection && server_opt.share_internet) {
 		loginfo("You want to share your Internet connection,"
 			"but `internet_connection' is set to 0."
 			"We are assuming it is 1");
@@ -509,7 +509,7 @@ void check_conflicting_options(void)
 		fatal("The Internet traffic shaping option is set, but "
 			"the `internet_connection' is set to 0, please check "
 			"your options.");
-	
+
 #ifdef IPV6_DISABLED
 	if(server_opt.inet_gw.family == AF_INET6)
 		fatal("Ipv6 is not supported");
@@ -519,10 +519,10 @@ void check_conflicting_options(void)
 void init_netsukuku(char **argv)
 {
 	xsrand();
-	
+
         if(geteuid())
 		fatal("Need root privileges");
-	
+
 	destroy_netsukuku_mutex=pid_saved=0;
 	sigterm_timestamp=sighup_timestamp=sigalrm_timestamp=0;
 	setzero(&me, sizeof(struct current_globals));
@@ -532,7 +532,7 @@ void init_netsukuku(char **argv)
 				server_opt.pid_file);
 	else
 		save_pid();
-	
+
 	my_family=server_opt.family;
 	restricted_mode =server_opt.restricted;
 	restricted_class=server_opt.restricted_class ? RESTRICTED_172 : RESTRICTED_10;
@@ -540,15 +540,15 @@ void init_netsukuku(char **argv)
 	/* Check if the DATA_DIR exists, if not create it */
 	if(check_and_create_dir(DATA_DIR))
 		fatal("Cannot access to the %s directory. Exiting.", DATA_DIR);
-	
-	/* 
-	 * Device initialization 
+
+	/*
+	 * Device initialization
 	 */
-	if(if_init_all(server_opt.ifs, server_opt.ifs_n, 
+	if(if_init_all(server_opt.ifs, server_opt.ifs_n,
 				me.cur_ifs, &me.cur_ifs_n) < 0)
 		fatal("Cannot initialize any network interfaces");
 
-	/* 
+	/*
 	 * ANDNA init
 	 */
 	if(!server_opt.disable_andna)
@@ -558,10 +558,10 @@ void init_netsukuku(char **argv)
 	 * Initialize the Internet gateway stuff
 	 */
 	if(server_opt.my_upload_bw && server_opt.my_dnload_bw)
-	      me.my_bandwidth = bandwidth_in_8bit((server_opt.my_upload_bw + 
+	      me.my_bandwidth = bandwidth_in_8bit((server_opt.my_upload_bw +
 						   server_opt.my_dnload_bw)/2);
 	init_internet_gateway_search();
-	
+
 	pkts_init(me.cur_ifs, me.cur_ifs_n, 0);
 	qspn_init(FAMILY_LVLS);
 
@@ -579,20 +579,20 @@ void init_netsukuku(char **argv)
 	debug(DBG_NORMAL, "ACPT: Initializing the accept_tbl: \n"
 			"	max_connections: %d,\n"
 			"	max_accepts_per_host: %d,\n"
-			"	max_accept_per_host_time: %d", 
-			server_opt.max_connections, 
-			server_opt.max_accepts_per_host, 
+			"	max_accept_per_host_time: %d",
+			server_opt.max_connections,
+			server_opt.max_accepts_per_host,
 			server_opt.max_accepts_per_host_time);
-	init_accept_tbl(server_opt.max_connections, 
-			server_opt.max_accepts_per_host, 
+	init_accept_tbl(server_opt.max_connections,
+			server_opt.max_accepts_per_host,
 			server_opt.max_accepts_per_host_time);
 #endif
-	
+
 	if(restricted_mode)
 		loginfo("NetsukukuD is in restricted mode. "
-			"Restricted class: %s",	
+			"Restricted class: %s",
 			server_opt.restricted_class?RESTRICTED_172_STR:RESTRICTED_10_STR);
-	
+
 	hook_init();
 	rehook_init();
 
@@ -606,7 +606,7 @@ int destroy_netsukuku(void)
 	destroy_netsukuku_mutex=1;
 
 	unlink(server_opt.pid_file);
-	
+
 	ntk_save_maps();
 	ntk_free_maps();
 	if(!server_opt.disable_andna)
@@ -630,14 +630,14 @@ void sigterm_handler(int sig)
 	if(sigterm_timestamp == (cur_t=time(0)))
 		return;
 	sigterm_timestamp=time(0);
-	
+
 	if(!destroy_netsukuku())
 		fatal("Termination signal caught. Dying, bye, bye");
 }
 
 void *reload_hostname_thread(void *null)
 {
-	/* 
+	/*
 	 * Reload the file where the hostnames to be registered are and
 	 * register the new ones
 	 */
@@ -653,13 +653,13 @@ void sighup_handler(int sig)
 {
 	pthread_t thread;
 	pthread_attr_t t_attr;
-	
+
 	time_t cur_t;
 
 	if(sighup_timestamp == (cur_t=time(0)))
 		return;
 	sighup_timestamp=time(0);
-	
+
 	pthread_attr_init(&t_attr);
 	pthread_attr_setdetachstate(&t_attr, PTHREAD_CREATE_DETACHED);
 	pthread_create(&thread, &t_attr, reload_hostname_thread, 0);
@@ -667,7 +667,7 @@ void sighup_handler(int sig)
 
 void *rh_cache_flush_thread(void *null)
 {
-	/* 
+	/*
 	 * Flush the resolved hostnames cache.
 	 */
 	loginfo("Flush the resolved hostnames cache");
@@ -680,7 +680,7 @@ void sigalrm_handler(int sig)
 {
 	pthread_t thread;
 	pthread_attr_t t_attr;
-	
+
 	time_t cur_t;
 
 	if(sigalrm_timestamp == (cur_t=time(0)))
@@ -703,9 +703,9 @@ int main(int argc, char **argv)
 	pthread_t daemon_tcp_thread, daemon_udp_thread, andna_thread;
 	pthread_t ping_igw_thread;
 	pthread_attr_t t_attr;
-	
+
 	log_init(argv[0], 0, 1);
-	
+
 	/* Options loading... */
 	fill_default_options();
 	parse_options(argc, argv);
@@ -717,13 +717,13 @@ int main(int argc, char **argv)
 	/* Load the option from the config file */
 	load_config_file(server_opt.config_file);
 	fill_loaded_cfg_options();
-	
+
 	/* If a same option was specified in the config file and in the
 	 * command line, give priority to the latter */
 	parse_options(argc, argv);
 
 	check_conflicting_options();
-	
+
 	/* Initialize the whole netsukuku source code */
 	init_netsukuku(argv);
 
@@ -732,14 +732,14 @@ int main(int argc, char **argv)
 	signal(SIGINT, sigterm_handler);
 	signal(SIGTERM, sigterm_handler);
 	signal(SIGQUIT, sigterm_handler);
-	
+
 	/* Angelic foreground or Daemonic background ? */
 	if(server_opt.daemon) {
 		loginfo("Forking to background");
 		log_init(argv[0], server_opt.dbg_lvl, 0);
 		if(daemon(0, 0) == -1)
 			error("Impossible to daemonize: %s.", strerror(errno));
-		
+
 	}
 
 	pthread_attr_init(&t_attr);
@@ -747,9 +747,9 @@ int main(int argc, char **argv)
 	setzero(&ud_argv, sizeof(struct udp_daemon_argv));
 	port=xmalloc(sizeof(u_short));
 
-	/* 
+	/*
 	 * These are the daemons, the main threads that keeps NetsukukuD
-	 * up & running. 
+	 * up & running.
 	 */
 	debug(DBG_NORMAL, "Activating all daemons");
 
@@ -762,7 +762,7 @@ int main(int argc, char **argv)
 	pthread_create(&daemon_udp_thread, &t_attr, udp_daemon, (void *)&ud_argv);
 	pthread_mutex_lock(&udp_daemon_lock);
 	pthread_mutex_unlock(&udp_daemon_lock);
-	
+
 	debug(DBG_SOFT,   "Evoking the netsukuku tcp daemon.");
 	*port=ntk_tcp_port;
 	pthread_mutex_lock(&tcp_daemon_lock);
@@ -770,19 +770,19 @@ int main(int argc, char **argv)
 	pthread_mutex_lock(&tcp_daemon_lock);
 	pthread_mutex_unlock(&tcp_daemon_lock);
 
-	
+
 	/* Now we hook in Netsukuku */
 	netsukuku_hook(0, 0);
-	
+
 	/*
-	 * If not disabled, start the ANDNA daemon 
+	 * If not disabled, start the ANDNA daemon
 	 */
 	if(!server_opt.disable_andna)
 		pthread_create(&andna_thread, &t_attr, andna_main, 0);
-	
+
 	xfree(port);
-	
-	if(restricted_mode && (server_opt.share_internet || 
+
+	if(restricted_mode && (server_opt.share_internet ||
 				server_opt.use_shared_inet)) {
 		debug(DBG_SOFT, "Evoking the Internet Gateway Pinger daemon");
 		pthread_create(&ping_igw_thread, &t_attr,
