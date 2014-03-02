@@ -4,19 +4,24 @@
 **
 *	
 
-* (generally these TODOs are already being implemented at the moment)
-
-- restore the network when NetsukukuD is closed (call /etc/rc.d/rc.inet1 ?)
+- restore the network when Netsukuku is closed (call /etc/rc.d/rc.inet1 ?)
 
 - Netsukuku WRT firmware:
 	- a configured openwrt release with all the necessary kernel modules
 	  and packages installed
-	- A web interface to configure the /etc/netsukuku/netsukuku.conf file
+	- A GUI interface to configure the /etc/netsukuku/netsukuku.conf file
 	  and to use the rc.ntk script.
 
 - bugs 
 	- comments in resolv.conf are not considered: 
 		NOTE: Do not resolv this BUG: Now It's useful
+	- resolv.conf is not reverted when netsukuku is closed, If it was ran
+	in restricted mode/IGS.
+	
+	- Netsukuku adds bizzare characters when using restricted/IGS, I.E this.
+	(#Qq`9TA^B)
+	
+	
 
 *
 **
