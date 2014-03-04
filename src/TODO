@@ -15,13 +15,14 @@
 - bugs 
 	- comments in resolv.conf are not considered: 
 		NOTE: Do not resolv this BUG: Now It's useful
+	
 	- resolv.conf is not reverted when netsukuku is closed, If it was ran
 	in restricted mode/IGS.
 	
 	- Netsukuku adds bizzare characters when using restricted/IGS, I.E this.
 	(#Qq`9TA^B)
 	
-	
+	- IGS is not functional due to tunl0 failing to be configured.
 
 *
 **
