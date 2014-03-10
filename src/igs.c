@@ -314,8 +314,9 @@ void init_internet_gateway_search(void)
 			"connections of the ntk nodes\n"
 			"  around you, disable the \"use_shared_inet\" option "
 			"in netsukuku.conf");
-			del_resolv_conf("nameserver 127.0.0.1", "/etc/resolv.conf");
-			exit(1);}
+			//del_resolv_conf("nameserver 127.0.0.1", "/etc/resolv.conf");
+			//exit(1);
+			}
 	ifs_del_all_name(me.cur_ifs, &me.cur_ifs_n, NTK_TUNL_PREFIX);
 	ifs_del_all_name(me.cur_ifs, &me.cur_ifs_n, DEFAULT_TUNL_PREFIX);
 
