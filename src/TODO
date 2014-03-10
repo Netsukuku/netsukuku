@@ -17,7 +17,7 @@
 		NOTE: Do not resolv this BUG: Now It's useful
 	
 	- resolv.conf is not reverted when netsukuku is closed, If it was ran
-	in restricted mode/IGS.
+	in restricted mode/IGS. <--- I fixed this, But it's basically a hack.
 	
 	- Netsukuku adds bizzare characters when using restricted/IGS, I.E this.
 	(#Qq`9TA^B)
