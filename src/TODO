@@ -24,7 +24,9 @@
 	
 	- IGS is not functional due to tunl0 failing to be configured.
 	
-	- netsukuku cannot discover other nodes when running on wlan, Even when wlan is configured by ntk-wifi.
+	- Netsukuku cannot discover other nodes when running on wlan, Even when wlan is configured by ntk-wifi.
+
+	- Netsukuku cannot discover other nodes on ethernet either, This may be a bug preventing any discovery/pairing of any nodes.
 
 *
 **
