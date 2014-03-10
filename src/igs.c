@@ -48,9 +48,9 @@ int igw_multi_gw_disabled;
 /*
  * bandwidth_in_8bit:
  * `x' is the bandwidth value expressed in Kb/s.
- * 
+ *
  * Since we consider `x' expressed in this form:
- * 	 x = y * 2^y; 
+ * 	 x = y * 2^y;
  * we can store just `y' in a u_char (8bit) variable.
  *
  * `bandwidth_in_8bit' returns `y' from `x'.
@@ -64,22 +64,22 @@ u_char bandwidth_in_8bit(u_int x)
 	u_int diff_2;
 
 	for(z=27;z>=0;z--) {
-		
+
 		i=z<<z;
 		if(i==x)
 			/* x is exactly z*2^z */
 			return (u_char)z;
-	
+
 		b=(z-1)<<(z-1);
 		diff_2=(i-b)>>1;
 		if(x >= i-diff_2 && x <=i)
-			/* `x' is nearer to z*2^z than (z-1)*2^(z-1) */ 
+			/* `x' is nearer to z*2^z than (z-1)*2^(z-1) */
 			return z;
 
 		a = z == 27 ? i : (z+1)<<(z+1);
 		diff_2=(a-i)>>1;
 		if(x <= i+diff_2 && x >= i)
-			/* `x' is nearer to z*2^z than (z+1)*2^(z+1) */ 
+			/* `x' is nearer to z*2^z than (z+1)*2^(z+1) */
 			return z;
 	}
 	return 0;
@@ -97,7 +97,7 @@ u_int bandwidth_to_32bit(u_char x)
  * str_to_inet_gw:
  * The syntax of `str' is IP:devname, i.e. 192.168.1.1:eth0.
  * str_to_inet_gw() stores the IP in `gw'.
- * In `*dev' is returned the pointer to a newly allocated string containing 
+ * In `*dev' is returned the pointer to a newly allocated string containing
  * the device name.
  * On error -1 is returned.
  */
@@ -115,7 +115,7 @@ int str_to_inet_gw(char *str, inet_prefix *gw, char **dev)
 	if(!*buf)
 		/* No device was specified */
 		return -1;
-	
+
 	if(strlen(buf) >= IFNAMSIZ)
 		/* It is too long, truncate it */
 		buf[IFNAMSIZ-1]=0;
@@ -140,7 +140,7 @@ int str_to_inet_gw(char *str, inet_prefix *gw, char **dev)
 char **parse_internet_hosts(char *str, int *hosts)
 {
 	char **hnames;
-	
+
 	hnames=split_string(str, ":", hosts, MAX_INTERNET_HNAMES,
 			MAX_INTERNET_HNAME_SZ);
 	return hnames;
@@ -158,7 +158,7 @@ void free_internet_hosts(char **hnames, int hosts)
 
 /*
  * internet_hosts_to_ip: replace the hostnames present in
- * `server_opt.inet_hosts' with IP strings. The IPs are obtained 
+ * `server_opt.inet_hosts' with IP strings. The IPs are obtained
  * with a normal DNS resolution. The hosts which cannot be resolved are
  * deleted from the `inet_hosts' array.
  */
@@ -168,7 +168,7 @@ void internet_hosts_to_ip(void)
 
 	for(i=0; i < server_opt.inet_hosts_counter; i++) {
 		inet_prefix ip;
-		
+
 		if(andns_gethostbyname(server_opt.inet_hosts[i], &ip)) {
 			error("Cannot resolve \"%s\". Check your netsukuku.conf",
 					server_opt.inet_hosts[i]);
@@ -195,7 +195,7 @@ void init_igws(inet_gw ***igws, int **igws_counter, int levels)
 void reset_igws(inet_gw **igws, int *igws_counter, int levels)
 {
 	int i;
-	
+
 	if(!igws)
 		return;
 
@@ -219,7 +219,7 @@ void free_igws(inet_gw **igws, int *igws_counter, int levels)
 		xfree(igws_counter);
 }
 
-/* 
+/*
  * init_my_igws
  *
  * initialiases the `my_igws' array. This list keeps inet_gw structs which
@@ -229,7 +229,7 @@ void free_igws(inet_gw **igws, int *igws_counter, int levels)
  * ...
  */
 void init_my_igws(inet_gw **igws, int *igws_counter,
-		inet_gw ***my_new_igws, u_char my_bandwidth, 
+		inet_gw ***my_new_igws, u_char my_bandwidth,
 		map_node *cur_node, quadro_group *qg)
 {
 	inet_gw *igw, **my_igws;
@@ -244,7 +244,7 @@ void init_my_igws(inet_gw **igws, int *igws_counter,
 			bw_mean=my_bandwidth;
 		} else {
 			node=&qg->gnode[_EL(i)]->g;
-			
+
 			bw_mean=e=0;
 			igw=igws[i-1];
 			list_for(igw) {
@@ -253,13 +253,13 @@ void init_my_igws(inet_gw **igws, int *igws_counter,
 			}
 			bw_mean/=e;
 		}
-		
+
 		igw=igw_add_node(igws, igws_counter, i, qg->gid[i],
-				node, (int*)qg->ipstart[0].data, 
+				node, (int*)qg->ipstart[0].data,
 				(u_char)bw_mean);
 		my_igws[i]=igw;
 	}
-	
+
 	*my_new_igws=my_igws;
 }
 
@@ -271,7 +271,7 @@ void free_my_igws(inet_gw ***my_igs)
 }
 
 /*
- * init_internet_gateway_search: 
+ * init_internet_gateway_search:
  * Initialization of the igs.c code.
  */
 void init_internet_gateway_search(void)
@@ -289,31 +289,33 @@ void init_internet_gateway_search(void)
 
 	/*
 	 * Just return if we aren't in restricted mode or if the user doesn't
-	 * want to use shared internet connections 
+	 * want to use shared internet connections
 	 */
-        if(!restricted_mode || (!server_opt.use_shared_inet && 
+        if(!restricted_mode || (!server_opt.use_shared_inet &&
 				!server_opt.share_internet))
 		return;
-	
+
 	loginfo("Activating the Internet Gateway Search engine");
-	
+
 	init_igws(&me.igws, &me.igws_counter, GET_LEVELS(my_family));
 	init_tunnels_ifs();
 
 	/* delete all the old tunnels */
 	del_all_tunnel_ifs(0, 0, 0, NTK_TUNL_PREFIX);
-	
+
 	/*
 	 * Bring tunl0 up (just to test if the ipip module is loaded)
 	 */
 	loginfo("Configuring the \"" DEFAULT_TUNL_IF "\" tunnel device");
-	if(tunnel_change(0, 0, 0, DEFAULT_TUNL_PREFIX, DEFAULT_TUNL_NUMBER) < 0)
-		fatal("Cannot initialize \"" DEFAULT_TUNL_IF "\". "
+	if(tunnel_change(0, 0, 0, DEFAULT_TUNL_PREFIX, DEFAULT_TUNL_NUMBER) < 0) {
+		printf("Cannot initialize \"" DEFAULT_TUNL_IF "\". "
 			"Is the \"ipip\" kernel module loaded?\n"
 			"  If you don't care about using the shared internet "
 			"connections of the ntk nodes\n"
 			"  around you, disable the \"use_shared_inet\" option "
 			"in netsukuku.conf");
+			del_resolv_conf("nameserver 127.0.0.1", "/etc/resolv.conf");
+			exit(1);}
 	ifs_del_all_name(me.cur_ifs, &me.cur_ifs_n, NTK_TUNL_PREFIX);
 	ifs_del_all_name(me.cur_ifs, &me.cur_ifs_n, DEFAULT_TUNL_PREFIX);
 
@@ -333,7 +335,7 @@ void init_internet_gateway_search(void)
 		 igw_multi_gw_disabled=1;
 	 }
 
-	/* 
+	/*
 	 * Check anomalies: from this point we initialize stuff only if we
 	 * have an Inet connection
 	 */
@@ -360,7 +362,7 @@ void init_internet_gateway_search(void)
 	setzero(&new_gw, sizeof(inet_prefix));
 	ret=rt_get_default_gw(&new_gw, new_gw_dev);
 
-	/* 
+	/*
 	 * If there is no IP set in the route, fetch it at least from the
 	 * device included in it.
 	 */
@@ -368,18 +370,18 @@ void init_internet_gateway_search(void)
 		if(get_dev_ip(&new_gw, my_family, new_gw_dev) < 0)
 			(*new_gw_dev)=0;
 	}
-	
+
 	if(ret < 0 || (!*new_gw_dev && !new_gw.family)) {
 		/* Nothing useful has been found  */
-		
+
 		loginfo("The retrieval of the default gw from the kernel failed.");
 
 		if(!server_opt.inet_gw.data[0])
 			fatal("The default gw isn't set in the kernel and you "
 				"didn't specified it in netsukuku.conf. "
 				"Cannot continue!");
-	} else if(!server_opt.inet_gw_dev || 
-		   strncmp(new_gw_dev, server_opt.inet_gw_dev, IFNAMSIZ) || 
+	} else if(!server_opt.inet_gw_dev ||
+		   strncmp(new_gw_dev, server_opt.inet_gw_dev, IFNAMSIZ) ||
 		   memcmp(new_gw.data, server_opt.inet_gw.data, MAX_IP_SZ)) {
 
 		if(server_opt.inet_gw.data[0])
@@ -397,8 +399,8 @@ void init_internet_gateway_search(void)
 		/* Delete the default gw, we are replacing it */
 		rt_delete_def_gw(0);
 	}
-	
-	loginfo("Using \"%s dev %s\" as your first Internet gateway.", 
+
+	loginfo("Using \"%s dev %s\" as your first Internet gateway.",
 			inet_to_str(server_opt.inet_gw), server_opt.inet_gw_dev);
 	if(rt_replace_def_gw(server_opt.inet_gw_dev, server_opt.inet_gw, 0))
 		fatal("Cannot set the default gw to %s %s",
@@ -419,14 +421,14 @@ void init_internet_gateway_search(void)
 		}
 	}
 
-	
+
 	/*
 	 * Activate the traffic shaping for the `server_opt.inet_gw_dev'
 	 * device
 	 */
 	if(server_opt.shape_internet)
 		igw_exec_tcshaper_sh(server_opt.tc_shaper_script, 0,
-			server_opt.inet_gw_dev, server_opt.my_upload_bw, 
+			server_opt.inet_gw_dev, server_opt.my_upload_bw,
 			server_opt.my_dnload_bw);
 
 	for(i=0; i < me.cur_ifs_n; i++)
@@ -435,11 +437,11 @@ void init_internet_gateway_search(void)
 				if(!strcmp(server_opt.ifs[i], server_opt.inet_gw_dev))
 					fatal("You specified the \"%s\" interface"
 						" in the options, but this device is also"
-						" part of the primary Internet gw route." 
+						" part of the primary Internet gw route."
 						" Don't include \"%s\" in the list of "
-						"interfaces utilised by the daemon", 
+						"interfaces utilised by the daemon",
 						server_opt.inet_gw_dev, server_opt.inet_gw_dev);
-			
+
 			loginfo("Deleting the \"%s\" interface from the device "
 				"list since it is part of the primary Internet"
 				" gw route.", me.cur_ifs[i].dev_name);
@@ -472,7 +474,7 @@ void init_internet_gateway_search(void)
 
 void close_internet_gateway_search(void)
 {
-        if(!restricted_mode || (!server_opt.use_shared_inet && 
+        if(!restricted_mode || (!server_opt.use_shared_inet &&
 				!server_opt.share_internet))
 		return;
 
@@ -484,7 +486,7 @@ void close_internet_gateway_search(void)
 	if(server_opt.shape_internet)
 		igw_exec_tcshaper_sh(server_opt.tc_shaper_script, 1,
 				server_opt.inet_gw_dev, 0, 0);
-	
+
 	/* Delete all the added rules */
 	reset_igw_rules();
 
@@ -498,7 +500,7 @@ void close_internet_gateway_search(void)
 	free_my_igws(&me.my_igws);
 
 	/* Free what has been malloced */
-	free_internet_hosts(server_opt.inet_hosts, 
+	free_internet_hosts(server_opt.inet_hosts,
 			    server_opt.inet_hosts_counter);
 }
 
@@ -518,7 +520,7 @@ inet_gw *igw_add_node(inet_gw **igws, int *igws_counter,  int level,
 	igw->node=node;
 	igw->gid=gid;
 	igw->bandwidth=bandwidth;
-		
+
 	clist_add(&igws[level], &igws_counter[level], igw);
 
 	return igw;
@@ -530,7 +532,7 @@ int igw_del(inet_gw **igws, int *igws_counter, inet_gw *igw, int level)
 		return -1;
 
 	igw->node->flags&=~MAP_IGW;
-	
+
 	if(!igws[level])
 		return -1;
 
@@ -579,7 +581,7 @@ int igw_del_node(inet_gw **igws, int *igws_counter,  int level,
 }
 
 /*
- * igw_update_gnode_bw: 
+ * igw_update_gnode_bw:
  * call this function _after_ adding and _before_ deleting the `igw->node' node
  * from the me.igws llist. This fuctions will update the `bandwidth' value of
  * the inet_gw which points to our (g)nodes.
@@ -589,14 +591,14 @@ void igw_update_gnode_bw(int *igws_counter, inet_gw **my_igws, inet_gw *igw,
 		int new, int level, int maxlevels)
 {
 	int i, bw, old_bw=0;
-	
+
 	if(level >= maxlevels)
 		return;
 
 	if(new) {
 		if(igws_counter[level] <= 0)
 			return;
-		
+
 		bw = my_igws[level+1]->bandwidth * (igws_counter[level]-1);
 		bw = (bw + igw->bandwidth) / igws_counter[level];
 	} else {
@@ -622,7 +624,7 @@ void igw_update_gnode_bw(int *igws_counter, inet_gw **my_igws, inet_gw *igw,
 
 
 /*
- * igw_cmp: compares two inet_gw structs calculating their connection quality: 
+ * igw_cmp: compares two inet_gw structs calculating their connection quality:
  * bandwith - rtt/1000;
  */
 int igw_cmp(const void *a, const void *b)
@@ -637,7 +639,7 @@ int igw_cmp(const void *a, const void *b)
 	cq_a = bandwidth_to_32bit(gw_a->bandwidth) - trtt;
 	trtt = gw_b->node->links ? gw_b->node->r_node[0].trtt/1000 : 0;
 	cq_b = bandwidth_to_32bit(gw_b->bandwidth) - trtt;
-	
+
 	if(cq_a > cq_b)
 		return 1;
 	else if(cq_a == cq_b)
@@ -648,7 +650,7 @@ int igw_cmp(const void *a, const void *b)
 
 /*
  * igw_order: orders in decrescent order the `igws[`level']' llist,
- * comparing the igws[level]->bandwidth and igws[level]->node->r_node[0].trtt 
+ * comparing the igws[level]->bandwidth and igws[level]->node->r_node[0].trtt
  * values.
  * `my_igws[level]' will point to the inet_gw struct which refers to an our
  * (g)node.
@@ -657,12 +659,12 @@ void igw_order(inet_gw **igws, int *igws_counter, inet_gw **my_igws, int level)
 {
 	inet_gw *igw, *new_head, *maxigws_ptr;
 	int i;
-		
+
 	if(!igws_counter[level] || !igws[level])
 		return;
-	
+
 	clist_qsort(new_head, igws[level], igws_counter[level], igw_cmp);
-	
+
 	igw=new_head;
 	list_for(igw) {
 		if(i >= MAXIGWS) {
@@ -670,14 +672,14 @@ void igw_order(inet_gw **igws, int *igws_counter, inet_gw **my_igws, int level)
 				list_substitute(maxigws_ptr, igw);
 				igw=maxigws_ptr;
 			}
-			
+
 			/* The maximum number of igw has been exceeded */
 			clist_del(&igws[level], &igws_counter[level], igw);
 		}
 
 		if(my_igws && igw->node->flags & MAP_ME)
 			my_igws[level]=igw;
-		
+
 		if(i == MAXIGWS-1)
 			maxigws_ptr=igw;
 
@@ -695,20 +697,20 @@ int igw_check_inet_conn(void)
 {
 	int i, ret;
 
-	for(i=0; server_opt.inet_hosts && server_opt.inet_hosts[i] && 
+	for(i=0; server_opt.inet_hosts && server_opt.inet_hosts[i] &&
 			i < server_opt.inet_hosts_counter; i++) {
 		ret=pingthost(server_opt.inet_hosts[i], INET_HOST_PING_TIMEOUT);
 		if(ret >= 1)
 			return 1;
 	}
-	
+
 	return 0;
 }
 
 /*
  * igw_check_inet_conn_t
- * 
- * checks if we are connected to the internet, then waits, then checks 
+ *
+ * checks if we are connected to the internet, then waits, then checks
  * if we are connected, then ...
  */
 void *igw_check_inet_conn_t(void *null)
@@ -716,7 +718,7 @@ void *igw_check_inet_conn_t(void *null)
 	inet_prefix new_gw;
 	char new_gw_dev[IFNAMSIZ];
 	int old_status, ret;
-	
+
 	for(;;) {
 		old_status=me.inet_connected;
 		me.inet_connected=igw_check_inet_conn();
@@ -724,12 +726,12 @@ void *igw_check_inet_conn_t(void *null)
 		if(old_status && !me.inet_connected) {
 			/* Connection lost, disable me.my_igws[0] */
 			loginfo("Internet connection lost. Inet connection sharing disabled");
-					
+
 			me.my_igws[0]->bandwidth=0;
 			igw_update_gnode_bw(me.igws_counter, me.my_igws,
 				me.my_igws[0], 0, 0, me.cur_quadg.levels);
 			clist_join(&me.igws[0], &me.igws_counter[0], me.my_igws[0]);
-			
+
 		} else if(!old_status && me.inet_connected) {
 			if(server_opt.share_internet) {
 				/* Maybe the Internet gateway is changed, it's
@@ -737,17 +739,17 @@ void *igw_check_inet_conn_t(void *null)
 
 				ret=rt_get_default_gw(&new_gw, new_gw_dev);
 				if(ret < 0) {
-					/* 
+					/*
 					 * Something's wrong, we can reach Inet
-					 * hosts, but we cannot take the default 
+					 * hosts, but we cannot take the default
 					 * gw, thus consider ourself not connected.
 					 */
 					me.inet_connected=0;
 					goto skip_it;
 				}
-				if(strncmp(new_gw_dev, server_opt.inet_gw_dev, IFNAMSIZ) || 
+				if(strncmp(new_gw_dev, server_opt.inet_gw_dev, IFNAMSIZ) ||
 					memcmp(new_gw.data, server_opt.inet_gw.data, MAX_IP_SZ)) {
-					
+
 					/* New Internet gw (dialup connection ?)*/
 					strncpy(server_opt.inet_gw_dev, new_gw_dev, IFNAMSIZ);
 					memcpy(&server_opt.inet_gw, &new_gw, sizeof(inet_prefix));
@@ -765,7 +767,7 @@ void *igw_check_inet_conn_t(void *null)
 				me.my_igws[0], 1, 0, me.cur_quadg.levels);
 
 		}
-skip_it:	
+skip_it:
 		sleep(INET_NEXT_PING_WAIT);
 	}
 }
@@ -778,11 +780,11 @@ int igw_ping_igw(inet_gw *igw)
 	inet_prefix ip;
 	char ntop[INET6_ADDRSTRLEN]="\0";
 	const char *ipstr;
-	
+
 	inet_setip_raw(&ip, igw->ip, my_family);
 	if(!(ipstr=inet_to_str(ip)))
 		return -1;
-			
+
 	strcpy(ntop, ipstr);
 	return pingthost(ntop, IGW_HOST_PING_TIMEOUT) >= 1;
 }
@@ -796,7 +798,7 @@ void *igw_monitor_igws_t(void *null)
 {
 	inet_gw *igw, *next, *old_igw;
 	int i, nexthops, ip[MAX_IP_INT], l, ni;
-	
+
 	nexthops=MAX_MULTIPATH_ROUTES/me.cur_quadg.levels;
 	for(;;) {
 		while(me.cur_node->flags & MAP_HNODE)
@@ -806,7 +808,7 @@ void *igw_monitor_igws_t(void *null)
 
 			while(me.cur_node->flags & MAP_HNODE)
 				sleep(1);
-			
+
 			igw=me.igws[i];
 
 			ni=0;
@@ -822,9 +824,9 @@ void *igw_monitor_igws_t(void *null)
 
 				if(!igw_ping_igw(igw)) {
 					memcpy(ip, igw->ip, MAX_IP_SZ);
-					
+
 					loginfo("The Internet gw %s doesn't replies "
-						"to pings. It is dead.", 
+						"to pings. It is dead.",
 						ipraw_to_str(igw->ip, my_family));
 
 					for(l=i, old_igw=igw; l<me.cur_quadg.levels; l++) {
@@ -840,7 +842,7 @@ void *igw_monitor_igws_t(void *null)
 				ni++;
 			}
 		}
-		
+
 		sleep(INET_NEXT_PING_WAIT);
 	}
 }
@@ -854,7 +856,7 @@ int igw_exec_masquerade_sh(char *script, int stop)
 {
 	int ret;
 	char argv[7]="";
-	
+
 	sprintf(argv, "%s", stop ? "stop" : "start");
 
 	ret=exec_root_script(script, argv);
@@ -869,19 +871,19 @@ int igw_exec_masquerade_sh(char *script, int stop)
  * shaping.
  * If `stop' is set to 1 the script will be executed as "script stop `dev'".
  */
-int igw_exec_tcshaper_sh(char *script, int stop, 
+int igw_exec_tcshaper_sh(char *script, int stop,
 		char *dev, int upload_bw, int dnload_bw)
 {
 	int ret;
 	char argv[7]="";
-	
+
 	if(stop)
 		sprintf(argv, "%s %s", "stop", dev);
 	else
 		sprintf(argv, "%s %d %d", dev, upload_bw, dnload_bw);
 
 	ret=exec_root_script(script, argv);
-	
+
 	if(ret == -1) {
 		if(!stop)
 			error("%s wasn't executed. The traffic shaping will be "
@@ -889,14 +891,14 @@ int igw_exec_tcshaper_sh(char *script, int stop,
 		else
 			error("The traffic shaping is still enabled!");
 	}
-			
+
 	return 0;
 }
 
 
 /*
  * add_igw_nexthop:
- * 	
+ *
  * 	`igwn' is an array of at leat MAX_MULTIPATH_ROUTES members.
  * 	`ip' is the ip of the nexthop
  *
@@ -916,7 +918,7 @@ int add_igw_nexthop(igw_nexthop *igwn, inet_prefix *ip, int *new)
 			*new=0;
 			return i;
 		}
-	
+
 	for(i=0; i<MAX_MULTIPATH_ROUTES; i++) {
 		if(!(igwn[i].flags & IGW_ACTIVE)) {
 			inet_copy(&igwn[i].nexthop, ip);
@@ -945,7 +947,7 @@ void reset_igw_nexthop(igw_nexthop *igwn)
 	setzero(igwn, sizeof(igw_nexthop)*MAX_MULTIPATH_ROUTES);
 }
 
-/* 
+/*
  * reset_igw_rules: flush all the routing rules
  */
 void reset_igw_rules(void)
@@ -954,7 +956,7 @@ void reset_igw_rules(void)
 	 * Reset each rule added for a tunnel-nexthop
 	 * and the rule used for the Anti-loop multi-igw shield.
 	 */
-	rule_flush_table_range(my_family, RTTABLE_IGW, 
+	rule_flush_table_range(my_family, RTTABLE_IGW,
 			RTTABLE_IGW+MAX_MULTIPATH_ROUTES);
 }
 
@@ -965,7 +967,7 @@ void reset_igw_rules(void)
  * from the `igws' llist.
  * On error -1 is returned.
  */
-int igw_replace_def_igws(inet_gw **igws, int *igws_counter, 
+int igw_replace_def_igws(inet_gw **igws, int *igws_counter,
 		inet_gw **my_igws, int max_levels, int family)
 {
 	inet_gw *igw;
@@ -975,14 +977,14 @@ int igw_replace_def_igws(inet_gw **igws, int *igws_counter,
 	int ni, ni_lvl, nexthops, level, max_multipath_routes, i, x;
 	int res, new_nexhtop;
 
-#ifdef DEBUG		
+#ifdef DEBUG
 #define MAX_GW_IP_STR_SIZE (MAX_MULTIPATH_ROUTES*((INET6_ADDRSTRLEN+1)+IFNAMSIZ)+1)
 	int n;
 	char gw_ip[MAX_GW_IP_STR_SIZE]="";
 #endif
-	
+
 	max_multipath_routes=MAX_MULTIPATH_ROUTES;
-	
+
 	/* to == 0.0.0.0 */
 	inet_setip_anyaddr(&to, family);
 	to.len=to.bits=0;
@@ -990,8 +992,8 @@ int igw_replace_def_igws(inet_gw **igws, int *igws_counter,
 	nh=xzalloc(sizeof(struct nexthop)*MAX_MULTIPATH_ROUTES);
 	ni=0; /* nexthop index */
 
-	/* 
-	 * If we are sharing our Internet connection use, as the primary 
+	/*
+	 * If we are sharing our Internet connection use, as the primary
 	 * gateway `me.internet_gw'.
 	 */
 	if(server_opt.share_internet && me.inet_connected) {
@@ -1003,21 +1005,21 @@ int igw_replace_def_igws(inet_gw **igws, int *igws_counter,
 		max_multipath_routes--;
 	}
 
-	/* 
-	 * Set all our saved nexthop as inactives, then mark as "active" only 
+	/*
+	 * Set all our saved nexthop as inactives, then mark as "active" only
 	 * the nexhtop we are going to re-pick, in this way we can know what
 	 * nexthop have been dropped.
 	 */
 	set_igw_nexhtop_inactive(multigw_nh);
-	
+
 	/* We choose an equal number of nexthops for each level */
 	nexthops=max_multipath_routes/max_levels;
 
 	for(level=0; level<max_levels; level++) {
-		
+
 		/* Remember the nexthops we choose at each cycle */
 		inet_gw *taken_nexthops[max_multipath_routes];
-		
+
 #ifndef IGS_MULTI_GW
 		if(ni)
 			break;
@@ -1029,11 +1031,11 @@ int igw_replace_def_igws(inet_gw **igws, int *igws_counter,
 		/* Reorder igws[level] */
 		igw_order(igws, igws_counter, my_igws, level);
 
-		
-		/* 
-		 * Take the first `nexthops'# gateways and add them in `ni' 
+
+		/*
+		 * Take the first `nexthops'# gateways and add them in `ni'
 		 */
-		
+
 		ni_lvl=0;
 		igw=igws[level];
 		list_for(igw) {
@@ -1047,18 +1049,18 @@ int igw_replace_def_igws(inet_gw **igws, int *igws_counter,
 			/* Do not include ourself as an inet-gw */
 			if(!memcmp(igw->ip, me.cur_ip.data, MAX_IP_SZ))
 				continue;
-		
-			/* Avoid duplicates, do not choose gateways we already 
+
+			/* Avoid duplicates, do not choose gateways we already
 			 * included in the nexthops array */
 			for(i=0, x=0; i<ni; i++)
-				if(!memcmp(taken_nexthops[i]->ip, igw->ip, 
+				if(!memcmp(taken_nexthops[i]->ip, igw->ip,
 							MAX_IP_SZ)) {
 					x=1;
 					break;
 				}
 			if(x)
 				continue;
-			
+
 			igw->flags|=IGW_ACTIVE;
 			inet_setip(&nh[ni].gw, igw->ip, family);
 			nh[ni].hops=max_multipath_routes-ni+1;
@@ -1066,7 +1068,7 @@ int igw_replace_def_igws(inet_gw **igws, int *igws_counter,
 			if((x=add_igw_nexthop(multigw_nh, &nh[ni].gw,
 							&new_nexhtop)) < 0)
 					continue;
-			
+
 			nh[ni].dev=tunnel_ifs[multigw_nh[x].tunl].dev_name;
 
 			/*
@@ -1074,26 +1076,26 @@ int igw_replace_def_igws(inet_gw **igws, int *igws_counter,
 			 * delete it.
 			 */
 			if(*nh[ni].dev && new_nexhtop)
-				del_tunnel_if(0, 0, nh[ni].dev, NTK_TUNL_PREFIX, 
+				del_tunnel_if(0, 0, nh[ni].dev, NTK_TUNL_PREFIX,
 						multigw_nh[x].tunl);
-			
-			if(!*nh[ni].dev) { 
+
+			if(!*nh[ni].dev) {
 				setzero(&nh_tmp, sizeof(struct nexthop)*2);
 				memcpy(&nh_tmp[0], &nh[ni], sizeof(struct nexthop));
 				inet_ntohl(nh_tmp[0].gw.data, nh_tmp[0].gw.family);
-				
-				/* 
+
+				/*
 				 * Initialize the `nh[ni].dev' tunnel, it's
 				 * its first time.
 				 */
-				if((add_tunnel_if(&nh_tmp[0].gw, &me.cur_ip, 0, 
-						NTK_TUNL_PREFIX, multigw_nh[x].tunl, 
+				if((add_tunnel_if(&nh_tmp[0].gw, &me.cur_ip, 0,
+						NTK_TUNL_PREFIX, multigw_nh[x].tunl,
 						&me.cur_ip)) < 0)
 					continue;
-				
-				/* 
+
+				/*
 				 * Add the table for the new tunnel-gw:
-				 * 
+				 *
 				 * ip rule add from me.cur_ip    \
 				 *   fwmark multigw_nh[x].tunl+1 \
 				 *   lookup multigw_nh[x].table
@@ -1103,14 +1105,14 @@ int igw_replace_def_igws(inet_gw **igws, int *igws_counter,
 					rule_del(&ip, 0, 0, 0,
 						multigw_nh[x].tunl, multigw_nh[x].table);
 				inet_htonl(ip.data, ip.family);
-				rule_add(&ip, 0, 0, 0, multigw_nh[x].tunl+1, 
+				rule_add(&ip, 0, 0, 0, multigw_nh[x].tunl+1,
 						multigw_nh[x].table);
 				multigw_nh[x].flags|=IGW_RTRULE;
 
 				/*
 				 * Add the default route in the added table:
-				 * 
-				 * ip route replace default via nh[ni].gw \ 
+				 *
+				 * ip route replace default via nh[ni].gw \
 				 * 	table multigw_nh[x].table 	  \
 				 * 	dev nh[ni].dev
 				 */
@@ -1119,17 +1121,17 @@ int igw_replace_def_igws(inet_gw **igws, int *igws_counter,
 					error("Cannote replace the default "
 						"route of the table %d ",
 						multigw_nh[x].table);
-				
+
 				 res=create_mark_rules(multigw_nh[x].tunl+1);
-				 if (res==-1) 
+				 if (res==-1)
 					 error(err_str);
 			}
 			taken_nexthops[ni]=igw;
-			
+
 			ni++;
 			ni_lvl++;
 		}
-		
+
 		if(ni_lvl >= nexthops)
 			/* All the other gateways are inactive */
 			list_for(igw)
@@ -1149,7 +1151,7 @@ int igw_replace_def_igws(inet_gw **igws, int *igws_counter,
 		return 0;
 
 #ifdef DEBUG
-	for(n=0; nh && nh[n].dev; n++){ 
+	for(n=0; nh && nh[n].dev; n++){
 		strcat(gw_ip, inet_to_str(nh[n].gw));
 		strcat(gw_ip, "|");
 		strcat(gw_ip, nh[n].dev);
@@ -1162,15 +1164,15 @@ int igw_replace_def_igws(inet_gw **igws, int *igws_counter,
 		error("WARNING: Cannot update the default route "
 				"lvl %d", level);
 	active_gws=ni;
-	
+
 	return 0;
 }
 
-/* 
+/*
  * igw_build_bentry: It builds the Internet gateway bnode blocks to be added
  * in the bnode's entry in the tracer pkt. For the specification of this type
  * of bnode block read igs.h
- * 
+ *
  * It returns the mallocated package containing the bblock, in `*pack_sz' it
  * stores the package's size.
  * The number of different bblock contained in the package is written in
@@ -1184,7 +1186,7 @@ char *igw_build_bentry(u_char level, size_t *pack_sz, int *new_bblocks)
 	bnode_chunk *bchunk;
 	inet_gw *igws_buf[MAX_IGW_PER_QSPN_CHUNK], *igw;
 	inet_prefix ip;
-	
+
 	int i, e, lvl, found_gws=0, max_igws, gids[FAMILY_LVLS];
 	size_t total_bblocks_sz, bblock_sz;
 	char *bblock, *buf;
@@ -1202,7 +1204,7 @@ char *igw_build_bentry(u_char level, size_t *pack_sz, int *new_bblocks)
 	if(!level && me.my_igws[level]->bandwidth)
 		igws_buf[found_gws++]=me.my_igws[level];
 	else {
-		for(lvl=level-1, found_gws=0; 
+		for(lvl=level-1, found_gws=0;
 			lvl >= 0 && found_gws < max_igws; lvl--) {
 
 			igw=me.igws[lvl];
@@ -1227,7 +1229,7 @@ char *igw_build_bentry(u_char level, size_t *pack_sz, int *new_bblocks)
 	total_bblocks_sz = bblock_sz * found_gws;
 	bblock=xzalloc(total_bblocks_sz);
 
-	/* 
+	/*
 	 * Write each IGW in the bblock
 	 */
 	for(i=0, buf=(char *)bblock; i<found_gws; i++) {
@@ -1264,12 +1266,12 @@ char *igw_build_bentry(u_char level, size_t *pack_sz, int *new_bblocks)
 
 /*
  * igw_store_bblock
- * 
- * It creates an inet_gw struct in me.igws using the bblock contained in 
+ *
+ * It creates an inet_gw struct in me.igws using the bblock contained in
  * `bchunk'. The hdr of the bblock is `bblock_hdr'.
  * The bblock has been packed using igw_build_bentry().
  * `level' is the level where the qspn_pkt which carries the bblock is being
- * spread. 
+ * spread.
  * The kernel routing table is also updated.
  * On error -1 is returned.
  */
@@ -1284,7 +1286,7 @@ int igw_store_bblock(bnode_hdr *bblock_hdr, bnode_chunk *bchunk, u_char level)
 	u_char *bnode_gid;
 
 	int i, update=0;
-	
+
 	/*
 	 * Extract the IP of the Internet gateway
 	 */
@@ -1296,13 +1298,13 @@ int igw_store_bblock(bnode_hdr *bblock_hdr, bnode_chunk *bchunk, u_char level)
 
 	gidtoipstart(gids, me.cur_quadg.levels, me.cur_quadg.levels, my_family,
 			&gw_ip);
-	
+
 #ifdef DEBUG
 	if(server_opt.dbg_lvl)
 		debug(DBG_NOISE, GREEN("igw_store_bblock: storing %s IGW, level %d"),
 					inet_to_str(gw_ip), level);
 #endif
-				
+
 	/*
 	 * Add `gw_ip' in all the levels >= `level' of me.igws
 	 */
@@ -1313,7 +1315,7 @@ int igw_store_bblock(bnode_hdr *bblock_hdr, bnode_chunk *bchunk, u_char level)
 			gnode = gnode_from_pos(gids[i], me.ext_map[_EL(i)]);
 			node  = &gnode->g;
 		}
-		
+
 		igw=igw_find_ip(me.igws, i, gw_ip.data);
 		if(igw) {
 			if(abs(igw->bandwidth - (char)bchunk->rtt) >= IGW_BW_DELTA) {
@@ -1321,7 +1323,7 @@ int igw_store_bblock(bnode_hdr *bblock_hdr, bnode_chunk *bchunk, u_char level)
 				update=1;
 			}
 		} else {
-			igw_add_node(me.igws, me.igws_counter, i, gids[i], node, 
+			igw_add_node(me.igws, me.igws_counter, i, gids[i], node,
 					(int*)gw_ip.data, bchunk->rtt);
 			update=1;
 		}
@@ -1330,14 +1332,14 @@ int igw_store_bblock(bnode_hdr *bblock_hdr, bnode_chunk *bchunk, u_char level)
 	if(!update)
 		/* we've finished */
 		return 0;
-	
-	/* 
-	 * Refresh the Kernel routing table 
+
+	/*
+	 * Refresh the Kernel routing table
 	 */
-	ret=igw_replace_def_igws(me.igws, me.igws_counter, me.my_igws, 
+	ret=igw_replace_def_igws(me.igws, me.igws_counter, me.my_igws,
 			me.cur_quadg.levels, my_family);
 	if(ret == -1) {
-		debug(DBG_SOFT, ERROR_MSG "cannot replace default gateway", 
+		debug(DBG_SOFT, ERROR_MSG "cannot replace default gateway",
 				ERROR_POS);
 		return -1;
 	}
@@ -1353,7 +1355,7 @@ char *pack_inet_gw(inet_gw *igw, char *pack)
 	memcpy(buf, igw->ip, MAX_IP_SZ);
 	inet_htonl((u_int *)buf, my_family);
 	buf+=MAX_IP_SZ;
-	
+
 	memcpy(buf, &igw->gid, sizeof(u_char));
 	buf+=sizeof(u_char);
 
@@ -1370,7 +1372,7 @@ inet_gw *unpack_inet_gw(char *pack, inet_gw *igw)
 	memcpy(igw->ip, buf, MAX_IP_SZ);
 	inet_ntohl(igw->ip, my_family);
 	buf+=MAX_IP_SZ;
-	
+
 	memcpy(&igw->gid, buf, sizeof(u_char));
 	buf+=sizeof(u_char);
 
@@ -1389,14 +1391,14 @@ char *pack_igws(inet_gw **igws, int *igws_counter, int levels, int *pack_sz)
 {
 	struct inet_gw_pack_hdr hdr;
 	inet_gw *igw;
-	
+
 	int lvl;
 	char *pack, *buf;
 
 	setzero(&hdr, sizeof(struct inet_gw_pack_hdr));
 
-	/* 
-	 * Fill the pack header and calculate the total pack size 
+	/*
+	 * Fill the pack header and calculate the total pack size
 	 */
 	hdr.levels=levels;
 	*pack_sz=sizeof(struct inet_gw_pack_hdr);
@@ -1426,8 +1428,8 @@ char *pack_igws(inet_gw **igws, int *igws_counter, int levels, int *pack_sz)
 /*
  * unpack_igws: upacks what pack_igws() packed.
  * `pack' is the package which is `pack_sz' big.
- * The pointer to the unpacked igws are stored in `new_igws' and 
- * `new_igws_counter'. 
+ * The pointer to the unpacked igws are stored in `new_igws' and
+ * `new_igws_counter'.
  * On error -1 is returned.
  */
 int unpack_igws(char *pack, size_t pack_sz,
@@ -1436,7 +1438,7 @@ int unpack_igws(char *pack, size_t pack_sz,
 {
 	struct inet_gw_pack_hdr *hdr;
 	inet_gw *igw, **igws;
-	
+
 	size_t sz;
 	int i, lvl=0, *igws_counter;
 	char *buf;
@@ -1446,7 +1448,7 @@ int unpack_igws(char *pack, size_t pack_sz,
 	sz=IGWS_PACK_SZ(hdr);
 
 	/* Verify the package header */
-	if(sz != pack_sz || sz > MAX_IGWS_PACK_SZ(levels) || 
+	if(sz != pack_sz || sz > MAX_IGWS_PACK_SZ(levels) ||
 			hdr->levels > levels) {
 		debug(DBG_NORMAL, "Malformed igws package");
 		return -1;
@@ -1466,7 +1468,7 @@ int unpack_igws(char *pack, size_t pack_sz,
 			buf+=INET_GW_PACK_SZ;
 		}
 	}
-		
+
 	*new_igws=igws;
 	*new_igws_counter=igws_counter;
 	return 0;

@@ -2,7 +2,7 @@
  * (c) Copyright 2005 Andrea Lo Pumo aka AlpT <alpt@freaknet.org>
  *
  * This source code is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as published 
+ * modify it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
  *
@@ -56,7 +56,7 @@ void log_init(char *prog, int dbg, int log_stderr)
  *
  * If `filename' is not null, it is opened and set as the logfile.
  * When `filename' is null, it just updates the `log_fd' global variable.
- * 
+ *
  * On errors it returns -1;
  */
 int log_to_file(char *filename)
@@ -71,7 +71,7 @@ int log_to_file(char *filename)
 
 	if(!(log_file=fopen(filename, "w"))) {
 		log_fd=stderr;
-		error("Cannot open the \"%s\" logfile: %s", 
+		error("Cannot open the \"%s\" logfile: %s",
 				filename, strerror(errno));
 		return -1;
 	}
@@ -131,7 +131,7 @@ void error(const char *fmt,...)
 	str[1]=' ';
 	strncpy(str+2, fmt, strlen(fmt));
 	str[strlen(fmt)+2]=0;
-	
+
 	va_start(args, fmt);
 	print_log(LOG_ERR, str, args);
 	va_end(args);
@@ -147,7 +147,7 @@ void loginfo(const char *fmt,...)
 	str[1]=' ';
 	strncpy(str+2, fmt, strlen(fmt));
 	str[strlen(fmt)+2]=0;
-	
+
 	va_start(args, fmt);
 	print_log(LOG_INFO, str, args);
 	va_end(args);
