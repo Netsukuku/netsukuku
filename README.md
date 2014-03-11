@@ -82,7 +82,11 @@ Here they are!
 
 for the libgmp: http://www.swox.com/gmp/
 the openssl library here: http://openssl.org
-and finally the zlibs: http://zlib.net
+the zlibs: http://zlib.net
+gawk: http://www.gnu.org/software/gawk/
+libgcrypt: https://www.gnu.org/software/libgcrypt/
+libpth: http://www.gnu.org/software/pth/
+libgee: https://wiki.gnome.org/Projects/Libgee
 
 ## Old stuff
 
