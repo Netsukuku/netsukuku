@@ -80,7 +80,7 @@ Or use them for development.
 
 Here they are!
 
-for the libgmp: http://www.swox.com/gmp/
+for the libgmp: https://gmplib.org/
 the openssl library here: http://openssl.org
 the zlibs: http://zlib.net
 gawk: http://www.gnu.org/software/gawk/
