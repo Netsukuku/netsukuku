@@ -5,7 +5,7 @@
 	     ***********************************************
 	     *******          BEGIN 3/2006          ********
 *************************************************************************
-*                                              				* 
+*                                              				*
 *  This program is free software; you can redistribute it and/or modify	*
 *  it under the terms of the GNU General Public License as published by	*
 *  the Free Software Foundation; either version 2 of the License, or	*
@@ -131,19 +131,19 @@ int collect_resolv_conf(char *resolve_conf)
         while ((crow=fgets(buf,512,erc)) && _andns_ns_count_<MAXNSSERVERS) {
                 if (!(crow=strstr(buf,"nameserver "))) /* is a good line? */
                         continue;
-		
+
 		/* Skip if the line is commented */
 		*crow=0;
 		if(strchr(buf, '#'))
 			continue;
-		
+
                 crow+=11;
-	
+
 		/* remove unwanted chars */
 		strip_char(crow, '\t');
 		strip_char(crow, ' ');
 		strip_char(crow, '\n');
-			
+
                 store_ns(crow); /* finally store nameserver */
         }
         if (fclose(erc)!=0) {
@@ -151,7 +151,7 @@ int collect_resolv_conf(char *resolve_conf)
 			"resolv.conf -> %s",strerror(errno));
 		err_ret(ERR_RSLERC,-1);
         }
-        if (!_andns_ns_count_) 
+        if (!_andns_ns_count_)
 		err_ret(ERR_RSLNNS,-1);
         return _andns_ns_count_;
 }
@@ -418,10 +418,10 @@ int is_prefixed(dns_pkt *dp)
 }
 
 /*
- * A very stupid function that converts 
+ * A very stupid function that converts
  * ANDNS code to DNS code.
  */
-int qtype_a_to_d(andns_pkt *ap) 
+int qtype_a_to_d(andns_pkt *ap)
 {
 	switch (ap->qtype) {
 		case AT_PTR:
@@ -431,7 +431,7 @@ int qtype_a_to_d(andns_pkt *ap)
 				return T_MX;
 			else if (!ap->service)
 				return T_A;
-			else 
+			else
 				return -1;
 		default:
 			return -1;
@@ -456,7 +456,7 @@ int apqsttodpqst(andns_pkt *ap,dns_pkt **dpsrc)
 
 	if (qt==T_A || qt==T_MX) {
 		qlen=strlen(ap->qstdata);
-		if (qlen>DNS_MAX_HNAME_LEN) 
+		if (qlen>DNS_MAX_HNAME_LEN)
 			goto incomp_err;
 		strcpy(dpq->qname,ap->qstdata);
 	}
@@ -475,13 +475,13 @@ int apqsttodpqst(andns_pkt *ap,dns_pkt **dpsrc)
 			goto incomp_err;
 		}
 		res=swapped_straddr_pref(temp,
-				dpq->qname,family); 
+				dpq->qname,family);
 		if (res==-1) {
 			debug(DBG_INSANE,err_str);
 			goto incomp_err;
 		}
 	}
-	else 
+	else
 		goto incomp_err;
 	dph->id=ap->id;
 	dph->rd=1;
@@ -503,14 +503,14 @@ int dpanswtoapansw(dns_pkt *dp,andns_pkt *ap)
 	rcode=DNS_GET_RCODE(dp);
 	ap->rcode=rcode;
 	ap->qr=1;
-	
-	if (rcode!=DNS_RCODE_NOERR) 
+
+	if (rcode!=DNS_RCODE_NOERR)
 		return 0;
 
 	qt=dp->pkt_qst->qtype;
 	dpa=dp->pkt_answ;
 	for (i=0;i<ancount;i++) {
-		if (!dpa) 
+		if (!dpa)
 			break;
 		apd=andns_add_answ(ap);
 		if (qt==T_A) {
@@ -518,7 +518,7 @@ int dpanswtoapansw(dns_pkt *dp,andns_pkt *ap)
 			APD_ALIGN(apd);
 			memcpy(apd->rdata,dpa->rdata,_ip_len_);
 			nan++;
-		} 
+		}
 		else if (qt==T_PTR ) {
 			apd->rdlength=strlen(dpa->rdata);
 			APD_ALIGN(apd);
@@ -543,7 +543,7 @@ int dpanswtoapansw(dns_pkt *dp,andns_pkt *ap)
 //			memcpy(&(apd->prio),dpa->rdata,sizeof(uint16_t));
 			nan++;
 		}
-		else 
+		else
 			andns_del_answ(ap);
 		dpa=dpa->next;
 	}
@@ -603,6 +603,8 @@ int andns_gethostbyname(char *hname, inet_prefix *ip)
                 error(err_str);
 		err_ret(ERR_RSLRSL,-1);
         }
+        fprintf(stderr, "Addr is %p, rdata is %p\n", (void*)addr, (void*) dp->pkt_answ->rdata);
+        if ((dp == NULL) || (dp->pkt_answ == NULL) || (dp->pkt_answ->rdata == NULL)) return -1;
         memcpy(&addr, dp->pkt_answ->rdata, sizeof(uint32_t));
         addr=ntohl(addr);
         if ((res=inet_setip_raw(ip,&addr, AF_INET))==-1) {
@@ -615,15 +617,15 @@ int andns_gethostbyname(char *hname, inet_prefix *ip)
 
 
 /* There is a DNS query, internet realm.
- * I'm going to forward it, but first I have 
+ * I'm going to forward it, but first I have
  * to control suffix presence.
- * 
- * After this function, `answer` is the answer to be 
+ *
+ * After this function, `answer` is the answer to be
  * sent to the client.
  *
  * Returns:
  * 	answer len
- */ 
+ */
 int dns_forward(dns_pkt *dp,char *msg,int msglen,char* answer)
 {
         dns_pkt *dp_forward;
@@ -684,7 +686,7 @@ failing:
  *
  * I'm going to resolve it in ANDNA.
  *
- * After this function, `answer` is the answer to be 
+ * After this function, `answer` is the answer to be
  * sent to the client.
  *
  * Returns:
@@ -720,7 +722,7 @@ int inet_rslv(dns_pkt *dp,char *msg,int msglen,char *answer)
 	} else if (qt==T_PTR) {
 		char tomp[DNS_MAX_HNAME_LEN];
 		lcl_cache *lc;
-			  
+
 		res=swapped_straddr(temp,tomp);
 		if (res==-1) {
 			rcode=RCODE_EINTRPRT;
@@ -757,14 +759,14 @@ return_rcode:
 	ANDNS_SET_QR(answer);
 	return msglen;
 }
-	
+
 int nk_rslv(andns_pkt *ap,char *msg,int msglen,char *answer)
 {
 	int qt,res,rcode,records;
 	inet_prefix ipres;
 	uint8_t recs;
 	uint16_t s;
-	
+
 	qt=ap->qtype;
 	if (qt==AT_A) {
 		snsd_service *ss;
@@ -783,11 +785,11 @@ int nk_rslv(andns_pkt *ap,char *msg,int msglen,char *answer)
 			goto safe_return_rcode;
 		}
 		snsd_service_llist_del(&ss);
-	} 
+	}
 	else if (qt==AT_PTR) {
 		lcl_cache *lc;
 		int family;
-		
+
 		family=ap->qstlength==4?AF_INET:AF_INET6;
 		res=inet_setip_raw(&ipres,(u_int*)ap->qstdata,family);
 		if (res==-1) {
@@ -802,7 +804,7 @@ int nk_rslv(andns_pkt *ap,char *msg,int msglen,char *answer)
 			goto safe_return_rcode;
 		}
 		res=lcl_cache_to_aansws(answer+msglen,lc,&records); /* destroys lc */
-	} 
+	}
 	else if (qt==AT_G) {
 		snsd_service *ss;
 		ss=andna_resolve_hash((u_int *)ap->qstdata,
@@ -914,7 +916,7 @@ char *andns_rslv(char *msg, int msglen,char *answer, int *answ_len)
 	andns_pkt *ap;
 
 	proto=GET_NK_BIT(msg);
-        if (proto==NK_DNS) 
+        if (proto==NK_DNS)
 		res=d_u(msg,msglen,&dp);
 	else if (proto==NK_INET || proto==NK_NTK)
 		res=a_u(msg,msglen,&ap);
@@ -923,10 +925,10 @@ char *andns_rslv(char *msg, int msglen,char *answer, int *answ_len)
 				 "Which language are you speaking?");
 		return NULL;
 	}
-	if (res==0) 
+	if (res==0)
 		goto discard;
         memset(answer, 0, ANDNS_MAX_SZ);
-	if (res==-1) 
+	if (res==-1)
 		goto intrprt;
         if (proto==NK_DNS) {
 		r=andns_realm(dp->pkt_qst,NULL);
@@ -934,7 +936,7 @@ char *andns_rslv(char *msg, int msglen,char *answer, int *answ_len)
 			res=dns_forward(dp,msg,msglen,answer);
 		else
 			res=inet_rslv(dp,msg,msglen,answer);
-	} 
+	}
 	else if (proto==NK_NTK)
 		res=nk_rslv(ap,msg,msglen,answer);
 	else if (proto==NK_INET)

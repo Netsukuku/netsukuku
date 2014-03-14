@@ -26,7 +26,7 @@ masq_start() {
 		# echo "1" > /proc/sys/net/ipv4/ip_dynaddr
 
 		# Masquerade
-		iptables -A POSTROUTING -t nat -j MASQUERADE -o ! lo
+		iptables -A POSTROUTING -t nat -j MASQUERADE ! -o lo
 
 		# Static IP users: 
 		#
