@@ -228,6 +228,12 @@ You can browse the archive here:
   http://lists.dyne.org/netsukuku/
   http://dir.gmane.org/gmane.network.peer-to-peer.netsukuku
 
+# How to donate money
+
+Some of us are not traditionally employed. We will distribute any donated money amongst ourselves, and take that as incentive to work harder on the project.
+
+* [bitcoin](bitcoin:1BAbi4aHjdN7znNLuDa6dgs4rZLU3Tq9ka) (1BAbi4aHjdN7znNLuDa6dgs4rZLU3Tq9ka)
+* [paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K5QNFRAXBYPY6)
 
 # Bug report
 
