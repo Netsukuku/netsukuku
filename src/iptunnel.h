@@ -22,8 +22,8 @@
 #include "if.h"
 
 #define DEFAULT_TUNL_PREFIX	"tunl"
-#define DEFAULT_TUNL_NUMBER	0	/* The permanent tunl0 device */
-#define DEFAULT_TUNL_IF		"tunl0"
+#define DEFAULT_TUNL_NUMBER	1	/* The permanent tunl0 device */
+#define DEFAULT_TUNL_IF		"tunl1"
 #define NTK_TUNL_PREFIX		"ntk_tunl"
 
 /* Usage: printf(TUNL_STRING, TUNL_NUMBER("tunl", x)); */
@@ -31,7 +31,7 @@
 #define TUNL_N(prefix, x)	prefix, x
 
 #define MAX_TUNNEL_IFS		24	/* it must be >= MAX_MULTIPATH_ROUTES,
-					   since in igs.c we are using a tunnel 
+					   since in igs.c we are using a tunnel
 					   for each nexthop inet-gw */
 
 /*
@@ -41,7 +41,7 @@
 interface tunnel_ifs[MAX_TUNNEL_IFS];
 
 
-/* 
+/*
  * Functions declaration
  */
 
@@ -63,6 +63,6 @@ int add_tunnel_if(inet_prefix *remote, inet_prefix *local, char *dev,
 		char *tunl_prefix, int tunl_number, inet_prefix *tunl_ip);
 int del_tunnel_if(inet_prefix *remote, inet_prefix *local, char *dev,
 		char *tunl_prefix, int tunl_number);
-void del_all_tunnel_ifs(inet_prefix *remote, inet_prefix *local, char *dev, 
+void del_all_tunnel_ifs(inet_prefix *remote, inet_prefix *local, char *dev,
 		char *tunl_prefix);
 #endif /* IPTUNNEL_H */

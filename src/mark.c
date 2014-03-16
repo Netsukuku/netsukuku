@@ -105,6 +105,7 @@ int commit_rules(iptc_handle_t *t)
 {
 	int res;
 	res=iptc_commit(t);
+	error("This is the value of res: %i This is the value of t is: %s", res, t);
 	if (!res) {
 		error("In commit_rules: %s.",iptc_strerror(errno));
 		err_ret(ERR_NETCOM,-1);

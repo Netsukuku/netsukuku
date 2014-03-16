@@ -603,7 +603,7 @@ int andns_gethostbyname(char *hname, inet_prefix *ip)
                 error(err_str);
 		err_ret(ERR_RSLRSL,-1);
         }
-        fprintf(stderr, "Addr is %p, rdata is %p\n", (void*)addr, (void*) dp->pkt_answ->rdata);
+        fprintf(stderr, "Addr is %p, rdata is %p rawr %p hai %p\n", (void*)&addr, (void*) dp->pkt_answ->rdata, (void*) dp->pkt_answ, (void*) dp);
         if ((dp == NULL) || (dp->pkt_answ == NULL) || (dp->pkt_answ->rdata == NULL)) return -1;
         memcpy(&addr, dp->pkt_answ->rdata, sizeof(uint32_t));
         addr=ntohl(addr);

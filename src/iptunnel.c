@@ -17,7 +17,7 @@
  * Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  * --
- * This code derives from iproute2/iprule.c, it was modified to fit in 
+ * This code derives from iproute2/iprule.c, it was modified to fit in
  * Netsukuku.
  *
  * Authors:	Alexey Kuznetsov, <kuznet@ms2.inr.ac.ru>
@@ -49,13 +49,14 @@ int do_del(inet_prefix *remote, inet_prefix *local, char *dev,
 int tunnel_add(inet_prefix *remote, inet_prefix *local, char *dev,
 		char *tunl_prefix, int tunl_number)
 {
-	return do_add(SIOCADDTUNNEL, remote, local, dev, tunl_prefix, 
+	return do_add(SIOCADDTUNNEL, remote, local, dev, tunl_prefix,
 			tunl_number);
 }
 
 int tunnel_change(inet_prefix *remote, inet_prefix *local, char *dev,
 		char *tunl_prefix, int tunl_number)
 {
+	error("The value of siocchgtunnel is: %d", SIOCCHGTUNNEL);
 	return do_add(SIOCCHGTUNNEL, remote, local, dev, tunl_prefix,
 			tunl_number);
 }
@@ -150,6 +151,7 @@ static int do_add_ioctl(int cmd, const char *basedev, struct ip_tunnel_parm *p)
 	ifr.ifr_ifru.ifru_data = (void*)p;
 	fd = socket(AF_INET, SOCK_DGRAM, 0);
 	err = ioctl(fd, cmd, &ifr);
+    error("Socket File Descriptor Is: %i cmd is: %i err is: %i ifr is: %s Errno is: %d", fd, cmd, err, &ifr, errno);
 	if (err)
 		error(ERROR_MSG "ioctl: %s",ERROR_POS, strerror(errno));
 	close(fd);
@@ -179,7 +181,7 @@ static int do_del_ioctl(const char *basedev, struct ip_tunnel_parm *p)
  * fill_tunnel_parm: fills the `p' struct.
  * `remote' and `local' must be in host order
  */
-static int fill_tunnel_parm(int cmd, inet_prefix *remote, inet_prefix *local, 
+static int fill_tunnel_parm(int cmd, inet_prefix *remote, inet_prefix *local,
 		char *dev, char *tunl_prefix, int tunl_number,
 		struct ip_tunnel_parm *p)
 {
@@ -229,7 +231,7 @@ static int fill_tunnel_parm(int cmd, inet_prefix *remote, inet_prefix *local,
 	return 0;
 }
 
-/* 
+/*
  * do_get: returns 1 if the tunnel named `dev' exists.
  */
 int do_get(char *dev)
@@ -246,9 +248,10 @@ int do_get(char *dev)
 static int do_add(int cmd, inet_prefix *remote, inet_prefix *local, char *dev,
 		char *tunl_prefix, int tunl_number)
 {
+    error("This is the do_add function.");
 	struct ip_tunnel_parm p;
 
-	if (fill_tunnel_parm(cmd, remote, local, dev, tunl_prefix, 
+	if (fill_tunnel_parm(cmd, remote, local, dev, tunl_prefix,
 				tunl_number, &p) < 0)
 		return -1;
 
@@ -258,7 +261,7 @@ static int do_add(int cmd, inet_prefix *remote, inet_prefix *local, char *dev,
 	switch (p.iph.protocol) {
 		case IPPROTO_IPIP:
 			return do_add_ioctl(cmd, DEFAULT_TUNL_IF, &p);
-		default:	
+		default:
 			fatal("cannot determine tunnel mode (ipip, gre or sit)\n");
 	}
 	return -1;
@@ -276,14 +279,14 @@ int do_del(inet_prefix *remote, inet_prefix *local, char *dev, char *tunl_prefix
 	switch (p.iph.protocol) {
 		case IPPROTO_IPIP:
 			return do_del_ioctl(DEFAULT_TUNL_IF, &p);
-		default:	
+		default:
 			return do_del_ioctl(p.name, &p);
 	}
 	return -1;
 }
 
 /*
- * tun_add_tunl: it adds in the `ifs' array a new struct which refers to 
+ * tun_add_tunl: it adds in the `ifs' array a new struct which refers to
  * the tunnel "tunlX", where X is a number equal to `tunl'.
  */
 int tun_add_tunl(interface *ifs, char *tunl_prefix, u_char tunl_number)
@@ -298,7 +301,7 @@ int tun_add_tunl(interface *ifs, char *tunl_prefix, u_char tunl_number)
 	return 0;
 }
 
-/* 
+/*
  * tun_del_tunl: it removes from the `ifs' array, which must have at least
  * MAX_TUNNEL_IFS members, the struct which refers the tunnel "tunlX", where X
  * is a number equal to `tunl'.
@@ -308,7 +311,7 @@ int tun_del_tunl(interface *ifs, char *tunl_prefix, u_char tunl_number)
 {
 	char tunl_name[IFNAMSIZ];
 	int i;
-	
+
 	sprintf(tunl_name, TUNL_STRING, TUNL_N(tunl_prefix, tunl_number));
 
 	for(i=0; i<MAX_TUNNEL_IFS; i++)
@@ -316,7 +319,7 @@ int tun_del_tunl(interface *ifs, char *tunl_prefix, u_char tunl_number)
 			memset(&ifs[i], 0, sizeof(interface));
 			return 0;
 		}
-	
+
 	return -1;
 }
 
@@ -328,7 +331,7 @@ void init_tunnels_ifs(void)
 }
 
 /*
- * first_free_tunnel_if: returns the position of the first member of the 
+ * first_free_tunnel_if: returns the position of the first member of the
  * `tunnel_ifs' array which isn't used yet.
  * If the whole array is full, -1 is returned.
  */
@@ -369,14 +372,14 @@ int add_tunnel_if(inet_prefix *remote, inet_prefix *local, char *dev,
 		char *tunl_prefix, int tunl_number, inet_prefix *tunl_ip)
 {
 	char tunl_name[IFNAMSIZ];
-	
-	/* 
+
+	/*
 	 * tunl0 zero is a special tunnel, it cannot be created nor destroyed.
 	 * It's pure energy.
 	 */
 	if(!strcmp(tunl_prefix, DEFAULT_TUNL_PREFIX) && !tunl_number)
 		goto skip_krnl_add_tunl;
-	
+
 	if(tunnel_add(remote, local, dev, tunl_prefix, tunl_number) < 0) {
 		error("Cannot add the \"" TUNL_STRING "\" tunnel",
 				TUNL_N(tunl_prefix, tunl_number));
@@ -396,14 +399,14 @@ skip_krnl_add_tunl:
 		if(set_tunnel_ip(tunl_prefix, tunl_number, tunl_ip) < 0)
 			return -1;
 
-		
+
 		/*
 		 *  ip route append tunl_ip_subnet dev tunnel  proto kernel \
 		 *  scope link  src `tunl_ip'
 		 */
 		sprintf(tunl_name, TUNL_STRING, TUNL_N(tunl_prefix, tunl_number));
 		rt_append_subnet_src(tunl_ip, tunl_name);
-				
+
 		if(route_rp_filter_all_dev(my_family, &tunnel_ifs[tunl_number],
 				1, 0) < 0)
 			return -1;
@@ -434,7 +437,7 @@ skip_krnl_del_tunl:
 	return 0;
 }
 
-void del_all_tunnel_ifs(inet_prefix *remote, inet_prefix *local, char *dev, 
+void del_all_tunnel_ifs(inet_prefix *remote, inet_prefix *local, char *dev,
 		char *tunl_prefix)
 {
 	char tunl_name[IFNAMSIZ];
