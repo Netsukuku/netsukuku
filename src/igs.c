@@ -306,16 +306,16 @@ void init_internet_gateway_search(void)
 	/*
 	 * Bring tunl0 up (just to test if the ipip module is loaded)
 	 */
-	loginfo("Configuring the \"" DEFAULT_TUNL_IF "\" tunnel device");
+	loginfo("Checking if \"" DEFAULT_TUNL_IF "\" exists");
 	if(tunnel_change(0, 0, 0, DEFAULT_TUNL_PREFIX, DEFAULT_TUNL_NUMBER) < 0) {
-		printf("Cannot initialize \"" DEFAULT_TUNL_IF "\". "
+		printf("Cannot read \"" DEFAULT_TUNL_IF "\". "
 			"Is the \"ipip\" kernel module loaded?\n"
 			"  If you don't care about using the shared internet "
 			"connections of the ntk nodes\n"
 			"  around you, disable the \"use_shared_inet\" option "
 			"in netsukuku.conf");
-			//del_resolv_conf("nameserver 127.0.0.1", "/etc/resolv.conf");
-			//exit(1);
+			del_resolv_conf("nameserver 127.0.0.1", "/etc/resolv.conf");
+			exit(1);
 			}
 	ifs_del_all_name(me.cur_ifs, &me.cur_ifs_n, NTK_TUNL_PREFIX);
 	ifs_del_all_name(me.cur_ifs, &me.cur_ifs_n, DEFAULT_TUNL_PREFIX);

@@ -56,8 +56,7 @@ int tunnel_add(inet_prefix *remote, inet_prefix *local, char *dev,
 int tunnel_change(inet_prefix *remote, inet_prefix *local, char *dev,
 		char *tunl_prefix, int tunl_number)
 {
-	error("The value of siocchgtunnel is: %d", SIOCCHGTUNNEL);
-	return do_add(SIOCCHGTUNNEL, remote, local, dev, tunl_prefix,
+	return do_add(SIOCGETTUNNEL, remote, local, dev, tunl_prefix,
 			tunl_number);
 }
 
@@ -248,7 +247,6 @@ int do_get(char *dev)
 static int do_add(int cmd, inet_prefix *remote, inet_prefix *local, char *dev,
 		char *tunl_prefix, int tunl_number)
 {
-    error("This is the do_add function.");
 	struct ip_tunnel_parm p;
 
 	if (fill_tunnel_parm(cmd, remote, local, dev, tunl_prefix,

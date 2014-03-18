@@ -1055,6 +1055,7 @@ ssize_t inet_sendto(int s, const void *msg, size_t len, int flags,
 	int ret;
 
 	if((err=sendto(s, msg, len, flags, to, tolen))==-1) {
+		error("sendto errno: %d err is: %d", errno, err);
 		switch(errno)
 		{
 			case EMSGSIZE:
