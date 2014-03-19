@@ -2,7 +2,7 @@
  * (c) Copyright 2005 Andrea Lo Pumo aka AlpT <alpt@freaknet.org>
  *
  * This source code is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as published 
+ * modify it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
  *
@@ -20,7 +20,7 @@
  *
  * The DNS wrapper listens to the port 53 for DNS hostname resolution queries,
  * it then resolves the hostname by using the ANDNA system and sends back the
- * resolved ip. In this way, every program can use ANDNA: just set 
+ * resolved ip. In this way, every program can use ANDNA: just set
  * "nameserver localhost"
  * in /etc/resolv.conf ;)
  */
@@ -49,7 +49,7 @@
 
 /*
  * dns_exec_pkt: resolve the hostname contained in the DNS query and sends
- * the reply to from. 
+ * the reply to from.
  * `passed_argv' is a pointer to a dns_exec_pkt_argv struct.
  */
 void *dns_exec_pkt(void *passed_argv)
@@ -77,6 +77,7 @@ void *dns_exec_pkt(void *passed_argv)
 	/* Send the DNS reply */
 	bytes_sent=inet_sendto(argv.sk, answer_buffer, answer_length, 0,
 			&argv.from, argv.from_len);
+        error("bytes_sent is: %d argv.sk is: %d answer_buffer is: %s answer_length is: %d argv.from is: %p agrv.from_len is: %p", bytes_sent,argv.sk, answer_buffer, answer_length, argv.from, argv.from_len);
 	if(bytes_sent != answer_length)
 		debug(DBG_SOFT, ERROR_MSG "inet_sendto error: %s", ERROR_POS,
 				strerror(errno));
@@ -103,7 +104,7 @@ void dns_wrapper_daemon(u_short port)
 #ifdef DEBUG
 	int select_errors=0;
 #endif
-	
+
 	pthread_attr_init(&t_attr);
 	pthread_attr_setdetachstate(&t_attr, PTHREAD_CREATE_DETACHED);
 	pthread_mutex_init(&dns_exec_lock, 0);
@@ -117,10 +118,10 @@ void dns_wrapper_daemon(u_short port)
 	for(;;) {
 		if(!sk)
 			fatal("The dns_wrapper_daemon socket got corrupted");
-		
+
 		FD_ZERO(&fdset);
 		FD_SET(sk, &fdset);
-		
+
 		ret = select(sk+1, &fdset, NULL, NULL, NULL);
 		if(sigterm_timestamp)
 			/* NetsukukuD has been closed */
@@ -131,7 +132,7 @@ void dns_wrapper_daemon(u_short port)
 				break;
 			select_errors++;
 #endif
-			error("dns_wrapper_daemonp: select error: %s", 
+			error("dns_wrapper_daemonp: select error: %s",
 					strerror(errno));
 			continue;
 		}
@@ -141,7 +142,7 @@ void dns_wrapper_daemon(u_short port)
 		setzero(&buf, MAX_DNS_PKT_SZ);
 		setzero(&exec_pkt_argv.from, sizeof(struct sockaddr));
 		setzero(&exec_pkt_argv, sizeof(struct dns_exec_pkt_argv));
-		
+
 		exec_pkt_argv.from_len = my_family == AF_INET ?
 			sizeof(struct sockaddr_in) : sizeof(struct sockaddr_in6);
 
@@ -153,14 +154,14 @@ void dns_wrapper_daemon(u_short port)
 					" query pkt aborted!");
 			continue;
 		}
-		
+
 		/* Exec the pkt in another thread */
 		exec_pkt_argv.sk=sk;
 		exec_pkt_argv.rpkt_sz=err;
 		exec_pkt_argv.rpkt=buf;
-		
+
 		pthread_mutex_lock(&dns_exec_lock);
-		pthread_create(&thread, &t_attr, dns_exec_pkt, 
+		pthread_create(&thread, &t_attr, dns_exec_pkt,
 				(void *)&exec_pkt_argv);
 		pthread_mutex_lock(&dns_exec_lock);
 		pthread_mutex_unlock(&dns_exec_lock);
