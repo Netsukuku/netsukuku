@@ -73,6 +73,7 @@ int insert_rule(const char *rule,iptc_handle_t *t,const char *chain,int pos)
 {
 	int res;
 	res=iptc_insert_entry(chain,(struct ipt_entry*)rule,0,t);
+	error("res is: %d rule is: %p chain is: %s pos is: %d t is: %p errno is: %d", res, rule, chain, pos, t, errno);
 	if (!res) {
 		error("In insert_rule: %s.",iptc_strerror(errno));
 		err_ret(ERR_NETRUL,-1);
@@ -105,7 +106,7 @@ int commit_rules(iptc_handle_t *t)
 {
 	int res;
 	res=iptc_commit(t);
-	error("This is the value of res: %i This is the value of t is: %p", res, t);
+	error("This is the value of res: %i This is the value of t is: %p errno is: %d", res, t, errno);
 	if (!res) {
 		error("In commit_rules: %s.",iptc_strerror(errno));
 		err_ret(ERR_NETCOM,-1);
@@ -321,11 +322,12 @@ int store_rules()
 			dr.sz=IGW_FILTER_RULE_SZ;
 			memcpy(dr.e,d,dr.sz);
 			dr.chain=CHAIN_PREROUTING;
-			commit_rules(&t);
+            error("This is store_rules, And the value of t is: %p", t);
+            commit_rules(&t);
 			return 0;
 		}
 		else {
-            error("This is store_rules, And the value of t is: %p", t);
+            error("This is store_rules else, And the value of t is: %p", t);
 			commit_rules(&t);
 			error("In store_rules: %s.",iptc_strerror(errno));
 			err_ret(ERR_NETSTO,-1);
