@@ -1,5 +1,5 @@
 http://netsukuku.freaknet.org
-
+##New Donations options have been added! Scroll down please!
 
 
 
@@ -72,6 +72,19 @@ This will run netsukuku in restricted mode and share your internet connection.
 
 (Netsukuku should be able to use any network interface you have, Even VPNs that emulate ethernet
 such as tinc.)
+
+# How to donate
+
+We love netsukuku, However, We can't work on it if we don't have money for an internet connection, Or money for food. Not all of us are not traditionally employed, And we need donations to continue being able to work, And devote as much time as we can to this wonderful project!
+
+This project is a dream come true for many of us, And we would love it if you would help us mantain this dream for as long as possible! Thank you for reading. :)
+
+[We will distribute any donated money amongst ourselves, and take that as incentive to work harder on the project. However, We will, Also, Provide additional crypto currency addresses if you want to donate to a specific person, Or prefer crypto-currencies.]
+
+* [Jercos' Bitcoin Address](Jercos' Bitcoin Address:1BAbi4aHjdN7znNLuDa6dgs4rZLU3Tq9ka) (1BAbi4aHjdN7znNLuDa6dgs4rZLU3Tq9ka)
+* [MissValeska's Bitcoin Address](MissValeska's Bitcoin Address:1Py3CmmaDk2bCUsLGprFkewGQunaKB7jmv) (1Py3CmmaDk2bCUsLGprFkewGQunaKB7jmv)
+* [MissValeska's Litecoin Address](MissValeska's Litecoin Address:LcjJW2hDHS9oCxCWAb3WLexyJECSZ2Rp2s) (LcjJW2hDHS9oCxCWAb3WLexyJECSZ2Rp2s)
+* [Communial Paypal Account](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K5QNFRAXBYPY6)
 
 ## Manual Dependencies
 
@@ -227,19 +240,6 @@ or use the web interface:
 You can browse the archive here:
   http://lists.dyne.org/netsukuku/
   http://dir.gmane.org/gmane.network.peer-to-peer.netsukuku
-
-# How to donate
-
-We love netsukuku, However, We can't work on it if we don't have money for an internet connection, Or money for food. Not all of us are not traditionally employed, And we need donations to continue being able to work, And devote as much time as we can to this wonderful project!
-
-This project is a dream come true for many of us, And we would love it if you would help us mantain this dream for as long as possible! Thank you for reading. :)
-
-[We will distribute any donated money amongst ourselves, and take that as incentive to work harder on the project. However, We will, Also, Provide additional crypto currency addresses if you want to donate to a specific person, Or prefer crypto-currencies.]
-
-* [Jercos' Bitcoin Address](Jercos' Bitcoin Address:1BAbi4aHjdN7znNLuDa6dgs4rZLU3Tq9ka) (1BAbi4aHjdN7znNLuDa6dgs4rZLU3Tq9ka)
-* [MissValeska's Bitcoin Address](MissValeska's Bitcoin Address:1Py3CmmaDk2bCUsLGprFkewGQunaKB7jmv) (1Py3CmmaDk2bCUsLGprFkewGQunaKB7jmv)
-* [MissValeska's Litecoin Address](MissValeska's Litecoin Address:LcjJW2hDHS9oCxCWAb3WLexyJECSZ2Rp2s) (LcjJW2hDHS9oCxCWAb3WLexyJECSZ2Rp2s)
-* [Communial Paypal Account](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K5QNFRAXBYPY6)
 
 # Bug report
 
