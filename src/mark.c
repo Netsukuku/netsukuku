@@ -325,7 +325,7 @@ int store_rules()
 			return 0;
 		}
 		else {
-            error("This is store_rules, And the value of t is: %p", t);
+            		error("This is store_rules, And the value of t is: %p", t);
 			commit_rules(&t);
 			error("In store_rules: %s.",iptc_strerror(errno));
 			err_ret(ERR_NETSTO,-1);
