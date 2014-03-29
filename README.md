@@ -1,5 +1,5 @@
 http://netsukuku.freaknet.org
-##New Donations options have been added! Scroll down please!
+##New Donations options have been added, Including tip4commit! Scroll down please!
 
 
 
@@ -80,6 +80,8 @@ We love netsukuku, However, We can't work on it if we don't have money for an in
 This project is a dream come true for many of us, And we would love it if you would help us mantain this dream for as long as possible! Thank you for reading. :)
 
 [We will distribute any donated money amongst ourselves, and take that as incentive to work harder on the project. However, We will, Also, Provide additional crypto currency addresses if you want to donate to a specific person, Or prefer crypto-currencies.]
+
+* [Tip4Commit!](Tip4Commit!:http://tip4commit.com/projects/687) (http://tip4commit.com/projects/687)
 
 * [Jercos' Bitcoin Address](Jercos' Bitcoin Address:1BAbi4aHjdN7znNLuDa6dgs4rZLU3Tq9ka) (1BAbi4aHjdN7znNLuDa6dgs4rZLU3Tq9ka)
 * [MissValeska's Bitcoin Address](MissValeska's Bitcoin Address:1Py3CmmaDk2bCUsLGprFkewGQunaKB7jmv) (1Py3CmmaDk2bCUsLGprFkewGQunaKB7jmv)
