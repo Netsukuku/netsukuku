@@ -55,6 +55,7 @@ static int dumped;
 int table_init(const char *table, iptc_handle_t *t)
 {
 	*t=iptc_init(table);
+	error("In table_int, t: %s and errno %d", table,errno);
 	if (!(*t)) {
 		error("In table_init, table %s: -> %s", table,iptc_strerror(errno));
 		err_ret(ERR_NETFIL,-1);
@@ -90,6 +91,7 @@ int append_rule(const char *rule,iptc_handle_t *t,const char *chain)
 {
 	int res;
 	res=iptc_append_entry(chain,(struct ipt_entry*)rule,t);
+	error("res is: %d, chain: %s, rule: %s, t: %s, Errno is: %d",res,chain,rule,t,errno);
 	if (!res) {
 		error("In append_rule: %s.",iptc_strerror(errno));
 		err_ret(ERR_NETRUL,-1);
