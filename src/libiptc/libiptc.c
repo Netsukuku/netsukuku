@@ -509,6 +509,7 @@ new_rule:
 			t = (STRUCT_STANDARD_TARGET *)GET_TARGET(e);
 			if (t->target.u.target_size
 			    != ALIGN(sizeof(STRUCT_STANDARD_TARGET))) {
+				free(r);
 				errno = EINVAL;
 				return -1;
 			}
@@ -2120,6 +2121,7 @@ TC_COMMIT(TC_HANDLE_T *handle)
 		errno = ret;
 		free(repl->counters);
 		free(repl);
+		free(newcounters);
 		return 0;
 	}
 

@@ -31,7 +31,7 @@ int andns_compress(char *src,int srclen)
 {
 	int res;
 	uLongf space;
-	
+
 	src+=ANDNS_HDR_SZ;
 	srclen-=ANDNS_HDR_SZ;
 	space=compressBound(srclen);
@@ -42,11 +42,11 @@ int andns_compress(char *src,int srclen)
 		 * the uncompressed size */
 	res=compress2(dst+ANDNS_HDR_Z, &space,(u_char *) src, srclen,
 			ANDNS_COMPR_LEVEL);
-	if (res!=Z_OK) 
+	if (res!=Z_OK)
 		err_ret(ERR_ZLIBCP,-1);
-	if (space >= srclen-ANDNS_HDR_Z) /* We have to consider the four 
+	if (space >= srclen-ANDNS_HDR_Z) /* We have to consider the four
 				  		bytes too */
-		err_ret(ERR_ZLIBNU,-1); /* This is a 
+		err_ret(ERR_ZLIBNU,-1); /* This is a
 					silent return */
 	res=htonl(srclen);
 	memcpy(dst,&res,ANDNS_HDR_Z);
@@ -54,7 +54,7 @@ int andns_compress(char *src,int srclen)
 
 	return (int)space;
 }
-char* andns_uncompress(char *src,int srclen,int *dstlen) 
+char* andns_uncompress(char *src,int srclen,int *dstlen)
 {
 	unsigned char *dst;
 	uLongf space;
@@ -64,7 +64,7 @@ char* andns_uncompress(char *src,int srclen,int *dstlen)
 
 	memcpy(&c_len,src+ANDNS_HDR_SZ,ANDNS_HDR_Z);
 	c_len=ntohl(c_len);
-	dst=xmalloc(c_len+ANDNS_HDR_SZ); 
+	dst=xmalloc(c_len+ANDNS_HDR_SZ);
 
 	space=c_len;
 
@@ -79,7 +79,7 @@ char* andns_uncompress(char *src,int srclen,int *dstlen)
 	}
 
 	memcpy(dst, src, ANDNS_HDR_SZ);
-	*dstlen=c_len+ANDNS_HDR_SZ; 
+	*dstlen=c_len+ANDNS_HDR_SZ;
 
 	return (char*)dst;
 }
@@ -104,7 +104,7 @@ int a_hdr_u(char *buf,andns_pkt *ap)
 	ap->id>>=1;
         buf+=2;
 
-        memcpy(&c,buf,2);
+        memcpy(&c,buf,sizeof(uint8_t));
         ap->qr=(c>>7)&0x01;
         ap->p=c&0x40?ANDNS_PROTO_UDP:ANDNS_PROTO_TCP;
 	ap->z=c&0x20;
@@ -150,7 +150,7 @@ int a_qst_u(char *buf,andns_pkt *ap,int limitlen)
 				memcpy(&s,buf,2);
 				ap->qstlength=ntohs(s);
 				buf+=2;
-        			if (ap->qstlength>=ANDNS_MAX_QST_LEN || 
+        			if (ap->qstlength>=ANDNS_MAX_QST_LEN ||
 					ap->qstlength>limitlen-4)
                 			err_ret(ERR_ANDPLB,-1);
 				AP_ALIGN(ap);
@@ -243,7 +243,7 @@ int a_answ_u(char *buf,andns_pkt *ap,int limitlen)
 			memcpy(&alen,buf,2);
 			apd->service=ntohs(alen);
 			buf+=2;
-			if (apd->m&APD_IP) 
+			if (apd->m&APD_IP)
 				apd->rdlength=(ap->ipv?16:4);
 			else
 				apd->rdlength=ANDNS_HASH_H;
@@ -268,7 +268,7 @@ int a_answs_u(char *buf,andns_pkt *ap,int limitlen)
 		memcpy(&alen,buf,sizeof(uint16_t));
 		ap->ancount=ntohs(alen);
 		offset+=2;
-	} 		
+	}
 	ancount=ap->ancount;
         for (i=0;i<ancount;i++) {
                 res=a_answ_u(buf+offset,ap,limitlen-offset);
@@ -303,15 +303,15 @@ int a_u(char *buf,int pktlen,andns_pkt **app)
         *app=ap=create_andns_pkt();
         offset=a_hdr_u(buf,ap);
 
-	if (ap->z) { /* Controls the space to read 
+	if (ap->z) { /* Controls the space to read
 			uncompressed size */
 		if (pktlen<ANDNS_HDR_SZ+ANDNS_HDR_Z) {
 			destroy_andns_pkt(ap);
                 	err_ret(ERR_ANDPLB,0);
 		}
-		if (!(u_buf=andns_uncompress(buf,pktlen,&u_len))) 
+		if (!(u_buf=andns_uncompress(buf,pktlen,&u_len)))
 			goto andmap;
-		destroy_andns_pkt(ap); 
+		destroy_andns_pkt(ap);
 		ANDNS_UNSET_Z(u_buf);
 		res=a_u(u_buf,u_len,app);
 		xfree(u_buf);
@@ -319,14 +319,14 @@ int a_u(char *buf,int pktlen,andns_pkt **app)
 	}
         buf+=offset;
         limitlen=pktlen-offset;
-        if ((res=a_qst_u(buf,ap,limitlen))==-1) 
+        if ((res=a_qst_u(buf,ap,limitlen))==-1)
 		goto andmap;
 	offset+=res;
 	if (!ap->ancount) /*No answers */
 		return offset;
 	buf+=res;
 	limitlen-=res;
-	if ((res=a_answs_u(buf,ap,limitlen))==-1) 
+	if ((res=a_answs_u(buf,ap,limitlen))==-1)
 		goto andmap;
 	offset+=res;
 	if (offset!=pktlen)
@@ -342,13 +342,13 @@ int a_hdr_p(andns_pkt *ap,char *buf)
 {
         uint16_t s;
 	uint8_t an;
-	
+
 	ap->id<<=1;
         s=htons(ap->id);
         memcpy(buf,&s,sizeof(uint16_t));
 	if (ap->r)
 		*(buf+1)|=0x01;
-	else	
+	else
 		*(buf+1)&=0xfe;
         buf+=2;
         if (ap->qr)
@@ -387,7 +387,7 @@ int a_qst_p(andns_pkt *ap,char *buf,int limitlen)
 			} else if (ap->nk==INET_REALM) {
 				s=htons(ap->qstlength);
 				memcpy(buf,&s,2);
-				buf+=2; 
+				buf+=2;
 				memcpy(buf,ap->qstdata,ap->qstlength);
 				ret=ap->qstlength+4;
 			} else
@@ -419,7 +419,7 @@ int a_answ_p(andns_pkt *ap,andns_pkt_data *apd,char *buf,int limitlen)
         uint16_t s;
 	int limit;
 	int ret;
-	
+
 	switch(ap->qtype) {
 		case AT_A:
 			limit=ap->ipv?16:4;
@@ -489,7 +489,7 @@ int a_answs_p(andns_pkt *ap,char *buf, int limitlen)
 		s=htons(ap->ancount);
 		memcpy(buf,&s,2);
 		offset+=2;
-	} 
+	}
         apd=ap->pkt_answ;
         for (i=0;i<ap->ancount && apd;i++) {
                 if((res=a_answ_p(ap,apd,buf+offset,limitlen-offset))==-1) {

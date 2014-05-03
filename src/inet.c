@@ -2,7 +2,7 @@
  * (c) Copyright 2005 Andrea Lo Pumo aka AlpT <alpt@freaknet.org>
  *
  * This source code is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as published 
+ * modify it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
  *
@@ -26,7 +26,7 @@
 #include "endianness.h"
 
 
-/* 
+/*
  * inet_ntohl: Converts each element of `data' from network to host order. If
  * `family' is equal to AF_INET6, the array is swapped too (on big endian
  * machine).
@@ -45,7 +45,7 @@ void inet_ntohl(u_int *data, int family)
 #endif
 }
 
-/* 
+/*
  * inet_htonl: Converts each element of `data' from host to network order. If
  * `family' is equal to AF_INET6, the array is swapped too (on big endian
  * machine).
@@ -71,18 +71,18 @@ int inet_setip_raw(inet_prefix *ip, u_int *data, int family)
 {
 	ip->family=family;
 	setzero(ip->data, sizeof(ip->data));
-	
+
 	if(family==AF_INET) {
 		ip->data[0]=data[0];
 		ip->len=4;
 	} else if(family==AF_INET6) {
 		memcpy(ip->data, data, sizeof(ip->data));
 		ip->len=16;
-	} else 
+	} else
 		fatal(ERROR_MSG "family not supported", ERROR_POS);
 
 	ip->bits=ip->len<<3; /* bits=len*8 */
-	
+
 	return 0;
 }
 
@@ -107,7 +107,7 @@ int inet_setip_bcast(inet_prefix *ip, int family)
 	} else if(family==AF_INET6) {
 		u_int data[MAX_IP_INT]=IPV6_ADDR_BROADCAST;
 		inet_setip(ip, data, family);
-	} else 
+	} else
 		fatal(ERROR_MSG "family not supported", ERROR_POS);
 
 	return 0;
@@ -117,13 +117,13 @@ int inet_setip_anyaddr(inet_prefix *ip, int family)
 {
 	if(family==AF_INET) {
 		u_int data[MAX_IP_INT]={0, 0, 0, 0};
-		
+
 		data[0]=INADDR_ANY;
 		inet_setip(ip, data, family);
 	} else if(family==AF_INET6) {
 		struct in6_addr ipv6=IN6ADDR_ANY_INIT;
 		inet_setip(ip, (u_int *)(&ipv6), family);
-	} else 
+	} else
 		fatal(ERROR_MSG "family not supported", ERROR_POS);
 
 	return 0;
@@ -133,22 +133,22 @@ int inet_setip_loopback(inet_prefix *ip, int family)
 {
 	if(family==AF_INET) {
 		u_int data[MAX_IP_INT]={0, 0, 0, 0};
-		
+
 		data[0]=LOOPBACK_IP;
 		inet_setip(ip, data, family);
 		inet_htonl(ip->data, ip->family);
 	} else if(family==AF_INET6) {
 		u_int data[MAX_IP_INT]=LOOPBACK_IPV6;
 		inet_setip(ip, data, family);
-	} else 
+	} else
 		fatal(ERROR_MSG "family not supported", ERROR_POS);
 
 	return 0;
 }
 
-/* 
+/*
  * inet_setip_localaddr: Restrict the `ip' to a local private class changing the
- * first byte of the `ip'. `class' specifies what restricted class is currently 
+ * first byte of the `ip'. `class' specifies what restricted class is currently
  * being used (10.x.x.x or 172.16.x.x). In ipv6 the site local class is the
  * default.
  */
@@ -157,11 +157,11 @@ int inet_setip_localaddr(inet_prefix *ip, int family, int class)
 	if(family==AF_INET) {
 		if(class == RESTRICTED_10)
 			ip->data[0] = NTK_RESTRICTED_10_MASK(ip->data[0]);
-		else 
+		else
 			ip->data[0] = NTK_RESTRICTED_172_MASK(ip->data[0]);
 	} else if(family==AF_INET6) {
 		ip->data[0] = NTK_RESTRICTED_IPV6_MASK(ip->data[0]);
-	} else 
+	} else
 		fatal(ERROR_MSG "family not supported", ERROR_POS);
 
 	return 0;
@@ -169,7 +169,7 @@ int inet_setip_localaddr(inet_prefix *ip, int family, int class)
 
 /*
  * inet_is_ip_local: verifies if `ip' is a local address. If it is, 1 is
- * returned. `class' specifies what restricted class is currently 
+ * returned. `class' specifies what restricted class is currently
  * being used (10.x.x.x or 172.16.x.x). In ipv6 the site local class is the
  * default.
  */
@@ -236,7 +236,7 @@ void pack_inet_prefix(inet_prefix *ip, char *pack)
 	memcpy(buf, ip->data, MAX_IP_SZ);
 	inet_htonl((u_int *)buf, ip->family);
 	buf+=MAX_IP_SZ;
-	
+
 	ints_host_to_network(pack, inet_prefix_iinfo);
 }
 
@@ -249,7 +249,7 @@ void unpack_inet_prefix(inet_prefix *ip, char *pack)
 	char *buf;
 
 	buf=pack;
-	
+
 	ints_network_to_host(pack, inet_prefix_iinfo);
 
 	memcpy(&ip->family, buf, sizeof(u_char));
@@ -266,18 +266,18 @@ void unpack_inet_prefix(inet_prefix *ip, char *pack)
 	buf+=MAX_IP_SZ;
 }
 
-/* 
+/*
  * inet_addr_match: without hesitating this function was robbed from iproute2.
  * It compares a->data wih b->data matching `bits'# bits.
  */
 int inet_addr_match(const inet_prefix *a, const inet_prefix *b, int bits)
 {
-        uint32_t *a1 = a->data;
-        uint32_t *a2 = b->data;
+        const uint32_t *a1 = a->data;
+        const uint32_t *a2 = b->data;
         int words = bits >> 0x05;
-        
+
         bits &= 0x1f;
-        
+
         if (words)
                 if (memcmp(a1, a2, words << 2))
                         return -1;
@@ -332,7 +332,7 @@ int ipv6_addr_type(inet_prefix addr)
 	if ((st & htonl(0xE0000000)) != htonl(0x00000000) &&
 	    (st & htonl(0xE0000000)) != htonl(0xE0000000))
 		return type;
-	
+
 	if ((st & htonl(0xFFC00000)) == htonl(0xFE800000))
 		return (IPV6_ADDR_LINKLOCAL | type);
 
@@ -375,14 +375,14 @@ int inet_validate_ip(inet_prefix ip)
 
 	if(ip.family==AF_INET) {
 		ipv4=htonl(ip.data[0]);
-		if(MULTICAST(ipv4) || BADCLASS(ipv4) || ZERONET(ipv4) 
+		if(MULTICAST(ipv4) || BADCLASS(ipv4) || ZERONET(ipv4)
 			|| LOOPBACK(ipv4) || NTK_PRIVATE_C(ipv4) ||
 			(!restricted_mode && NTK_PRIVATE_B(ipv4)))
 			return -EINVAL;
 
 	} else if(ip.family==AF_INET6) {
 		type=ipv6_addr_type(ip);
-		if( (type & IPV6_ADDR_MULTICAST) || (type & IPV6_ADDR_RESERVED) || 
+		if( (type & IPV6_ADDR_MULTICAST) || (type & IPV6_ADDR_RESERVED) ||
 				(type & IPV6_ADDR_LOOPBACK))
 			return -EINVAL;
 	}
@@ -396,8 +396,8 @@ int inet_validate_ip(inet_prefix ip)
 
 /*\
  *
- *  *  *  Conversion functions...  *  * 
- * 
+ *  *  *  Conversion functions...  *  *
+ *
 \*/
 
 /*
@@ -413,7 +413,7 @@ const char *ipraw_to_str(u_int ip[MAX_IP_INT], int family)
 	if(family==AF_INET) {
 		src.s_addr=htonl(ip[0]);
 		inet_ntop(family, &src, dst, INET_ADDRSTRLEN);
-		
+
 		return dst;
 	} else if(family==AF_INET6) {
 		inet_htonl(ip, family);
@@ -457,7 +457,7 @@ int str_to_inet(const char *src, inet_prefix *ip)
 	}
 
 	if((res=inet_pton(family, src, (void *)data)) < 0) {
-		debug(DBG_NORMAL, ERROR_MSG "error -> %s.", 
+		debug(DBG_NORMAL, ERROR_MSG "error -> %s.",
 				ERROR_FUNC, strerror(errno));
 		return -1;
 	}
@@ -478,27 +478,27 @@ int inet_to_sockaddr(inet_prefix *ip, u_short port, struct sockaddr *dst,
 		socklen_t *dstlen)
 {
 	port=htons(port);
-	
+
 	if(ip->family==AF_INET) {
 		struct sockaddr_in sin;
 		setzero(&sin,  sizeof(struct sockaddr_in));
-		
+
 		sin.sin_family = ip->family;
 		sin.sin_port = port;
 		sin.sin_addr.s_addr = htonl(ip->data[0]);
 		memcpy(dst, &sin, sizeof(struct sockaddr_in));
-		
+
 		if(dstlen)
 			*dstlen=sizeof(struct sockaddr_in);
 
 	} else if(ip->family==AF_INET6) {
 		struct sockaddr_in6 sin6;
 		setzero(&sin6,  sizeof(struct sockaddr_in6));
-		
+
 		sin6.sin6_family = ip->family;
 		sin6.sin6_port = port;
 		sin6.sin6_flowinfo = 0;
-		
+
 		memcpy(&sin6.sin6_addr, ip->data, MAX_IP_SZ);
 		inet_htonl((u_int *)&sin6.sin6_addr, ip->family);
 
@@ -516,14 +516,14 @@ int sockaddr_to_inet(struct sockaddr *ip, inet_prefix *dst, u_short *port)
 {
 	u_short po;
 	char *p;
-	
+
 	setzero(dst,  sizeof(inet_prefix));
-	
+
 	dst->family=ip->sa_family;
 	memcpy(&po, &ip->sa_data, sizeof(u_short));
 	if(port)
 		*port=ntohs(po);
-	
+
 	if(ip->sa_family==AF_INET)
 		p=(char *)ip->sa_data+sizeof(u_short);
 	else if(ip->sa_family==AF_INET6)
@@ -532,7 +532,7 @@ int sockaddr_to_inet(struct sockaddr *ip, inet_prefix *dst, u_short *port)
 		error(ERROR_MSG "family not supported", ERROR_POS);
 		return -1;
 	}
-		
+
 	inet_setip(dst, (u_int *)p, ip->sa_family);
 
 	return 0;
@@ -566,7 +566,7 @@ int new_dgram_socket(int sock_type)
 	return sockfd;
 }
 
-/* 
+/*
  * inet_close
  *
  * It closes the `*sk' socket and sets it to zero.
@@ -594,20 +594,20 @@ int inet_getpeername(int sk, inet_prefix *ip, short *port)
 	return sockaddr_to_inet(sa, ip, port);
 }
 
-/* 
+/*
  * join_ipv6_multicast: It adds the membership to the IPV6_ADDR_BROADCAST
- * multicast group. The device with index `idx' will be used. 
+ * multicast group. The device with index `idx' will be used.
  */
 int join_ipv6_multicast(int socket, int idx)
 {
 	struct ipv6_mreq    mreq6;
 	const int addr[MAX_IP_INT]=IPV6_ADDR_BROADCAST;
-	
+
 	setzero(&mreq6, sizeof(struct ipv6_mreq));
 	memcpy(&mreq6.ipv6mr_multiaddr,	addr, sizeof(struct in6_addr));
 	mreq6.ipv6mr_interface=idx;
-	
-	if(setsockopt(socket, IPPROTO_IPV6, IPV6_JOIN_GROUP, &mreq6, 
+
+	if(setsockopt(socket, IPPROTO_IPV6, IPV6_JOIN_GROUP, &mreq6,
 				sizeof(mreq6)) < 0) {
 		error("Cannot set IPV6_JOIN_GROUP: %s", strerror(errno));
 	        close(socket);
@@ -631,11 +631,11 @@ int set_multicast_if(int socket, int idx)
 
 	return 0;
 }
-		
+
 int set_nonblock_sk(int fd)
 {
 	if (fcntl(fd, F_SETFL, O_NONBLOCK) < 0) {
-		error("set_nonblock_sk(): cannot set O_NONBLOCK: %s", 
+		error("set_nonblock_sk(): cannot set O_NONBLOCK: %s",
 				strerror(errno));
 		close(fd);
 		return -1;
@@ -646,7 +646,7 @@ int set_nonblock_sk(int fd)
 int unset_nonblock_sk(int fd)
 {
 	if (fcntl(fd, F_SETFL, 0) < 0) {
-		error("unset_nonblock_sk(): cannot unset O_NONBLOCK: %s", 
+		error("unset_nonblock_sk(): cannot unset O_NONBLOCK: %s",
 				strerror(errno));
 		close(fd);
 		return -1;
@@ -671,10 +671,10 @@ int set_bindtodevice_sk(int socket, char *dev)
 {
 	struct ifreq ifr;
 	int ret=0;
-	
+
 	setzero(&ifr, sizeof(ifr));
 	strncpy(ifr.ifr_name, dev, IFNAMSIZ-1);
-	
+
 	ret=setsockopt(socket, SOL_SOCKET, SO_BINDTODEVICE, dev, strlen(dev)+1);
 	if(ret < 0)
 		error("setsockopt SO_BINDTODEVICE: %s", strerror(errno));
@@ -683,7 +683,7 @@ int set_bindtodevice_sk(int socket, char *dev)
 }
 
 /*
- * `loop': 0 = disable, 1 = enable (default) 
+ * `loop': 0 = disable, 1 = enable (default)
  */
 int set_multicast_loop_sk(int family, int socket, u_char loop)
 {
@@ -707,7 +707,7 @@ int set_broadcast_sk(int socket, int family, inet_prefix *host, short port,
 	struct sockaddr	*sa=(struct sockaddr *)&saddr_sto;
 	socklen_t alen;
 	int broadcast=1;
-	
+
 	if(family == AF_INET) {
 		if (setsockopt(socket, SOL_SOCKET, SO_BROADCAST, &broadcast,
 					sizeof(broadcast)) < 0) {
@@ -723,7 +723,7 @@ int set_broadcast_sk(int socket, int family, inet_prefix *host, short port,
 		set_multicast_if(socket, dev_idx);
 	} else
 		fatal(ERROR_MSG "family not supported", ERROR_POS);
-	
+
 	/* What's my name ? */
 	alen = sizeof(saddr_sto);
 	setzero(sa, alen);
@@ -732,14 +732,14 @@ int set_broadcast_sk(int socket, int family, inet_prefix *host, short port,
 		close(socket);
 		return -1;
 	}
-	
+
 	/* Let's bind it! */
 	if(bind(socket, sa, alen) < 0) {
 		error("Cannot bind the broadcast socket: %s", strerror(errno));
 		close(socket);
 		return -1;
 	}
-	
+
 	return socket;
 }
 
@@ -759,7 +759,7 @@ int set_keepalive_sk(int socket)
 {
 	int on=1;
 
-	if(setsockopt(socket, SOL_SOCKET, SO_KEEPALIVE, (void *)&on, 
+	if(setsockopt(socket, SOL_SOCKET, SO_KEEPALIVE, (void *)&on,
 				sizeof(on)) < 0){
 		error("Cannot set keepalive socket: %s", strerror(errno));
 		return -1;
@@ -771,7 +771,7 @@ int unset_keepalive_sk(int socket)
 {
 	int off=0;
 
-	if(setsockopt(socket, SOL_SOCKET, SO_KEEPALIVE, (void *)&off, 
+	if(setsockopt(socket, SOL_SOCKET, SO_KEEPALIVE, (void *)&off,
 				sizeof(off)) < 0){
 		error("Cannot unset keepalive socket: %s", strerror(errno));
 		return -1;
@@ -794,7 +794,7 @@ int set_tos_sk(int socket, int lowdelay)
 
 /*\
  *
- *   *  *  Connection functions  *  * 
+ *   *  *  Connection functions  *  *
  *
 \*/
 
@@ -806,19 +806,19 @@ int new_tcp_conn(inet_prefix *host, short port, char *dev)
 	struct sockaddr	*sa=(struct sockaddr *)&saddr_sto;
 	const char *ntop;
 	ntop=inet_to_str(*host);
-	
+
 	if(inet_to_sockaddr(host, port, sa, &sa_len)) {
 		error("Cannot new_tcp_connect(): %d Family not supported", host->family);
 		ERROR_FINISH(sk, -1, finish);
 	}
-	
+
 	if((sk = new_socket(host->family)) == -1)
 		ERROR_FINISH(sk, -1, finish);
 
 	if(dev) /* if `dev' is not null bind the socket to it */
 		if(set_bindtodevice_sk(sk, dev) < 0)
 			ERROR_FINISH(sk, -1, finish);
-	
+
 	if (connect(sk, sa, sa_len) == -1) {
 		error("Cannot tcp_connect() to %s: %s", ntop, strerror(errno));
 		ERROR_FINISH(sk, -1, finish);
@@ -828,7 +828,7 @@ finish:
 }
 
 int new_udp_conn(inet_prefix *host, short port, char *dev)
-{	
+{
 	int sk;
 	socklen_t sa_len;
 	struct sockaddr_storage saddr_sto;
@@ -841,9 +841,9 @@ int new_udp_conn(inet_prefix *host, short port, char *dev)
 		ERROR_FINISH(sk, -1, finish);
 	}
 
-	if((sk = new_dgram_socket(host->family)) == -1) 
+	if((sk = new_dgram_socket(host->family)) == -1)
 		ERROR_FINISH(sk, -1, finish);
-	
+
 	if(dev) /* if `dev' is not null bind the socket to it */
 		if(set_bindtodevice_sk(sk, dev) < 0)
 			ERROR_FINISH(sk, -1, finish);
@@ -852,13 +852,13 @@ int new_udp_conn(inet_prefix *host, short port, char *dev)
 		error("Cannot connect to %s: %s", ntop, strerror(errno));
 		ERROR_FINISH(sk, -1, finish);
 	}
-	
+
 finish:
 	return sk;
 }
-	
+
 int new_bcast_conn(inet_prefix *host, short port, int dev_idx)
-{	
+{
 	struct sockaddr_storage saddr_sto;
 	struct sockaddr	*sa=(struct sockaddr *)&saddr_sto;
 	socklen_t alen;
@@ -868,26 +868,26 @@ int new_bcast_conn(inet_prefix *host, short port, int dev_idx)
 	if((sk = new_dgram_socket(host->family)) == -1)
 		return -1;
 	sk=set_broadcast_sk(sk, host->family, host, port, dev_idx);
-	
+
 	/*
-	 * Connect 
+	 * Connect
 	 */
 	if(inet_to_sockaddr(host, port, sa, &alen)) {
 		error("set_broadcast_sk: %d Family not supported", host->family);
 		return -1;
 	}
-	
+
 	if(host->family == AF_INET6) {
 		struct sockaddr_in6 *sin6=(struct sockaddr_in6 *)sa;
 		sin6->sin6_scope_id = dev_idx;
 	}
-	
+
 	if(set_bindtodevice_sk(sk, (char *)ll_index_to_name(dev_idx)) < 0)
 		return -1;
-	
+
 	if(connect(sk, sa, alen) == -1) {
 		ntop=inet_to_str(*host);
-		error("Cannot connect to the broadcast (%s): %s", ntop,	
+		error("Cannot connect to the broadcast (%s): %s", ntop,
 				strerror(errno));
 		return -1;
 	}
@@ -909,7 +909,7 @@ ssize_t inet_recv(int s, void *buf, size_t len, int flags)
 	int ret;
 
 	if((err=recv(s, buf, len, flags))==-1) {
-		switch(errno) 
+		switch(errno)
 		{
 			default:
 				/* Probably connection was closed */
@@ -922,9 +922,9 @@ ssize_t inet_recv(int s, void *buf, size_t len, int flags)
 	return err;
 }
 
-/* 
+/*
  * inet_recv_timeout
- * 
+ *
  * is the same as inet_recv() but if no reply is received for `timeout'
  * seconds it returns -1.
  */
@@ -955,7 +955,7 @@ ssize_t inet_recvfrom(int s, void *buf, size_t len, int flags, struct sockaddr *
 	int ret;
 
 	if((err=recvfrom(s, buf, len, flags, from, fromlen)) < 0) {
-		switch(errno) 
+		switch(errno)
 		{
 			default:
 				error("inet_recvfrom: Cannot recv(): %s", strerror(errno));
@@ -966,11 +966,11 @@ ssize_t inet_recvfrom(int s, void *buf, size_t len, int flags, struct sockaddr *
 	return err;
 }
 
-/* 
+/*
  * inet_recvfrom_timeout: is the same as inet_recvfrom() but if no reply is
  * received for `timeout' seconds it returns -1.
  */
-ssize_t inet_recvfrom_timeout(int s, void *buf, size_t len, int flags, 
+ssize_t inet_recvfrom_timeout(int s, void *buf, size_t len, int flags,
 		struct sockaddr *from, socklen_t *fromlen, u_int timeout)
 {
 	struct timeval timeout_t;
@@ -990,10 +990,10 @@ ssize_t inet_recvfrom_timeout(int s, void *buf, size_t len, int flags,
 
 	if(FD_ISSET(s, &fdset))
 		return inet_recvfrom(s, buf, len, flags, from, fromlen);
-	
+
 	return -1;
 }
-			
+
 ssize_t inet_send(int s, const void *msg, size_t len, int flags)
 {
 	ssize_t err;
@@ -1001,11 +1001,11 @@ ssize_t inet_send(int s, const void *msg, size_t len, int flags)
 	int ret;
 
 	if((err=send(s, msg, len, flags)) < 0) {
-		switch(errno) 
+		switch(errno)
 		{
 			case EMSGSIZE:
 				inet_send(s, msg, len/2, flags);
-				err=inet_send(s, (const char *)msg+(len/2), 
+				err=inet_send(s, (const char *)msg+(len/2),
 						len-(len/2), flags);
 				break;
 
@@ -1029,7 +1029,7 @@ ssize_t inet_send_timeout(int s, const void *msg, size_t len, int flags, u_int t
 	int ret;
 
 	MILLISEC_TO_TV(timeout*1000, timeout_t);
-	
+
 	FD_ZERO(&fdset);
 	FD_SET(s, &fdset);
 
@@ -1047,14 +1047,14 @@ ssize_t inet_send_timeout(int s, const void *msg, size_t len, int flags, u_int t
 
 
 
-ssize_t inet_sendto(int s, const void *msg, size_t len, int flags, 
+ssize_t inet_sendto(int s, const void *msg, size_t len, int flags,
 		const struct sockaddr *to, socklen_t tolen)
 {
 	ssize_t err;
 	fd_set fdset;
 	int ret;
 	int errno_int;
-	
+
 	if((err=sendto(s, msg, len, flags, to, tolen))==-1) {
 		errno_int = errno;
 		error("sendto errno: %d err is: %d", errno, err);
@@ -1063,7 +1063,7 @@ ssize_t inet_sendto(int s, const void *msg, size_t len, int flags,
 			case EMSGSIZE:
 			error("Packet artificially fragmented: %d", stderr);
 				inet_sendto(s, msg, len/2, flags, to, tolen);
-				err=inet_sendto(s, ((const char *)msg+(len/2)), 
+				err=inet_sendto(s, ((const char *)msg+(len/2)),
 						len-(len/2), flags, to, tolen);
 				break;
 			case EFAULT:
@@ -1081,7 +1081,7 @@ ssize_t inet_sendto(int s, const void *msg, size_t len, int flags,
  * inet_sendto_timeout: is the same as inet_sendto() but if the packet isn't sent
  * in `timeout' seconds it timeouts and returns -1.
  */
-ssize_t inet_sendto_timeout(int s, const void *msg, size_t len, int flags, 
+ssize_t inet_sendto_timeout(int s, const void *msg, size_t len, int flags,
 		const struct sockaddr *to, socklen_t tolen, u_int timeout)
 {
 	struct timeval timeout_t;
@@ -1089,7 +1089,7 @@ ssize_t inet_sendto_timeout(int s, const void *msg, size_t len, int flags,
 	int ret;
 
 	MILLISEC_TO_TV(timeout*1000, timeout_t);
-	
+
 	FD_ZERO(&fdset);
 	FD_SET(s, &fdset);
 
