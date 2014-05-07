@@ -171,7 +171,8 @@ void usage(void)
 		"\n"
 		" -d	Debug (Add more ds to get more info)\n"
 		" -h	Shows this help\n"
-		" -v	Shows the version you are using\n");
+		" -v	Shows the version you are using\n"
+                " -k     Kills the running instance of ntkd\n");
 }
 
 /*
@@ -347,10 +348,11 @@ void parse_options(int argc, char **argv)
 
 			{"debug", 	0, 0, 'd'},
 			{"version",	0, 0, 'v'},
+			{"kill", 0, 0, 'k'},
 			{0, 0, 0, 0}
 		};
 
-		c = getopt_long (argc, argv,"i:c:l:hvd64DRrIa", long_options,
+		c = getopt_long (argc, argv,"i:c:l:hvd64DRrIak", long_options,
 				&option_index);
 		if (c == -1)
 			break;
@@ -361,6 +363,25 @@ void parse_options(int argc, char **argv)
 				printf("%s\n",VERSION_STR);
 				exit(0);
 				break;
+                        case 'k':
+                            if(is_ntkd_already_running() == 1){
+                            char process_name[256] = {0};
+                            pid_t pid;
+                            printf("...Shutting down ntkd...\n");
+                            FILE *fd=fopen(server_opt.pid_file, "r");
+                            while(fscanf(fd, "%s %d", process_name, &pid)!=EOF) {
+                                    if(strcmp(process_name, "ntkd") == 0) {
+                                    kill(pid, SIGKILL);
+                                        }
+                                    }
+                                    fclose(fd);
+                                    exit(0);
+                            }
+                            else if(is_ntkd_already_running() == 0) {
+                                printf("ntkd is not running\n ...Exiting...\n");
+                                exit(0);
+                            }
+                            break;
 			case 'h':
 				usage();
 				exit(0);
