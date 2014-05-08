@@ -1053,18 +1053,23 @@ ssize_t inet_sendto(int s, const void *msg, size_t len, int flags,
 	ssize_t err;
 	fd_set fdset;
 	int ret;
-	int errno_int;
-
+        
+        error("Socket: %i Data: %p Data Length: %u Flags: %i Address: %p Address Length: %u", s, msg, len, flags, to, tolen);
+        
 	if((err=sendto(s, msg, len, flags, to, tolen))==-1) {
-		errno_int = errno;
 		error("sendto errno: %d err is: %d", errno, err);
-		switch(errno_int)
+		switch(errno)
 		{
 			case EMSGSIZE:
 			error("Packet artificially fragmented: %d", stderr);
-				inet_sendto(s, msg, len/2, flags, to, tolen);
-				err=inet_sendto(s, ((const char *)msg+(len/2)),
-						len-(len/2), flags, to, tolen);
+                                error("\nData Length: %u", len);
+                                int bytesleft = len;
+                                while(bytesleft > 1024) {
+                                inet_sendto(s, msg, 1024, flags, to, tolen);
+                                bytesleft -= 1024;
+				//err=inet_sendto(s, ((const char *)msg+(len/2)),
+						//len-(len/2), flags, to, tolen);
+                                }
 				break;
 			case EFAULT:
 			error("The value of to is: %d", to);

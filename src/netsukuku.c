@@ -367,11 +367,11 @@ void parse_options(int argc, char **argv)
                             if(is_ntkd_already_running() == 1){
                             char process_name[256] = {0};
                             pid_t pid;
-                            printf("...Shutting down ntkd...\n");
+                            printf("...Closing ntkd...\n");
                             FILE *fd=fopen(server_opt.pid_file, "r");
                             while(fscanf(fd, "%s %d", process_name, &pid)!=EOF) {
                                     if(strcmp(process_name, "ntkd") == 0) {
-                                    kill(pid, SIGKILL);
+                                    kill(pid, SIGINT);
                                         }
                                     }
                                     fclose(fd);
