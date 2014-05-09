@@ -552,6 +552,8 @@ int new_socket(int sock_type)
 		return -1;
 	}
 
+        printf("Socket FD: %i ", sockfd);
+        
 	return sockfd;
 }
 
@@ -1064,11 +1066,24 @@ ssize_t inet_sendto(int s, const void *msg, size_t len, int flags,
 			error("Packet artificially fragmented: %d", stderr);
                                 error("\nData Length: %u", len);
                                 int bytesleft = len;
-                                while(bytesleft > 1024) {
-                                inet_sendto(s, msg, 1024, flags, to, tolen);
-                                bytesleft -= 1024;
-				//err=inet_sendto(s, ((const char *)msg+(len/2)),
-						//len-(len/2), flags, to, tolen);
+                                int sendbuf;
+                                socklen_t optlen;
+                                optlen = sizeof(sendbuf);
+                                int res = getsockopt(s, SOL_SOCKET, SO_SNDBUF, &sendbuf, &optlen);
+                                
+                                error("GetSockOpt: %i \n", res);
+                                
+                                while(bytesleft != 0) {
+                                    if(bytesleft > 64000) {
+                                        inet_sendto(s, msg, 64000, flags, to, tolen);
+                                        bytesleft -= 64000;
+                                        //err=inet_sendto(s, ((const char *)msg+(len/2)),
+                                                 //len-(len/2), flags, to, tolen);
+                                    }
+                                    else    {
+                                        inet_sendto(s, msg, bytesleft, flags, to, tolen);
+                                        bytesleft = 0;
+                                    }
                                 }
 				break;
 			case EFAULT:
