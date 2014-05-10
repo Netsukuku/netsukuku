@@ -1056,6 +1056,13 @@ ssize_t inet_sendto(int s, const void *msg, size_t len, int flags,
 	fd_set fdset;
 	int ret;
         
+        int sendbuf;
+        socklen_t optlen;
+        optlen = sizeof(sendbuf);
+        int res = getsockopt(s, SOL_SOCKET, SO_SNDBUF, &sendbuf, &optlen);
+                                
+        error("GetSockOpt: %i \n", res);
+        
         error("Socket: %i Data: %p Data Length: %u Flags: %i Address: %p Address Length: %u", s, msg, len, flags, to, tolen);
         
 	if((err=sendto(s, msg, len, flags, to, tolen))==-1) {
@@ -1077,6 +1084,7 @@ ssize_t inet_sendto(int s, const void *msg, size_t len, int flags,
                                     if(bytesleft > 64000) {
                                         inet_sendto(s, msg, 64000, flags, to, tolen);
                                         bytesleft -= 64000;
+                                        msg += 64000
                                         //err=inet_sendto(s, ((const char *)msg+(len/2)),
                                                  //len-(len/2), flags, to, tolen);
                                     }
