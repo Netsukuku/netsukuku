@@ -1089,7 +1089,7 @@ ssize_t inet_sendto(int s, const void *msg, size_t len, int flags,
                                                  //len-(len/2), flags, to, tolen);
                                     }
                                     else    {
-                                        inet_sendto(s, msg, bytesleft, flags, to, tolen);
+                                        err=inet_sendto(s, msg, bytesleft, flags, to, tolen);
                                         bytesleft = 0;
                                     }
                                 }
