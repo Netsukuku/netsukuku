@@ -1084,7 +1084,7 @@ ssize_t inet_sendto(int s, const void *msg, size_t len, int flags,
                                     if(bytesleft > 64000) {
                                         inet_sendto(s, msg, 64000, flags, to, tolen);
                                         bytesleft -= 64000;
-                                        msg += 64000
+                                        msg += 64000;
                                         //err=inet_sendto(s, ((const char *)msg+(len/2)),
                                                  //len-(len/2), flags, to, tolen);
                                     }
