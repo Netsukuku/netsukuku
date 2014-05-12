@@ -1127,11 +1127,15 @@ hook_retry_scan:
 		me.cur_node->flags|=MAP_HNODE;
 		qspn_b_del_all_dead_rnodes();
 	}
-
-	loginfo("We have %d nodes around us. (%d are hooking)", 
+        if(me.cur_node->links < 1) {
+            loginfo("We have %d nodes around us. (%d are hooking)", 
 			me.cur_node->links, total_hooking_nodes);
-
-	return 0;
+        }
+        else if(me.cur_node->links == 1) {
+            loginfo("We have %d node around us. (%d are hooking)", 
+			me.cur_node->links, total_hooking_nodes);
+	}
+        return 0;
 }
 
 
