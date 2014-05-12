@@ -28,6 +28,7 @@
 #include <errno.h>
 #include <sys/time.h>
 #include <sys/types.h>
+#include <ifaddrs.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <sys/sendfile.h>

@@ -172,7 +172,8 @@ void usage(void)
 		" -d	Debug (Add more ds to get more info)\n"
 		" -h	Shows this help\n"
 		" -v	Shows the version you are using\n"
-                " -k     Kills the running instance of ntkd\n");
+                " -k     Kills the running instance of ntkd\n"
+                " -e     Excludes an interface from usage I.E all interfaces except this one\n");
 }
 
 /*
@@ -323,6 +324,49 @@ void free_server_opt(void)
 		xfree(server_opt.ifs[i]);
 }
 
+void exclude_interface() {
+                      printf("optarg: %s\n", optarg);
+                      char *a_ifs;
+                      struct ifaddrs *addrs,*tmp;
+                      getifaddrs(&addrs);
+                      tmp = addrs;
+                      int i;
+                      if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
+                            tmp->ifa_name;
+                      char *first_tmp = tmp;
+                      tmp->ifa_next;
+                      int ifs_c = 1;
+                      while(tmp != first_tmp){
+                            if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
+                                    tmp->ifa_name;
+                            tmp->ifa_next;
+                            ifs_c++;
+                     }
+                     ifs_c += 1;
+                     if(ifs_c >= MAX_INTERFACES){
+                            printf("ERROR: Max Number of interfaces is: %i", MAX_INTERFACES);
+                            exit(1);
+                     }
+                                    
+                     for(i=0; i<ifs_c; i++) {
+                            if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET){
+                                    a_ifs = tmp->ifa_name;
+                                    printf("Normal Interface Name Increment: %s\n", a_ifs);
+                            }
+                                if(a_ifs == 'lo' || a_ifs == 'tunl0' || a_ifs == 'tunl1' || a_ifs == optarg) {
+                                        tmp = tmp->ifa_next;
+                                        if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET){
+                                            a_ifs = tmp->ifa_name;
+                                            printf("Bad Case Interface Name Increment: %s\n", a_ifs);
+                                        }
+                                    }
+                            else
+                                    tmp = tmp->ifa_next;
+                            server_opt.ifs[server_opt.ifs_n++]=xstrndup(a_ifs, IFNAMSIZ-1);
+                                }
+                            freeifaddrs(addrs);
+}
+
 void parse_options(int argc, char **argv)
 {
 	int c, saved_argc=argc;
@@ -349,10 +393,11 @@ void parse_options(int argc, char **argv)
 			{"debug", 	0, 0, 'd'},
 			{"version",	0, 0, 'v'},
 			{"kill", 0, 0, 'k'},
+                        {"exclude", 1, 0, 'e'},
 			{0, 0, 0, 0}
 		};
 
-		c = getopt_long (argc, argv,"i:c:l:hvd64DRrIak", long_options,
+		c = getopt_long (argc, argv,"i:c:l:e:hvd64DRrIak", long_options,
 				&option_index);
 		if (c == -1)
 			break;
@@ -363,6 +408,9 @@ void parse_options(int argc, char **argv)
 				printf("%s\n",VERSION_STR);
 				exit(0);
 				break;
+                        case 'e':
+                                exclude_interface();
+                                break;
                         case 'k':
                             if(is_ntkd_already_running() == 1){
                             char process_name[256] = {0};
