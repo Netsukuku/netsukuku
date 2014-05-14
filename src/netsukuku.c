@@ -325,48 +325,39 @@ void free_server_opt(void)
 }
 
 void exclude_interface(void) {
-                      printf("optarg: %s\n", optarg);
                       char *a_ifs;
+		      char *old_tmp;
                       struct ifaddrs *addrs,*tmp;
                       getifaddrs(&addrs);
                       tmp = addrs;
-                      int i;
-                      if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
-                            a_ifs = tmp->ifa_name;
-                      char *first_tmp = tmp;
-                      tmp->ifa_next;
-                      int ifs_c = 1;
-                      while(tmp != first_tmp){
-                            //if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
-                                    //tmp->ifa_name;
-                            tmp->ifa_next;
-                            ifs_c++;
-                     }
-                     ifs_c += 1;
-                     if(ifs_c > MAX_INTERFACES){
-                            printf("ERROR: Max Number of interfaces is: %i", MAX_INTERFACES);
-                            exit(1);
-                     }
-                     printf("ifs_c is: %i\n", ifs_c);               
-                     for(i=0; i<ifs_c; i++) {
-                            //if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
-                                    //a_ifs = tmp->ifa_name;
-                                    
+		      int run_c = 1;
+                      printf("omg\n");
+                      while(tmp) {
+			    old_tmp = a_ifs;
+
+                            if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
+                                    a_ifs = tmp->ifa_name;
+
+                            printf("wtf\n");
+                            
                                 if(strncmp(a_ifs, "lo", 2) == 0 || strncmp(a_ifs, "tunl0", 5) == 0 || strncmp(a_ifs, "tunl1", 5) == 0 || strcmp(a_ifs, optarg) == 0) {
-                                        a_ifs = tmp->ifa_next;
-                                        printf("Bad Case Interface Name Increment: %s\n", a_ifs);
-                                        //if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
-                                            //a_ifs = tmp->ifa_name;
+                                        tmp = tmp->ifa_next;
+                                        if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
+                                            a_ifs = tmp->ifa_name;
+                                        printf("dun be meanie\n");
                                     }
-                            else {
-                                    //tmp = tmp->ifa_next;
-                                    printf("Normal Interface Name Increment: %s\n", a_ifs);
-                            }
-                            printf("a_ifs is: %s\n", a_ifs);
-                            server_opt.ifs[server_opt.ifs_n++]=xstrndup(a_ifs, IFNAMSIZ-1);
-                            a_ifs = tmp->ifa_next;
-                                }
-                            freeifaddrs(addrs);
+                            printf("weirdness\n");
+                            tmp = tmp->ifa_next;
+			    run_c++;
+			    if(strcmp(old_tmp, a_ifs) == 0) {
+                                        printf("True\n");
+					break;
+				}
+                            printf("why so mean? D:\n");
+			    server_opt.ifs[server_opt.ifs_n++]=xstrndup(a_ifs, IFNAMSIZ-1);
+                          }
+
+freeifaddrs(addrs);
 }
 
 void parse_options(int argc, char **argv)
@@ -411,6 +402,7 @@ void parse_options(int argc, char **argv)
 				exit(0);
 				break;
                         case 'e':
+                                printf("hey\n");
                                 exclude_interface();
                                 break;
                         case 'k':
