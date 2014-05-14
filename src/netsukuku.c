@@ -325,8 +325,8 @@ void free_server_opt(void)
 }
 
 void exclude_interface(void) {
-                      char *a_ifs = NULL;
-		      char *old_tmp = NULL;
+                      char *a_ifs = "null1";
+		      char *old_tmp = "null2";
                       struct ifaddrs *addrs,*tmp;
                       getifaddrs(&addrs);
                       tmp = addrs;
