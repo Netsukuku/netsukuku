@@ -46,9 +46,13 @@ nodes together as you want!
 
     git clone git@github.com:Netsukuku/netsukuku.git 
 
-The dependencies of netsukuku can be installed by running this command.
+The dependencies of netsukuku can be installed by running this command, For debian/ubuntu.
 
     sudo apt-get install zlibc libgmp-dev openssl libssl-dev libgee-dev libpth-dev libgcrypt11-dev autoconf cmake autogen mawk gawk
+
+For Archlinux, Try this.
+
+    sudo pacman -S zlib gmp lib32-gmp openssl lib32-openssl libgee pth libgcrypt autoconf cmake autogen gawk
 
 To compile the code you can do this:
    
