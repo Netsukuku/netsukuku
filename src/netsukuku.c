@@ -325,35 +325,27 @@ void free_server_opt(void)
 }
 
 void exclude_interface(void) {
-                      char *a_ifs;
-		      char *old_tmp;
+                      char *a_ifs = NULL;
+		      char *old_tmp = NULL;
                       struct ifaddrs *addrs,*tmp;
                       getifaddrs(&addrs);
                       tmp = addrs;
 		      int run_c = 1;
-                      printf("omg\n");
                       while(tmp) {
 			    old_tmp = a_ifs;
 
                             if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
                                     a_ifs = tmp->ifa_name;
-
-                            printf("wtf\n");
                             
                                 if(strncmp(a_ifs, "lo", 2) == 0 || strncmp(a_ifs, "tunl0", 5) == 0 || strncmp(a_ifs, "tunl1", 5) == 0 || strcmp(a_ifs, optarg) == 0) {
                                         tmp = tmp->ifa_next;
                                         if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
                                             a_ifs = tmp->ifa_name;
-                                        printf("dun be meanie\n");
                                     }
-                            printf("weirdness\n");
                             tmp = tmp->ifa_next;
 			    run_c++;
-			    if(strcmp(old_tmp, a_ifs) == 0) {
-                                        printf("True\n");
+			    if(strcmp(old_tmp, a_ifs) == 0)
 					break;
-				}
-                            printf("why so mean? D:\n");
 			    server_opt.ifs[server_opt.ifs_n++]=xstrndup(a_ifs, IFNAMSIZ-1);
                           }
 
@@ -385,8 +377,8 @@ void parse_options(int argc, char **argv)
 
 			{"debug", 	0, 0, 'd'},
 			{"version",	0, 0, 'v'},
-			{"kill", 0, 0, 'k'},
-                        {"exclude", 1, 0, 'e'},
+			{"kill",        0, 0, 'k'},
+                        {"exclude",     1, 0, 'e'},
 			{0, 0, 0, 0}
 		};
 
@@ -402,7 +394,6 @@ void parse_options(int argc, char **argv)
 				exit(0);
 				break;
                         case 'e':
-                                printf("hey\n");
                                 exclude_interface();
                                 break;
                         case 'k':

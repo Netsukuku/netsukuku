@@ -21,8 +21,8 @@
 
 #include <string.h>
 #include <ctype.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <syslog.h>
 #include <stdarg.h>
 #include <errno.h>

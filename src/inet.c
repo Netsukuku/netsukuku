@@ -551,8 +551,6 @@ int new_socket(int sock_type)
 		error("Socket SOCK_STREAM creation failed: %s", strerror(errno));
 		return -1;
 	}
-
-        printf("Socket FD: %i ", sockfd);
         
 	return sockfd;
 }
