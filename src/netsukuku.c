@@ -325,28 +325,32 @@ void free_server_opt(void)
 }
 
 void exclude_interface(void) {
-                      char *a_ifs = "null1";
+                      char *ifs = "null1";
 		      char *old_tmp = "null2";
                       struct ifaddrs *addrs,*tmp;
+                      struct ifreq *a_ifs;
                       getifaddrs(&addrs);
                       tmp = addrs;
-		      int run_c = 1;
                       while(tmp) {
-			    old_tmp = a_ifs;
-
-                            if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
-                                    a_ifs = tmp->ifa_name;
+			    old_tmp = ifs;
                             
-                                if(strncmp(a_ifs, "lo", 2) == 0 || strncmp(a_ifs, "tunl0", 5) == 0 || strncmp(a_ifs, "tunl1", 5) == 0 || strcmp(a_ifs, optarg) == 0) {
+                            if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
+                                    ifs = tmp->ifa_name;
+                            
+                                if(strncmp(ifs, "lo", 2) == 0 || strncmp(ifs, "tunl0", 5) == 0 || strncmp(ifs, "tunl1", 5) == 0 || strcmp(ifs, optarg) == 0) {
                                         tmp = tmp->ifa_next;
                                         if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
-                                            a_ifs = tmp->ifa_name;
+                                            ifs = tmp->ifa_name;
                                     }
+                            a_ifs = ifs;
+                            if(a_ifs->ifr_name != IFF_UP) {
+                                tmp = tmp->ifa_next;
+                                ifs = tmp->ifa_name;
+                            }
                             tmp = tmp->ifa_next;
-			    run_c++;
-			    if(strcmp(old_tmp, a_ifs) == 0)
+			    if(strcmp(old_tmp, ifs) == 0)
 					break;
-			    server_opt.ifs[server_opt.ifs_n++]=xstrndup(a_ifs, IFNAMSIZ-1);
+			    server_opt.ifs[server_opt.ifs_n++]=xstrndup(ifs, IFNAMSIZ-1);
                           }
 
 freeifaddrs(addrs);
@@ -573,7 +577,7 @@ void check_conflicting_options(void)
 void init_netsukuku(char **argv)
 {
 	xsrand();
-
+        
         if(geteuid())
 		fatal("Need root privileges");
 
