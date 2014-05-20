@@ -1,3 +1,10 @@
+#
+# Copyright (C) 2007-2010 OpenWrt.org
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
+
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=netsukuku
@@ -28,10 +35,6 @@ endef
 define Build/Configure
         $(call Build/Configure/Default)
 endef
-
-#define Build/Compile
-#       $(MAKE) -s -C $(PKG_BUILD_DIR)
-#endef
 
 define Package/netsukuku/install
         $(INSTALL_DIR) $(1)/usr/bin/
