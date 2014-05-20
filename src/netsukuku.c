@@ -337,15 +337,21 @@ void exclude_interface(void) {
                             if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
                                     ifs = tmp->ifa_name;
                             
-                                if(strncmp(ifs, "lo", 2) == 0 || strncmp(ifs, "tunl0", 5) == 0 || strncmp(ifs, "tunl1", 5) == 0 || strcmp(ifs, optarg) == 0) {
-                                        tmp = tmp->ifa_next;
-                                        if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
-                                            ifs = tmp->ifa_name;
-                                    }
+                            printf("One");
+                            
+                            goto Check_Active;
+                            
+                            printf("Two");
+                            
+                                if(strncmp(ifs, "lo", 2) == 0 || strncmp(ifs, "tunl0", 5) == 0 || strncmp(ifs, "tunl1", 5) == 0 || strcmp(ifs, optarg) == 0)
+                                    goto Check_Active;
+                                    
+                            Check_Active:
                             a_ifs = ifs;
                             if(a_ifs->ifr_name != IFF_UP) {
                                 tmp = tmp->ifa_next;
-                                ifs = tmp->ifa_name;
+                                if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
+                                            ifs = tmp->ifa_name;
                             }
                             tmp = tmp->ifa_next;
 			    if(strcmp(old_tmp, ifs) == 0)
