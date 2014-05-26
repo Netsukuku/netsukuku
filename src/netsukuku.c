@@ -327,32 +327,59 @@ void free_server_opt(void)
 void exclude_interface(void) {
                       char *ifs = "null1";
 		      char *old_tmp = "null2";
+                      char *old_tmp1 = "null3";
                       struct ifaddrs *addrs,*tmp;
-                      struct ifreq *a_ifs;
-                      getifaddrs(&addrs);
+                      
+                      if (getifaddrs(&addrs) !=0) {
+                          printf("%s\n", strerror(errno));
+                          exit(1);
+                      }
                       tmp = addrs;
                       while(tmp) {
+                          
 			    old_tmp = ifs;
                             
-                            if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
-                                    ifs = tmp->ifa_name;
+                            Re_Check:
                             
-                                if(strncmp(ifs, "lo", 2) == 0 || strncmp(ifs, "tunl0", 5) == 0 || strncmp(ifs, "tunl1", 5) == 0 || strcmp(ifs, optarg) == 0)
-                                    goto Check_Active;
-                                    
-                            Check_Active:
+                            old_tmp1 = ifs;
+                            if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP)
+                                 ifs = tmp->ifa_name;
+                                        
+                                else if(tmp && strcmp(old_tmp1, ifs) == 0) {
+                                    tmp = tmp->ifa_next;
+                                    goto Re_Check;
+                            }
                             
-                            a_ifs = ifs;
-                            if(a_ifs->ifr_name != IFF_UP) {
-                                tmp = tmp->ifa_next;
-                                if(tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET)
-                                            ifs = tmp->ifa_name;
+                            Re_Check1:
+                            
+                            printf("Possibly bad ifs is: %s\n", ifs);
+                            
+                                if(tmp && (strncmp(ifs, "lo", 2) == 0 || strncmp(ifs, "tunl0", 5) == 0 || strncmp(ifs, "tunl1", 5) == 0 || strcmp(optarg, ifs) == 0)) {
+                                        printf("Bad Interface: %s\n", ifs);
+                                        tmp = tmp->ifa_next;
+                                        old_tmp1 = ifs;
+                                		if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP)
+                                            		ifs = tmp->ifa_name;
+                                        
+                                                    if(tmp && strcmp(old_tmp1, ifs) == 0) {
+                                                        tmp = tmp->ifa_next;
+                                                        
+                                                        if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP)
+                                                            ifs = tmp->ifa_name;
+                                                            goto Re_Check1;
+                                                    }
+                                }
+                            
+                            printf("Good ifs is: %s\n", ifs);
+                            
+                            if(strcmp(old_tmp, ifs) == 0) {
+                                printf("Loop finished: %s\n", ifs);
+                                break;
                             }
                             
                             tmp = tmp->ifa_next;
-			    if(strcmp(old_tmp, ifs) == 0)
-					break;
-			    server_opt.ifs[server_opt.ifs_n++]=xstrndup(ifs, IFNAMSIZ-1);
+                            server_opt.ifs[server_opt.ifs_n++]=xstrndup(ifs, IFNAMSIZ-1);
+                            printf("Using Interface: %s\n", ifs);
                           }
 
 freeifaddrs(addrs);

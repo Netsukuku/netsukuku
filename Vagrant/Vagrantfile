@@ -97,6 +97,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     sudo apt-get update
     sudo apt-get install nasm make build-essential grub qemu zip -y
     sudo apt-get install git vde2 zlibc libgmp-dev openssl libssl-dev libgee-dev libpth-dev libgcrypt11-dev autoconf cmake autogen mawk gawk
+    sudo vde_switch -t tap0 -t tap1 -d
   }
 
   
