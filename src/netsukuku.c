@@ -324,7 +324,17 @@ void free_server_opt(void)
 		xfree(server_opt.ifs[i]);
 }
 
+void check_excluded(void) {
+    
+    printf("Number of Interfaces in Use: %d\n", server_opt.ifs_n);
+    printf("Interface names in Use: %s", server_opt.ifs);
+    
+}
+
 int exclude_interface(void) {
+    
+                      check_excluded();
+    
                       char *ifs = "null1";
 		      char *old_tmp = "null2";
                       char *old_tmp1 = "null3";
