@@ -324,7 +324,7 @@ void free_server_opt(void)
 		xfree(server_opt.ifs[i]);
 }
 
-void exclude_interface(void) {
+int exclude_interface(void) {
                       char *ifs = "null1";
 		      char *old_tmp = "null2";
                       char *old_tmp1 = "null3";
@@ -342,7 +342,7 @@ void exclude_interface(void) {
                             Re_Check:
                             
                             old_tmp1 = ifs;
-                            if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP)
+                            if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP && (strncmp(ifs, "lo", 2) == 0 || strncmp(ifs, "tunl0", 5) == 0 || strncmp(ifs, "tunl1", 5) == 0 || strcmp(optarg, ifs) == 0))
                                  ifs = tmp->ifa_name;
                                         
                                 else if(tmp && strcmp(old_tmp1, ifs) == 0) {
@@ -350,31 +350,11 @@ void exclude_interface(void) {
                                     goto Re_Check;
                             }
                             
-                            Re_Check1:
-                            
-                            printf("Possibly bad ifs is: %s\n", ifs);
-                            
-                                if(tmp && (strncmp(ifs, "lo", 2) == 0 || strncmp(ifs, "tunl0", 5) == 0 || strncmp(ifs, "tunl1", 5) == 0 || strcmp(optarg, ifs) == 0)) {
-                                        printf("Bad Interface: %s\n", ifs);
-                                        tmp = tmp->ifa_next;
-                                        old_tmp1 = ifs;
-                                		if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP)
-                                            		ifs = tmp->ifa_name;
-                                        
-                                                    if(tmp && strcmp(old_tmp1, ifs) == 0) {
-                                                        tmp = tmp->ifa_next;
-                                                        
-                                                        if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP)
-                                                            ifs = tmp->ifa_name;
-                                                            goto Re_Check1;
-                                                    }
-                                }
-                            
                             printf("Good ifs is: %s\n", ifs);
                             
                             if(strcmp(old_tmp, ifs) == 0) {
                                 printf("Loop finished: %s\n", ifs);
-                                break;
+                                return 0;
                             }
                             
                             tmp = tmp->ifa_next;
