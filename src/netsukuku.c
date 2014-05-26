@@ -332,9 +332,6 @@ void check_excluded(void) {
 }
 
 int exclude_interface(void) {
-    
-                      check_excluded();
-    
                       char *ifs = "null1";
 		      char *old_tmp = "null2";
                       char *old_tmp1 = "null3";
@@ -364,12 +361,14 @@ int exclude_interface(void) {
                             
                             if(strcmp(old_tmp, ifs) == 0) {
                                 printf("Loop finished: %s\n", ifs);
+                                check_excluded();
                                 return 0;
                             }
                             
                             tmp = tmp->ifa_next;
                             server_opt.ifs[server_opt.ifs_n++]=xstrndup(ifs, IFNAMSIZ-1);
                             printf("Using Interface: %s\n", ifs);
+                            check_excluded();
                           }
 
 freeifaddrs(addrs);
