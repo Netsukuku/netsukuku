@@ -326,7 +326,7 @@ void free_server_opt(void)
 
 // Checks and removes any existing interface which is intended to be excluded
 
-void check_excluded(void) {
+/*void check_excluded(void) {
     
     int i;
     
@@ -396,7 +396,7 @@ int exclude_interface(int prevent_doubles) {
                           }
 
 freeifaddrs(addrs);
-}
+}*/
 
 void parse_options(int argc, char **argv)
 {
@@ -443,7 +443,7 @@ void parse_options(int argc, char **argv)
                                 //int prevent_doubles = -1;
                                 //prevent_doubles++;
                                 //exclude_interface(prevent_doubles);
-                                check_excluded();
+                                //check_excluded();
                                 break;
                         case 'k':
                             if(is_ntkd_already_running() == 1){
