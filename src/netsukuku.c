@@ -324,37 +324,55 @@ void free_server_opt(void)
 		xfree(server_opt.ifs[i]);
 }
 
+// Checks and removes any existing interface which is intended to be excluded
+
 void check_excluded(void) {
+    
+    int i;
     
     printf("Number of Interfaces in Use: %d\n", server_opt.ifs_n);
     printf("Interface names in Use: %s", server_opt.ifs);
     
+    for(i=0; i<server_opt.ifs_n; i++) {
+        if(strcmp(server_opt.ifs[i], optarg) == 0) {
+            printf("Interface %s removed, And replaced with %s", server_opt.ifs[i], server_opt.ifs[server_opt.ifs_n]);
+            strncpy(server_opt.ifs[i], server_opt.ifs[server_opt.ifs_n], strlen(server_opt.ifs[server_opt.ifs_n]));
+            server_opt.ifs_n -= 1;
+        }
+        
+    }
+    
 }
 
-int exclude_interface(void) {
+// Adds all interfaces available which are up, And not the interface set by the user.
+// -e eth0 would exclude eth0 from being used by netsukuku.
+// returns 0 on success, -1 on error, And 1 if it has already been run.
+
+int exclude_interface(int prevent_doubles) {
+    
+                      if(prevent_doubles == 1) {
+                          check_excluded();
+                          return 1;
+                      }
+    
                       char *ifs = "null1";
 		      char *old_tmp = "null2";
-                      char *old_tmp1 = "null3";
+                      interface ifs_a;
+                      int ifs_n = 1;
                       struct ifaddrs *addrs,*tmp;
                       
                       if (getifaddrs(&addrs) !=0) {
                           printf("%s\n", strerror(errno));
-                          exit(1);
+                          exit(-1);
                       }
                       tmp = addrs;
                       while(tmp) {
                           
 			    old_tmp = ifs;
                             
-                            Re_Check:
-                            
-                            old_tmp1 = ifs;
-                            if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP && (strncmp(ifs, "lo", 2) == 0 || strncmp(ifs, "tunl0", 5) == 0 || strncmp(ifs, "tunl1", 5) == 0 || strcmp(optarg, ifs) == 0))
+                            if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP && !(tmp->ifa_flags & IFF_LOOPBACK) (strncmp(tmp->ifa_name, "tunl0", 5) != 0 || strncmp(tmp->ifa_name, "tunl1", 5) != 0 || strcmp(optarg, tmp->ifa_name) != 0)) {
                                  ifs = tmp->ifa_name;
-                                        
-                                else if(tmp && strcmp(old_tmp1, ifs) == 0) {
-                                    tmp = tmp->ifa_next;
-                                    goto Re_Check;
+                                 ifs_n++;
                             }
                             
                             printf("Good ifs is: %s\n", ifs);
@@ -368,7 +386,13 @@ int exclude_interface(void) {
                             tmp = tmp->ifa_next;
                             server_opt.ifs[server_opt.ifs_n++]=xstrndup(ifs, IFNAMSIZ-1);
                             printf("Using Interface: %s\n", ifs);
+                            
+                            ifs_a[ifs_n].dev_idx = (int)tmp->ifa_flags;
+                            
+                            strncpy(ifs_a[ifs_n].dev_name, ifs, (int)strlen(ifs));
+                            
                             check_excluded();
+                            
                           }
 
 freeifaddrs(addrs);
@@ -416,7 +440,10 @@ void parse_options(int argc, char **argv)
 				exit(0);
 				break;
                         case 'e':
-                                exclude_interface();
+                                //int prevent_doubles = -1;
+                                //prevent_doubles++;
+                                //exclude_interface(prevent_doubles);
+                                check_excluded();
                                 break;
                         case 'k':
                             if(is_ntkd_already_running() == 1){
