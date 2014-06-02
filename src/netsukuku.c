@@ -326,7 +326,7 @@ void free_server_opt(void)
 
 // Checks and removes any existing interface which is intended to be excluded
 
-/*void check_excluded(void) {
+void check_excluded(void) {
     
     int i;
     
@@ -396,7 +396,7 @@ int exclude_interface(int prevent_doubles) {
                           }
 
 freeifaddrs(addrs);
-}*/
+}
 
 void parse_options(int argc, char **argv)
 {
