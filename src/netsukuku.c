@@ -49,6 +49,8 @@ extern int optind, opterr, optopt;
 int destroy_netsukuku_mutex;
 int pid_saved;
 
+int prevent_doubles;
+
 int options_parsed=0; /* How many times parse_options() has been called */
 
 void save_pid(void)
@@ -440,7 +442,7 @@ void parse_options(int argc, char **argv)
 				exit(0);
 				break;
                         case 'e':
-                                int prevent_doubles = -1;
+                                prevent_doubles = -1;
                                 prevent_doubles++;
                                 exclude_interface(prevent_doubles);
                                 break;
