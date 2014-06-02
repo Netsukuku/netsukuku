@@ -370,7 +370,7 @@ int exclude_interface(int prevent_doubles) {
                           
 			    old_tmp = ifs;
                             
-                            if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP && !(tmp->ifa_flags & IFF_LOOPBACK /*&& strncmp(tmp->ifa_name, "tunl0", 5) != 0 && strncmp(tmp->ifa_name, "tunl1", 5) != 0 && */ && strcmp(optarg, tmp->ifa_name) != 0)) {
+                            if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP && !(tmp->ifa_flags & IFF_LOOPBACK && strncmp(tmp->ifa_name, "tunl0", 5) != 0 && strncmp(tmp->ifa_name, "tunl1", 5) != 0 && strcmp(optarg, tmp->ifa_name) != 0)) {
                                  ifs = tmp->ifa_name;
                                  ifs_n++;
                             }
@@ -440,10 +440,9 @@ void parse_options(int argc, char **argv)
 				exit(0);
 				break;
                         case 'e':
-                                //int prevent_doubles = -1;
-                                //prevent_doubles++;
-                                //exclude_interface(prevent_doubles);
-                                //check_excluded();
+                                int prevent_doubles = -1;
+                                prevent_doubles++;
+                                exclude_interface(prevent_doubles);
                                 break;
                         case 'k':
                             if(is_ntkd_already_running() == 1){
@@ -487,11 +486,7 @@ void parse_options(int argc, char **argv)
 					fatal(0);
 				break;
 			case 'i':
-				if(server_opt.ifs_n+1 >= MAX_INTERFACES)
-					fatal("The maximum number of interfaces is %d",
-							MAX_INTERFACES);
-				server_opt.ifs[server_opt.ifs_n++]=xstrndup(optarg, IFNAMSIZ-1);
-				break;
+break;
 			case 'D':
 				server_opt.daemon=0;
 				break;
