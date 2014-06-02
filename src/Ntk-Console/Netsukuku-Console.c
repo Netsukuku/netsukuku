@@ -81,7 +81,7 @@ int openpipe(void) {
 
 int main(void) {
     
-    server_opt.pid_file="/ntkd.pid";
+    server_opt.pid_file="/var/run/ntkd.pid";
     
     openpipe();
     
