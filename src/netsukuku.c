@@ -357,7 +357,7 @@ int exclude_interface(int prevent_doubles) {
     
                       char *ifs = "null1";
 		      char *old_tmp = "null2";
-                      interface ifs_a;
+                      interface *ifs_a;
                       int ifs_n = 1;
                       struct ifaddrs *addrs,*tmp;
                       
@@ -370,7 +370,7 @@ int exclude_interface(int prevent_doubles) {
                           
 			    old_tmp = ifs;
                             
-                            if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP && !(tmp->ifa_flags & IFF_LOOPBACK) (strncmp(tmp->ifa_name, "tunl0", 5) != 0 || strncmp(tmp->ifa_name, "tunl1", 5) != 0 || strcmp(optarg, tmp->ifa_name) != 0)) {
+                            if(tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET && tmp->ifa_flags & IFF_UP && !(tmp->ifa_flags & IFF_LOOPBACK /*&& strncmp(tmp->ifa_name, "tunl0", 5) != 0 && strncmp(tmp->ifa_name, "tunl1", 5) != 0 && */ && strcmp(optarg, tmp->ifa_name) != 0)) {
                                  ifs = tmp->ifa_name;
                                  ifs_n++;
                             }
