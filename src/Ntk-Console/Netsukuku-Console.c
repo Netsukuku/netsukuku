@@ -2,112 +2,199 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h> 
+#include <sys/socket.h>
+#include <sys/un.h>
 #include <errno.h>
 #include "Netsukuku-Console.h"
 
-int fd[2];
-pid_t ntkd_pid;
+void usage();
+
+int validity_check(char argv) {
+    
+    switch(argv) {
+        case 'help':
+            return 1;
+            break;
+        case 'uptime':
+            return 0;
+            break;
+        case 'kill':
+            return 2;
+            break;
+        case 'version':
+            return 3;
+            break;
+        case 'inet_connected':
+            return 0;
+            break;
+        case 'cur_ifs':
+            return 0;
+            break;
+        case 'cur_ifs_n':
+            return 0;
+            break;
+        case 'cur_qspn_id':
+            return 0;
+            break;
+        case 'cur_ip':
+            return 0;
+            break;
+        case 'cur_node':
+            return 0;
+            break;
+        case 'ifs':
+            return 0;
+            break;
+        case 'ifs_n':
+            return 0;
+            break;
+        case 'console_uptime':
+            return 0;
+            break;
+        default:
+            printf("Incorrect or unreadable command, Please correct it.\n");
+            return -1;
+            break;    
+    }
+    
+}
 
 /* this function is run by the second thread */
-void *server_opt_pipe(void *args) {
-
-    int i;
+void *ntkd_request(void *argv) {
     
-    int* ServIter = (int*)&server_opt;
-    
-    for(i = 0; i<33; i++) {
-        
-        printf("%d\n",*(ServIter + i));
-        
-    }
-
-}
-
-/*
- * is_ntkd_already_running
- *
- * Returns 1 if there's already a ntkd running
- */
-int is_ntkd_already_running(void)
-{
-	pid_t oldpid;
-	FILE *fd;
-
-	if(!(fd=fopen(server_opt.pid_file, "r"))) {
-		if(errno != ENOENT)
-			printf("Cannot read pid file \"%s\": %s\n",
-					server_opt.pid_file, strerror(errno));
-		return 0;
-	}
-
-	fscanf(fd, "ntkd %d\n", &oldpid);
-        if(ferror(fd)) {
-		printf("error reading pid file \"%s\": %s\n",
-				server_opt.pid_file, strerror(errno));
-		fclose(fd);
-		return 0;
-	}
-	fclose(fd);
-
-	return !kill(oldpid, 0);
-}
-
-int openpipe(void) {
-    
-    if(is_ntkd_already_running() == 1){
-        char process_name[256] = {0};
-        pid_t pid1;
-        printf("...Opening Pipe to ntkd...\n");
-        FILE *fd1=fopen(server_opt.pid_file, "r");
-        while(fscanf(fd1, "%s %d", process_name, &pid1)!=EOF) {
-            if(strcmp(process_name, "ntkd") == 0) {
-                ntkd_pid = pid1;
-                if (pipe(fd) == -1) {
-                    printf("Error in Pipe Creation: %s\n", strerror(errno));
-                    exit(1);
-                }
+    while(sendrecv == 1) {
+        rc = sendto(sockfd1, request, strlen(request), 0, (struct sockaddr *)&serveraddr, strlen(serveraddr));
+            if (rc < 0) {
+                perror("sendto() failed");
+                exit(-1);
             }
+    
+        rc = recvfrom(sockfd1, response, strlen(response), MSG_WAITALL, (struct sockaddr *)&ntkdaddr, strlen(ntkdaddr));
+        if (rc < 0) {
+            perror("recvfrom() failed");
+            exit(-1);
         }
-            fclose(fd1);
+    
+        if(rc >= 0) {
+            printf("Sent and received Successfully!\n The Response was: %s", response);
+            
+        }
+    
+    }
+}
+
+int opensocket(void) {
+    
+    sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
+    if (sockfd < 0) {
+         perror("socket creation failed");
+         exit(-1);
     }
     
-     else if(is_ntkd_already_running() == 0) {
-     printf("ntkd is not running\n ...Exiting...\n");
-     exit(0);
-     
-    }
+    memset(&serveraddr, 0, sizeof(serveraddr));
+    serveraddr.sun_family = AF_UNIX;
+    strcpy(serveraddr.sun_path, SERVER_PATH);
+
+    rc = bind(sockfd, (struct sockaddr *)&serveraddr, SUN_LEN(&serveraddr));
+    if (rc < 0) {
+        perror("bind() failed");
+        exit(-1);
+      }
+}
+
+int console(void *argv) {
     
+    int exit_now = 0;
+    
+    while(exit_now == 1) {
+        printf("\n>")
+    
+        request = scanf("%s");
+        
+        if(validity_check(request) == -1)
+            usage();
+        
+        if(strncmp(request, "quit", 4) == 0)
+            exit(0);
+    
+        if(validity_check(request) == 0)
+            sendrecv = 1;
+        
+        if(validity_check(request) == 1)
+            usage();
+        
+        if(validity_check(request) == 2)
+            system("ntkd -k");
+        
+        if(validity_check(request) == 3) {
+            printf("%s", VERSION_STR);
+            sendrecv = 1;
+        }
+    
+        sendrecv = 0;
+    }    
 }
 
 int main(void) {
     
-    server_opt.pid_file="/var/run/ntkd.pid";
-    
-    openpipe();
+    opensocket();
     
     printf("This is the Netsukuku Console, Please type: 'help' for more information.\n");
     
-    server_opt_pipe(NULL);
-    
 /* This variable is our reference to the second thread */
-    pthread_t NetsukukuServeroptPipe;
+    pthread_t NtkdRequest;
 
-/* create a second thread which executes inc_x(&x) */
-    if(pthread_create(&NetsukukuServeroptPipe, NULL, server_opt_pipe, NULL)) {
+/* Create a second thread which executes ntkd_request() */
+    if(pthread_create(&NtkdRequest, NULL, ntkd_request, NULL)) {
+        fprintf(stderr, "Error creating thread\n");
+        return -1;
+    }
 
-    fprintf(stderr, "Error creating thread\n");
-    return 1;
+/* Detach the second thread */
+    if(pthread_detach(NtkdRequest)) {
+        fprintf(stderr, "Error joining thread\n");
+        return -2;
+    }
+    
+    pthread_t ConsoleThread;
+    
+    if(pthread_create(&ConsoleThread, NULL, console, NULL)) {
+        fprintf(stderr, "Error creating thread\n");
+        return -1;
+    }
 
-        }
-
-/* wait for the second thread to finish */
-    if(pthread_join(NetsukukuServeroptPipe, NULL)) {
-
-    fprintf(stderr, "Error joining thread\n");
-    return 2;
-
-   }
+    if(pthread_detach(ConsoleThread)) {
+        fprintf(stderr, "Error joining thread\n");
+        return -2;
+    }
 
 return 0;
 
+}
+
+void usage(void) {
+    
+    	printf("Usage:\n"
+		" uptime    Returns the time when ntkd finished the hooking, 
+					  "to get the the actual uptime just do: "
+					  "time(0)-me.uptime \n"
+		" help	Shows this\n"
+		" kill	Kills the running instance of netsukuku with SIGINT\n\n"
+		" version   Shows the running version of ntkd and ntk-console\n"
+		" inet_connected    If it is 1, Ntkd is connected to the Internet\n"
+		"\n"
+		" cur_ifs   Lists all of the interfaces in cur_ifs\n"
+		" cur_ifs_n Lists the number of interfaces present in `cur_ifs'\n"
+		"\n"
+		" cur_qspn_id   The current qspn_id we are processing. "
+                                "It is cur_qspn_id[levels] big\n"
+		" cur_ip    Current IP address\n"
+		"\n"
+		" cur_node  Current Node\n"
+		" ifs   Lists all of the interfaces in server_opt.ifs\n"
+                " ifs_n Lists the number of interfaces present in server_opt.ifs\n"
+                " quit Exits this program\n"
+		" console_uptime    Gets the uptime of this console (Yet to be implemented)\n");
+    
 }
