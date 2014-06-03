@@ -1,11 +1,14 @@
-CXX=clang
-DEBUG=-g -pthread -Wfatal-errors -pedantic -Weffc++ -Wunreachable-code -Winline -Wredundant-decls -Wno-vla
+LDLIBS=-pthread
+LIBS=-pthread
+C=clang
+DEBUG=-g -Wfatal-errors -pedantic -Weffc++ -Wunreachable-code -Winline -Wredundant-decls -Wno-vla
+CFLAGS=-Wall ${DEBUG}
 SRCBIN=Netsukuku-Console
 
 all: ${SRCBIN}
 
 ${SRCBIN}: Netsukuku-Console.o
-	${CXX} ${LDFLAGS} ${LIBS} $^ -pthread -g -o $@
+	${C} ${LDFLAGS} ${LIBS} $^ -o $@
 
 .PHONY: clean
 

@@ -5,58 +5,65 @@
 #include <sys/types.h> 
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <unistd.h>
 #include <errno.h>
 #include "Netsukuku-Console.h"
 
+int sockfd, sockfd1, sendrecv;
+struct sockaddr_un serveraddr;
+struct sockaddr ntkdaddr;
+int rc, length, exit_now;
+char *request, *response;
+
 void usage();
 
-int validity_check(char argv) {
+void clean_up();
+
+int validity_check(void) {
     
-    switch(argv) {
-        case 'help':
+        if(strncmp(request,"help", 4)  == 0)
             return 1;
-            break;
-        case 'uptime':
+        
+        else if(strncmp(request,"uptime", 6)  == 0)
             return 0;
-            break;
-        case 'kill':
+        
+        else if(strncmp(request,"kill", 4)  == 0)
             return 2;
-            break;
-        case 'version':
+        
+        else if(strncmp(request,"version", 7)  == 0)
             return 3;
-            break;
-        case 'inet_connected':
+        
+        else if(strncmp(request,"console_uptime", 14)  == 0)
+            return 4;
+        
+        else if(strncmp(request,"inet_connected", 14)  == 0)
             return 0;
-            break;
-        case 'cur_ifs':
+        
+        else if(strncmp(request,"cur_ifs", 7)  == 0)
             return 0;
-            break;
-        case 'cur_ifs_n':
+        
+        else if(strncmp(request,"cur_ifs_n", 9)  == 0)
             return 0;
-            break;
-        case 'cur_qspn_id':
+        
+        else if(strncmp(request,"cur_qspn_id", 11)  == 0)
             return 0;
-            break;
-        case 'cur_ip':
+        
+        else if(strncmp(request,"cur_ip", 6)  == 0)
             return 0;
-            break;
-        case 'cur_node':
+        
+        else if(strncmp(request,"cur_node", 8)  == 0)
             return 0;
-            break;
-        case 'ifs':
+        
+        else if(strncmp(request,"ifs", 3)  == 0)
             return 0;
-            break;
-        case 'ifs_n':
+        
+        else if(strncmp(request,"ifs_n", 5)  == 0)
             return 0;
-            break;
-        case 'console_uptime':
-            return 0;
-            break;
-        default:
+        
+        else {
             printf("Incorrect or unreadable command, Please correct it.\n");
             return -1;
-            break;    
-    }
+        }
     
 }
 
@@ -64,20 +71,20 @@ int validity_check(char argv) {
 void *ntkd_request(void *argv) {
     
     while(sendrecv == 1) {
-        rc = sendto(sockfd1, request, strlen(request), 0, (struct sockaddr *)&serveraddr, strlen(serveraddr));
+        rc = sendto(sockfd1, request, strlen(request), 0, (struct sockaddr *)&serveraddr, (socklen_t *)strlen(&serveraddr));
             if (rc < 0) {
                 perror("sendto() failed");
                 exit(-1);
             }
     
-        rc = recvfrom(sockfd1, response, strlen(response), MSG_WAITALL, (struct sockaddr *)&ntkdaddr, strlen(ntkdaddr));
+        rc = recvfrom(sockfd1, response, strlen(response), MSG_WAITALL, (struct sockaddr *)&ntkdaddr, (socklen_t *)strlen(&ntkdaddr));
         if (rc < 0) {
             perror("recvfrom() failed");
             exit(-1);
         }
     
         if(rc >= 0) {
-            printf("Sent and received Successfully!\n The Response was: %s", response);
+            printf("Sent and received Successfully!\n The Response was) %s", response);
             
         }
     
@@ -99,38 +106,50 @@ int opensocket(void) {
     rc = bind(sockfd, (struct sockaddr *)&serveraddr, SUN_LEN(&serveraddr));
     if (rc < 0) {
         perror("bind() failed");
+        clean_up();
         exit(-1);
       }
 }
 
-int console(void *argv) {
+void console(void) {
     
-    int exit_now = 0;
+    exit_now = 1;
     
     while(exit_now == 1) {
-        printf("\n>")
+        printf("\n>");
     
-        request = scanf("%s");
+        //request = scanf("%s");
+        fgets(request, 15, stdin);
         
-        if(validity_check(request) == -1)
+        int len = strlen(request);
+            if (len > 0 && request[len-1] == '\n')
+            request[len-1] = '\0';
+        
+        if(validity_check() == -1)
             usage();
         
-        if(strncmp(request, "quit", 4) == 0)
+        if(strncmp(request,"quit", 4) == 0) {
+            exit_now = 2;
+            clean_up();
             exit(0);
+        }
     
-        if(validity_check(request) == 0)
+        if(validity_check() == 0)
             sendrecv = 1;
         
-        if(validity_check(request) == 1)
+        if(validity_check() == 1)
             usage();
         
-        if(validity_check(request) == 2)
+        if(validity_check() == 2)
             system("ntkd -k");
         
-        if(validity_check(request) == 3) {
+        if(validity_check() == 3) {
             printf("%s", VERSION_STR);
             sendrecv = 1;
         }
+        
+        if(validity_check() == 4)
+            sizeof(char); // Place holder text
     
         sendrecv = 0;
     }    
@@ -138,9 +157,13 @@ int console(void *argv) {
 
 int main(void) {
     
+    sendrecv = 0;
+    
     opensocket();
     
-    printf("This is the Netsukuku Console, Please type: 'help' for more information.\n");
+    printf("This is the Netsukuku Console, Please type 'help' for more information.\n");
+    
+    console();
     
 /* This variable is our reference to the second thread */
     pthread_t NtkdRequest;
@@ -152,32 +175,20 @@ int main(void) {
     }
 
 /* Detach the second thread */
-    if(pthread_detach(NtkdRequest)) {
-        fprintf(stderr, "Error joining thread\n");
-        return -2;
+    if(exit_now == 2) {
+        if(pthread_detach(NtkdRequest)) {
+            fprintf(stderr, "Error detaching thread\n");
+            return -2;
+        }
     }
     
-    pthread_t ConsoleThread;
-    
-    if(pthread_create(&ConsoleThread, NULL, console, NULL)) {
-        fprintf(stderr, "Error creating thread\n");
-        return -1;
-    }
-
-    if(pthread_detach(ConsoleThread)) {
-        fprintf(stderr, "Error joining thread\n");
-        return -2;
-    }
-
-return 0;
-
 }
 
 void usage(void) {
     
-    	printf("Usage:\n"
-		" uptime    Returns the time when ntkd finished the hooking, 
-					  "to get the the actual uptime just do: "
+    	printf("Usage)\n"
+		" uptime    Returns the time when ntkd finished the hooking," 
+					  "to get the the actual uptime just do) "
 					  "time(0)-me.uptime \n"
 		" help	Shows this\n"
 		" kill	Kills the running instance of netsukuku with SIGINT\n\n"
@@ -186,8 +197,8 @@ void usage(void) {
 		"\n"
 		" cur_ifs   Lists all of the interfaces in cur_ifs\n"
 		" cur_ifs_n Lists the number of interfaces present in `cur_ifs'\n"
-		"\n"
-		" cur_qspn_id   The current qspn_id we are processing. "
+		"\n");
+        printf(" cur_qspn_id   The current qspn_id we are processing. "
                                 "It is cur_qspn_id[levels] big\n"
 		" cur_ip    Current IP address\n"
 		"\n"
@@ -196,5 +207,23 @@ void usage(void) {
                 " ifs_n Lists the number of interfaces present in server_opt.ifs\n"
                 " quit Exits this program\n"
 		" console_uptime    Gets the uptime of this console (Yet to be implemented)\n");
+    
+}
+
+void clean_up(void) {
+    
+    const int optVal = 1;
+    const socklen_t optLen = sizeof(optVal);
+    
+    setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void*) &optVal, optLen);
+    setsockopt(sockfd1, SOL_SOCKET, SO_REUSEADDR, (void*) &optVal, optLen);
+    
+    if (sockfd != -1)
+        close(sockfd);
+
+    if (sockfd1 != -1)
+        close(sockfd1);
+   
+   unlink(SERVER_PATH);
     
 }
