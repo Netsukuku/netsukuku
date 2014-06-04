@@ -4,8 +4,10 @@
 #include <string.h>
 #include <sys/types.h> 
 #include <sys/socket.h>
+#include <utmp.h>
 #include <sys/un.h>
 #include <unistd.h>
+#include <time.h>
 #include <errno.h>
 #include "Netsukuku-Console.h"
 
@@ -15,83 +17,98 @@ struct sockaddr ntkdaddr;
 int rc, length, exit_now;
 char *request, *response;
 
+time_t rawtime;
+struct tm *timeinfo;
+
+int uptime_sec;
+int uptime_min;
+int uptime_hr;
+
 void usage();
 
 void clean_up();
 
 int validity_check(void) {
     
-        if(strncmp(request,"help", 4)  == 0)
+    if(request && strncmp(request, "null", (int)strlen(request)) != 0) {
+    
+        if(strncmp(request,"help", (int)strlen(request))  == 0)
             return 1;
         
-        else if(strncmp(request,"uptime", 6)  == 0)
+        else if(strncmp(request,"uptime", (int)strlen(request))  == 0)
             return 0;
         
-        else if(strncmp(request,"kill", 4)  == 0)
+        else if(strncmp(request,"kill", (int)strlen(request))  == 0)
             return 2;
         
-        else if(strncmp(request,"version", 7)  == 0)
+        else if(strncmp(request,"version", (int)strlen(request))  == 0)
             return 3;
         
-        else if(strncmp(request,"console_uptime", 14)  == 0)
+        else if(strncmp(request,"console_uptime", (int)strlen(request))  == 0)
             return 4;
         
-        else if(strncmp(request,"inet_connected", 14)  == 0)
+        else if(strncmp(request,"inet_connected", (int)strlen(request))  == 0)
             return 0;
         
-        else if(strncmp(request,"cur_ifs", 7)  == 0)
+        else if(strncmp(request,"cur_ifs", (int)strlen(request))  == 0)
             return 0;
         
-        else if(strncmp(request,"cur_ifs_n", 9)  == 0)
+        else if(strncmp(request,"cur_ifs_n", (int)strlen(request))  == 0)
             return 0;
         
-        else if(strncmp(request,"cur_qspn_id", 11)  == 0)
+        else if(strncmp(request,"cur_qspn_id", (int)strlen(request))  == 0)
             return 0;
         
-        else if(strncmp(request,"cur_ip", 6)  == 0)
+        else if(strncmp(request,"cur_ip", (int)strlen(request))  == 0)
             return 0;
         
-        else if(strncmp(request,"cur_node", 8)  == 0)
+        else if(strncmp(request,"cur_node", (int)strlen(request))  == 0)
             return 0;
         
-        else if(strncmp(request,"ifs", 3)  == 0)
+        else if(strncmp(request,"ifs", (int)strlen(request))  == 0)
             return 0;
         
-        else if(strncmp(request,"ifs_n", 5)  == 0)
+        else if(strncmp(request,"ifs_n", (int)strlen(request))  == 0)
             return 0;
         
         else {
             printf("Incorrect or unreadable command, Please correct it.\n");
             return -1;
         }
+    }
+    
+    return -2;
     
 }
 
 /* this function is run by the second thread */
 void *ntkd_request(void *argv) {
     
-    while(sendrecv == 1) {
-        rc = sendto(sockfd1, request, strlen(request), 0, (struct sockaddr *)&serveraddr, (socklen_t *)strlen(&serveraddr));
+    while(usleep(200)) {
+        while(request && sendrecv == 1 && strncmp(request, "null", (int)strlen(request) != 0)) {
+            rc = sendto(sockfd1, request, strlen(request), 0, (struct sockaddr *)&serveraddr, (socklen_t)sizeof(&serveraddr));
+                if (rc < 0) {
+                    perror("sendto() failed");
+                    exit(-1);
+                }
+
+            rc = recvfrom(sockfd1, response, strlen(response), MSG_WAITALL, (struct sockaddr *)&ntkdaddr, (socklen_t *__restrict)sizeof(&ntkdaddr));
             if (rc < 0) {
-                perror("sendto() failed");
+                perror("recvfrom() failed");
                 exit(-1);
-            }
-    
-        rc = recvfrom(sockfd1, response, strlen(response), MSG_WAITALL, (struct sockaddr *)&ntkdaddr, (socklen_t *)strlen(&ntkdaddr));
-        if (rc < 0) {
-            perror("recvfrom() failed");
-            exit(-1);
-        }
-    
-        if(rc >= 0) {
-            printf("Sent and received Successfully!\n The Response was) %s", response);
-            
-        }
+           }
+
+            if(rc >= 0) {
+                printf("Sent and received Successfully!\n The Response was) %s", response);
+
+       }
     
     }
+  }
+return 0;
 }
 
-int opensocket(void) {
+void opensocket(void) {
     
     sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
     if (sockfd < 0) {
@@ -107,28 +124,52 @@ int opensocket(void) {
     if (rc < 0) {
         perror("bind() failed");
         clean_up();
-        exit(-1);
+        opensocket();
       }
 }
 
+void console_uptime(void) {
+    
+    int uptime_sec1;
+    int uptime_min1;
+    int uptime_hr1;
+    
+    time(&rawtime);
+    
+    timeinfo = localtime(&rawtime);
+    
+    uptime_sec1 = timeinfo->tm_sec;
+    uptime_min1 = timeinfo->tm_min;
+    uptime_hr1 = timeinfo->tm_hour;
+    
+    uptime_sec1 -= uptime_sec;
+    uptime_min1 -= uptime_min;
+    uptime_hr1 -= uptime_hr;
+    
+    printf("Total Uptime is: %i, %i, %i\n", uptime_hr1, uptime_min1, uptime_sec1);
+    
+}
+
 void console(void) {
+    
+    char request_buf[16];
     
     exit_now = 1;
     
     while(exit_now == 1) {
         printf("\n>");
-    
-        //request = scanf("%s");
-        fgets(request, 15, stdin);
         
-        int len = strlen(request);
-            if (len > 0 && request[len-1] == '\n')
-            request[len-1] = '\0';
+        fgets(request_buf, 16, stdin);
+        
+        strcpy(request, request_buf);
+        
+        if(validity_check() == -2)
+            printf("Error: Command has not been processed!");
         
         if(validity_check() == -1)
             usage();
         
-        if(strncmp(request,"quit", 4) == 0) {
+        if(strncmp(request,"quit", (int)strlen(request)) == 0) {
             exit_now = 2;
             clean_up();
             exit(0);
@@ -149,44 +190,61 @@ void console(void) {
         }
         
         if(validity_check() == 4)
-            sizeof(char); // Place holder text
+            console_uptime();
     
         sendrecv = 0;
     }    
 }
 
 int main(void) {
+
+    char request_buf[16];
+    
+    printf("\n>");
+    
+    fgets(request_buf, 16, stdin);
+    
+    printf("uhm %s", request_buf);
     
     sendrecv = 0;
+    
+    /*request = "null";*/
+    
+    time(&rawtime);
+    
+    timeinfo = localtime(&rawtime);
+    
+    uptime_sec = timeinfo->tm_sec;
+    uptime_min = timeinfo->tm_min;
+    uptime_hr = timeinfo->tm_hour;
     
     opensocket();
     
     printf("This is the Netsukuku Console, Please type 'help' for more information.\n");
     
-    console();
-    
 /* This variable is our reference to the second thread */
     pthread_t NtkdRequest;
 
 /* Create a second thread which executes ntkd_request() */
-    if(pthread_create(&NtkdRequest, NULL, ntkd_request, NULL)) {
+    if(pthread_create(&NtkdRequest, NULL, ntkd_request, 0)) {
         fprintf(stderr, "Error creating thread\n");
         return -1;
     }
 
 /* Detach the second thread */
-    if(exit_now == 2) {
         if(pthread_detach(NtkdRequest)) {
             fprintf(stderr, "Error detaching thread\n");
             return -2;
         }
-    }
+ 
+    console();
     
+ return 0;
 }
 
 void usage(void) {
     
-    	printf("Usage)\n"
+    	printf("Usage\n"
 		" uptime    Returns the time when ntkd finished the hooking," 
 					  "to get the the actual uptime just do) "
 					  "time(0)-me.uptime \n"
@@ -206,7 +264,7 @@ void usage(void) {
 		" ifs   Lists all of the interfaces in server_opt.ifs\n"
                 " ifs_n Lists the number of interfaces present in server_opt.ifs\n"
                 " quit Exits this program\n"
-		" console_uptime    Gets the uptime of this console (Yet to be implemented)\n");
+		" console_uptime    Gets the uptime of this console\n");
     
 }
 
