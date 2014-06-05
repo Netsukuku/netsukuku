@@ -1,7 +1,5 @@
-LDLIBS=-pthread
-LIBS=-pthread
 C=clang
-DEBUG=-g -Wfatal-errors -pedantic -Wunreachable-code -Winline -Wredundant-decls -Wno-vla
+DEBUG=-g -fno-builtin -Wfatal-errors -pedantic -Wunreachable-code -Winline -Wredundant-decls -Wno-vla
 CFLAGS=-Wall ${DEBUG}
 SRCBIN=Netsukuku-Console
 

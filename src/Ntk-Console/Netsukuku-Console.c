@@ -1,32 +1,4 @@
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h> 
-#include <sys/socket.h>
-#include <utmp.h>
-#include <sys/un.h>
-#include <unistd.h>
-#include <time.h>
-#include <errno.h>
 #include "Netsukuku-Console.h"
-
-int sockfd, sockfd1, sendrecv;
-struct sockaddr_un serveraddr;
-struct sockaddr ntkdaddr;
-int rc, length, exit_now;
-char *request, *response;
-
-time_t rawtime;
-struct tm *timeinfo;
-
-int uptime_sec;
-int uptime_min;
-int uptime_hr;
-
-void usage();
-
-void clean_up();
 
 int validity_check(void) {
     
@@ -82,10 +54,8 @@ int validity_check(void) {
 }
 
 /* this function is run by the second thread */
-void *ntkd_request(void *argv) {
-    
-    while(usleep(200)) {
-        while(request && sendrecv == 1 && strncmp(request, "null", (int)strlen(request) != 0)) {
+void ntkd_request(void) {
+
             rc = sendto(sockfd1, request, strlen(request), 0, (struct sockaddr *)&serveraddr, (socklen_t)sizeof(&serveraddr));
                 if (rc < 0) {
                     perror("sendto() failed");
@@ -102,10 +72,6 @@ void *ntkd_request(void *argv) {
                 printf("Sent and received Successfully!\n The Response was) %s", response);
 
        }
-    
-    }
-  }
-return 0;
 }
 
 void opensocket(void) {
@@ -132,7 +98,11 @@ void console_uptime(void) {
     
     int uptime_sec1;
     int uptime_min1;
-    int uptime_hr1;
+    int uptime_hour1;
+    
+    int uptime_day1;
+    int uptime_month1;
+    int uptime_year1;
     
     time(&rawtime);
     
@@ -140,13 +110,21 @@ void console_uptime(void) {
     
     uptime_sec1 = timeinfo->tm_sec;
     uptime_min1 = timeinfo->tm_min;
-    uptime_hr1 = timeinfo->tm_hour;
+    uptime_hour1 = timeinfo->tm_hour;
+    
+    uptime_day1 = timeinfo->tm_mday;
+    uptime_month1 = timeinfo->tm_mon;
+    uptime_year1 = timeinfo->tm_year;
     
     uptime_sec1 -= uptime_sec;
     uptime_min1 -= uptime_min;
-    uptime_hr1 -= uptime_hr;
+    uptime_hour1 -= uptime_hour;
     
-    printf("Total Uptime is: %i, %i, %i\n", uptime_hr1, uptime_min1, uptime_sec1);
+    uptime_day1 -= uptime_day;
+    uptime_month1 -= uptime_month;
+    uptime_year1 -= uptime_year;
+    
+    printf("Total Uptime is: %i Year(s), %i Month(s), %i Day(s), %i Hour(s), %i Minute(s), %i Second(s)\n",uptime_year1, uptime_month1, uptime_day1, uptime_hour1, uptime_min1, uptime_sec1);
     
 }
 
@@ -176,7 +154,7 @@ void console(void) {
         }
     
         if(validity_check() == 0)
-            sendrecv = 1;
+            ntkd_request();
         
         if(validity_check() == 1)
             usage();
@@ -186,13 +164,11 @@ void console(void) {
         
         if(validity_check() == 3) {
             printf("%s", VERSION_STR);
-            sendrecv = 1;
+            ntkd_request();
         }
-        
+
         if(validity_check() == 4)
             console_uptime();
-    
-        sendrecv = 0;
     }    
 }
 
@@ -204,7 +180,7 @@ int main(void) {
     
     fgets(request_buf, 16, stdin);
     
-    printf("uhm %s", request_buf);
+    printf("uhm: %s", request_buf);
     
     sendrecv = 0;
     
@@ -216,26 +192,14 @@ int main(void) {
     
     uptime_sec = timeinfo->tm_sec;
     uptime_min = timeinfo->tm_min;
-    uptime_hr = timeinfo->tm_hour;
+    uptime_hour = timeinfo->tm_hour;
+    uptime_day = timeinfo->tm_mday;
+    uptime_month = timeinfo->tm_mon;
+    uptime_year = timeinfo->tm_year;
     
     opensocket();
     
     printf("This is the Netsukuku Console, Please type 'help' for more information.\n");
-    
-/* This variable is our reference to the second thread */
-    pthread_t NtkdRequest;
-
-/* Create a second thread which executes ntkd_request() */
-    if(pthread_create(&NtkdRequest, NULL, ntkd_request, 0)) {
-        fprintf(stderr, "Error creating thread\n");
-        return -1;
-    }
-
-/* Detach the second thread */
-        if(pthread_detach(NtkdRequest)) {
-            fprintf(stderr, "Error detaching thread\n");
-            return -2;
-        }
  
     console();
     
