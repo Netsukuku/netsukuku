@@ -49,7 +49,7 @@ extern int optind, opterr, optopt;
 int destroy_netsukuku_mutex;
 int pid_saved;
 
-int prevent_doubles;
+int prevent_duplication;
 
 int options_parsed=0; /* How many times parse_options() has been called */
 
@@ -326,7 +326,7 @@ void free_server_opt(void)
 		xfree(server_opt.ifs[i]);
 }
 
-// Checks and removes any existing interface which is intended to be excluded
+/* Checks and removes any existing interface which is intended to be excluded*/
 
 void check_excluded(void) {
     
@@ -346,13 +346,30 @@ void check_excluded(void) {
     
 }
 
-// Adds all interfaces available which are up, And not the interface set by the user.
-// -e eth0 would exclude eth0 from being used by netsukuku.
-// returns 0 on success, -1 on error, And 1 if it has already been run.
+/* Adds all interfaces available which are up, And not the interface set by the user.
+ * -e eth0 would exclude eth0 from being used by netsukuku. It, Also, Excludes the 
+ * loopback interface, And tunl0, and tunl1, If it exists.
+ * 
+ * It iterates through a pointer to the getifaddrs struct, Using the ifa_name member 
+ * for reading the interface name, And ifa_next to move to the next
+ * interface in the array.
+ * 
+ * It commits every up interface name that is not the one specified to be excluded
+ * by the user, Nor the loop back interface to server_opt.ifs and to pointer
+ * to the struct interface in the member dev_name, And increments the server_opt.ifs_n member. 
+ * It, Also, Sets the index of each interface to a pointer to the struct interface 
+ * in the member dev_idx
+ * 
+ * It checks if it has already been run, If it has, It just runs check_excluded()
+ * and then exits. check_excluded() is run at the end of the function
+ * to check for errors in excluding optarg.
+ * 
+ * returns 0 on success, -1 on error, And 1 if it has already been run.
+*/
 
-int exclude_interface(int prevent_doubles) {
+int exclude_interface() {
     
-                      if(prevent_doubles == 1) {
+                      if(prevent_duplication == 1) {
                           check_excluded();
                           return 1;
                       }
@@ -393,10 +410,10 @@ int exclude_interface(int prevent_doubles) {
                             
                             strncpy(ifs_a[ifs_n].dev_name, ifs, (int)strlen(ifs));
                             
-                            check_excluded();
-                            
                           }
 
+check_excluded();
+                      
 freeifaddrs(addrs);
 }
 
@@ -442,9 +459,9 @@ void parse_options(int argc, char **argv)
 				exit(0);
 				break;
                         case 'e':
-                                prevent_doubles = -1;
-                                prevent_doubles++;
-                                exclude_interface(prevent_doubles);
+                                prevent_duplication = -1;
+                                prevent_duplication++;
+                                exclude_interface();
                                 break;
                         case 'k':
                             if(is_ntkd_already_running() == 1){
