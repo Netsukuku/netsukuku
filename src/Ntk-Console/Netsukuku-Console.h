@@ -16,11 +16,10 @@
 #define VERSION_STR     "0.0.1"
 #define FALSE              0
 
-int sockfd, sockfd1, sendrecv;
+int sockfd, sockfd1;
 struct sockaddr_un serveraddr;
 struct sockaddr ntkdaddr;
-int rc, length, exit_now;
-char *request, *response;
+int rc;
 
 time_t rawtime;
 struct tm *timeinfo;
@@ -32,8 +31,6 @@ int uptime_day;
 int uptime_month;
 int uptime_year;
 
-void usage();
-
-void clean_up();
+int i;
 
 #endif /*NETSUKUKUCONSOLE_H*/

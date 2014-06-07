@@ -1,8 +1,12 @@
 #include "Netsukuku-Console.h"
 
-int validity_check(void) {
-    
-    if(request && strncmp(request, "null", (int)strlen(request)) != 0) {
+char *response;
+
+void usage();
+
+void clean_up();
+
+int validity_check(char *request) {
     
         if(strncmp(request,"help", (int)strlen(request))  == 0)
             return 1;
@@ -47,14 +51,13 @@ int validity_check(void) {
             printf("Incorrect or unreadable command, Please correct it.\n");
             return -1;
         }
-    }
     
     return -2;
     
 }
 
 /* this function is run by the second thread */
-void ntkd_request(void) {
+void ntkd_request(char *request) {
 
             rc = sendto(sockfd1, request, strlen(request), 0, (struct sockaddr *)&serveraddr, (socklen_t)sizeof(&serveraddr));
                 if (rc < 0) {
@@ -128,65 +131,43 @@ void console_uptime(void) {
     
 }
 
-void console(void) {
+void console(char *request) { 
     
-    char request_buf[16];
-    
-    exit_now = 1;
-    
-    while(exit_now == 1) {
-        printf("\n>");
+    printf("%s", request);
         
-        fgets(request_buf, 16, stdin);
-        
-        strcpy(request, request_buf);
-        
-        if(validity_check() == -2)
+    if(validity_check(request) == -2)
             printf("Error: Command has not been processed!");
         
-        if(validity_check() == -1)
+    if(validity_check(request) == -1)
             usage();
         
-        if(strncmp(request,"quit", (int)strlen(request)) == 0) {
-            exit_now = 2;
+    if(strncmp(request,"quit", (int)strlen(request)) == 0) {
             clean_up();
             exit(0);
         }
     
-        if(validity_check() == 0)
-            ntkd_request();
+    if(validity_check(request) == 0)
+            ntkd_request(request);
         
-        if(validity_check() == 1)
+    if(validity_check(request) == 1)
             usage();
         
-        if(validity_check() == 2)
-            system("ntkd -k");
+    if(validity_check(request) == 2)
+            /*system("ntkd -k");*/
+        printf("");
         
-        if(validity_check() == 3) {
+    if(validity_check(request) == 3) {
             printf("%s", VERSION_STR);
-            ntkd_request();
+            ntkd_request(request);
         }
 
-        if(validity_check() == 4)
-            console_uptime();
-    }    
+    if(validity_check(request) == 4)
+            console_uptime();  
 }
 
 int main(void) {
-
-    char request_buf[16];
     
-    printf("\n>");
-    
-    fgets(request_buf, 16, stdin);
-    
-    printf("uhm: %s", request_buf);
-    
-    sendrecv = 0;
-    
-    /*request = "null";*/
-    
-    time(&rawtime);
+    /*time(&rawtime);
     
     timeinfo = localtime(&rawtime);
     
@@ -199,9 +180,32 @@ int main(void) {
     
     opensocket();
     
-    printf("This is the Netsukuku Console, Please type 'help' for more information.\n");
- 
-    console();
+    printf("This is the Netsukuku Console, Please type 'help' for more information.\n");*/
+    
+    char *request;
+    
+    int exit_now;
+    
+    exit_now = 1;
+    
+    while(exit_now == 1) {
+    
+    printf("\n>");
+        
+    fgets(request, 16, stdin);
+    
+    perror("fgets failed");
+    
+    fflush(stdin);
+    
+    printf("%s", request);
+    
+    request[strlen(request)-1] = '\0';
+    
+    printf("%s", request);
+    
+    /*console(request);*/
+    }
     
  return 0;
 }
