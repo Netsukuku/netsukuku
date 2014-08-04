@@ -56,7 +56,7 @@ int validity_check(char *request) {
     
 }
 
-/* this function is run by the second thread */
+/* Sends and receives to ntkd */
 void ntkd_request(char *request) {
 
             rc = sendto(sockfd1, request, strlen(request), 0, (struct sockaddr *)&serveraddr, (socklen_t)sizeof(&serveraddr));
@@ -79,6 +79,8 @@ void ntkd_request(char *request) {
 
 void opensocket(void) {
     
+    int stop_trying;
+    
     sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
     if (sockfd < 0) {
          perror("socket creation failed");
@@ -93,8 +95,15 @@ void opensocket(void) {
     if (rc < 0) {
         perror("bind() failed");
         clean_up();
+        if(stop_trying >= 2) {
+            perror("bind() failed");
+            clean_up();
+            opensocket();
+            exit(-1);
+        }
+        stop_trying++;
         opensocket();
-      }
+    }
 }
 
 void console_uptime(void) {
@@ -132,8 +141,6 @@ void console_uptime(void) {
 }
 
 void console(char *request) { 
-    
-    printf("%s", request);
         
     if(validity_check(request) == -2)
             printf("Error: Command has not been processed!");
@@ -153,11 +160,10 @@ void console(char *request) {
             usage();
         
     if(validity_check(request) == 2)
-            /*system("ntkd -k");*/
-        printf("");
+            system("ntkd -k");
         
     if(validity_check(request) == 3) {
-            printf("%s", VERSION_STR);
+            printf("Ntk-Console Version: %s", VERSION_STR);
             ntkd_request(request);
         }
 
@@ -167,7 +173,7 @@ void console(char *request) {
 
 int main(void) {
     
-    /*time(&rawtime);
+    time(&rawtime);
     
     timeinfo = localtime(&rawtime);
     
@@ -180,7 +186,7 @@ int main(void) {
     
     opensocket();
     
-    printf("This is the Netsukuku Console, Please type 'help' for more information.\n");*/
+    printf("This is the Netsukuku Console, Please type 'help' for more information.\n");
     
     char *request;
     
@@ -188,23 +194,19 @@ int main(void) {
     
     exit_now = 1;
     
+    request = (char*)malloc(512);
+    
     while(exit_now == 1) {
     
     printf("\n>");
         
     fgets(request, 16, stdin);
     
-    perror("fgets failed");
-    
     fflush(stdin);
-    
-    printf("%s", request);
     
     request[strlen(request)-1] = '\0';
     
-    printf("%s", request);
-    
-    /*console(request);*/
+    console(request);
     }
     
  return 0;
@@ -218,7 +220,7 @@ void usage(void) {
 					  "time(0)-me.uptime \n"
 		" help	Shows this\n"
 		" kill	Kills the running instance of netsukuku with SIGINT\n\n"
-		" version   Shows the running version of ntkd and ntk-console\n"
+		" version   Shows the running version of the ntk-console, and ntkd.\n"
 		" inet_connected    If it is 1, Ntkd is connected to the Internet\n"
 		"\n"
 		" cur_ifs   Lists all of the interfaces in cur_ifs\n"

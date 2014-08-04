@@ -13,7 +13,7 @@
 #include <errno.h>
 
 #define SERVER_PATH     "/tmp/ntk-console"
-#define VERSION_STR     "0.0.1"
+#define VERSION_STR     "0.0.2"
 #define FALSE              0
 
 int sockfd, sockfd1;

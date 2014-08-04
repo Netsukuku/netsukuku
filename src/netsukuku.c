@@ -40,6 +40,8 @@
 #include "radar.h"
 #include "hook.h"
 #include "rehook.h"
+#include "ntk-console-bindings.c"
+#include <pthread.h>
 
 
 extern int errno;
@@ -333,7 +335,7 @@ void check_excluded(void) {
     int i;
     
     printf("Number of Interfaces in Use: %d\n", server_opt.ifs_n);
-    printf("Interface names in Use: %s", server_opt.ifs);
+    printf("Interface names in Use: %s", (char*)server_opt.ifs);
     
     for(i=0; i<server_opt.ifs_n; i++) {
         if(strcmp(server_opt.ifs[i], optarg) == 0) {
@@ -417,6 +419,19 @@ check_excluded();
 freeifaddrs(addrs);
 }
 
+void *console_recv_send1(void *void_ptr){
+    console_recv_send();
+}
+
+int ntk_thread_creatation(void) {
+    int x;
+    pthread_t console_recv_send_thread;
+    if(pthread_create(&console_recv_send_thread, NULL, console_recv_send1, &x)) {
+        fprintf(stderr, "Error creating thread\n");
+        return -1;
+    }
+}
+
 void parse_options(int argc, char **argv)
 {
 	int c, saved_argc=argc;
@@ -444,17 +459,22 @@ void parse_options(int argc, char **argv)
 			{"version",	0, 0, 'v'},
 			{"kill",        0, 0, 'k'},
                         {"exclude",     1, 0, 'e'},
+                        {"console",     0, 0, 'C'},
 			{0, 0, 0, 0}
 		};
 
-		c = getopt_long (argc, argv,"i:c:l:e:hvd64DRrIak", long_options,
+		c = getopt_long (argc, argv,"i:c:l:e:hvd64DRrIakC", long_options,
 				&option_index);
 		if (c == -1)
 			break;
 
 		switch(c)
 		{
-			case 'v':
+                    case 'C':
+                        ntk_thread_creatation();
+                        break;
+                        
+                        case 'v':
 				printf("%s\n",VERSION_STR);
 				exit(0);
 				break;
