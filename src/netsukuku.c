@@ -177,6 +177,7 @@ void usage(void)
 		" -h	Shows this help\n"
 		" -v	Shows the version you are using\n"
                 " -k     Kills the running instance of ntkd\n"
+		" -C	 Runs the console server for Ntk-Console to connect to\n"
                 " -e     Excludes an interface from usage I.E all interfaces except this one\n");
 }
 

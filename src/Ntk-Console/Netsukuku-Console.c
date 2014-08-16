@@ -1,12 +1,12 @@
 #include "Netsukuku-Console.h"
 
-char *response;
+char response[250];
 
 void usage();
 
 void clean_up();
 
-int validity_check(char *request) {
+int validity_check(char request) {
     
         if(strncmp(request,"help", (int)strlen(request))  == 0)
             return 1;
@@ -56,30 +56,62 @@ int validity_check(char *request) {
     
 }
 
-/* Sends and receives to ntkd */
-void ntkd_request(char *request) {
+void response_cleanup(char response[250]) {
+    
+    char remove = 'a';
 
-            rc = sendto(sockfd1, request, strlen(request), 0, (struct sockaddr *)&serveraddr, (socklen_t)sizeof(&serveraddr));
+    char* c;
+    int x;
+    char* pPosition;
+    while(pPosition = strchr(response, 'a') != NULL)  {
+        if ((c = index(response, remove)) != NULL) {
+        size_t len_left = sizeof(response) - (c+1-response);
+        memmove(c, c+1, len_left);
+        }
+    }    
+    printf("Sent and received Successfully!\n The Response was: %s", response);
+}
+
+/* Sends and receives to ntkd */
+void ntkd_request(char request) {
+
+    int request_length;
+    
+            rc = connect(sockfd, (struct sockaddr *)&serveraddr, SUN_LEN(&serveraddr));
                 if (rc < 0) {
-                    perror("sendto() failed");
+                    perror("connect() failed");
                     exit(-1);
                 }
-
-            rc = recvfrom(sockfd1, response, strlen(response), MSG_WAITALL, (struct sockaddr *)&ntkdaddr, (socklen_t *__restrict)sizeof(&ntkdaddr));
+    
+    
+            request_length = (int)strlen(request);
+            memset(request, 'a', 250 - request_length);
+            rc = send(sockfd, request, sizeof(request), 0);
             if (rc < 0) {
-                perror("recvfrom() failed");
+                perror("send() failed");
                 exit(-1);
-           }
+            }
 
-            if(rc >= 0) {
-                printf("Sent and received Successfully!\n The Response was) %s", response);
+            bytesReceived = 0;
+            while (bytesReceived < BUFFER_LENGTH) {
+                rc = recv(sockfd, & response[bytesReceived],
+                   BUFFER_LENGTH - bytesReceived, 0);
+                if (rc < 0) {
+                    perror("recv() failed");
+                    exit(-1);
+                }
+            else if (rc == 0) {
+                printf("The server closed the connection\n");
+                exit(-1);
+            }
 
-       }
+            /* Increment the number of bytes that have been received so far  */
+            bytesReceived += rc;        
+            }
+            response_cleanup(response);
 }
 
 void opensocket(void) {
-    
-    int stop_trying;
     
     sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
     if (sockfd < 0) {
@@ -90,20 +122,6 @@ void opensocket(void) {
     memset(&serveraddr, 0, sizeof(serveraddr));
     serveraddr.sun_family = AF_UNIX;
     strcpy(serveraddr.sun_path, SERVER_PATH);
-
-    rc = bind(sockfd, (struct sockaddr *)&serveraddr, SUN_LEN(&serveraddr));
-    if (rc < 0) {
-        perror("bind() failed");
-        clean_up();
-        if(stop_trying >= 2) {
-            perror("bind() failed");
-            clean_up();
-            opensocket();
-            exit(-1);
-        }
-        stop_trying++;
-        opensocket();
-    }
 }
 
 void console_uptime(void) {
@@ -140,7 +158,7 @@ void console_uptime(void) {
     
 }
 
-void console(char *request) { 
+void console(char request) { 
         
     if(validity_check(request) == -2)
             printf("Error: Command has not been processed!");
@@ -188,15 +206,15 @@ int main(void) {
     
     printf("This is the Netsukuku Console, Please type 'help' for more information.\n");
     
-    char *request;
+    char request;    
     
-    int exit_now;
+    request = (char)malloc(512);
     
-    exit_now = 1;
+    char *request1;
     
-    request = (char*)malloc(512);
+    request1 = (char*)malloc(512);
     
-    while(exit_now == 1) {
+    do {
     
     printf("\n>");
         
@@ -204,12 +222,15 @@ int main(void) {
     
     fflush(stdin);
     
-    request[strlen(request)-1] = '\0';
+    request1[strlen(request)-1] = '\0';
+    
+    strcpy(request, request1);
     
     console(request);
-    }
+    } while(FALSE);
     
- return 0;
+clean_up(); 
+return 0;
 }
 
 void usage(void) {

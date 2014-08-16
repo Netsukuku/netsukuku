@@ -13,13 +13,13 @@
 #include <errno.h>
 
 #define SERVER_PATH     "/tmp/ntk-console"
+#define BUFFER_LENGTH    250
 #define VERSION_STR     "0.0.2"
 #define FALSE              0
 
-int sockfd, sockfd1;
+int sockfd = -1, sockfd1 = -1;
 struct sockaddr_un serveraddr;
-struct sockaddr ntkdaddr;
-int rc;
+int rc, bytesReceived;
 
 time_t rawtime;
 struct tm *timeinfo;
