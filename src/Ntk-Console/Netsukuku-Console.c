@@ -224,7 +224,7 @@ int main(void) {
     
     request = (char *)malloc(BUFFER_LENGTH);
     
-    request1 = (char*)malloc(BUFFER_LENGTH);
+    request1 = (char)malloc(BUFFER_LENGTH);
     
     do {
     
