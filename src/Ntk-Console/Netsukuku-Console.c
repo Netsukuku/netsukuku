@@ -64,9 +64,8 @@ void response_cleanup(char response[BUFFER_LENGTH]) {
     char remove = 'a';
 
     char* c;
-    int x;
     char* pPosition;
-    while(pPosition = strchr(response, 'a') != NULL)  {
+    while((pPosition = strchr(response, 'a')) != NULL)  {
         if ((c = index(response, remove)) != NULL) {
         size_t len_left = sizeof(response) - (c+1-response);
         memmove(c, c+1, len_left);
