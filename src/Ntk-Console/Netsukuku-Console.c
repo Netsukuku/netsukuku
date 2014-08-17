@@ -23,7 +23,7 @@ int validity_check(char *request) {
         else if(strncmp(request,"console_uptime", (int)strlen(request))  == 0)
             return 4;
         
-        else if(strlen(request) > 250)
+        else if(strlen(request) > BUFFER_LENGTH)
             return 5;
         
         else if(strncmp(request,"inet_connected", (int)strlen(request))  == 0)
@@ -70,7 +70,7 @@ void response_cleanup(char response[BUFFER_LENGTH]) {
         size_t len_left = sizeof(response) - (c+1-response);
         memmove(c, c+1, len_left);
         }
-    }    
+    }
     printf("Sent and received Successfully!\n The Response was: %s", response);
 }
 
@@ -218,9 +218,13 @@ int main(void) {
     
     printf("This is the Netsukuku Console, Please type 'help' for more information.\n");
     
-    char * request;    
+    char * request;
+
+    char *request1;
     
     request = (char *)malloc(BUFFER_LENGTH);
+    
+    request1 = (char*)malloc(BUFFER_LENGTH);
     
     do {
     
@@ -229,6 +233,8 @@ int main(void) {
     fgets(request, 16, stdin);
     
     fflush(stdin);
+    
+    strcpy(request, request1);
     
     console(request);
     } while(FALSE);
