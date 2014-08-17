@@ -78,7 +78,7 @@ void opensocket(void) {
 
 /* Sends a parsed response to the ntk console client. */
 
-void send_response(char response[REQUEST_LENGTH]) {
+void send_response(char response[REQUEST_LENGTH], ...) {
     int response_length;
     
     response_length = (int)strlen(response);
