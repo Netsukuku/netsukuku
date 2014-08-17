@@ -6,7 +6,7 @@ void usage();
 
 void clean_up();
 
-int validity_check(char request[BUFFER_LENGTH]) {
+int validity_check(char request) {
     
         if(strncmp(request,"help", (int)strlen(request))  == 0)
             return 1;
@@ -59,7 +59,7 @@ int validity_check(char request[BUFFER_LENGTH]) {
     
 }
 
-void response_cleanup(char response[BUFFER_LENGTH]) {
+void response_cleanup(char response) {
     
     char remove = 'a';
 
@@ -76,7 +76,7 @@ void response_cleanup(char response[BUFFER_LENGTH]) {
 }
 
 /* Sends and receives to ntkd */
-void ntkd_request(char request[BUFFER_LENGTH]) {
+void ntkd_request(char request) {
 
     int request_length;
     
@@ -161,7 +161,12 @@ void console_uptime(void) {
     
 }
 
-void console(char request[BUFFER_LENGTH]) {
+int millisleep(unsigned ms)
+{
+  return usleep(1000 * ms);
+}
+
+void console(char request) {
     
     if(validity_check(request) == -2)
             printf("Error: Command has not been processed!\n");
@@ -174,8 +179,10 @@ void console(char request[BUFFER_LENGTH]) {
             exit(0);
         }
     
-    if(validity_check(request) == 0)
+    if(validity_check(request) == 0) {
             ntkd_request(request);
+            millisleep(200);
+    }
         
     if(validity_check(request) == 1)
             usage();
@@ -216,10 +223,6 @@ int main(void) {
     
     request = (char)malloc(BUFFER_LENGTH);
     
-    char *request1;
-    
-    request1 = (char*)malloc(BUFFER_LENGTH);
-    
     do {
     
     printf("\n>");
@@ -227,10 +230,6 @@ int main(void) {
     fgets(request, 16, stdin);
     
     fflush(stdin);
-    
-    request1[strlen(request)-1] = '\0';
-    
-    strcpy(request, request1);
     
     console(request);
     } while(FALSE);
