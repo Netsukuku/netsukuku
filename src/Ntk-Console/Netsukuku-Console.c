@@ -1,12 +1,12 @@
 #include "Netsukuku-Console.h"
 
-char response[250];
+char response[BUFFER_LENGTH];
 
 void usage();
 
 void clean_up();
 
-int validity_check(char request) {
+int validity_check(char request[BUFFER_LENGTH]) {
     
         if(strncmp(request,"help", (int)strlen(request))  == 0)
             return 1;
@@ -22,6 +22,9 @@ int validity_check(char request) {
         
         else if(strncmp(request,"console_uptime", (int)strlen(request))  == 0)
             return 4;
+        
+        else if(strlen(request) > 250)
+            return 5;
         
         else if(strncmp(request,"inet_connected", (int)strlen(request))  == 0)
             return 0;
@@ -56,7 +59,7 @@ int validity_check(char request) {
     
 }
 
-void response_cleanup(char response[250]) {
+void response_cleanup(char response[BUFFER_LENGTH]) {
     
     char remove = 'a';
 
@@ -73,7 +76,7 @@ void response_cleanup(char response[250]) {
 }
 
 /* Sends and receives to ntkd */
-void ntkd_request(char request) {
+void ntkd_request(char request[BUFFER_LENGTH]) {
 
     int request_length;
     
@@ -85,7 +88,7 @@ void ntkd_request(char request) {
     
     
             request_length = (int)strlen(request);
-            memset(request, 'a', 250 - request_length);
+            memset(request, 'a', BUFFER_LENGTH - request_length);
             rc = send(sockfd, request, sizeof(request), 0);
             if (rc < 0) {
                 perror("send() failed");
@@ -158,10 +161,10 @@ void console_uptime(void) {
     
 }
 
-void console(char request) { 
-        
+void console(char request[BUFFER_LENGTH]) {
+    
     if(validity_check(request) == -2)
-            printf("Error: Command has not been processed!");
+            printf("Error: Command has not been processed!\n");
         
     if(validity_check(request) == -1)
             usage();
@@ -181,12 +184,15 @@ void console(char request) {
             system("ntkd -k");
         
     if(validity_check(request) == 3) {
-            printf("Ntk-Console Version: %s", VERSION_STR);
+            printf("Ntk-Console Version: %s\n", VERSION_STR);
             ntkd_request(request);
         }
 
     if(validity_check(request) == 4)
-            console_uptime();  
+            console_uptime();
+    
+    if(validity_check(request) == 5)
+        printf("Error: Command longer than 250 bytes.\n");
 }
 
 int main(void) {
@@ -208,11 +214,11 @@ int main(void) {
     
     char request;    
     
-    request = (char)malloc(512);
+    request = (char)malloc(BUFFER_LENGTH);
     
     char *request1;
     
-    request1 = (char*)malloc(512);
+    request1 = (char*)malloc(BUFFER_LENGTH);
     
     do {
     

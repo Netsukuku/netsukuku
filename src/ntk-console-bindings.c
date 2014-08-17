@@ -78,11 +78,11 @@ void opensocket(void) {
 
 /* Sends a parsed response to the ntk console client. */
 
-void send_response(char response) {
+void send_response(char response[REQUEST_LENGTH]) {
     int response_length;
     
     response_length = (int)strlen(response);
-    memset(response, 'a', 250 - response_length);
+    memset(response, 'a', REQUEST_LENGTH - response_length);
     rc = send(sockfd_2, response, sizeof(response), 0);
         if (rc < 0){
             perror("send() failed");
@@ -91,7 +91,7 @@ void send_response(char response) {
     
 }
 
-void request_cleanup(char unprocessed_request) {
+void request_cleanup(char unprocessed_request[REQUEST_LENGTH]) {
     
     char remove = 'a';
 
@@ -114,7 +114,7 @@ void request_cleanup(char unprocessed_request) {
  * to data from ntkd structures such as: me 
  * into a response for the ntk console client. */
 
-int request_processing(char unprocessed_request) {
+int request_processing(char unprocessed_request[REQUEST_LENGTH]) {
     
         if(strncmp(unprocessed_request,"uptime", (int)strlen(unprocessed_request))  == 0)
             send_response((char)time(0)-me.uptime);
