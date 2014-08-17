@@ -168,7 +168,7 @@ void ntkd_request(void) {
         printf("Ready for client connect().\n");
       
         sockfd_2 = accept(sockfd_1, NULL, NULL);
-            if (sd2 < 0) {
+            if (sockfd_2 < 0) {
                 perror("accept() failed");
                 exit(-1);
             }
