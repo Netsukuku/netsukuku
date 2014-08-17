@@ -6,7 +6,7 @@ void usage();
 
 void clean_up();
 
-int validity_check(char request) {
+int validity_check(char *request) {
     
         if(strncmp(request,"help", (int)strlen(request))  == 0)
             return 1;
@@ -76,7 +76,7 @@ void response_cleanup(char response[BUFFER_LENGTH]) {
 }
 
 /* Sends and receives to ntkd */
-void ntkd_request(char request) {
+void ntkd_request(char *request) {
 
     int request_length;
     
@@ -166,7 +166,7 @@ int millisleep(unsigned ms)
   return usleep(1000 * ms);
 }
 
-void console(char request) {
+void console(char * request) {
     
     if(validity_check(request) == -2)
             printf("Error: Command has not been processed!\n");
@@ -219,9 +219,9 @@ int main(void) {
     
     printf("This is the Netsukuku Console, Please type 'help' for more information.\n");
     
-    char request;    
+    char * request;    
     
-    request = (char)malloc(BUFFER_LENGTH);
+    request = (char *)malloc(BUFFER_LENGTH);
     
     do {
     
