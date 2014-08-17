@@ -201,3 +201,8 @@ void ntkd_request(void) {
         clean_up();
         
 }
+
+void console_recv_send(void) {
+    opensocket();
+    ntkd_request();
+}
