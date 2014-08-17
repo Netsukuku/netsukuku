@@ -59,19 +59,7 @@ int validity_check(char request) {
     
 }
 
-void response_conversion(char response) {
-    
-    char *response1;
-    
-    response1 = (char*)malloc(512);
-    
-    strcpy(response, response1);
-    
-    response_cleanup(response1);
-    
-}
-
-void response_cleanup(char *response[BUFFER_LENGTH]) {
+void response_cleanup(char response[BUFFER_LENGTH]) {
     
     char remove = 'a';
 
@@ -123,7 +111,7 @@ void ntkd_request(char request) {
             /* Increment the number of bytes that have been received so far  */
             bytesReceived += rc;        
             }
-            response_conversion(response);
+            response_cleanup(response);
 }
 
 void opensocket(void) {
