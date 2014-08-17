@@ -220,7 +220,7 @@ int main(void) {
     
     char * request;
 
-    char *request1;
+    char request1;
     
     request = (char *)malloc(BUFFER_LENGTH);
     
