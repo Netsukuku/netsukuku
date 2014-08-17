@@ -234,7 +234,7 @@ int main(void) {
     
     fflush(stdin);
     
-    strcpy(request, request1);
+    request = request1;
     
     console(request);
     } while(FALSE);
