@@ -370,11 +370,13 @@ void check_excluded(void) {
  * returns 0 on success, -1 on error, And 1 if it has already been run.
 */
 
-int exclude_interface() {
+void
+exclude_interface()
+{
     
                       if(prevent_duplication == 1) {
                           check_excluded();
-                          return 1;
+                          return;
                       }
     
                       char *ifs = "null1";
@@ -402,7 +404,7 @@ int exclude_interface() {
                             if(strcmp(old_tmp, ifs) == 0) {
                                 printf("Loop finished: %s\n", ifs);
                                 check_excluded();
-                                return 0;
+                                return;
                             }
                             
                             tmp = tmp->ifa_next;
