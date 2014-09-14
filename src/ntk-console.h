@@ -43,7 +43,7 @@ int i;
 void usage();
 void clean_up();
 
-void opensocket();
+int opensocket();
 void closesocket();
 
 

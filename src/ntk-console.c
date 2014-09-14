@@ -53,7 +53,7 @@ const struct supported_commands {
 
 
 command_t
-command_parse(char *request)
+command_parse(char* request)
 {
 	if (strlen(request) > CONSOLE_BUFFER_LENGTH) {
 		printf("Error: Command longer than 250 bytes.\n");
@@ -98,42 +98,13 @@ request_receive(int sock, char message[], int max)
 }
 
 
-/* Sends and receives to ntkd */
-void
-ntkd_request(command_t command)
-{
-	if (sockfd <= 0) {
-		perror("ntkd connection closed unexpectedly!\n");
-		exit(-1);
-	}
-
-	cmd_packet_t packetOut;
-	packetOut.command = command;
-
-	rc = send(sockfd, &packetOut, sizeof(packetOut), 0);
-	if (rc < sizeof(packetOut)) {
-		perror("send() failed");
-		exit(-1);
-	}
-
-	char response[CONSOLE_BUFFER_LENGTH];
-	request_receive(sockfd, response, CONSOLE_BUFFER_LENGTH);
-	if (rc < 0) {
-		perror("recv() failed");
-		exit(-1);
-	}
-
-	printf("Response: %s\n", response);
-}
-
-
-void
+int
 opensocket(void)
 {
 	sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
 	if (sockfd < 0) {
-		 perror("socket creation failed");
-		 exit(-1);
+		perror("socket creation failed");
+		return -1;
 	}
 	
 	memset(&serveraddr, 0, sizeof(serveraddr));
@@ -143,10 +114,9 @@ opensocket(void)
 	rc = connect(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
 	if (rc < 0) {
 		perror("connect() failed");
-		printf("Unable to connect to ntk daemon console.\n");
-		exit(-1);
+		return -1;
 	}
-	printf("ntkd console connection opened successfully.\n");
+	return 0;
 }
 
 
@@ -160,8 +130,37 @@ closesocket(void)
 
 	if (sockfd >= 0)
 		close(sockfd);
+}
 
-	printf("ntkd console connection closed.\n");
+
+/* Sends and receives to ntkd */
+void
+ntkd_request(command_t command)
+{
+	if (opensocket() < 0) {
+		printf("Unable to connect to ntk daemon console.\n");
+		return;
+	}
+
+	cmd_packet_t packetOut;
+	packetOut.command = command;
+
+	rc = send(sockfd, &packetOut, sizeof(packetOut), 0);
+	if (rc < sizeof(packetOut)) {
+		perror("send() failed");
+		exit(-1);
+	}
+
+	char* response = (char*)malloc(CONSOLE_BUFFER_LENGTH);
+	request_receive(sockfd, response, CONSOLE_BUFFER_LENGTH);
+	if (rc < 0) {
+		perror("recv() failed");
+		exit(-1);
+	}
+
+	printf("Response: '%s'\n", response);
+	free(response);
+	closesocket();
 }
 
 
@@ -263,8 +262,6 @@ main(void)
 	uptime_month = timeinfo->tm_mon;
 	uptime_year = timeinfo->tm_year;
 	
-	opensocket();
-
 	printf("This is the Netsukuku Console. Please type 'help' for more information.\n");
 	for(;;) {
 		char* request = (char*)malloc(CONSOLE_BUFFER_LENGTH);
@@ -273,13 +270,15 @@ main(void)
 		fflush(stdin);
 		console(request);
 		free(request);
+		closesocket();
 	}
-	closesocket();
 
 	return 0;
 }
 
-void usage(void) {
+void
+usage(void)
+{
 	printf("Usage:\n");
 	for (int i = 0; i < sizeof(kSupportedCommands)
 		/ sizeof(kSupportedCommands[0]); i++) {
