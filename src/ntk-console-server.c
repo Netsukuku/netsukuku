@@ -207,7 +207,7 @@ wait_session(int server_fd)
 void*
 console_recv_send(void *arg)
 {
-	char* uargv;
+	char* uargv = NULL;
 
 	opensocket();
 	wait_session(serverfd);
