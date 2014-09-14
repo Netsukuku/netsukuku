@@ -1,28 +1,10 @@
+
 #include "Netsukuku-Console.h"
 
+#include <unistd.h>
+
+
 char response[BUFFER_LENGTH];
-
-void usage();
-
-void clean_up();
-
-
-typedef enum {
-	COMMAND_HELP = 0x100,
-	COMMAND_UPTIME,
-	COMMAND_KILL,
-	COMMAND_VERSION,
-	COMMAND_INETCONN,
-	COMMAND_CURIFS,
-	COMMAND_CURIFSCT,
-	COMMAND_CURQSPNID,
-	COMMAND_CURIP,
-	COMMAND_CURNODE,
-	COMMAND_IFS,
-	COMMAND_IFSCT,
-	COMMAND_QUIT,
-	COMMAND_CONSUPTIME,
-} command_t;
 
 
 const struct supported_commands {
@@ -69,21 +51,28 @@ command_parse(char *request)
 }
 
 
-void
-response_cleanup(char response[BUFFER_LENGTH])
+static int
+request_receive(int sock, char message[], int max)
 {
-	char remove = 'a';
-
-	char* c;
-	char* pPosition;
-	while((pPosition = strchr(response, 'a')) != NULL)  {
-		if ((c = index(response, remove)) != NULL) {
-		size_t len_left = sizeof(response) - (c+1-response);
-		memmove(c, c+1, len_left);
-		}
+	int total = 0;
+	const int bsize = 1024;
+	char buffer[bsize+1];
+	int read = bsize;
+	
+	message[0] = 0; // initialize for strcat()
+	
+	while(read == bsize) {
+		read = recv(sock, buffer, bsize, 0);
+		if(read < 0)
+		    return -1; // error, bail out
+		total += read;
+		if(total > max)
+		    return -2; // overflow
+		buffer[read] = 0;
+		strcat(message, buffer);
 	}
 
-	printf("Sent and received Successfully!\n The Response was: %s", response);
+    return total;
 }
 
 
@@ -91,37 +80,28 @@ response_cleanup(char response[BUFFER_LENGTH])
 void
 ntkd_request(char *request)
 {
-	rc = connect(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
-	if (rc < 0) {
-		perror("connect() failed");
+	if (sockfd <= 0) {
+		perror("ntkd connection closed unexpectedly!\n");
 		exit(-1);
 	}
 
-	int request_length = strlen(request);
-	memset(request, 'a', BUFFER_LENGTH - request_length);
-	rc = send(sockfd, request, sizeof(request), 0);
+	int request_length = strlen(request) - 1;
+	request[request_length] = '\0';
+
+	printf("request: '%s'\n", request);
+	rc = send(sockfd, request, request_length, 0);
 	if (rc < 0) {
 		perror("send() failed");
 		exit(-1);
 	}
 
-	bytesReceived = 0;
-	while (bytesReceived < BUFFER_LENGTH) {
-		rc = recv(sockfd, & response[bytesReceived],
-		   BUFFER_LENGTH - bytesReceived, 0);
-		if (rc < 0) {
-			perror("recv() failed");
-			exit(-1);
-		}
-	else if (rc == 0) {
-		printf("The server closed the connection\n");
+	request_receive(sockfd, response, BUFFER_LENGTH);
+	if (rc < 0) {
+		perror("recv() failed");
 		exit(-1);
 	}
 
-	/* Increment the number of bytes that have been received so far  */
-	bytesReceived += rc;		
-	}
-	response_cleanup(response);
+	printf("%s\n", response);
 }
 
 
@@ -137,6 +117,28 @@ opensocket(void)
 	memset(&serveraddr, 0, sizeof(serveraddr));
 	serveraddr.sun_family = AF_UNIX;
 	strcpy(serveraddr.sun_path, SERVER_PATH);
+
+	rc = connect(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
+	if (rc < 0) {
+		perror("connect() failed");
+		exit(-1);
+	}
+	printf("ntkd console connection opened successfully.\n");
+}
+
+
+void
+closesocket(void)
+{
+    const int optVal = 1;
+    const socklen_t optLen = sizeof(optVal);
+
+    setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void*) &optVal, optLen);
+
+	if (sockfd >= 0)
+		close(sockfd);
+
+	printf("ntkd console connection closed.\n");
 }
 
 
@@ -175,10 +177,10 @@ console_uptime(void)
 }
 
 
-int
+static void
 millisleep(unsigned ms)
 {
-  return usleep(1000 * ms);
+	usleep(1000 * ms);
 }
 
 
@@ -189,7 +191,7 @@ console(char* request)
 
 	switch (commandID) {
 		case COMMAND_QUIT:
-			clean_up();
+			closesocket();
 			exit(0);
 		case COMMAND_UPTIME:
 		case COMMAND_INETCONN:
@@ -211,6 +213,7 @@ console(char* request)
 			console_uptime();
 			break;
 		case COMMAND_KILL:
+			closesocket();
 			system("ntkd -k");
 			break;
 		case COMMAND_HELP:
@@ -234,61 +237,28 @@ main(void)
 	uptime_month = timeinfo->tm_mon;
 	uptime_year = timeinfo->tm_year;
 	
-	opensocket();
-	
 	printf("This is the Netsukuku Console, Please type 'help' for more information.\n");
 	
 	char* request = (char*)malloc(BUFFER_LENGTH);
 	
+	opensocket();
 	do {
-		printf("\n>");
+		printf("\n> ");
 		fgets(request, 16, stdin);
 		fflush(stdin);
 		console(request);
-	} while(FALSE);
+		memset(request, 0, BUFFER_LENGTH);
+	} while(TRUE);
+	closesocket();
 	
 	clean_up(); 
 	return 0;
 }
 
 void usage(void) {
-	
-		printf("Usage\n"
-		"  uptime         Returns the time when ntkd finished the hooking,\n" 
-		"                 to get the the actual uptime just do)\n"
-		"                 time(0)-me.uptime \n"
-		"  help           Shows this\n"
-		"  kill           Kills the running instance of netsukuku with SIGINT\n\n"
-		"  version        Shows the running version of the ntk-console, and ntkd.\n"
-		"  inet_connected If it is 1, Ntkd is connected to the Internet\n"
-		" \n"
-		"  cur_ifs        Lists all of the interfaces in cur_ifs\n"
-		"  cur_ifs_n      Lists the number of interfaces present in `cur_ifs'\n"
-		"  cur_qspn_id    The current qspn_id we are processing. "
-		"                 It is cur_qspn_id[levels] big\n"
-		"  cur_ip         Current IP address\n"
-		" \n"
-		"  cur_node       Current Node\n"
-		"  ifs            Lists all of the interfaces in server_opt.ifs\n"
-		"  ifs_n          Lists the number of interfaces present in server_opt.ifs\n"
-		"  quit           Exits this program\n"
-		"  console_uptime Gets the uptime of this console\n");
-	
-}
-
-void clean_up(void)
-{
-	const int optVal = 1;
-	const socklen_t optLen = sizeof(optVal);
-	
-	setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void*) &optVal, optLen);
-	setsockopt(sockfd1, SOL_SOCKET, SO_REUSEADDR, (void*) &optVal, optLen);
-	
-	if (sockfd != -1)
-		close(sockfd);
-
-	if (sockfd1 != -1)
-		close(sockfd1);
-   
-	unlink(SERVER_PATH);
+	printf("Usage:\n");
+	for (int i = 0; i < sizeof(kSupportedCommands)
+		/ sizeof(kSupportedCommands[0]); i++) {
+		printf("  %16s - %s\n", kSupportedCommands[i].command, kSupportedCommands[i].help);
+	}
 }
