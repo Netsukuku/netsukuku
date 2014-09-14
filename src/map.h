@@ -19,6 +19,7 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "includes.h"
 #include "inet.h"
 
 /* Generic map defines */

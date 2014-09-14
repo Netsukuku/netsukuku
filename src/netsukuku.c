@@ -40,7 +40,7 @@
 #include "radar.h"
 #include "hook.h"
 #include "rehook.h"
-#include "ntk-console-bindings.c"
+#include "ntk-console-server.h"
 #include <pthread.h>
 
 
@@ -420,16 +420,14 @@ check_excluded();
 freeifaddrs(addrs);
 }
 
-void *console_recv_send1(void *void_ptr){
-    console_recv_send();
-}
 
-int ntk_thread_creatation(void) {
+void
+ntk_thread_creatation(void) {
     int x;
     pthread_t console_recv_send_thread;
-    if(pthread_create(&console_recv_send_thread, NULL, console_recv_send1, &x)) {
+    if(pthread_create(&console_recv_send_thread, NULL, &console_recv_send, &x)) {
         fprintf(stderr, "Error creating thread\n");
-        return -1;
+        exit(-1);
     }
 }
 

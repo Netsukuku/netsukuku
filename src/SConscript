@@ -35,7 +35,8 @@ sources_netsukuku = Split("""accept.c llist.c ipv6-gmp.c inet.c request.c map.c
 		   dnslib.c andns.c andns_net.c andns_snsd.c
 		   ll_map.c libnetlink.c if.c krnl_route.c krnl_rule.c
 		   iptunnel.c route.c conf.c dns_wrapper.c igs.c mark.c 
-		   libiptc/libip4tc.c libping.c netsukuku.c""") + sources_common
+		   libiptc/libip4tc.c libping.c ntk-console-server.c
+		   netsukuku.c""") + sources_common
 sources_ntkresolv = sources_common + Split("""andns_lib.c ntkresolv.c andns_net.c
 					      crypto.c snsd_cache.c inet.c
 					      ll_map.c libnetlink.c

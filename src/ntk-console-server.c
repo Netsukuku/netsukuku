@@ -3,6 +3,7 @@
 
 
 #include <utmp.h>
+#include <stdio.h>
 #include <sys/un.h>
 #include <unistd.h>
 
@@ -203,9 +204,13 @@ wait_session(int server_fd)
 }
 
 
-void
-console_recv_send(void)
+void*
+console_recv_send(void *arg)
 {
+	char* uargv;
+
 	opensocket();
 	wait_session(serverfd);
+
+	return uargv;
 }
