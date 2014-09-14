@@ -85,7 +85,7 @@ void swap_array(int nmemb, size_t nmemb_sz, void *src, void *dst);
 void swap_ints(int nmemb, unsigned int *x, unsigned int *y) ;
 void swap_shorts(int nmemb, unsigned short *x, unsigned short *y);
 
-inline int rand_range(int _min, int _max);
+int rand_range(int _min, int _max);
 void xsrand(void);
 
 char *last_token(char *string, char tok);
