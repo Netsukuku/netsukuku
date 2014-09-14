@@ -905,8 +905,6 @@ int new_bcast_conn(inet_prefix *host, short port, int dev_idx)
 ssize_t inet_recv(int s, void *buf, size_t len, int flags)
 {
 	ssize_t err;
-	fd_set fdset;
-	int ret;
 
 	if((err=recv(s, buf, len, flags))==-1) {
 		switch(errno)
@@ -951,8 +949,6 @@ ssize_t inet_recv_timeout(int s, void *buf, size_t len, int flags, u_int timeout
 ssize_t inet_recvfrom(int s, void *buf, size_t len, int flags, struct sockaddr *from, socklen_t *fromlen)
 {
 	ssize_t err;
-	fd_set fdset;
-	int ret;
 
 	if((err=recvfrom(s, buf, len, flags, from, fromlen)) < 0) {
 		switch(errno)
@@ -997,8 +993,6 @@ ssize_t inet_recvfrom_timeout(int s, void *buf, size_t len, int flags,
 ssize_t inet_send(int s, const void *msg, size_t len, int flags)
 {
 	ssize_t err;
-	fd_set fdset;
-	int ret;
 
 	if((err=send(s, msg, len, flags)) < 0) {
 		switch(errno)
@@ -1051,8 +1045,6 @@ ssize_t inet_sendto(int s, const void *msg, size_t len, int flags,
 		const struct sockaddr *to, socklen_t tolen)
 {
 	ssize_t err;
-	fd_set fdset;
-	int ret;
                                                         
 	if((err=sendto(s, msg, len, flags, to, tolen))==-1) {
 		error("sendto errno: %d err is: %d", errno, err);
@@ -1126,8 +1118,6 @@ ssize_t inet_sendto_timeout(int s, const void *msg, size_t len, int flags,
 ssize_t inet_sendfile(int out_fd, int in_fd, off_t *offset, size_t count)
 {
 	ssize_t err;
-	fd_set fdset;
-	int ret;
 
 	if((err=sendfile(out_fd, in_fd, offset, count))==-1)
 		error("inet_sendfile: Cannot sendfile(): %s", strerror(errno));
