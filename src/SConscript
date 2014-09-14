@@ -40,6 +40,7 @@ sources_ntkresolv = sources_common + Split("""andns_lib.c ntkresolv.c andns_net.
 					      crypto.c snsd_cache.c inet.c
 					      ll_map.c libnetlink.c
 					      err_errno.c""") 
+sources_ntkconsole = Split('ntk-console.c')
 
 libs = ['gmp', 'pthread', 'crypto', 'z']
 
@@ -153,8 +154,9 @@ build_config_files(env = env)
 ntkd 	= env.Program('ntkd', sources_netsukuku, LIBS = libs, CPPPATH = '.')
 qspn    = env.Program('qspn-empiric', sources_qspn, LIBS = libs, CPPPATH = '.')
 ntkresolv = env.Program('ntk-resolv', sources_ntkresolv, LIBS = libs, CPPPATH = '.')
+ntkconsole = env.Program('ntk-console', sources_ntkconsole, LIBS = libs, CPPPATH = '.', CFLAGS = '-std=c99')
 
-Default(ntkd, ntkresolv)
+Default(ntkd, ntkresolv, ntkconsole)
 
 
 #
@@ -171,6 +173,7 @@ idir_pid    = '$destdir' + '$PID_DIR'
 
 env.Install(idir_bin, [ntkd])
 env.Install(idir_bin, [ntkresolv])
+env.Install(idir_bin, [ntkconsole])
 env.Alias('install', [idir_bin, idir_conf])
 
 #Dirty hack ;( Why GetOption("install") doesn't work?

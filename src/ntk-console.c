@@ -1,5 +1,5 @@
 
-#include "Netsukuku-Console.h"
+#include "ntk-console.h"
 
 #include <unistd.h>
 
