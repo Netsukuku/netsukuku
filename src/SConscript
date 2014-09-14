@@ -18,6 +18,8 @@
 import sys
 import os
 
+Import("env")
+
 NTK_VERSION="0.0.9b"
 
 #
@@ -41,34 +43,6 @@ sources_ntkresolv = sources_common + Split("""andns_lib.c ntkresolv.c andns_net.
 
 libs = ['gmp', 'pthread', 'crypto', 'z']
 
-#
-#	Command line options and help
-#
-
-opts = Options('build.conf')
-opts.AddOptions(('CONF_DIR', """Directory where the Netsukuku configuration files will be installed""",
-				'/etc/netsukuku'),
-		('DATA_DIR', 'Directory to install data files',	
-				'/usr/share/netsukuku'),
-		('MAN_DIR',  'Where the manuals will be installed', 
-				'/usr/man'),
-		('BIN_DIR' , 'Directory to install the binaries',
-				'/usr/bin'),
-		('PID_DIR',  'Specify location of ntkd.pid file',
-				'/var/run'),
-		('destdir', 'SCons will copy all the files under destdir during installation',
-				'/'),
-		EnumOption('debug', 'build the debug code', 'no', 
-			allowed_values=('yes', 'no', '1', '0'), map={},
-			ignorecase=0),
-		EnumOption('static', 'build statically the binaries', 'no', 
-			allowed_values=('yes', 'no', '1', '0'), map={},
-			ignorecase=0))
-opts.Add('CC', 'The C compiler.')
-opts.Add('CXX', 'The C++ compiler.')
-
-env = Environment(options = opts, ENV = os.environ, CCFLAGS = ' -Wall')
-
 if ("yes" in env['debug']) or ("1" in env['debug']):
 	debug = 1
 	env.Append(CPPDEFINES={'DEBUG' : '${debug}'}, CCFLAGS = ' -ggdb -Wall', CXXFLAGS = '-g')
@@ -85,8 +59,6 @@ else:
 if (env['destdir'] == "/"):
 	env['destdir']=""
 
-opts.Save('build.conf', env)
-
 if os.path.exists("conf/netsukuku.conf") and env.GetOption('clean'):
 	Execute(Delete('conf/netsukuku.conf'))
 if os.path.exists("config.h") and env.GetOption('clean'):
@@ -94,15 +66,6 @@ if os.path.exists("config.h") and env.GetOption('clean'):
 if os.path.exists("config.log") and env.GetOption('clean'):
 	Execute(Delete('config.log'))
 	
-Help("""
-*** Usage
-      'scons' to build the ntkd binary,
-      'scons debug=yes' to build the debug version.
-      'scons install' to install it in the system.
-      
-*** General options
-""" + opts.GenerateHelpText(env))
-
 if ARGUMENTS.get('install'):
 		print "you aren't root"
 
@@ -145,10 +108,10 @@ if not os.path.exists("config.log") and not env.GetOption('clean'):
 
 def conf_build(target, source, env):
     conf_defines = {
-        "CONF_DIR": env["CONF_DIR"],
-	"DATA_DIR": env["DATA_DIR"],
-	"PID_DIR": env["PID_DIR"],
-	"VERSION": NTK_VERSION,
+		"CONF_DIR": env["CONF_DIR"],
+		"DATA_DIR": env["DATA_DIR"],
+		"PID_DIR": env["PID_DIR"],
+		"VERSION": NTK_VERSION,
         "debug": debug # this is an int.  1 for true, 0 for false
     }
 

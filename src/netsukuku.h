@@ -22,11 +22,11 @@
 #include "config.h"
 #include "igs.h"
 
-#define VERSION_STR				"NetsukukuD "PACKAGE_VERSION
+#define VERSION_STR				"NetsukukuD "VERSION
 
 #ifdef DEBUG
 #undef VERSION_STR
-#define VERSION_STR				"NetsukukuD "PACKAGE_VERSION" (debug)"
+#define VERSION_STR				"NetsukukuD "VERSION" (debug)"
 #endif
 
 /*
