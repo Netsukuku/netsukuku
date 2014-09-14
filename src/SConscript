@@ -151,10 +151,10 @@ build_config_files(env = env)
 #	Build
 #
 
-ntkd 	= env.Program('ntkd', sources_netsukuku, LIBS = libs, CPPPATH = '.')
-qspn    = env.Program('qspn-empiric', sources_qspn, LIBS = libs, CPPPATH = '.')
-ntkresolv = env.Program('ntk-resolv', sources_ntkresolv, LIBS = libs, CPPPATH = '.')
-ntkconsole = env.Program('ntk-console', sources_ntkconsole, LIBS = libs, CPPPATH = '.', CFLAGS = '-std=c99')
+ntkd 		= env.Program('ntkd', sources_netsukuku, LIBS = libs, CPPPATH = '.')
+qspn  		= env.Program('qspn-empiric', sources_qspn, LIBS = libs, CPPPATH = '.')
+ntkresolv 	= env.Program('ntk-resolv', sources_ntkresolv, LIBS = libs, CPPPATH = '.')
+ntkconsole 	= env.Program('ntk-console', sources_ntkconsole, LIBS = libs, CPPPATH = '.', CFLAGS = '-std=c99')
 
 Default(ntkd, ntkresolv, ntkconsole)
 

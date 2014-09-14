@@ -1,18 +1,14 @@
 /* Header files required for the console bindings
  * not included outside of this file. */
 
+
 #include <utmp.h>
 #include <sys/un.h>
 #include <unistd.h>
 
+#include "console.h"
 #include "netsukuku.h"
 
-/* Constants used for the console bindings. */
-
-#define SERVER_PATH	 "/tmp/ntk-console"
-#define REQUEST_LENGTH   250
-#define FALSE 			0
-#define TRUE 			1
 
 /* Variable and structure defintions, serverfd refers to socket file descriptor
  * length refers to the required length of the requests that will be sent.
@@ -28,8 +24,9 @@ int rc, length;
 /* Cleans up the console bindings for closing, Closes socket file descriptors,
  * unlinks the server path, etc. */
 
-void clean_up(void) {
-	
+static void
+clean_up(void)
+{
 	const int optVal = 1;
 	const socklen_t optLen = sizeof(optVal);
 	
@@ -38,14 +35,15 @@ void clean_up(void) {
 	if (serverfd != -1)
 		close(serverfd);
 
-   unlink(SERVER_PATH);
+   unlink(CONSOLE_SOCKET_PATH);
 	
 }
 
 /* Creates an AF_UNIX socket and binds it to a local address. */
 
-void opensocket(void) {
-	
+static void
+opensocket(void)
+{
 	int stop_trying;
 	
 	serverfd = socket(AF_UNIX, SOCK_STREAM, 0);
@@ -56,7 +54,7 @@ void opensocket(void) {
 	
 	memset(&serveraddr, 0, sizeof(serveraddr));
 	serveraddr.sun_family = AF_UNIX;
-	strcpy(serveraddr.sun_path, SERVER_PATH);
+	strcpy(serveraddr.sun_path, CONSOLE_SOCKET_PATH);
 
 	rc = bind(serverfd, (struct sockaddr *)&serveraddr, SUN_LEN(&serveraddr));
 	if (rc < 0) {
@@ -73,10 +71,11 @@ void opensocket(void) {
 	}
 }
 
+
 /* Sends a parsed response to the ntk console client. */
 
-void
-send_response(int session_fd, char response[REQUEST_LENGTH], ...)
+static void
+send_response(int session_fd, char response[CONSOLE_BUFFER_LENGTH], ...)
 {
 	int response_length = (int)strlen(response);
 	rc = send(session_fd, response, response_length, 0);
@@ -91,8 +90,8 @@ send_response(int session_fd, char response[REQUEST_LENGTH], ...)
  * to data from ntkd structures such as: me 
  * into a response for the ntk console client. */
 
-int
-request_processing(int session_fd, char unprocessed_request[REQUEST_LENGTH])
+static int
+request_processing(int session_fd, char unprocessed_request[CONSOLE_BUFFER_LENGTH])
 {
 	if(strncmp(unprocessed_request,"uptime", (int)strlen(unprocessed_request))  == 0)
 		send_response(session_fd, (char)time(0)-me.uptime);
@@ -153,7 +152,24 @@ request_receive(int sock, char message[], int max)
 }
 
 
-void
+static void
+handle_session(int session_fd)
+{
+	char request[CONSOLE_BUFFER_LENGTH];
+
+	rc = request_receive(session_fd, request, CONSOLE_BUFFER_LENGTH);
+	if (rc < 0) {
+		perror("recv() failed");
+		exit(-1);
+	}
+	
+	printf("%d bytes of data were received\n", rc);
+	
+	request_processing(session_fd, request);
+}
+
+
+static void
 wait_session(int server_fd)
 {
 	rc = listen(serverfd, 10);
@@ -184,23 +200,6 @@ wait_session(int server_fd)
 		}
 
 	}
-}
-
-
-void
-handle_session(int session_fd)
-{
-	char request[REQUEST_LENGTH];
-
-	rc = request_receive(session_fd, request, REQUEST_LENGTH);
-	if (rc < 0) {
-		perror("recv() failed");
-		exit(-1);
-	}
-	
-	printf("%d bytes of data were received\n", rc);
-	
-	request_processing(session_fd, request);
 }
 
 

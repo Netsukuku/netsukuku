@@ -15,36 +15,37 @@
  * Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-#ifndef NETSUKUKUCONSOLE_H
-#define NETSUKUKUCONSOLE_H
+#ifndef CONSOLE_H
+#define CONSOLE_H
 
 
-#include <time.h>
+#define CONSOLE_SOCKET_PATH 	"/tmp/ntk-console"
+#define CONSOLE_VERSION_MAJOR	0
+#define CONSOLE_VERSION_MINOR 	3
+#define CONSOLE_BUFFER_LENGTH 	250
 
-#include "console.h"
-
-
-int sockfd = -1, sockfd1 = -1;
-struct sockaddr_un serveraddr;
-int rc, bytesReceived;
-
-time_t rawtime;
-struct tm *timeinfo;
-
-int uptime_sec;
-int uptime_min;
-int uptime_hour;
-int uptime_day;
-int uptime_month;
-int uptime_year;
-
-int i;
-
-void usage();
-void clean_up();
-
-void opensocket();
-void closesocket();
+#ifndef TRUE
+#define FALSE               0
+#define TRUE                1
+#endif
 
 
-#endif /*NETSUKUKUCONSOLE_H*/
+typedef enum {
+    COMMAND_HELP = 0x100,
+    COMMAND_UPTIME,
+    COMMAND_KILL,
+    COMMAND_VERSION,
+    COMMAND_INETCONN,
+    COMMAND_CURIFS,
+    COMMAND_CURIFSCT,
+    COMMAND_CURQSPNID,
+    COMMAND_CURIP,
+    COMMAND_CURNODE,
+    COMMAND_IFS,
+    COMMAND_IFSCT,
+    COMMAND_QUIT,
+    COMMAND_CONSUPTIME,
+} command_t;
+
+
+#endif /* CONSOLE_H */
