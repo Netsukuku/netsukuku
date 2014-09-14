@@ -98,7 +98,7 @@ void swap_shorts(int nmemb, unsigned short *x, unsigned short *y)
 /* 
  * rand_range: It returns a random number x which is _min <= x <= _max
  */ 
-inline int rand_range(int _min, int _max)
+int rand_range(int _min, int _max)
 {
 	return (rand()%(_max - _min + 1)) + _min;
 }

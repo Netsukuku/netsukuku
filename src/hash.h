@@ -27,7 +27,7 @@
 \*/
 u_long fnv_32_buf(void *buf, size_t len, u_long hval);
 unsigned int inthash(unsigned int key);
-inline unsigned int dl_elf_hash (const unsigned char *name);
+unsigned int dl_elf_hash (const unsigned char *name);
 char xor_int(int i);
 int hash_time(int *h_sec, int *h_usec);
 

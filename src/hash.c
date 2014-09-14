@@ -98,7 +98,7 @@ u_long fnv_32_buf(void *buf, size_t len, u_long hval)
  * first five operations no overflow is possible so we optimized it a
  * bit.  
  */
-inline unsigned int dl_elf_hash (const unsigned char *name)
+unsigned int dl_elf_hash (const unsigned char *name)
 {
   unsigned long int hash = 0;
   if (*name != '\0') {

@@ -31,7 +31,7 @@
  *
  * It returns how many groups there are in the given level.
  */
-inline int get_groups(int max_levels, int lvl)
+int get_groups(int max_levels, int lvl)
 {
 	return lvl == max_levels ? 1 : MAXGROUPNODE;
 }
