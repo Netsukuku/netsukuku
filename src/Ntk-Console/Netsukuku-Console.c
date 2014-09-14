@@ -4,9 +4,6 @@
 #include <unistd.h>
 
 
-char response[BUFFER_LENGTH];
-
-
 const struct supported_commands {
 	command_t 		id;
 	const char* 	command;
@@ -95,13 +92,14 @@ ntkd_request(char *request)
 		exit(-1);
 	}
 
+	char response[BUFFER_LENGTH];
 	request_receive(sockfd, response, BUFFER_LENGTH);
 	if (rc < 0) {
 		perror("recv() failed");
 		exit(-1);
 	}
 
-	printf("%s\n", response);
+	printf("Response: %s\n", response);
 }
 
 
@@ -121,6 +119,7 @@ opensocket(void)
 	rc = connect(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
 	if (rc < 0) {
 		perror("connect() failed");
+		printf("Unable to connect to ntk daemon console.\n");
 		exit(-1);
 	}
 	printf("ntkd console connection opened successfully.\n");
@@ -193,6 +192,7 @@ console(char* request)
 		case COMMAND_QUIT:
 			closesocket();
 			exit(0);
+			break;
 		case COMMAND_UPTIME:
 		case COMMAND_INETCONN:
 		case COMMAND_CURIFS:
@@ -237,21 +237,19 @@ main(void)
 	uptime_month = timeinfo->tm_mon;
 	uptime_year = timeinfo->tm_year;
 	
-	printf("This is the Netsukuku Console, Please type 'help' for more information.\n");
-	
-	char* request = (char*)malloc(BUFFER_LENGTH);
-	
 	opensocket();
-	do {
+
+	printf("This is the Netsukuku Console. Please type 'help' for more information.\n");
+	for(;;) {
+		char* request = (char*)malloc(BUFFER_LENGTH);
 		printf("\n> ");
 		fgets(request, 16, stdin);
 		fflush(stdin);
 		console(request);
-		memset(request, 0, BUFFER_LENGTH);
-	} while(TRUE);
+		free(request);
+	}
 	closesocket();
-	
-	clean_up(); 
+
 	return 0;
 }
 
