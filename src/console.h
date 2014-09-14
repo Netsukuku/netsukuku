@@ -22,6 +22,7 @@
 #define CONSOLE_SOCKET_PATH 	"/tmp/ntk-console"
 #define CONSOLE_VERSION_MAJOR	0
 #define CONSOLE_VERSION_MINOR 	3
+#define CONSOLE_ARGV_LENGTH 	250
 #define CONSOLE_BUFFER_LENGTH 	250
 
 #ifndef TRUE
@@ -46,6 +47,14 @@ typedef enum {
     COMMAND_QUIT,
     COMMAND_CONSUPTIME,
 } command_t;
+
+
+#pragma pack(1)
+typedef struct {
+	command_t command;
+	char* argv[CONSOLE_ARGV_LENGTH];
+} cmd_packet_t;
+#pragma pack(0)
 
 
 #endif /* CONSOLE_H */

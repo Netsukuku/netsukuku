@@ -91,82 +91,64 @@ send_response(int session_fd, char response[CONSOLE_BUFFER_LENGTH], ...)
  * to data from ntkd structures such as: me 
  * into a response for the ntk console client. */
 
-static int
-request_processing(int session_fd, char unprocessed_request[CONSOLE_BUFFER_LENGTH])
+static void
+request_processing(int session_fd, cmd_packet_t packet)
 {
-	if(strncmp(unprocessed_request,"uptime", (int)strlen(unprocessed_request))  == 0)
-		send_response(session_fd, (char)time(0)-me.uptime);
-	
-	else if(strncmp(unprocessed_request,"version", (int)strlen(unprocessed_request))  == 0)
-		send_response(session_fd, VERSION_STR);
-	
-	else if(strncmp(unprocessed_request,"inet_connected", (int)strlen(unprocessed_request))  == 0)
-		send_response(session_fd, (char)me.inet_connected);
-	
-	else if(strncmp(unprocessed_request,"cur_ifs", (int)strlen(unprocessed_request))  == 0)
-		send_response(session_fd, (char)me.cur_ifs);
-		
-	else if(strncmp(unprocessed_request,"cur_ifs_n", (int)strlen(unprocessed_request))  == 0)
-		send_response(session_fd, (char)me.cur_ifs_n);
-		
-	else if(strncmp(unprocessed_request,"cur_qspn_id", (int)strlen(unprocessed_request))  == 0)
-		send_response(session_fd, (char)me.cur_qspn_id);
-		
-	else if(strncmp(unprocessed_request,"cur_ip", (int)strlen(unprocessed_request))  == 0)
-		send_response(session_fd, (char)me.cur_ip.data);
-		
-	/*else if(strncmp(unprocessed_request,"cur_node", (int)strlen(unprocessed_request))  == 0)
-		send_response(me.cur_node);
-		
-	else if(strncmp(unprocessed_request,"ifs", (int)strlen(unprocessed_request))  == 0)
-		return 0;
-		
-	else if(strncmp(unprocessed_request,"ifs_n", (int)strlen(unprocessed_request))  == 0)
-		return 0;*/
-	send_response(session_fd, unprocessed_request, " Is invalid or yet to be implemented.");
-	return -1;
-}
-
-
-static int
-request_receive(int sock, char message[], int max)
-{
-	int total = 0;
-	const int bsize = 1024;
-	char buffer[bsize+1];
-	int read = bsize;
-	 
-	message[0] = 0; // initialize for strcat()
-	
-	while(read == bsize) {
-		read = recv(sock, buffer, bsize, 0);
-		if(read < 0)
-			return -1; // error, bail out
-		total += read;
-		if(total > max)
-			return -2; // overflow
-		buffer[read] = 0;
-		strcat(message, buffer);
+	switch (packet.command) {
+		case COMMAND_UPTIME:
+			send_response(session_fd, (char)time(0)-me.uptime);
+			break;
+		case COMMAND_VERSION:
+			send_response(session_fd, VERSION_STR);
+			break;
+		case COMMAND_CURIFS:
+			send_response(session_fd, (char)me.cur_ifs);
+			break;
+		case COMMAND_CURIFSCT:
+			send_response(session_fd, (char)me.cur_ifs_n);
+			break;
+		case COMMAND_INETCONN:
+			send_response(session_fd, (char)me.inet_connected);
+			break;
+		case COMMAND_CURQSPNID:
+			send_response(session_fd, (char)me.cur_qspn_id);
+			break;
+		case COMMAND_CURIP:
+			send_response(session_fd, (char)me.cur_ip.data);
+			break;
+		case COMMAND_CURNODE:
+			send_response(session_fd, (char)me.cur_node);
+			break;
+		case COMMAND_IFS:
+			send_response(session_fd, "IFS: TODO");
+			break;
+		case COMMAND_IFSCT:
+			send_response(session_fd, "IFS: TODO");
+			break;
+		default:
+			send_response(session_fd, "Provided command is invalid or yet to be implemented.");
+			break;
 	}
-	     
-	return total;
 }
+
 
 
 static void
 handle_session(int session_fd)
 {
-	char request[CONSOLE_BUFFER_LENGTH];
+	cmd_packet_t packetIn;
 
-	rc = request_receive(session_fd, request, CONSOLE_BUFFER_LENGTH);
-	if (rc < 0) {
+	rc = recv(session_fd, &packetIn, sizeof(packetIn), 0);
+
+	printf("%d bytes of data were received\n", rc);
+	if (rc < sizeof(packetIn)) {
 		perror("recv() failed");
 		exit(-1);
 	}
 	
-	printf("%d bytes of data were received\n", rc);
+	printf("0x%x command received\n", packetIn.command);
 	
-	request_processing(session_fd, request);
+	request_processing(session_fd, packetIn);
 }
 
 

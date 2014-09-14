@@ -100,19 +100,18 @@ request_receive(int sock, char message[], int max)
 
 /* Sends and receives to ntkd */
 void
-ntkd_request(char *request)
+ntkd_request(command_t command)
 {
 	if (sockfd <= 0) {
 		perror("ntkd connection closed unexpectedly!\n");
 		exit(-1);
 	}
 
-	int request_length = strlen(request) - 1;
-	request[request_length] = '\0';
+	cmd_packet_t packetOut;
+	packetOut.command = command;
 
-	printf("request: '%s'\n", request);
-	rc = send(sockfd, request, request_length, 0);
-	if (rc < 0) {
+	rc = send(sockfd, &packetOut, sizeof(packetOut), 0);
+	if (rc < sizeof(packetOut)) {
 		perror("send() failed");
 		exit(-1);
 	}
@@ -228,13 +227,13 @@ console(char* request)
 		case COMMAND_CURNODE:
 		case COMMAND_IFS:
 		case COMMAND_IFSCT:
-			ntkd_request(request);
+			ntkd_request(commandID);
 			millisleep(200);
 			break;
 		case COMMAND_VERSION:
 			printf("ntk-console version: %d.%d\n",
 				CONSOLE_VERSION_MAJOR, CONSOLE_VERSION_MINOR);
-			ntkd_request(request);
+			ntkd_request(commandID);
 			break;
 		case COMMAND_CONSUPTIME:
 			console_uptime();
