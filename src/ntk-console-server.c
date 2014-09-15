@@ -140,13 +140,10 @@ handle_session(int session_fd)
 
 	rc = recv(session_fd, &packetIn, sizeof(packetIn), 0);
 
-	printf("%d bytes of data were received\n", rc);
 	if (rc < sizeof(packetIn)) {
 		perror("recv() failed");
 		exit(-1);
 	}
-	
-	printf("0x%x command received\n", packetIn.command);
 	
 	request_processing(session_fd, packetIn);
 }
