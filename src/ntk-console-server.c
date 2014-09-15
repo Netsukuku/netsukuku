@@ -97,6 +97,8 @@ request_processing(int session_fd, cmd_packet_t packet)
 	char buffer[CONSOLE_BUFFER_LENGTH];
 	int maxBuffer = CONSOLE_BUFFER_LENGTH - 1;
 
+	memset(buffer, 0, sizeof(buffer));
+
 	switch (packet.command) {
 		case COMMAND_UPTIME:
 		{
@@ -108,8 +110,15 @@ request_processing(int session_fd, cmd_packet_t packet)
 			snprintf(buffer, maxBuffer, "ntkd version: %s", VERSION_STR);
 			break;
 		case COMMAND_CURIFS:
-			//send_response(session_fd, (char)me.cur_ifs);
+		{
+			strcat(buffer, "current interfaces: ");
+			int i;
+			for(i = 0; i < me.cur_ifs_n; i++) {
+				strcat(buffer, me.cur_ifs[i].dev_name);
+				strcat(buffer, " ");
+			}
 			break;
+		}
 		case COMMAND_CURIFSCT:
 			snprintf(buffer, maxBuffer, "current interface count: %d", me.cur_ifs_n);
 			break;
