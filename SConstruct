@@ -6,17 +6,17 @@ import platform as _platform
 #   Command line options and help
 #
 
-opts = Options('build.conf')
-opts.AddOptions(('CONF_DIR', """Directory where the Netsukuku configuration files will be installed""", '/etc/netsukuku'),
+opts = Variables('build.conf')
+opts.AddVariables(('CONF_DIR', """Directory where the Netsukuku configuration files will be installed""", '/etc/netsukuku'),
         ('DATA_DIR', 'Directory to install data files', '/usr/share/netsukuku'),
         ('MAN_DIR',  'Where the manuals will be installed', '/usr/man'),
         ('BIN_DIR' , 'Directory to install the binaries', '/usr/bin'),
         ('PID_DIR',  'Specify location of ntkd.pid file', '/var/run'),
         ('destdir', 'SCons will copy all the files under destdir during installation', '/'),
-        EnumOption('debug', 'build the debug code', 'no',
+        EnumVariable('debug', 'build the debug code', 'no',
             allowed_values=('yes', 'no', '1', '0'), map={},
             ignorecase=0),
-        EnumOption('static', 'build statically the binaries', 'no',
+        EnumVariable('static', 'build statically the binaries', 'no',
             allowed_values=('yes', 'no', '1', '0'), map={},
             ignorecase=0))
 opts.Add('CC', 'The C compiler.')
