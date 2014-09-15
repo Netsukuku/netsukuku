@@ -94,41 +94,48 @@ send_response(int session_fd, char response[CONSOLE_BUFFER_LENGTH], ...)
 static void
 request_processing(int session_fd, cmd_packet_t packet)
 {
+	char buffer[CONSOLE_BUFFER_LENGTH];
+	int maxBuffer = CONSOLE_BUFFER_LENGTH - 1;
+
 	switch (packet.command) {
 		case COMMAND_UPTIME:
-			send_response(session_fd, (char)time(0)-me.uptime);
+		{
+			int uptime = time(0) - me.uptime;
+			snprintf(buffer, maxBuffer, "node uptime: %d seconds", uptime);
 			break;
+		}
 		case COMMAND_VERSION:
-			send_response(session_fd, VERSION_STR);
+			snprintf(buffer, maxBuffer, "ntkd version: %s", VERSION_STR);
 			break;
 		case COMMAND_CURIFS:
-			send_response(session_fd, (char)me.cur_ifs);
+			//send_response(session_fd, (char)me.cur_ifs);
 			break;
 		case COMMAND_CURIFSCT:
-			send_response(session_fd, (char)me.cur_ifs_n);
+			snprintf(buffer, maxBuffer, "current interface count: %d", me.cur_ifs_n);
 			break;
 		case COMMAND_INETCONN:
-			send_response(session_fd, (char)me.inet_connected);
+			//send_response(session_fd, (char)me.inet_connected);
 			break;
 		case COMMAND_CURQSPNID:
-			send_response(session_fd, (char)me.cur_qspn_id);
+			//send_response(session_fd, (char)me.cur_qspn_id);
 			break;
 		case COMMAND_CURIP:
-			send_response(session_fd, (char)me.cur_ip.data);
+			//send_response(session_fd, (char)me.cur_ip.data);
 			break;
 		case COMMAND_CURNODE:
-			send_response(session_fd, (char)me.cur_node);
+			//send_response(session_fd, (char)me.cur_node);
 			break;
 		case COMMAND_IFS:
-			send_response(session_fd, "IFS: TODO");
+			//send_response(session_fd, "IFS: TODO");
 			break;
 		case COMMAND_IFSCT:
-			send_response(session_fd, "IFS: TODO");
+			//send_response(session_fd, "IFS: TODO");
 			break;
 		default:
-			send_response(session_fd, "Provided command is invalid or yet to be implemented.");
+			snprintf(buffer, maxBuffer, "Provided command is invalid or not implemented in this API");
 			break;
 	}
+	send_response(session_fd, buffer);
 }
 
 

@@ -158,7 +158,7 @@ ntkd_request(command_t command)
 		exit(-1);
 	}
 
-	printf("Response: '%s'\n", response);
+	printf("%s\n", response);
 	free(response);
 	closesocket();
 }
