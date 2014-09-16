@@ -123,7 +123,10 @@ request_processing(int session_fd, cmd_packet_t packet)
 			snprintf(buffer, maxBuffer, "current interface count: %d", me.cur_ifs_n);
 			break;
 		case COMMAND_INETCONN:
-			//send_response(session_fd, (char)me.inet_connected);
+			if (me.inet_connected)
+				snprintf(buffer, maxBuffer, "internet connectivity: true");
+			else
+				snprintf(buffer, maxBuffer, "internet connectivity: false");
 			break;
 		case COMMAND_CURQSPNID:
 			//send_response(session_fd, (char)me.cur_qspn_id);
