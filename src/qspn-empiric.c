@@ -733,7 +733,7 @@ send_qspn_backpro(void *argv)
 	if (int_map[to].flags & QSPN_STARTER) {
 		fprintf(stderr, "%u: qspn_backpro: We've arrived... finally\n",
 				pthread_self());
-		return;
+		return NULL;
 	}
 
 	for (x = 0; x < int_map[to].links; x++) {
@@ -789,7 +789,7 @@ send_qspn_reply(void *argv)
 				"%u: DROPPED old brdcast: q.broadcast: %d, qopt->q.from broadcast: %d\n",
 				pthread_self(), qopt->q.broadcast,
 				int_map[to].brdcast[qopt->q.from]);
-		return;
+		return NULL;
 	} else
 		int_map[to].brdcast[qopt->q.from] = qopt->q.broadcast;
 
@@ -847,7 +847,7 @@ send_qspn_open(void *argv)
 		fprintf(stderr,
 				"%u: qspn_open: We received a qspn_open, but we are the OPENER!!\n",
 				pthread_self());
-		return;
+		return NULL;
 	}
 
 	for (x = 0; x < int_map[to].links; x++) {
@@ -867,7 +867,7 @@ send_qspn_open(void *argv)
 		fprintf(stderr,
 				"%u: Yai! We've finished the reopening of heaven\n",
 				pthread_self());
-		return;
+		return NULL;
 	}
 
 	for (x = 0; x < int_map[to].links; x++) {
@@ -924,7 +924,7 @@ send_qspn_pkt(void *argv)
 		fprintf(stderr,
 				"%u: qspn_pkt: We received a qspn_pkt, but we are the QSPN_STARTER!!\n",
 				pthread_self());
-		return;
+		return NULL;
 	}
 
 	for (x = 0; x < int_map[to].links; x++) {
@@ -980,7 +980,7 @@ send_qspn_pkt(void *argv)
 					pthread_self(), dst);
 			thread_joint(qopt->join, send_qspn_open, (void *) nopt);
 			xfree(qopt);
-			return;
+			return NULL;
 		}
 	}
 #else							/*Q_OPEN not defined */
@@ -1024,7 +1024,7 @@ send_qspn_pkt(void *argv)
 					pthread_self(), dst);
 			thread_joint(qopt->join, send_qspn_reply, (void *) nopt);
 			xfree(qopt);
-			return;
+			return NULL;
 		}
 	}
 #endif							/*Q_OPEN */
