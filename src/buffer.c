@@ -25,12 +25,13 @@
  * Is the buffer `a' filled with `sz'# of zeros?
  * If yes return 1. 
  */
-int is_bufzero(const void *a, int sz)
+int
+is_bufzero(const void *a, int sz)
 {
-	const char *p=a;
+	const char *p = a;
 	int i;
-	for(i=0; i<sz; i++, p++)
-		if(*p)
+	for (i = 0; i < sz; i++, p++)
+		if (*p)
 			return 0;
 	return 1;
 }

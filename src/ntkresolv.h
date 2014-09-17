@@ -59,8 +59,9 @@
 
 
 
-char *QTYPE_STR_LIST[]={QTYPE_A_STR,QTYPE_PTR_STR,QTYPE_G_STR,QTYPE_MX_STR};
-int QT_LEN=4;
+char *QTYPE_STR_LIST[] =
+	{ QTYPE_A_STR, QTYPE_PTR_STR, QTYPE_G_STR, QTYPE_MX_STR };
+int QT_LEN = 4;
 
 #define QTFROMPREF(s)							\
 ({									\
@@ -68,7 +69,7 @@ int QT_LEN=4;
 	for (__n=0;__n<QT_LEN;__n++) 					\
 		if (!strncasecmp(s,QTYPE_STR_LIST[__n],strlen(s))) 	\
  			{__res=__n;break;}				\
-	__res; })			
+	__res; })
 #define REALMFROMPREF(s)						\
 ({									\
 	uint8_t __res=0;						\
@@ -76,7 +77,7 @@ int QT_LEN=4;
 		__res=REALM_NTK;					\
 	else if (!strncasecmp(REALM_INT_STR,s,strlen(s)))		\
  		__res=REALM_INT; 					\
-		__res; })	
+		__res; })
 #define PROTOFROMPREF(s)						\
 ({									\
  	uint8_t __res=-1;						\
@@ -84,18 +85,18 @@ int QT_LEN=4;
 		__res=SNSD_PROTO_UDP;					\
 	else if (!strncasecmp(SNSD_PROTO_TCP_STR,s,strlen(s)))		\
  		__res=SNSD_PROTO_TCP; 					\
-		__res; })	
+		__res; })
 
-		
-			
+
+
 typedef struct ntkresolv_opts {
-	char		nsserver[MAX_HOSTNAME_LEN];
-	int16_t		port;
-	int8_t		silent;
-	char		obj[NTKRESOLV_MAX_OBJ_LEN];
-	uint16_t	id;
-	uint8_t		hash;
-	andns_pkt	*q;
+	char nsserver[MAX_HOSTNAME_LEN];
+	int16_t port;
+	int8_t silent;
+	char obj[NTKRESOLV_MAX_OBJ_LEN];
+	uint16_t id;
+	uint8_t hash;
+	andns_pkt *q;
 } ntkresolv_opts;
 
 #define NTKRESOLV_OPTS_SZ	sizeof(ntkresolv_opts)
@@ -118,7 +119,7 @@ typedef struct ntkresolv_opts {
 			__c="Unknow";				\
  			break;					\
 			}					\
-		__c;})						
+		__c;})
 #define NK_STR(ap)						\
 ({								\
 	char *__d;						\
@@ -136,7 +137,7 @@ typedef struct ntkresolv_opts {
 			__d="UNKNOW";				\
  			break;					\
 			}					\
- 		__d;})						
+ 		__d;})
 
 #define RCODE_STR(ap)						\
 ({								\
@@ -225,7 +226,7 @@ typedef struct ntkresolv_opts {
 			break;					\
 	}							\
 	__h;})
- 	
+
 
 #define GET_OPT_REALM	(globopts.realm==REALM_NTK)?"NTK":"INET"
 
@@ -276,7 +277,7 @@ void qt_usage(char *arg);
 void realm_usage(char *arg);
 void proto_usage(char *arg);
 void service_and_proto_usage(char *arg);
-double diff_time(struct timeval a,struct timeval b);
+double diff_time(struct timeval a, struct timeval b);
 void opts_init(void);
 void opts_set_silent(void);
 void opts_set_port(char *arg);
@@ -284,17 +285,17 @@ void opts_set_ns(char *arg);
 void opts_set_qt(char *arg);
 void opts_set_realm(char *arg);
 void opts_set_service_and_proto(char *arg);
-void opts_set_proto(char *arg) ;
+void opts_set_proto(char *arg);
 void opts_set_recursion(void);
-void opts_set_hash(void) ;
+void opts_set_hash(void);
 void opts_set_compute_hash(void);
 void opts_set_parsable_output(void);
 void opts_set_question(char *arg);
 void opts_finish(char *arg);
 void print_headers();
 void print_question();
-void ip_bin_to_str(void *data,char *dst);
-void answer_data_to_str(andns_pkt_data *apd,char *dst);
+void ip_bin_to_str(void *data, char *dst);
+void answer_data_to_str(andns_pkt_data * apd, char *dst);
 void print_answers();
 void print_parsable_answers(void);
 void print_results(void);
@@ -303,4 +304,4 @@ void ntkresolv_exit(int i);
 void ntkresolv_safe_exit(int i);
 int main(int argc, char **argv);
 
-#endif /* NTK_RESOLV_H */
+#endif							/* NTK_RESOLV_H */

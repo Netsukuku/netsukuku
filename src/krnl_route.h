@@ -23,17 +23,16 @@
 
 #define RTPROT_NETSUKUKU	15
 
-struct nexthop 
-{
+struct nexthop {
 	inet_prefix gw;
 	char *dev;
 	u_char hops;
 };
 
 struct rt_request {
-	struct nlmsghdr 	nh;
-	struct rtmsg 		rt;
-	char   			buf[1024];
+	struct nlmsghdr nh;
+	struct rtmsg rt;
+	char buf[1024];
 };
 
 
@@ -49,6 +48,7 @@ int route_get_exact_prefix_dst(inet_prefix, inet_prefix *, char *);
 int route_flush_cache(int family);
 int route_ip_forward(int family, int enable);
 int route_rp_filter(int family, char *dev, int enable);
-int route_rp_filter_all_dev(int family, interface *ifs, int ifs_n, int enable);
+int route_rp_filter_all_dev(int family, interface * ifs, int ifs_n,
+							int enable);
 
-#endif /*KRNL_ROUTE_H*/
+#endif							/*KRNL_ROUTE_H */

@@ -24,42 +24,45 @@
 #include "ipv6-gmp.h"
 
 /*y=x+y*/
-int sum_128(unsigned int *x, unsigned int *y)
+int
+sum_128(unsigned int *x, unsigned int *y)
 {
 	mpz_t xx, yy, res;
 	size_t count;
-	
+
 	mpz_init(res);
 	mpz_init(xx);
 	mpz_init(yy);
-	mpz_import (xx, 4, HOST_ORDER, sizeof(x[0]), NATIVE_ENDIAN, 0, x);
-	mpz_import (yy, 4, HOST_ORDER, sizeof(y[0]), NATIVE_ENDIAN, 0, y);
+	mpz_import(xx, 4, HOST_ORDER, sizeof(x[0]), NATIVE_ENDIAN, 0, x);
+	mpz_import(yy, 4, HOST_ORDER, sizeof(y[0]), NATIVE_ENDIAN, 0, y);
 
 	mpz_add(res, xx, yy);
-	memset(y, '\0', sizeof(y[0])*4);
+	memset(y, '\0', sizeof(y[0]) * 4);
 	mpz_export(y, &count, HOST_ORDER, sizeof(x[0]), NATIVE_ENDIAN, 0, res);
-	
+
 	mpz_clear(xx);
 	mpz_clear(yy);
 	mpz_clear(res);
-	return 0;	
+	return 0;
 }
 
 /*y=x+y*/
-int sum_int(unsigned int x, unsigned int *y)
+int
+sum_int(unsigned int x, unsigned int *y)
 {
-	unsigned int z[4]=ZERO128;
-	
-	z[3]=x;
+	unsigned int z[4] = ZERO128;
+
+	z[3] = x;
 	return sum_128(z, y);
 }
 
 /*y=x-y*/
-int sub_128(unsigned int *x, unsigned int *y)
+int
+sub_128(unsigned int *x, unsigned int *y)
 {
 	mpz_t xx, yy, res;
 	size_t count;
-	
+
 	mpz_init(res);
 	mpz_init(xx);
 	mpz_init(yy);
@@ -67,57 +70,61 @@ int sub_128(unsigned int *x, unsigned int *y)
 	mpz_import(yy, 4, HOST_ORDER, sizeof(y[0]), NATIVE_ENDIAN, 0, y);
 
 	mpz_sub(res, xx, yy);
-	memset(y, '\0', sizeof(y[0])*4);
+	memset(y, '\0', sizeof(y[0]) * 4);
 	mpz_export(y, &count, HOST_ORDER, sizeof(x[0]), NATIVE_ENDIAN, 0, res);
-	
+
 	mpz_clear(xx);
 	mpz_clear(yy);
 	mpz_clear(res);
-	return 0;	
+	return 0;
 }
 
 /* y=y-x */
-int sub_int(unsigned int *y, unsigned int x)
+int
+sub_int(unsigned int *y, unsigned int x)
 {
-	unsigned int z[4]=ZERO128;
+	unsigned int z[4] = ZERO128;
 
-	z[3]=x;
+	z[3] = x;
 	return sub_128(z, y);
 }
 
 /*y=x/y*/
-int div_128(unsigned int *x, unsigned int *y)
+int
+div_128(unsigned int *x, unsigned int *y)
 {
 	mpz_t xx, yy, res;
 	size_t count;
-	
+
 	mpz_init(res);
 	mpz_init(xx);
 	mpz_init(yy);
 	mpz_import(xx, 4, HOST_ORDER, sizeof(x[0]), NATIVE_ENDIAN, 0, x);
 	mpz_import(yy, 4, HOST_ORDER, sizeof(y[0]), NATIVE_ENDIAN, 0, y);
-	
+
 	mpz_tdiv_q(res, xx, yy);
-	memset(y, '\0', sizeof(y[0])*4);
+	memset(y, '\0', sizeof(y[0]) * 4);
 	mpz_export(y, &count, HOST_ORDER, sizeof(x[0]), NATIVE_ENDIAN, 0, res);
-	
+
 	mpz_clear(xx);
 	mpz_clear(yy);
 	mpz_clear(res);
-	return 0;	
+	return 0;
 }
 
 /* y=y/x */
-int div_int(unsigned int *y, unsigned int x)
+int
+div_int(unsigned int *y, unsigned int x)
 {
-	unsigned int z[4]=ZERO128;
+	unsigned int z[4] = ZERO128;
 
-	z[3]=x;
+	z[3] = x;
 	return div_128(z, y);
 }
 
 /* y=y/x */
-int div_mpz(unsigned int *y, mpz_t x)
+int
+div_mpz(unsigned int *y, mpz_t x)
 {
 	mpz_t yy, res;
 	size_t count;
@@ -125,39 +132,42 @@ int div_mpz(unsigned int *y, mpz_t x)
 	mpz_init(res);
 	mpz_init(yy);
 	mpz_import(yy, 4, HOST_ORDER, sizeof(y[0]), NATIVE_ENDIAN, 0, y);
-	
+
 	mpz_tdiv_q(res, yy, x);
-	memset(y, '\0', sizeof(y[0])*4);
+	memset(y, '\0', sizeof(y[0]) * 4);
 	mpz_export(y, &count, HOST_ORDER, sizeof(x[0]), NATIVE_ENDIAN, 0, res);
-	
+
 	mpz_clear(yy);
 	mpz_clear(res);
-	return 0;	
+	return 0;
 }
 
 /* "ORDER can be 1 for most significant word first or -1 for least significant first." */
-int htonl_128(unsigned int *x, unsigned int *y)
+int
+htonl_128(unsigned int *x, unsigned int *y)
 {
 	mpz_t xx;
 	size_t count;
-	
+
 	mpz_init(xx);
-	mpz_import(xx, 4,     HOST_ORDER, sizeof(x[0]), NATIVE_ENDIAN,  0, x);
-	memset(y, '\0', sizeof(y[0])*4);
-	mpz_export(y, &count, NETWORK_ORDER, sizeof(x[0]), NETWORK_ENDIAN, 0, xx);
+	mpz_import(xx, 4, HOST_ORDER, sizeof(x[0]), NATIVE_ENDIAN, 0, x);
+	memset(y, '\0', sizeof(y[0]) * 4);
+	mpz_export(y, &count, NETWORK_ORDER, sizeof(x[0]), NETWORK_ENDIAN, 0,
+			   xx);
 	mpz_clear(xx);
 	return 0;
 }
 
-int ntohl_128(unsigned int *x, unsigned int *y)
+int
+ntohl_128(unsigned int *x, unsigned int *y)
 {
 	mpz_t xx;
 	size_t count;
-	
+
 	mpz_init(xx);
-	mpz_import(xx, 4,     NETWORK_ORDER, sizeof(x[0]), NETWORK_ENDIAN, 0, x);
-	memset(y, '\0', sizeof(y[0])*4);
-	mpz_export(y, &count, HOST_ORDER, sizeof(x[0]), NATIVE_ENDIAN,  0, xx);	
+	mpz_import(xx, 4, NETWORK_ORDER, sizeof(x[0]), NETWORK_ENDIAN, 0, x);
+	memset(y, '\0', sizeof(y[0]) * 4);
+	mpz_export(y, &count, HOST_ORDER, sizeof(x[0]), NATIVE_ENDIAN, 0, xx);
 	mpz_clear(xx);
 
 	return 0;

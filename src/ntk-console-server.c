@@ -30,14 +30,15 @@ clean_up(void)
 {
 	const int optVal = 1;
 	const socklen_t optLen = sizeof(optVal);
-	
-	setsockopt(serverfd, SOL_SOCKET, SO_REUSEADDR, (void*) &optVal, optLen);
-	
+
+	setsockopt(serverfd, SOL_SOCKET, SO_REUSEADDR, (void *) &optVal,
+			   optLen);
+
 	if (serverfd != -1)
 		close(serverfd);
 
-   unlink(CONSOLE_SOCKET_PATH);
-	
+	unlink(CONSOLE_SOCKET_PATH);
+
 }
 
 /* Creates an AF_UNIX socket and binds it to a local address. */
@@ -46,22 +47,23 @@ static void
 opensocket(void)
 {
 	int stop_trying;
-	
+
 	serverfd = socket(AF_UNIX, SOCK_STREAM, 0);
 	if (serverfd < 0) {
-		 perror("socket creation failed");
-		 exit(-1);
+		perror("socket creation failed");
+		exit(-1);
 	}
-	
+
 	memset(&serveraddr, 0, sizeof(serveraddr));
 	serveraddr.sun_family = AF_UNIX;
 	strcpy(serveraddr.sun_path, CONSOLE_SOCKET_PATH);
 
-	rc = bind(serverfd, (struct sockaddr *)&serveraddr, SUN_LEN(&serveraddr));
+	rc = bind(serverfd, (struct sockaddr *) &serveraddr,
+			  SUN_LEN(&serveraddr));
 	if (rc < 0) {
 		perror("bind() failed");
 		clean_up();
-		if(stop_trying >= 2) {
+		if (stop_trying >= 2) {
 			perror("bind() failed");
 			clean_up();
 			opensocket();
@@ -78,9 +80,9 @@ opensocket(void)
 static void
 send_response(int session_fd, char response[CONSOLE_BUFFER_LENGTH], ...)
 {
-	int response_length = (int)strlen(response);
+	int response_length = (int) strlen(response);
 	rc = send(session_fd, response, response_length, 0);
-	if (rc < 0){
+	if (rc < 0) {
 		perror("send() failed");
 		exit(-1);
 	}
@@ -100,52 +102,54 @@ request_processing(int session_fd, cmd_packet_t packet)
 	memset(buffer, 0, sizeof(buffer));
 
 	switch (packet.command) {
-		case COMMAND_UPTIME:
+	case COMMAND_UPTIME:
 		{
 			int uptime = time(0) - me.uptime;
 			snprintf(buffer, maxBuffer, "node uptime: %d seconds", uptime);
 			break;
 		}
-		case COMMAND_VERSION:
-			snprintf(buffer, maxBuffer, "ntkd version: %s", VERSION_STR);
-			break;
-		case COMMAND_CURIFS:
+	case COMMAND_VERSION:
+		snprintf(buffer, maxBuffer, "ntkd version: %s", VERSION_STR);
+		break;
+	case COMMAND_CURIFS:
 		{
 			strcat(buffer, "current interfaces: ");
 			int i;
-			for(i = 0; i < me.cur_ifs_n; i++) {
+			for (i = 0; i < me.cur_ifs_n; i++) {
 				strcat(buffer, me.cur_ifs[i].dev_name);
 				strcat(buffer, " ");
 			}
 			break;
 		}
-		case COMMAND_CURIFSCT:
-			snprintf(buffer, maxBuffer, "current interface count: %d", me.cur_ifs_n);
-			break;
-		case COMMAND_INETCONN:
-			if (me.inet_connected)
-				snprintf(buffer, maxBuffer, "internet connectivity: true");
-			else
-				snprintf(buffer, maxBuffer, "internet connectivity: false");
-			break;
-		case COMMAND_CURQSPNID:
-			//send_response(session_fd, (char)me.cur_qspn_id);
-			break;
-		case COMMAND_CURIP:
-			snprintf(buffer, maxBuffer, "IP: %s", inet_to_str(me.cur_ip));
-			break;
-		case COMMAND_CURNODE:
-			//send_response(session_fd, (char)me.cur_node);
-			break;
-		case COMMAND_IFS:
-			//send_response(session_fd, "IFS: TODO");
-			break;
-		case COMMAND_IFSCT:
-			//send_response(session_fd, "IFS: TODO");
-			break;
-		default:
-			snprintf(buffer, maxBuffer, "Provided command is invalid or not implemented in this API");
-			break;
+	case COMMAND_CURIFSCT:
+		snprintf(buffer, maxBuffer, "current interface count: %d",
+				 me.cur_ifs_n);
+		break;
+	case COMMAND_INETCONN:
+		if (me.inet_connected)
+			snprintf(buffer, maxBuffer, "internet connectivity: true");
+		else
+			snprintf(buffer, maxBuffer, "internet connectivity: false");
+		break;
+	case COMMAND_CURQSPNID:
+		//send_response(session_fd, (char)me.cur_qspn_id);
+		break;
+	case COMMAND_CURIP:
+		snprintf(buffer, maxBuffer, "IP: %s", inet_to_str(me.cur_ip));
+		break;
+	case COMMAND_CURNODE:
+		//send_response(session_fd, (char)me.cur_node);
+		break;
+	case COMMAND_IFS:
+		//send_response(session_fd, "IFS: TODO");
+		break;
+	case COMMAND_IFSCT:
+		//send_response(session_fd, "IFS: TODO");
+		break;
+	default:
+		snprintf(buffer, maxBuffer,
+				 "Provided command is invalid or not implemented in this API");
+		break;
 	}
 	send_response(session_fd, buffer);
 }
@@ -163,7 +167,7 @@ handle_session(int session_fd)
 		perror("recv() failed");
 		exit(-1);
 	}
-	
+
 	request_processing(session_fd, packetIn);
 }
 
@@ -172,14 +176,14 @@ static void
 wait_session(int server_fd)
 {
 	rc = listen(serverfd, 10);
-	if (rc< 0) {
+	if (rc < 0) {
 		perror("listen() failed");
 		exit(-1);
 	}
 
 	printf("Ready for client connect().\n");
 
-	for(;;) {
+	for (;;) {
 		int session_fd = accept(server_fd, NULL, NULL);
 		if (session_fd < 0) {
 			perror("accept() failed");
@@ -202,10 +206,10 @@ wait_session(int server_fd)
 }
 
 
-void*
+void *
 console_recv_send(void *arg)
 {
-	char* uargv = NULL;
+	char *uargv = NULL;
 
 	opensocket();
 	wait_session(serverfd);

@@ -47,4 +47,4 @@ int opensocket();
 void closesocket();
 
 
-#endif /*NETSUKUKUCONSOLE_H*/
+#endif							/*NETSUKUKUCONSOLE_H */

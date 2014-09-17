@@ -2,7 +2,7 @@
 #define NTKCONSOLESERVER_H
 
 
-void* console_recv_send(void *arg);
+void *console_recv_send(void *arg);
 
 
-#endif /* NTKCONSOLESERVER_H */
+#endif							/* NTKCONSOLESERVER_H */

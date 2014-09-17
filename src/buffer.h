@@ -73,4 +73,4 @@
 \*/
 int is_bufzero(const void *a, int sz);
 
-#endif /*BUFFER_H*/
+#endif							/*BUFFER_H */

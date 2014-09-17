@@ -52,7 +52,8 @@
  * the reply to from.
  * `passed_argv' is a pointer to a dns_exec_pkt_argv struct.
  */
-void *dns_exec_pkt(void *passed_argv)
+void *
+dns_exec_pkt(void *passed_argv)
 {
 	struct dns_exec_pkt_argv argv;
 
@@ -71,16 +72,19 @@ void *dns_exec_pkt(void *passed_argv)
 	}
 
 	/* Unpack the DNS query and resolve the hostname */
-	if(!andns_rslv(buf, argv.rpkt_sz, answer_buffer, &answer_length))
+	if (!andns_rslv(buf, argv.rpkt_sz, answer_buffer, &answer_length))
 		return 0;
 
 	/* Send the DNS reply */
-	bytes_sent=inet_sendto(argv.sk, answer_buffer, answer_length, 0,
-			&argv.from, argv.from_len);
-        error("bytes_sent is: %d argv.sk is: %d answer_buffer is: %s answer_length is: %d argv.from is: %p agrv.from_len is: %p", bytes_sent,argv.sk, answer_buffer, answer_length, argv.from, argv.from_len);
-	if(bytes_sent != answer_length)
+	bytes_sent = inet_sendto(argv.sk, answer_buffer, answer_length, 0,
+							 &argv.from, argv.from_len);
+	error
+		("bytes_sent is: %d argv.sk is: %d answer_buffer is: %s answer_length is: %d argv.from is: %p agrv.from_len is: %p",
+		 bytes_sent, argv.sk, answer_buffer, answer_length, argv.from,
+		 argv.from_len);
+	if (bytes_sent != answer_length)
 		debug(DBG_SOFT, ERROR_MSG "inet_sendto error: %s", ERROR_POS,
-				strerror(errno));
+			  strerror(errno));
 
 	return 0;
 }
@@ -90,7 +94,8 @@ void *dns_exec_pkt(void *passed_argv)
  * replies with a DNS reply.
  * It listens to `port'.
  */
-void dns_wrapper_daemon(u_short port)
+void
+dns_wrapper_daemon(u_short port)
 {
 	struct dns_exec_pkt_argv exec_pkt_argv;
 	char buf[MAX_DNS_PKT_SZ];
@@ -99,44 +104,45 @@ void dns_wrapper_daemon(u_short port)
 	int ret, sk;
 	pthread_t thread;
 	pthread_attr_t t_attr;
-	ssize_t err=-1;
+	ssize_t err = -1;
 
 #ifdef DEBUG
-	int select_errors=0;
+	int select_errors = 0;
 #endif
 
 	pthread_attr_init(&t_attr);
 	pthread_attr_setdetachstate(&t_attr, PTHREAD_CREATE_DETACHED);
 	pthread_mutex_init(&dns_exec_lock, 0);
 
-	debug(DBG_SOFT, "Preparing the dns_udp listening socket on port %d", port);
-	sk=prepare_listen_socket(my_family, SOCK_DGRAM, port, 0);
-	if(sk == -1)
+	debug(DBG_SOFT, "Preparing the dns_udp listening socket on port %d",
+		  port);
+	sk = prepare_listen_socket(my_family, SOCK_DGRAM, port, 0);
+	if (sk == -1)
 		return;
 
 	debug(DBG_NORMAL, "DNS wrapper daemon on port %d up & running", port);
-	for(;;) {
-		if(!sk)
+	for (;;) {
+		if (!sk)
 			fatal("The dns_wrapper_daemon socket got corrupted");
 
 		FD_ZERO(&fdset);
 		FD_SET(sk, &fdset);
 
-		ret = select(sk+1, &fdset, NULL, NULL, NULL);
-		if(sigterm_timestamp)
+		ret = select(sk + 1, &fdset, NULL, NULL, NULL);
+		if (sigterm_timestamp)
 			/* NetsukukuD has been closed */
 			break;
 		if (ret < 0) {
 #ifdef DEBUG
-			if(select_errors > 20)
+			if (select_errors > 20)
 				break;
 			select_errors++;
 #endif
 			error("dns_wrapper_daemonp: select error: %s",
-					strerror(errno));
+				  strerror(errno));
 			continue;
 		}
-		if(!FD_ISSET(sk, &fdset))
+		if (!FD_ISSET(sk, &fdset))
 			continue;
 
 		setzero(&buf, MAX_DNS_PKT_SZ);
@@ -147,28 +153,29 @@ void dns_wrapper_daemon(u_short port)
 			sizeof(struct sockaddr_in) : sizeof(struct sockaddr_in6);
 
 		/* we get the DNS query */
-		err=inet_recvfrom(sk, buf, MAX_DNS_PKT_SZ, MSG_WAITALL,
-				&exec_pkt_argv.from, &exec_pkt_argv.from_len);
-		if(err < 0) {
+		err = inet_recvfrom(sk, buf, MAX_DNS_PKT_SZ, MSG_WAITALL,
+							&exec_pkt_argv.from, &exec_pkt_argv.from_len);
+		if (err < 0) {
 			debug(DBG_NOISE, "dns_wrapper_daemonp: recv of the dns"
-					" query pkt aborted!");
+				  " query pkt aborted!");
 			continue;
 		}
 
 		/* Exec the pkt in another thread */
-		exec_pkt_argv.sk=sk;
-		exec_pkt_argv.rpkt_sz=err;
-		exec_pkt_argv.rpkt=buf;
+		exec_pkt_argv.sk = sk;
+		exec_pkt_argv.rpkt_sz = err;
+		exec_pkt_argv.rpkt = buf;
 
 		pthread_mutex_lock(&dns_exec_lock);
 		pthread_create(&thread, &t_attr, dns_exec_pkt,
-				(void *)&exec_pkt_argv);
+					   (void *) &exec_pkt_argv);
 		pthread_mutex_lock(&dns_exec_lock);
 		pthread_mutex_unlock(&dns_exec_lock);
 	}
 }
 
-void *dns_wrapper_thread(void *null)
+void *
+dns_wrapper_thread(void *null)
 {
 	dns_wrapper_daemon(DNS_WRAPPER_PORT);
 	return 0;

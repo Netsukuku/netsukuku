@@ -45,8 +45,7 @@
 #define IPT_CONNTRACK_EXPIRES	0x80
 
 /* This is exposed to userspace, so remains frozen in time. */
-struct ip_conntrack_old_tuple
-{
+struct ip_conntrack_old_tuple {
 	struct {
 		u_int32_t ip;
 		union {
@@ -65,8 +64,7 @@ struct ip_conntrack_old_tuple
 	} dst;
 };
 
-struct ipt_conntrack_info
-{
+struct ipt_conntrack_info {
 	unsigned int statemask, statusmask;
 
 	struct ip_conntrack_old_tuple tuple[IP_CT_DIR_MAX];

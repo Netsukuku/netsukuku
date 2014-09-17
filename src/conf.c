@@ -32,12 +32,13 @@
  *
  * do not make the environment dirty
  */
-void clear_config_env(void)
+void
+clear_config_env(void)
 {
 	int i;
 
-	for(i=0; config_str[i][0]; i++)
-		if(getenv(config_str[i]))
+	for (i = 0; config_str[i][0]; i++)
+		if (getenv(config_str[i]))
 			unsetenv(config_str[i]);
 }
 
@@ -48,31 +49,32 @@ void clear_config_env(void)
  * On failure fatal() is called, so it will never return ;)
  * `file' and `pos' are used by fatal() to tell where the corrupted `line' was.
  */
-void parse_config_line(char *file, int pos, char *line)
+void
+parse_config_line(char *file, int pos, char *line)
 {
-	int i, e=0;
+	int i, e = 0;
 	char *value;
-	
-	if(!(value=strchr(line, '=')))
-		fatal("The line %s:%d is invalid, it does not contain the '=' "
-				"character. Aborting.", file, pos);
 
-	for(i=0; config_str[i][0]; i++)
-		if(strstr(line, config_str[i])) {
-			e=1;
+	if (!(value = strchr(line, '=')))
+		fatal("The line %s:%d is invalid, it does not contain the '=' "
+			  "character. Aborting.", file, pos);
+
+	for (i = 0; config_str[i][0]; i++)
+		if (strstr(line, config_str[i])) {
+			e = 1;
 			break;
 		}
-	if(!e)
- 	    fatal("The line %s:%d does not contain a valid option. Aborting.",
-				file, pos);
+	if (!e)
+		fatal("The line %s:%d does not contain a valid option. Aborting.",
+			  file, pos);
 
 	value++;
-	while(isspace(*value)) 
+	while (isspace(*value))
 		value++;
-	
-	if(setenv(config_str[i], value, 1))
-		fatal("Error in line %s:%d: %s. Aborting.", file, pos, 
-				strerror(errno));
+
+	if (setenv(config_str[i], value, 1))
+		fatal("Error in line %s:%d: %s. Aborting.", file, pos,
+			  strerror(errno));
 }
 
 
@@ -83,47 +85,48 @@ void parse_config_line(char *file, int pos, char *line)
  * parse_config_line() detects a corrupted line, fatal() is directly called.
  * On success 0 is returned.
  */
-int load_config_file(char *file)
+int
+load_config_file(char *file)
 {
 	FILE *fd;
-	char buf[PATH_MAX+1], *p, *str;
+	char buf[PATH_MAX + 1], *p, *str;
 	size_t slen;
-	int i=0, e=0;
+	int i = 0, e = 0;
 
-	if(!(fd=fopen(file, "r"))) {
+	if (!(fd = fopen(file, "r"))) {
 		fatal("Cannot load the configuration file from %s: %s\n"
-			"  Maybe you want to use the -c option ?",
-			file, strerror(errno));
+			  "  Maybe you want to use the -c option ?",
+			  file, strerror(errno));
 		return -1;
 	}
 
-	while(!feof(fd) && i < CONF_MAX_LINES) {
-		setzero(buf, PATH_MAX+1);
+	while (!feof(fd) && i < CONF_MAX_LINES) {
+		setzero(buf, PATH_MAX + 1);
 		fgets(buf, PATH_MAX, fd);
 		e++;
 
-		if(feof(fd))
+		if (feof(fd))
 			break;
 
-		str=buf;
-		while(isspace(*str))
+		str = buf;
+		while (isspace(*str))
 			str++;
-		if(*str=='#' || !*str) {
+		if (*str == '#' || !*str) {
 			/* Strip off any comment or null lines */
 			continue;
 		} else {
 			/* Remove the last part of the string where a side
-			 * comment starts, 	#a comment like this.
+			 * comment starts,  #a comment like this.
 			 */
-			if((p=strrchr(str, '#')))
-				*p='\0';
-			
+			if ((p = strrchr(str, '#')))
+				*p = '\0';
+
 			/* Don't include the newline and spaces of the end of 
 			 * the string */
-			slen=strlen(str);
-			for(p=&str[slen-1]; isspace(*p); p--)
-				*p='\0';
-			
+			slen = strlen(str);
+			for (p = &str[slen - 1]; isspace(*p); p--)
+				*p = '\0';
+
 
 			parse_config_line(file, e, str);
 			i++;

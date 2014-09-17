@@ -41,8 +41,7 @@
 /* 
  * The allowed options in the configuration file
  */
-enum config_options
-{
+enum config_options {
 	CONF_NTK_INT_MAP_FILE,
 	CONF_NTK_BNODE_MAP_FILE,
 	CONF_NTK_EXT_MAP_FILE,
@@ -62,7 +61,7 @@ enum config_options
 
 	CONF_DISABLE_ANDNA,
 	CONF_DISABLE_RESOLVCONF,
-	
+
 	CONF_NTK_RESTRICTED_MODE,
 	CONF_NTK_RESTRICTED_CLASS,
 	CONF_NTK_INTERNET_CONNECTION,
@@ -77,44 +76,43 @@ enum config_options
 	CONF_NTK_TC_SHAPER_SCRIPT,
 };
 
-const static char config_str[][30]=
-{
-	{ "ntk_int_map_file" },
-	{ "ntk_bnode_map_file" },
-	{ "ntk_ext_map_file" },
-	
-	{ "andna_hnames_file" },
-	{ "snsd_nodes_file" },
-	{ "andna_cache_file" },
-	{ "andna_lclkey_file" },
-	{ "andna_lcl_file" },
-	{ "andna_rhc_file" },
-	{ "andna_counter_c_file" },
+const static char config_str[][30] = {
+	{"ntk_int_map_file"},
+	{"ntk_bnode_map_file"},
+	{"ntk_ext_map_file"},
 
-	{ "pid_file" },
-	{ "ntk_max_connections" },
-	{ "ntk_max_accepts_per_host" },
-	{ "max_accepts_per_host_time" },
+	{"andna_hnames_file"},
+	{"snsd_nodes_file"},
+	{"andna_cache_file"},
+	{"andna_lclkey_file"},
+	{"andna_lcl_file"},
+	{"andna_rhc_file"},
+	{"andna_counter_c_file"},
 
-	{ "disable_andna" },
-	{ "disable_resolvconf" },
-	{ "ntk_restricted_mode" },
-	{ "ntk_restricted_class" },
-	{ "internet_connection" },
-	{ "internet_gateway" },
-	{ "internet_upload_rate" },
-	{ "internet_download_rate" },
-	{ "internet_ping_hosts" },
-	{ "share_internet" },
-	{ "shape_internet" },
-	{ "use_shared_internet" },
-	{ "ip_masquerade_script" },
-	{ "tc_shaper_script" },
-	{ 0 },
+	{"pid_file"},
+	{"ntk_max_connections"},
+	{"ntk_max_accepts_per_host"},
+	{"max_accepts_per_host_time"},
+
+	{"disable_andna"},
+	{"disable_resolvconf"},
+	{"ntk_restricted_mode"},
+	{"ntk_restricted_class"},
+	{"internet_connection"},
+	{"internet_gateway"},
+	{"internet_upload_rate"},
+	{"internet_download_rate"},
+	{"internet_ping_hosts"},
+	{"share_internet"},
+	{"shape_internet"},
+	{"use_shared_internet"},
+	{"ip_masquerade_script"},
+	{"tc_shaper_script"},
+	{0},
 };
 
 
 void clear_config_env(void);
 int load_config_file(char *file);
 
-#endif /*CONF_H*/
+#endif							/*CONF_H */

@@ -35,18 +35,21 @@
 #include "log.h"
 #include "xmalloc.h"
 
-void init_crypto(void)
+void
+init_crypto(void)
 {
 	RAND_load_file("/dev/urandom", 1024);
 	ERR_load_crypto_strings();
 }
 
-void free_crypto(void)
+void
+free_crypto(void)
 {
 	ERR_free_strings();
 }
 
-char *ssl_strerr(void)
+char *
+ssl_strerr(void)
 {
 	return ERR_error_string(ERR_get_error(), 0);
 }
@@ -58,43 +61,47 @@ char *ssl_strerr(void)
  * `priv' and `priv_len'.
  * On error null is returned.
  */
-RSA *genrsa(int key_bits, u_char **pub, u_int *pub_len, u_char **priv, u_int *priv_len)
+RSA *
+genrsa(int key_bits, u_char ** pub, u_int * pub_len, u_char ** priv,
+	   u_int * priv_len)
 {
-	RSA *rsa=0;
+	RSA *rsa = 0;
 	int len;
-	
-	rsa=RSA_generate_key(key_bits, RSA_F4, NULL, NULL);
+
+	rsa = RSA_generate_key(key_bits, RSA_F4, NULL, NULL);
 	if (!rsa) {
-		debug(DBG_SOFT, "RSA key generation failed"); 
+		debug(DBG_SOFT, "RSA key generation failed");
 		goto error;
 	}
 
-	if(priv) {
-		*priv=0;
-		len=i2d_RSAPrivateKey(rsa, priv);
-		if(priv_len)
-			*priv_len=len;
-		if(len <= 0) {
-			debug(DBG_SOFT, "Cannot dump RSA public key: %s", ssl_strerr());
+	if (priv) {
+		*priv = 0;
+		len = i2d_RSAPrivateKey(rsa, priv);
+		if (priv_len)
+			*priv_len = len;
+		if (len <= 0) {
+			debug(DBG_SOFT, "Cannot dump RSA public key: %s",
+				  ssl_strerr());
 			goto error;
 		}
 	}
 
-	if(pub) {
-		*pub=0;
-		len=i2d_RSAPublicKey(rsa, pub);
-		if(pub_len)
-			*pub_len=len;
-		if(len <= 0) {
-			debug(DBG_SOFT, "Cannot dump RSA public key: %s", ssl_strerr());
+	if (pub) {
+		*pub = 0;
+		len = i2d_RSAPublicKey(rsa, pub);
+		if (pub_len)
+			*pub_len = len;
+		if (len <= 0) {
+			debug(DBG_SOFT, "Cannot dump RSA public key: %s",
+				  ssl_strerr());
 			goto error;
 		}
 	}
-	
+
 	return rsa;
-error:
-	if(rsa)
-		RSA_free(rsa);	
+  error:
+	if (rsa)
+		RSA_free(rsa);
 	return 0;
 }
 
@@ -104,9 +111,10 @@ error:
  * Converts a dump of a rsa pub key to a RSA structure, which is returned.
  * Remeber to RSA_free() the returned key.
  */
-RSA *get_rsa_pub(const u_char **pub_key, long length)
+RSA *
+get_rsa_pub(const u_char ** pub_key, long length)
 {
-	 return d2i_RSAPublicKey(NULL, pub_key, length);
+	return d2i_RSAPublicKey(NULL, pub_key, length);
 }
 
 /*
@@ -115,17 +123,20 @@ RSA *get_rsa_pub(const u_char **pub_key, long length)
  * Converts a dump of a rsa priv key to a RSA structure, which is returned.
  * Remeber to RSA_free() the returned key.
  */
-RSA *get_rsa_priv(const u_char **priv_key, long length)
+RSA *
+get_rsa_priv(const u_char ** priv_key, long length)
 {
-	 return d2i_RSAPrivateKey(NULL, priv_key, length);
+	return d2i_RSAPrivateKey(NULL, priv_key, length);
 }
 
-u_char *hash_sha1(u_char *msg, u_int m_len, u_char *hash)
+u_char *
+hash_sha1(u_char * msg, u_int m_len, u_char * hash)
 {
 	return SHA1(msg, m_len, hash);
 }
 
-u_char *hash_md5(u_char *msg, u_int m_len, u_char *hash)
+u_char *
+hash_md5(u_char * msg, u_int m_len, u_char * hash)
 {
 	return MD5(msg, m_len, hash);
 }
@@ -135,20 +146,21 @@ u_char *hash_md5(u_char *msg, u_int m_len, u_char *hash)
  * signature. In `siglen' it stores the signature's lenght.
  * On error null is returned.
  */
-u_char *rsa_sign(u_char *msg, u_int m_len, RSA *priv, u_int *siglen)
+u_char *
+rsa_sign(u_char * msg, u_int m_len, RSA * priv, u_int * siglen)
 {
 	u_char *signature;
 	int ret, len;
 
-	ret=RSA_size(priv);
-	if(!ret)
+	ret = RSA_size(priv);
+	if (!ret)
 		return 0;
 
-	signature=(u_char *)xmalloc(ret);
-	ret=RSA_sign(NID_sha1, hash_sha1(msg, m_len, 0), SHA_DIGEST_LENGTH,
-			signature,(u_int*) &len, priv);
-	if(siglen)
-		*siglen=len;
+	signature = (u_char *) xmalloc(ret);
+	ret = RSA_sign(NID_sha1, hash_sha1(msg, m_len, 0), SHA_DIGEST_LENGTH,
+				   signature, (u_int *) & len, priv);
+	if (siglen)
+		*siglen = len;
 
 	return !ret ? 0 : signature;
 }
@@ -157,8 +169,10 @@ u_char *rsa_sign(u_char *msg, u_int m_len, RSA *priv, u_int *siglen)
  * verify_sign: verifies the rsa `signature' of `msg'.
  * It returns 1 if the signature is valid, otherwise 0 is returned.
  */
-int verify_sign(u_char *msg, u_int m_len, u_char *signature, u_int siglen, RSA *pub)
+int
+verify_sign(u_char * msg, u_int m_len, u_char * signature, u_int siglen,
+			RSA * pub)
 {
-        return RSA_verify(NID_sha1, hash_sha1(msg, m_len, 0), SHA_DIGEST_LENGTH,
-			signature, siglen, pub);
+	return RSA_verify(NID_sha1, hash_sha1(msg, m_len, 0),
+					  SHA_DIGEST_LENGTH, signature, siglen, pub);
 }

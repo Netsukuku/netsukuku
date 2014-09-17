@@ -22,12 +22,12 @@
 #include "gmap.h"
 
 #define QSPN_WAIT_ROUND 	32	/*This is a crucial value. It is the number of 
-					  seconds to be waited before the next qspn_round 
-					  can be sent*/
+								   seconds to be waited before the next qspn_round 
+								   can be sent */
 #define QSPN_WAIT_ROUND_MS	QSPN_WAIT_ROUND*1000
 #define QSPN_WAIT_DELTA_MS	64	/*If a qspn_round is sent while 
-					  qspn_round_left() < QSPN_WAIT_DELTA_MS,
-					  then it is acceptable*/
+								   qspn_round_left() < QSPN_WAIT_DELTA_MS,
+								   then it is acceptable */
 
 #ifdef DEBUG
 #undef QSPN_WAIT_ROUND
@@ -46,15 +46,14 @@
 
 /* This list keeps tracks of the qspn_pkts sent or
  * received by our rnodes*/
-struct qspn_buffer
-{	
-	LLIST_HDR	(struct qspn_buffer);
-	
-	map_node      *	rnode;		/* the rnode this buf is referring to */
-	u_int	 	replies;	/* How many replies we forwarded/sent
-					   to `rnode' */
-	u_char	      * replier;	/* Who has sent these replies (qspn_sub_id) */
-	u_short	      * flags;
+struct qspn_buffer {
+	LLIST_HDR(struct qspn_buffer);
+
+	map_node *rnode;			/* the rnode this buf is referring to */
+	u_int replies;				/* How many replies we forwarded/sent
+								   to `rnode' */
+	u_char *replier;			/* Who has sent these replies (qspn_sub_id) */
+	u_short *flags;
 };
 
 
@@ -62,20 +61,20 @@ struct qspn_buffer
  *  *  *  Global vars  *  *  *
  */
 
-struct qspn_buffer **qspn_b; /*It is sizeof(struct qspn_buffer *)*levels big*/
+struct qspn_buffer **qspn_b;	/*It is sizeof(struct qspn_buffer *)*levels big */
 
-int *qspn_send_mutex;	     /*It is sizeof(int)*levels big.*/
+int *qspn_send_mutex;			/*It is sizeof(int)*levels big. */
 
 #define GCOUNT_LEVELS		(MAX_LEVELS-ZERO_LEVEL+UNITY_LEVEL)
 /*
  * qspn_gnode_count[x] is the number of nodes present in the gnode
  * me.cur_quadg.gnode[x], it is updated at each qspn_round.
  * Use the _EL() macro!
- */ 
+ */
 u_int qspn_gnode_count[GCOUNT_LEVELS];
 
 /* gcount of the previous qspn_round */
-u_int qspn_old_gcount[GCOUNT_LEVELS]; 
+u_int qspn_old_gcount[GCOUNT_LEVELS];
 
 
 /*
@@ -86,28 +85,30 @@ void qspn_reset_counters(u_char levels);
 void qspn_reset(u_char levels);
 void qspn_init(u_char levels);
 void qspn_free(void);
-void qspn_set_map_vars(u_char level, map_node **map, map_node **root_node, 
-		int *root_node_pos, map_gnode **gmap);
+void qspn_set_map_vars(u_char level, map_node ** map,
+					   map_node ** root_node, int *root_node_pos,
+					   map_gnode ** gmap);
 
 void qspn_b_clean(u_char level);
-int  qspn_b_add(struct qspn_buffer *qb, u_char replier, u_short flags);
-int  qspn_b_find_reply(struct qspn_buffer *qb, int sub_id);
-struct qspn_buffer *qspn_b_find_rnode(struct qspn_buffer *qb, map_node *rnode);
-int qspn_b_del_dead_rnodes(struct qspn_buffer **qb, map_node *root_node);
+int qspn_b_add(struct qspn_buffer *qb, u_char replier, u_short flags);
+int qspn_b_find_reply(struct qspn_buffer *qb, int sub_id);
+struct qspn_buffer *qspn_b_find_rnode(struct qspn_buffer *qb,
+									  map_node * rnode);
+int qspn_b_del_dead_rnodes(struct qspn_buffer **qb, map_node * root_node);
 void qspn_b_del_all_dead_rnodes(void);
 
-int  qspn_round_left(u_char level);
+int qspn_round_left(u_char level);
 void update_qspn_time(u_char level, u_int new_qspn_time);
 
-void qspn_inc_gcount(u_int *gcount, int level, int inc);
-void qspn_dec_gcount(u_int *gcount, int level, int dec);
-void qspn_reset_gcount(u_int *gcount, int level, int value);
-void qspn_backup_gcount(u_int *old_gcount, int *gcount);
+void qspn_inc_gcount(u_int * gcount, int level, int inc);
+void qspn_dec_gcount(u_int * gcount, int level, int dec);
+void qspn_reset_gcount(u_int * gcount, int level, int value);
+void qspn_backup_gcount(u_int * old_gcount, int *gcount);
 
 void qspn_new_round(u_char level, int new_qspn_id, u_int new_qspn_time);
 
-int  qspn_send(u_char level);
-int  qspn_close(PACKET rpkt);
-int  qspn_open(PACKET rpkt);
+int qspn_send(u_char level);
+int qspn_close(PACKET rpkt);
+int qspn_open(PACKET rpkt);
 
-#endif /*QSPN_H*/
+#endif							/*QSPN_H */

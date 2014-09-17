@@ -82,7 +82,7 @@ do{									\
 char xor_int(int i);
 
 void swap_array(int nmemb, size_t nmemb_sz, void *src, void *dst);
-void swap_ints(int nmemb, unsigned int *x, unsigned int *y) ;
+void swap_ints(int nmemb, unsigned int *x, unsigned int *y);
 void swap_shorts(int nmemb, unsigned short *x, unsigned short *y);
 
 int rand_range(int _min, int _max);
@@ -91,9 +91,9 @@ void xsrand(void);
 char *last_token(char *string, char tok);
 void strip_char(char *string, char char_to_strip);
 char **split_string(char *str, const char *div_str, int *substrings,
-		int max_substrings, int max_substring_sz);
+					int max_substrings, int max_substring_sz);
 
-		
+
 int find_int(int x, int *ia, int nmemb);
 
 void xtimer(u_int secs, u_int steps, int *counter);
@@ -104,4 +104,4 @@ int exec_root_script(char *script, char *argv);
 
 void do_nothing(void);
 
-#endif /*MISC_H*/
+#endif							/*MISC_H */
