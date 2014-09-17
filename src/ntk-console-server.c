@@ -132,7 +132,7 @@ request_processing(int session_fd, cmd_packet_t packet)
 			//send_response(session_fd, (char)me.cur_qspn_id);
 			break;
 		case COMMAND_CURIP:
-			//send_response(session_fd, (char)me.cur_ip.data);
+			snprintf(buffer, maxBuffer, "IP: %s", inet_to_str(me.cur_ip));
 			break;
 		case COMMAND_CURNODE:
 			//send_response(session_fd, (char)me.cur_node);
