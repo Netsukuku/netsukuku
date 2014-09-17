@@ -1164,10 +1164,6 @@ int main(int argc, char **argv)
 	log_init(argv[0], 1, 1);
 	clear_all();
 
-#ifndef QSPN_EMPIRIC
-	fatal("QSPN_EMPIRIC is not enabled! Aborting.");
-#endif
-	
 	for(i=0; i<MAXGROUPNODE; i++) 
 		pthread_mutex_init(&mutex[i], NULL);
 

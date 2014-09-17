@@ -26,22 +26,24 @@ NTK_VERSION="0.0.9b"
 #	Sources and libs
 #
 
-sources_common    = Split('xmalloc.c log.c misc.c buffer.c endianness.c')
-sources_qspn      = Split('qspn-empiric.c') + sources_common
-sources_netsukuku = Split("""accept.c llist.c ipv6-gmp.c inet.c request.c map.c
-		   gmap.c bmap.c pkts.c radar.c hook.c rehook.c tracer.c qspn.c 
-		   hash.c daemon.c crypto.c snsd_cache.c
-		   andna_cache.c andna.c andns_lib.c err_errno.c
-		   dnslib.c andns.c andns_net.c andns_snsd.c
-		   ll_map.c libnetlink.c if.c krnl_route.c krnl_rule.c
-		   iptunnel.c route.c conf.c dns_wrapper.c igs.c mark.c 
-		   libiptc/libip4tc.c libping.c ntk-console-server.c
-		   netsukuku.c""") + sources_common
-sources_ntkresolv = sources_common + Split("""andns_lib.c ntkresolv.c andns_net.c
-					      crypto.c snsd_cache.c inet.c
-					      ll_map.c libnetlink.c
-					      err_errno.c""") 
-sources_ntkconsole = Split('ntk-console.c')
+sources_common    = ['xmalloc.c', 'log.c', 'misc.c', 'buffer.c', 'endianness.c']
+
+sources_qspn      = ['qspn-empiric.c'] + sources_common
+sources_netsukuku = ['accept.c', 'llist.c', 'ipv6-gmp.c', 'inet.c', 'request.c',
+					 'map.c', 'gmap.c', 'bmap.c', 'pkts.c', 'radar.c', 'hook.c',
+					 'rehook.c', 'tracer.c', 'qspn.c', 'hash.c', 'daemon.c',
+					 'crypto.c', 'snsd_cache.c', 'andna_cache.c', 'andna.c',
+					 'andns_lib.c', 'err_errno.c', 'dnslib.c', 'andns.c',
+					 'andns_net.c', 'andns_snsd.c', 'll_map.c', 'libnetlink.c',
+					 'if.c', 'krnl_route.c', 'krnl_rule.c', 'iptunnel.c',
+					 'route.c', 'conf.c', 'dns_wrapper.c', 'igs.c', 'mark.c',
+					 'libiptc/libip4tc.c', 'libping.c', 'ntk-console-server.c',
+					 'netsukuku.c'] + sources_common
+sources_ntkresolv = ['andns_lib.c', 'andns_net.c', 'crypto.c', 'snsd_cache.c',
+					 'inet.c', 'll_map.c', 'libnetlink.c', 'err_errno.c',
+					 'ntkresolv.c'] + sources_common
+
+sources_ntkconsole = ['ntk-console.c']
 
 libs = ['gmp', 'pthread', 'crypto', 'z']
 
@@ -157,7 +159,7 @@ qspn  		= env.Program('qspn-empiric', sources_qspn, LIBS = libs, CPPPATH = '.')
 ntkresolv 	= env.Program('ntk-resolv', sources_ntkresolv, LIBS = libs, CPPPATH = '.')
 ntkconsole 	= env.Program('ntk-console', sources_ntkconsole, LIBS = libs, CPPPATH = '.', CFLAGS = '-std=c99')
 
-Default(ntkd, ntkresolv, ntkconsole)
+Default(ntkd, ntkresolv, ntkconsole, qspn)
 
 
 #
