@@ -572,31 +572,11 @@ random_ip(inet_prefix * ipstart, int final_level, int final_gid,
 		for (;;) {
 			/*
 			 * Let's choose a completely random ip.
-			 * New gnodes are limited to:
-			 * IPv4: 172.16.0.0/12
-			 * IPv6: fe6e:746b::/32
 			 */
 			levels = total_levels;
-			if (my_family == AF_INET) {
-				int i = 0;
-				while (i < 4) {
-					int octet = 0;
-					switch (i) {
-						case 0:
-							octet = 172;
-							break;
-						case 1:
-							octet = (rand() % (31-16)) + 16;
-							break;
-						default:
-							octet = rand() % 255;
-							break;
-					}
-					idata[0] |= (octet << (i * 8));
-					i++;
-				}
-			} else {
-				// TODO: Generate a random address in fe6e:746b::/32
+			if (my_family == AF_INET)
+				idata[0] = rand();
+			else {
 				idata[0] = rand();
 				idata[1] = rand();
 				idata[2] = rand();
