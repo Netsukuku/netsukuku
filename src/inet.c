@@ -1003,6 +1003,10 @@ ssize_t inet_send(int s, const void *msg, size_t len, int flags)
 	if((err=send(s, msg, len, flags)) < 0) {
 		switch(errno)
 		{
+			/* This divides the length of a packet if it is too large to send,
+			* it then sends the first half, And then the second half.
+			* If it is too large to send again, When it tries to send the first half
+			* it will just come back here to repeat the process as needed. */
 			case EMSGSIZE:
 				inet_send(s, msg, len/2, flags);
 				err=inet_send(s, (const char *)msg+(len/2),
