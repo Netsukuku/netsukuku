@@ -155,6 +155,40 @@ void console_uptime(void) {
     uptime_day1 -= uptime_day;
     uptime_month1 -= uptime_month;
     uptime_year1 -= uptime_year;
+    /* Checks if the date/time is negative,
+     * And makes it positive.
+     * e.g -11 is 1 because this is a signed variable
+     * at a modulus of 12. Thus after 12, It is -12
+     * which is zero, Every number after this is counting up
+     * to 12 again, Which is going to be 0 in this instance.
+     * -12 to 12 is 24 actual months.
+     * So -11 + 12 is 1, As it should be, And -12 + 12 is zero
+     * as it should be. The only difference is the modulus number,
+     * i.e: 12, 24, etc. */
+    if(uptime_month1 < 0)
+        uptime_month1 + 12;
+    if(uptime_day1 < 0)
+        uptime_day1 + 365;
+    if(uptime_hour1 < 0)
+        uptime_hour1 + 24;
+    if(uptime_min1 < 0)
+        uptime_min1 + 60;
+    if(uptime_sec1 < 0)
+        uptime_sec1 + 60;
+    /* Checks if the date/time is the modulus, And resets it to zero.
+     * e.g: 12 months is a year, Listing 12 months and one year
+     * is confusing,
+     * And implies that it has been two years. */
+    if(uptime_month1 == 12)
+        uptime_month1 = 0;
+    if(uptime_day1 == 365)
+        uptime_day1 = 0;
+    if(uptime_hour1 == 24)
+        uptime_hour1 = 0;
+    if(uptime_min1 == 60)
+        uptime_min1 = 0;
+    if(uptime_sec1 == 60)
+        uptime_sec1 = 0;
     
     printf("Total Uptime is: %i Year(s), %i Month(s), %i Day(s), %i Hour(s), %i Minute(s), %i Second(s)\n",uptime_year1, uptime_month1, uptime_day1, uptime_hour1, uptime_min1, uptime_sec1);
     
@@ -218,11 +252,11 @@ int main(void) {
     
     printf("This is the Netsukuku Console, Please type 'help' for more information.\n");
     
-    char * request;
+    char request;
 
     char request1;
     
-    request = (char *)malloc(BUFFER_LENGTH);
+    request = (char)malloc(BUFFER_LENGTH);
     
     request1 = (char)malloc(BUFFER_LENGTH);
     
@@ -230,11 +264,11 @@ int main(void) {
     
     printf("\n>");
         
-    fgets(request, 16, stdin);
+    fgets(request1, 16, stdin);
     
     fflush(stdin);
     
-    request = request1;
+    request1 = request;
     
     console(request);
     } while(FALSE);
