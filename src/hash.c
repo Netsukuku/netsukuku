@@ -23,7 +23,8 @@
 #include "hash.h"
 
 /* Robert Jenkins's 32 bit Mix Function */
-unsigned int inthash(unsigned int key)
+unsigned int
+inthash(unsigned int key)
 {
 	key += (key << 12);
 	key ^= (key >> 22);
@@ -70,25 +71,28 @@ unsigned int inthash(unsigned int key)
  * returns:
  *	32 bit hash as a static hash type
  */
-u_long fnv_32_buf(void *buf, size_t len, u_long hval)
+u_long
+fnv_32_buf(void *buf, size_t len, u_long hval)
 {
-    u_char *bp = (u_char *)buf;	/* start of buffer */
-    u_char *be = bp + len;		/* beyond end of buffer */
+	u_char *bp = (u_char *) buf;	/* start of buffer */
+	u_char *be = bp + len;		/* beyond end of buffer */
 
-    /*
-     * FNV-1 hash each octet in the buffer
-     */
-    while (bp < be) {
+	/*
+	 * FNV-1 hash each octet in the buffer
+	 */
+	while (bp < be) {
 
-	/* multiply by the 32 bit FNV magic prime mod 2^32 */
-	hval += (hval<<1) + (hval<<4) + (hval<<7) + (hval<<8) + (hval<<24);
+		/* multiply by the 32 bit FNV magic prime mod 2^32 */
+		hval +=
+			(hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) +
+			(hval << 24);
 
-	/* xor the bottom with the current octet */
-	hval ^= (u_long)*bp++;
-    }
+		/* xor the bottom with the current octet */
+		hval ^= (u_long) * bp++;
+	}
 
-    /* return our new hash value */
-    return hval;
+	/* return our new hash value */
+	return hval;
 }
 
 
@@ -98,44 +102,45 @@ u_long fnv_32_buf(void *buf, size_t len, u_long hval)
  * first five operations no overflow is possible so we optimized it a
  * bit.  
  */
-inline unsigned int dl_elf_hash (const unsigned char *name)
+unsigned int
+dl_elf_hash(const unsigned char *name)
 {
-  unsigned long int hash = 0;
-  if (*name != '\0') {
-      hash = *name++;
-      if (*name != '\0') {
-	  hash = (hash << 4) + *name++;
-	  if (*name != '\0') {
-	      hash = (hash << 4) + *name++;
-	      if (*name != '\0') {
-		  hash = (hash << 4) + *name++;
-		  if (*name != '\0') {
-		      hash = (hash << 4) + *name++;
-		      while (*name != '\0') {
-			  unsigned long int hi;
-			  hash = (hash << 4) + *name++;
-			  hi = hash & 0xf0000000;
+	unsigned long int hash = 0;
+	if (*name != '\0') {
+		hash = *name++;
+		if (*name != '\0') {
+			hash = (hash << 4) + *name++;
+			if (*name != '\0') {
+				hash = (hash << 4) + *name++;
+				if (*name != '\0') {
+					hash = (hash << 4) + *name++;
+					if (*name != '\0') {
+						hash = (hash << 4) + *name++;
+						while (*name != '\0') {
+							unsigned long int hi;
+							hash = (hash << 4) + *name++;
+							hi = hash & 0xf0000000;
 
-			  /* The algorithm specified in the ELF ABI is as
-			     follows:
+							/* The algorithm specified in the ELF ABI is as
+							   follows:
 
-			     if (hi != 0)
-			       hash ^= hi >> 24;
+							   if (hi != 0)
+							   hash ^= hi >> 24;
 
-			     hash &= ~hi;
+							   hash &= ~hi;
 
-			     But the following is equivalent and a lot
-			     faster, especially on modern processors.  */
+							   But the following is equivalent and a lot
+							   faster, especially on modern processors.  */
 
-			  hash ^= hi;
-			  hash ^= hi >> 24;
+							hash ^= hi;
+							hash ^= hi >> 24;
+						}
+					}
+				}
 			}
-		    }
 		}
-	    }
 	}
-    }
-  return hash;
+	return hash;
 }
 
 /* 
@@ -145,22 +150,23 @@ inline unsigned int dl_elf_hash (const unsigned char *name)
  * If h_sec or h_usec are not null, it stores in them respectively the hash of
  * the second and the microsecond.
  */
-int hash_time(int *h_sec, int *h_usec)
+int
+hash_time(int *h_sec, int *h_usec)
 {
 	struct timeval t;
-	char str[sizeof(struct timeval)+1];
+	char str[sizeof(struct timeval) + 1];
 	u_int elf_hash;
-	
+
 	gettimeofday(&t, 0);
 	memcpy(str, &t, sizeof(struct timeval));
-	str[sizeof(struct timeval)]=0;
+	str[sizeof(struct timeval)] = 0;
 
-	elf_hash=dl_elf_hash((u_char *)str);
-	
-	if(h_sec)
-		*h_sec=inthash(t.tv_sec);
-	if(h_usec)
-		*h_usec=inthash(t.tv_usec);
+	elf_hash = dl_elf_hash((u_char *) str);
+
+	if (h_sec)
+		*h_sec = inthash(t.tv_sec);
+	if (h_usec)
+		*h_usec = inthash(t.tv_usec);
 
 	return inthash(elf_hash);
 }

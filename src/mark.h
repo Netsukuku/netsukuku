@@ -6,35 +6,35 @@
 //original inclusions
 #if LINUX_VERSION_CODE <= KERNEL_VERSION(2, 7, 0)
 #if 0
-  #include "libiptc/libiptc.h"
- #include <linux/netfilter_ipv4/ip_conntrack.h>
- #include <linux/netfilter_ipv4/ip_conntrack_tuple.h>
- #include "libiptc/ipt_conntrack.h"
- #include "libiptc/ipt_connmark.h"
- #include "libiptc/ipt_CONNMARK.h"
- #endif
-
- #if 1
- #include "libiptc/libiptc.h"
- #if 1
-  #include <linux/netfilter/nf_conntrack_common.h>
- #endif
- #if 0
- #include <linux/netfilter_ipv4/ipt_conntrack_tuple.h>
- #endif
+#include "libiptc/libiptc.h"
+#include <linux/netfilter_ipv4/ip_conntrack.h>
+#include <linux/netfilter_ipv4/ip_conntrack_tuple.h>
 #include "libiptc/ipt_conntrack.h"
 #include "libiptc/ipt_connmark.h"
 #include "libiptc/ipt_CONNMARK.h"
- #endif
+#endif
+
+#if 1
+#include "libiptc/libiptc.h"
+#if 1
+#include <linux/netfilter/nf_conntrack_common.h>
+#endif
+#if 0
+#include <linux/netfilter_ipv4/ipt_conntrack_tuple.h>
+#endif
+#include "libiptc/ipt_conntrack.h"
+#include "libiptc/ipt_connmark.h"
+#include "libiptc/ipt_CONNMARK.h"
+#endif
 
  /* 2010 fixes for debian package */
- #if 0
- #include "libiptc/libiptc.h"
- #include <linux/netfilter/nf_conntrack_common.h>
- #include <linux/netfilter_ipv4/ipt_conntrack.h>
- #include <linux/netfilter_ipv4/ipt_connmark.h>
- #include <linux/netfilter_ipv4/ipt_CONNMARK.h>
- #endif
+#if 0
+#include "libiptc/libiptc.h"
+#include <linux/netfilter/nf_conntrack_common.h>
+#include <linux/netfilter_ipv4/ipt_conntrack.h>
+#include <linux/netfilter_ipv4/ipt_connmark.h>
+#include <linux/netfilter_ipv4/ipt_CONNMARK.h>
+#endif
 #endif
 
 #include "libiptc/libiptc.h"
@@ -88,30 +88,31 @@
 //struct in_addr inet_dst,inet_dst_mask;
 
 typedef struct rule_store {
-	char			e[RESTORE_OUTPUT_RULE_SZ];
-	int			sz;
-	char 			*chain;
+	char e[RESTORE_OUTPUT_RULE_SZ];
+	int sz;
+	char *chain;
 } rule_store;
 
 /* Functions */
 
-int table_init(const char *table, iptc_handle_t *t);
-int insert_rule(const char *rule,iptc_handle_t *t,const char *chain,int pos);
-int append_rule(const char *rule,iptc_handle_t *t,const char *chain);
-int commit_rules(iptc_handle_t *t);
+int table_init(const char *table, iptc_handle_t * t);
+int insert_rule(const char *rule, iptc_handle_t * t, const char *chain,
+				int pos);
+int append_rule(const char *rule, iptc_handle_t * t, const char *chain);
+int commit_rules(iptc_handle_t * t);
 void restore_output_rule_init(char *rule);
 void ntk_forward_rule_init(char *rule);
-void mark_rule_init(char *rule,char *outiface,int outiface_num);
+void mark_rule_init(char *rule, char *outiface, int outiface_num);
 void igw_mark_rule_init(char *rule);
-int ntk_mark_chain_init(iptc_handle_t *t);
+int ntk_mark_chain_init(iptc_handle_t * t);
 int store_rules();
 int mark_init(int igw);
-int count_ntk_mark_chain(iptc_handle_t *t);
+int count_ntk_mark_chain(iptc_handle_t * t);
 int create_mark_rules(int n);
-int delete_ntk_forward_chain(iptc_handle_t *t);
-int delete_first_rule(iptc_handle_t *t,const char *chain);
-int rule_position(rule_store *rule,iptc_handle_t *t);
-int delete_rule(rule_store *rule,iptc_handle_t *t);
+int delete_ntk_forward_chain(iptc_handle_t * t);
+int delete_first_rule(iptc_handle_t * t, const char *chain);
+int rule_position(rule_store * rule, iptc_handle_t * t);
+int delete_rule(rule_store * rule, iptc_handle_t * t);
 int mark_close();
 
-#endif /* MARK_H */
+#endif							/* MARK_H */

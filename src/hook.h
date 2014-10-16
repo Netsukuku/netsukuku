@@ -21,9 +21,9 @@
 
 #include "qspn.h"
 
-#define MAX_FIRST_RADAR_SCANS	1  /* How many time we have to retry 
-				      the first radar_scan if we
-				      didn't found anything */
+#define MAX_FIRST_RADAR_SCANS	1	/* How many time we have to retry 
+									   the first radar_scan if we
+									   didn't found anything */
 #ifdef DEBUG
 #undef  MAX_FIRST_RADAR_SCANS
 #define MAX_FIRST_RADAR_SCANS	1
@@ -34,7 +34,7 @@
 #define HOOKING_IP_172		0xac100001	/* 172.16.0.1 */
 #define HOOKING_IPV6		0xfec00000	/* fec0:: */
 
-#define HOOK_RQ_TIMEOUT		8  /* seconds */
+#define HOOK_RQ_TIMEOUT		8	/* seconds */
 
 /*
  * * *  Global vars  * * *
@@ -45,7 +45,7 @@ int total_hooks;
 
 /* Current join_rate */
 u_int hook_join_rate;
-u_int rnodes_rehooked;		/* How many rnodes have rehooked with us */
+u_int rnodes_rehooked;			/* How many rnodes have rehooked with us */
 
 
 /*
@@ -62,20 +62,21 @@ u_int rnodes_rehooked;		/* How many rnodes have rehooked with us */
  * the gnode with `fn_hdr.gid' gid of the `fn_hdr.level'th level. So the free gnodes
  * are part of the (fn_hdr.level - 1)th level.
  */
-struct free_nodes_hdr
-{
-	u_char 		max_levels;	/* How many levels we are managing */
+struct free_nodes_hdr {
+	u_char max_levels;			/* How many levels we are managing */
 
-	uint32_t 	ipstart[MAX_IP_INT];	 /* The ipstart of the gnode */
-	u_char 		level;		/* The level where the gnode belongs */
-	u_char  	gid;		/* The gnode id */
-	u_char		nodes;		/* The number of free (g)nodes - 1 */
-	uint32_t	join_rate;	/* Join_rate of `level' */
-}_PACKED_;
-INT_INFO free_nodes_hdr_iinfo = { 1, { INT_TYPE_32BIT }, 
-				     { sizeof(struct free_nodes_hdr)-sizeof(uint32_t) },
-				     { 1 }
-				};
+	uint32_t ipstart[MAX_IP_INT];	/* The ipstart of the gnode */
+	u_char level;				/* The level where the gnode belongs */
+	u_char gid;					/* The gnode id */
+	u_char nodes;				/* The number of free (g)nodes - 1 */
+	uint32_t join_rate;			/* Join_rate of `level' */
+} _PACKED_;
+INT_INFO free_nodes_hdr_iinfo = { 1, {INT_TYPE_32BIT},
+{sizeof(struct free_nodes_hdr) - sizeof(uint32_t)}
+,
+{1}
+};
+
 #define FREE_NODES_SZ(nodes) (sizeof(struct free_nodes_hdr)  	      +\
 					    (sizeof(u_char) * (nodes)))
 
@@ -105,12 +106,13 @@ INT_INFO free_nodes_hdr_iinfo = { 1, { INT_TYPE_32BIT },
  */
 /* Note: for this int_info we are considering the timeval array as one int
  * with `max_levels'*2 members */
-INT_INFO qspn_round_pkt_iinfo = { 3, 
-				  { INT_TYPE_32BIT, INT_TYPE_32BIT, INT_TYPE_32BIT }, 
-				  { sizeof(char), IINFO_DYNAMIC_VALUE, IINFO_DYNAMIC_VALUE },
-				  { IINFO_DYNAMIC_VALUE, IINFO_DYNAMIC_VALUE, GCOUNT_LEVELS }
-				};
-	
+INT_INFO qspn_round_pkt_iinfo = { 3,
+	{INT_TYPE_32BIT, INT_TYPE_32BIT, INT_TYPE_32BIT}
+	,
+	{sizeof(char), IINFO_DYNAMIC_VALUE, IINFO_DYNAMIC_VALUE},
+	{IINFO_DYNAMIC_VALUE, IINFO_DYNAMIC_VALUE, GCOUNT_LEVELS}
+};
+
 #define QSPN_ROUND_PKT_SZ(levels)	(sizeof(u_char) + 			\
 					    ((levels) * sizeof(int32_t)) +	\
 			                    ((levels) * sizeof(struct timeval))+\
@@ -120,17 +122,17 @@ INT_INFO qspn_round_pkt_iinfo = { 3,
 /* 
  * * * Functions declaration * * *
  */
-	
+
 int put_free_nodes(PACKET rq_pkt);
 int put_qspn_round(PACKET rq_pkt);
 int put_ext_map(PACKET rq_pkt);
 int put_int_map(PACKET rq_pkt);
 int put_bnode_map(PACKET rq_pkt);
 
-int create_gnodes(inet_prefix *ip, int final_level);
+int create_gnodes(inet_prefix * ip, int final_level);
 void set_ip_and_def_gw(char *dev, inet_prefix ip);
 
 int hook_init(void);
-int netsukuku_hook(map_gnode *hook_gnode, int hook_level);
+int netsukuku_hook(map_gnode * hook_gnode, int hook_level);
 
-#endif /*HOOK_H*/
+#endif							/*HOOK_H */

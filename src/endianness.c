@@ -40,50 +40,54 @@
 
 #define IS_DYNAMIC(i) ({do_nothing();})
 
-#endif	/*DEBUG*/
-
-void *int_info_copy(int_info *dst, const int_info *src)
+#endif /*DEBUG*/
+void *
+int_info_copy(int_info * dst, const int_info * src)
 {
 	return memcpy(dst, src, sizeof(int_info));
 }
-		
-void ints_array_ntohl(int *hostlong, int nmemb)
+
+void
+ints_array_ntohl(int *hostlong, int nmemb)
 {
 #if BYTE_ORDER == LITTLE_ENDIAN
 	int i;
-	
-	for(i=0; i<nmemb; i++)
-		hostlong[i]=ntohl(hostlong[i]);
+
+	for (i = 0; i < nmemb; i++)
+		hostlong[i] = ntohl(hostlong[i]);
 #endif
 }
 
-void ints_array_htonl(int *netlong, int nmemb)
+void
+ints_array_htonl(int *netlong, int nmemb)
 {
 #if BYTE_ORDER == LITTLE_ENDIAN
 	int i;
-	
-	for(i=0; i<nmemb; i++)
-		netlong[i]=htonl(netlong[i]);
+
+	for (i = 0; i < nmemb; i++)
+		netlong[i] = htonl(netlong[i]);
 #endif
 }
 
-void ints_array_ntohs(short *hostshort, int nmemb)
+void
+ints_array_ntohs(short *hostshort, int nmemb)
 {
 #if BYTE_ORDER == LITTLE_ENDIAN
 	int i;
-	
-	for(i=0; i<nmemb; i++)
-		hostshort[i]=ntohs(hostshort[i]);
+
+	for (i = 0; i < nmemb; i++)
+		hostshort[i] = ntohs(hostshort[i]);
 #endif
 }
 
-void ints_array_htons(short *netshort, int nmemb)
+void
+ints_array_htons(short *netshort, int nmemb)
 {
 #if BYTE_ORDER == LITTLE_ENDIAN
 	int i;
-	
-	for(i=0; i<nmemb; i++)
-		netshort[i]=htons(netshort[i]);
+
+	for (i = 0; i < nmemb; i++)
+		netshort[i] = htons(netshort[i]);
 #endif
 }
 
@@ -93,7 +97,8 @@ void ints_array_htons(short *netshort, int nmemb)
  * struct `s' from network order to host order. The `s' struct must be
  * described in the `iinfo' struct.
  */
-void ints_network_to_host(void *s, int_info iinfo)
+void
+ints_network_to_host(void *s, int_info iinfo)
 {
 #if BYTE_ORDER == LITTLE_ENDIAN
 
@@ -101,15 +106,15 @@ void ints_network_to_host(void *s, int_info iinfo)
 	char *p;
 
 	IS_DYNAMIC(iinfo.total_ints);
-	
-	for(i=0; i < iinfo.total_ints; i++) {
-		if(!iinfo.int_type[i])
+
+	for (i = 0; i < iinfo.total_ints; i++) {
+		if (!iinfo.int_type[i])
 			continue;
 
 		IS_DYNAMIC(iinfo.int_offset[i]);
-		
-		p=(char *)s + iinfo.int_offset[i];
-		
+
+		p = (char *) s + iinfo.int_offset[i];
+
 		IS_DYNAMIC(iinfo.int_nmemb[i]);
 		IS_DYNAMIC(iinfo.int_type[i]);
 
@@ -117,20 +122,19 @@ void ints_network_to_host(void *s, int_info iinfo)
 		 * Swap the entire array if it is a single integer and if we 
 		 * are on a little endian machine.
 		 */
-		if(iinfo.int_type[i] & INT_TYPE_WORDS) {
-			
-			if(iinfo.int_type[i] & INT_TYPE_32BIT)
-				swap_ints(iinfo.int_nmemb[i], (u_int *)p,
-						(u_int *)p);
+		if (iinfo.int_type[i] & INT_TYPE_WORDS) {
+
+			if (iinfo.int_type[i] & INT_TYPE_32BIT)
+				swap_ints(iinfo.int_nmemb[i], (u_int *) p, (u_int *) p);
 			else
-				swap_shorts(iinfo.int_nmemb[i], (u_short *)p,
-						(u_short *)p);
+				swap_shorts(iinfo.int_nmemb[i], (u_short *) p,
+							(u_short *) p);
 		}
-		
-		if(iinfo.int_type[i] & INT_TYPE_32BIT)
-			ints_array_ntohl((int *)p, iinfo.int_nmemb[i]);
+
+		if (iinfo.int_type[i] & INT_TYPE_32BIT)
+			ints_array_ntohl((int *) p, iinfo.int_nmemb[i]);
 		else
-			ints_array_ntohs((short *)p, iinfo.int_nmemb[i]);
+			ints_array_ntohs((short *) p, iinfo.int_nmemb[i]);
 	}
 #endif
 }
@@ -140,7 +144,8 @@ void ints_network_to_host(void *s, int_info iinfo)
  * struct `s' from host order to network order. The `s' struct must be
  * described in the `iinfo' struct.
  */
-void ints_host_to_network(void *s, int_info iinfo)
+void
+ints_host_to_network(void *s, int_info iinfo)
 {
 #if BYTE_ORDER == LITTLE_ENDIAN
 	int i;
@@ -148,14 +153,14 @@ void ints_host_to_network(void *s, int_info iinfo)
 
 	IS_DYNAMIC(iinfo.total_ints);
 
-	for(i=0; i < iinfo.total_ints; i++) {
-		if(!iinfo.int_type[i])
+	for (i = 0; i < iinfo.total_ints; i++) {
+		if (!iinfo.int_type[i])
 			continue;
 
 		IS_DYNAMIC(iinfo.int_offset[i]);
 
-		p=(char *)s + iinfo.int_offset[i];
-		
+		p = (char *) s + iinfo.int_offset[i];
+
 		IS_DYNAMIC(iinfo.int_nmemb[i]);
 		IS_DYNAMIC(iinfo.int_type[i]);
 
@@ -163,18 +168,19 @@ void ints_host_to_network(void *s, int_info iinfo)
 		 * Swap the entire array if it is a single integer and if we 
 		 * are on a little endian machine.
 		 */
-		if(iinfo.int_type[i] & INT_TYPE_WORDS) {
-			
-			if(iinfo.int_type[i] & INT_TYPE_32BIT)
-				swap_ints(iinfo.int_nmemb[i], (u_int *)p, (u_int *)p);
+		if (iinfo.int_type[i] & INT_TYPE_WORDS) {
+
+			if (iinfo.int_type[i] & INT_TYPE_32BIT)
+				swap_ints(iinfo.int_nmemb[i], (u_int *) p, (u_int *) p);
 			else
-				swap_shorts(iinfo.int_nmemb[i], (u_short *)p, (u_short *)p);
+				swap_shorts(iinfo.int_nmemb[i], (u_short *) p,
+							(u_short *) p);
 		}
 
-		if(iinfo.int_type[i] & INT_TYPE_32BIT)
-			ints_array_htonl((int *)p, iinfo.int_nmemb[i]);
+		if (iinfo.int_type[i] & INT_TYPE_32BIT)
+			ints_array_htonl((int *) p, iinfo.int_nmemb[i]);
 		else
-			ints_array_htons((short *)p, iinfo.int_nmemb[i]);
+			ints_array_htons((short *) p, iinfo.int_nmemb[i]);
 	}
 #endif
 }
@@ -183,7 +189,8 @@ void ints_host_to_network(void *s, int_info iinfo)
  * ints_printf: prints all the int/short vars present in the `s' struct
  * described by `iinfo'. It uses `print_func' as the the printing function
  */
-void ints_printf(void *s, int_info iinfo, void(*print_func(const char *, ...)))
+void
+ints_printf(void *s, int_info iinfo, void (*print_func(const char *, ...)))
 {
 	int i, e, *i32;
 	short *i16;
@@ -191,27 +198,27 @@ void ints_printf(void *s, int_info iinfo, void(*print_func(const char *, ...)))
 
 	IS_DYNAMIC(iinfo.total_ints);
 
-	for(i=0; i < iinfo.total_ints; i++) {
-		if(!iinfo.int_type[i])
+	for (i = 0; i < iinfo.total_ints; i++) {
+		if (!iinfo.int_type[i])
 			continue;
 
 		IS_DYNAMIC(iinfo.int_offset[i]);
 
-		p=(char *)s + iinfo.int_offset[i];
-		
+		p = (char *) s + iinfo.int_offset[i];
+
 		IS_DYNAMIC(iinfo.int_nmemb[i]);
 		IS_DYNAMIC(iinfo.int_type[i]);
 
-		for(e=0; e < iinfo.int_nmemb[i]; e++) {
+		for (e = 0; e < iinfo.int_nmemb[i]; e++) {
 
-			print_func("ints_printf: offset %d, nmemb %d, ", 
-					iinfo.int_offset[i], e);
-			
-			if(iinfo.int_type[i] & INT_TYPE_32BIT) {
-				i32  = (int *)(p + (sizeof(int) * e));
+			print_func("ints_printf: offset %d, nmemb %d, ",
+					   iinfo.int_offset[i], e);
+
+			if (iinfo.int_type[i] & INT_TYPE_32BIT) {
+				i32 = (int *) (p + (sizeof(int) * e));
 				print_func("32bit value %d\n", *i32);
 			} else {
-				i16  = (short *)(p + (sizeof(short) * e));
+				i16 = (short *) (p + (sizeof(short) * e));
 				print_func("16bit value %d\n", *i16);
 			}
 		}

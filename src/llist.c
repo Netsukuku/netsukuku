@@ -43,10 +43,9 @@
 
 #define LLIST_HDR(_struct)	_struct *next, *prev
 
-struct linked_list
-{
-	LLIST_HDR	(struct linked_list);
-}linked_list;
+struct linked_list {
+	LLIST_HDR(struct linked_list);
+} linked_list;
 typedef struct linked_list l_list;
 
 #define is_list_zero(list)						\
@@ -193,7 +192,7 @@ do {									\
 	}								\
 	(typeof((_head)))_nd;						\
 })
- 
+
 /*
  * list_join: 
  * before list_join(list):
@@ -252,7 +251,7 @@ do {									\
 	_lin->next=_n;							\
 	_n->prev=_lin;							\
 } while (0)
-	
+
 /* 
  * list_substitute
  *
@@ -324,7 +323,7 @@ do{									\
 	if(_lmf->next)							\
 		list_swap(_lmf->next, _lmf);				\
 }while(0)
- 
+
 /* 
  * list_moveontop
  *
@@ -510,7 +509,7 @@ do{ 									\
  */
 #define list_copy_all_yes(_nil)	(1)
 #define list_copy_all(list)	list_copy_some((list), list_copy_all_yes)
- 
+
 /*
  * Here below there are the definitions for the linked list with a counter.
  * The arguments format is:
@@ -566,7 +565,7 @@ do{                  							\
 		(*(_counter))--;					\
 	}								\
 } while(0)
-	
+
 
 /* 
  * Zeros the `counter' and set the head pointer to 0.
@@ -632,4 +631,4 @@ do{                  							\
 	_new_head = (typeof((_head)))_hecq;						\
 })									\
 
-#endif /*LLIST_C*/
+#endif							/*LLIST_C */

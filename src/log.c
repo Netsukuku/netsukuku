@@ -33,21 +33,22 @@
 char *__argv0;
 int dbg_lvl;
 int log_to_stderr;
-static int log_facility=LOG_DAEMON;
-int log_file_opened=0;
+static int log_facility = LOG_DAEMON;
+int log_file_opened = 0;
 FILE *log_file, *log_fd;
 
-void log_init(char *prog, int dbg, int log_stderr)
+void
+log_init(char *prog, int dbg, int log_stderr)
 {
-	__argv0=prog;
-	dbg_lvl=dbg;
-	log_to_stderr=log_stderr;
-	if(log_stderr)
-		log_fd=stderr;
-	if(!log_file_opened)
-		log_file=0;
+	__argv0 = prog;
+	dbg_lvl = dbg;
+	log_to_stderr = log_stderr;
+	if (log_stderr)
+		log_fd = stderr;
+	if (!log_file_opened)
+		log_file = 0;
 
-	if(!log_to_stderr)
+	if (!log_to_stderr)
 		openlog(__argv0, dbg ? LOG_PID : 0, log_facility);
 }
 
@@ -59,48 +60,51 @@ void log_init(char *prog, int dbg, int log_stderr)
  *
  * On errors it returns -1;
  */
-int log_to_file(char *filename)
+int
+log_to_file(char *filename)
 {
-	if(!filename) {
-		if(log_file)
-			log_fd=log_file;
+	if (!filename) {
+		if (log_file)
+			log_fd = log_file;
 		else
 			return -1;
 		return 0;
 	}
 
-	if(!(log_file=fopen(filename, "w"))) {
-		log_fd=stderr;
+	if (!(log_file = fopen(filename, "w"))) {
+		log_fd = stderr;
 		error("Cannot open the \"%s\" logfile: %s",
-				filename, strerror(errno));
+			  filename, strerror(errno));
 		return -1;
 	}
 
-	log_fd=log_file;
-	log_file_opened=1;
+	log_fd = log_file;
+	log_file_opened = 1;
 
 	return 0;
 }
 
-void close_log_file(void)
+void
+close_log_file(void)
 {
-	if(log_file) {
+	if (log_file) {
 		fflush(log_file);
 		fclose(log_file);
 	}
 }
 
 /* Life is fatal! */
-void fatal(const char *fmt,...)
+void
+fatal(const char *fmt, ...)
 {
-	char str[strlen(fmt)+3];
+	char str[strlen(fmt) + 3];
 	va_list args;
 
-	if(fmt) {
-		str[0]='!';
-		str[1]=' ';
-		strncpy(str+2, fmt, strlen(fmt));
-		str[strlen(fmt)+2]=0;
+	if (fmt) {
+		str[0] = '!';
+		str[1] = ' ';
+		strncpy(str + 2, fmt, strlen(fmt));
+		str[strlen(fmt) + 2] = 0;
 
 		va_start(args, fmt);
 		print_log(LOG_CRIT, str, args);
@@ -108,29 +112,29 @@ void fatal(const char *fmt,...)
 	}
 
 	/** Flush the stream if we want to read something */
-	if(log_to_stderr || log_file)
+	if (log_to_stderr || log_file)
 		fflush(log_fd);
-	if(log_file)
+	if (log_file)
 		close_log_file();
-	/**/
-
+	 /**/
 #ifdef DEBUG
-	/* Useful to catch the error in gdb */
-	kill(getpid(), SIGSEGV);
+		/* Useful to catch the error in gdb */
+		kill(getpid(), SIGSEGV);
 #endif
 	exit(1);
 }
 
 /* Misc errors */
-void error(const char *fmt,...)
+void
+error(const char *fmt, ...)
 {
-	char str[strlen(fmt)+3];
+	char str[strlen(fmt) + 3];
 	va_list args;
 
-	str[0]='*';
-	str[1]=' ';
-	strncpy(str+2, fmt, strlen(fmt));
-	str[strlen(fmt)+2]=0;
+	str[0] = '*';
+	str[1] = ' ';
+	strncpy(str + 2, fmt, strlen(fmt));
+	str[strlen(fmt) + 2] = 0;
 
 	va_start(args, fmt);
 	print_log(LOG_ERR, str, args);
@@ -138,15 +142,16 @@ void error(const char *fmt,...)
 }
 
 /* Let's give some news */
-void loginfo(const char *fmt,...)
+void
+loginfo(const char *fmt, ...)
 {
-	char str[strlen(fmt)+3];
+	char str[strlen(fmt) + 3];
 	va_list args;
 
-	str[0]='+';
-	str[1]=' ';
-	strncpy(str+2, fmt, strlen(fmt));
-	str[strlen(fmt)+2]=0;
+	str[0] = '+';
+	str[1] = ' ';
+	strncpy(str + 2, fmt, strlen(fmt));
+	str[strlen(fmt) + 2] = 0;
 
 	va_start(args, fmt);
 	print_log(LOG_INFO, str, args);
@@ -159,16 +164,17 @@ void loginfo(const char *fmt,...)
  * Damn!
  */
 
-void debug(int lvl, const char *fmt,...)
+void
+debug(int lvl, const char *fmt, ...)
 {
-	char str[strlen(fmt)+3];
+	char str[strlen(fmt) + 3];
 	va_list args;
 
-	if(lvl <= dbg_lvl) {
-		str[0]='#';
-		str[1]=' ';
-		strncpy(str+2, fmt, strlen(fmt));
-		str[strlen(fmt)+2]=0;
+	if (lvl <= dbg_lvl) {
+		str[0] = '#';
+		str[1] = ' ';
+		strncpy(str + 2, fmt, strlen(fmt));
+		str[strlen(fmt) + 2] = 0;
 
 		va_start(args, fmt);
 		print_log(LOG_DEBUG, str, args);
@@ -176,9 +182,10 @@ void debug(int lvl, const char *fmt,...)
 	}
 }
 
-void print_log(int level, const char *fmt, va_list args)
+void
+print_log(int level, const char *fmt, va_list args)
 {
-	if(log_to_stderr || log_file) {
+	if (log_to_stderr || log_file) {
 		vfprintf(log_fd, fmt, args);
 		fprintf(log_fd, "\n");
 	} else

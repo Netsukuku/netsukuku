@@ -19,24 +19,24 @@
 #ifndef ENDIANNESS_H
 #define ENDIANNESS_H
 
-#define MAX_INTS_PER_STRUCT	8		/* The maximum number of short/int variables 
-						   present in a struct */
+#define MAX_INTS_PER_STRUCT	8	/* The maximum number of short/int variables 
+								   present in a struct */
 
-#define IINFO_DYNAMIC_VALUE	-1		/* This define is used to fill part in a 
-						   int_info struct that must be set each time. 
-						   If that part is not set, -1 will remain, and
-						   the int_info functions will call fatal(). 
-						   Therefore this is useful to track bugs. */
+#define IINFO_DYNAMIC_VALUE	-1	/* This define is used to fill part in a 
+								   int_info struct that must be set each time. 
+								   If that part is not set, -1 will remain, and
+								   the int_info functions will call fatal(). 
+								   Therefore this is useful to track bugs. */
 
 
 /* flags for int_info.int_type */
-#define INT_TYPE_VOID		0		/* Emptiness is loneliness, and loneliness is 
-						   cleanliness */
-#define INT_TYPE_32BIT		1		/* The int var is of 32 bits */
-#define INT_TYPE_16BIT		(1<<1)		/* The int var is of 16 bits */
-#define INT_TYPE_WORDS		(1<<2)		/* The int var is composed by an array of ints,
-						   like the ipv6 ip (struct in6_addr) */
-#define INT_TYPE_NETWORK 	(1<<3)		/* The int var is stored in network order */
+#define INT_TYPE_VOID		0	/* Emptiness is loneliness, and loneliness is 
+								   cleanliness */
+#define INT_TYPE_32BIT		1	/* The int var is of 32 bits */
+#define INT_TYPE_16BIT		(1<<1)	/* The int var is of 16 bits */
+#define INT_TYPE_WORDS		(1<<2)	/* The int var is composed by an array of ints,
+									   like the ipv6 ip (struct in6_addr) */
+#define INT_TYPE_NETWORK 	(1<<3)	/* The int var is stored in network order */
 
 /*
  * int_info: this struct is used to keep the information about the int/short
@@ -66,23 +66,22 @@
  *		           { 1, 1, 4 }
  *			 };
  */
-typedef struct
-{
+typedef struct {
 	/* The total int/short vars present in the struct */
-	int 	total_ints;				
+	int total_ints;
 
 	/* Each member in the int_type array corresponds to a int/short var
 	 * and it is set using the above INT_TYPE_ flags */
-	char 	int_type[MAX_INTS_PER_STRUCT];
+	char int_type[MAX_INTS_PER_STRUCT];
 
 	/* Each member in the int_offset array specifies the amount of bytes
 	 * to be added at the end of the struct to get the relative int/short
 	 * var. */
-	size_t	int_offset[MAX_INTS_PER_STRUCT];
+	size_t int_offset[MAX_INTS_PER_STRUCT];
 
 	/* int_nmemb[x] is equal to the number of consecutive ints/shorts var,
 	 * which start at the int_offset[x] offset. */
-	size_t	int_nmemb[MAX_INTS_PER_STRUCT];
+	size_t int_nmemb[MAX_INTS_PER_STRUCT];
 
 } int_info;
 
@@ -97,13 +96,14 @@ typedef struct
 
 
 /* * * Functions declaration * * */
-void *int_info_copy(int_info *dst, const int_info *src);
+void *int_info_copy(int_info * dst, const int_info * src);
 void ints_array_htons(short *netshort, int nmemb);
 void ints_array_ntohs(short *hostshort, int nmemb);
 void ints_array_htonl(int *netlong, int nmemb);
 void ints_array_ntohl(int *hostlong, int nmemb);
 void ints_network_to_host(void *s, int_info iinfo);
 void ints_host_to_network(void *s, int_info iinfo);
-void ints_printf(void *s, int_info iinfo, void(*print_func(const char *, ...)));
+void ints_printf(void *s, int_info iinfo,
+				 void (*print_func(const char *, ...)));
 
-#endif /*ENDIANNESS_H*/
+#endif							/*ENDIANNESS_H */

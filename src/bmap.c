@@ -29,37 +29,43 @@
 #include "gmap.h"
 #include "bmap.h"
 
-void bmap_levels_init(u_char levels, map_bnode ***bmap, u_int **bmap_nodes)
+void
+bmap_levels_init(u_char levels, map_bnode *** bmap, u_int ** bmap_nodes)
 {
-	*bmap=xmalloc(sizeof(map_bnode *) * levels);
-	*bmap_nodes=(u_int *)xmalloc(sizeof(u_int) * levels);
+	*bmap = xmalloc(sizeof(map_bnode *) * levels);
+	*bmap_nodes = (u_int *) xmalloc(sizeof(u_int) * levels);
 
 	setzero(*bmap, sizeof(map_bnode *) * levels);
 	bmap_counter_reset(levels, *bmap_nodes);
 }
 
-void bmap_levels_free(map_bnode **bmap, u_int *bmap_nodes)
+void
+bmap_levels_free(map_bnode ** bmap, u_int * bmap_nodes)
 {
 	xfree(bmap);
 	xfree(bmap_nodes);
 }
 
-void bmap_counter_init(u_char levels, u_int **bnodes_closed, u_int **bnodes_opened)
+void
+bmap_counter_init(u_char levels, u_int ** bnodes_closed,
+				  u_int ** bnodes_opened)
 {
-	*bnodes_closed=(u_int *)xmalloc(sizeof(u_int) * levels);
-	*bnodes_opened=(u_int *)xmalloc(sizeof(u_int) * levels);
-	
+	*bnodes_closed = (u_int *) xmalloc(sizeof(u_int) * levels);
+	*bnodes_opened = (u_int *) xmalloc(sizeof(u_int) * levels);
+
 	bmap_counter_reset(levels, *bnodes_closed);
 	bmap_counter_reset(levels, *bnodes_opened);
 }
 
-void bmap_counter_free(u_int *bnodes_closed, u_int *bnodes_opened)
+void
+bmap_counter_free(u_int * bnodes_closed, u_int * bnodes_opened)
 {
 	xfree(bnodes_closed);
 	xfree(bnodes_opened);
 }
 
-void bmap_counter_reset(u_char levels, u_int *counter)
+void
+bmap_counter_reset(u_char levels, u_int * counter)
 {
 	setzero(counter, sizeof(u_int) * levels);
 }
@@ -70,22 +76,24 @@ void bmap_counter_reset(u_char levels, u_int *counter)
  * to `bnode' and the links to `links'.
  * Note that the `bmap' argument must be an adress of a pointer.
  */
-int map_add_bnode(map_bnode **bmap, u_int *bmap_nodes, u_int bnode, u_int links)
+int
+map_add_bnode(map_bnode ** bmap, u_int * bmap_nodes, u_int bnode,
+			  u_int links)
 {
 	map_bnode *bnode_map;
 	u_int bm;
-	
-	bm=*bmap_nodes; 
-	(*bmap_nodes)++;
-	if(!bm)
-		*bmap=xmalloc(sizeof(map_bnode));
-	else
-		*bmap=xrealloc(*bmap, sizeof(map_bnode) * *bmap_nodes);
 
-	bnode_map=*bmap;
+	bm = *bmap_nodes;
+	(*bmap_nodes)++;
+	if (!bm)
+		*bmap = xmalloc(sizeof(map_bnode));
+	else
+		*bmap = xrealloc(*bmap, sizeof(map_bnode) * *bmap_nodes);
+
+	bnode_map = *bmap;
 	setzero(bnode_map, sizeof(map_bnode));
-	bnode_map[bm].bnode_ptr=bnode;
-	bnode_map[bm].links=links;
+	bnode_map[bm].bnode_ptr = bnode;
+	bnode_map[bm].links = links;
 	return bm;
 }
 
@@ -93,18 +101,20 @@ int map_add_bnode(map_bnode **bmap, u_int *bmap_nodes, u_int bnode, u_int links)
  * map_bnode_del: It deletes the `bnode' in the `bmap' which has `bmap_nodes'.
  * It returns the newly rescaled `bmap'.
  * It returns 0 if the `bmap' doesn't exist anymore.*/
-map_bnode *map_bnode_del(map_bnode *bmap, u_int *bmap_nodes,  map_bnode *bnode)
+map_bnode *
+map_bnode_del(map_bnode * bmap, u_int * bmap_nodes, map_bnode * bnode)
 {
-	map_node_del((map_node *)bnode);
-	
-	if( ((char *)bnode-(char *)bmap)/sizeof(map_bnode) != (*bmap_nodes)-1 )
-		memcpy(bnode, &bmap[*bmap_nodes-1], sizeof(map_bnode));
+	map_node_del((map_node *) bnode);
+
+	if (((char *) bnode - (char *) bmap) / sizeof(map_bnode) !=
+		(*bmap_nodes) - 1)
+		memcpy(bnode, &bmap[*bmap_nodes - 1], sizeof(map_bnode));
 
 	(*bmap_nodes)--;
-	if(*bmap_nodes)
+	if (*bmap_nodes)
 		return xrealloc(bmap, (*bmap_nodes) * sizeof(map_bnode));
 	else {
-		*bmap_nodes=0;
+		*bmap_nodes = 0;
 		xfree(bmap);
 		return 0;
 	}
@@ -117,18 +127,19 @@ map_bnode *map_bnode_del(map_bnode *bmap, u_int *bmap_nodes,  map_bnode *bnode)
  * `total_levels' must be equal to the maximum levels 
  * available (use FAMILY_LVLS).
  */
-int bmap_del_rnode_by_level(map_bnode *bnode, int level, map_gnode **ext_map,
-		int total_levels)
-{ 
+int
+bmap_del_rnode_by_level(map_bnode * bnode, int level, map_gnode ** ext_map,
+						int total_levels)
+{
 	map_gnode *gn;
-	int i, ret=0, lvl;
-	
-	
-	for(i=0; i < bnode->links; i++) {
-		gn=(map_gnode *)bnode->r_node[i].r_node;
-		lvl=extmap_find_level(ext_map, gn, total_levels);
+	int i, ret = 0, lvl;
 
-		if(lvl != level) {
+
+	for (i = 0; i < bnode->links; i++) {
+		gn = (map_gnode *) bnode->r_node[i].r_node;
+		lvl = extmap_find_level(ext_map, gn, total_levels);
+
+		if (lvl != level) {
 			rnode_del(bnode, i);
 			ret++;
 		}
@@ -141,14 +152,15 @@ int bmap_del_rnode_by_level(map_bnode *bnode, int level, map_gnode **ext_map,
  * map_find_bnode: Find the given `node' (in the pos_from_node() format) in the
  * given map_bnode `bmap'.
  */
-int map_find_bnode(map_bnode *bmap, int bmap_nodes, int node)
+int
+map_find_bnode(map_bnode * bmap, int bmap_nodes, int node)
 {
 	int e;
 
-	for(e=0; e<bmap_nodes; e++)
-		if(bmap[e].bnode_ptr == node)
+	for (e = 0; e < bmap_nodes; e++)
+		if (bmap[e].bnode_ptr == node)
 			return e;
-	
+
 	return -1;
 }
 
@@ -157,12 +169,13 @@ int map_find_bnode(map_bnode *bmap, int bmap_nodes, int node)
  * which points to `n'. If it is found the pos of the bnode in the `bmap' is
  * returned, otherwise -1 is the return value. 
  */
-int map_find_bnode_rnode(map_bnode *bmap, int bmap_nodes, void *n)
+int
+map_find_bnode_rnode(map_bnode * bmap, int bmap_nodes, void *n)
 {
 	int e;
 
-	for(e=0; e<bmap_nodes; e++)
-		if(rnode_find((map_node *)&bmap[e], (map_node *)n) != -1)
+	for (e = 0; e < bmap_nodes; e++)
+		if (rnode_find((map_node *) & bmap[e], (map_node *) n) != -1)
 			return e;
 
 	return -1;
@@ -172,12 +185,13 @@ int map_find_bnode_rnode(map_bnode *bmap, int bmap_nodes, void *n)
  * map_count_bnode_rnode: counts how many bnode which have a rnode which
  * points to `n' there are in `bmap'.
  */
-int map_count_bnode_rnode(map_bnode *bmap, int bmap_nodes, void *n)
+int
+map_count_bnode_rnode(map_bnode * bmap, int bmap_nodes, void *n)
 {
 	int e, i;
 
-	for(i=0, e=0; i<bmap_nodes; i++)
-		if(rnode_find((map_node *)&bmap[i], (map_node *)n) != -1)
+	for (i = 0, e = 0; i < bmap_nodes; i++)
+		if (rnode_find((map_node *) & bmap[i], (map_node *) n) != -1)
 			e++;
 
 	return e;
@@ -188,12 +202,14 @@ int map_count_bnode_rnode(map_bnode *bmap, int bmap_nodes, void *n)
  * `bmap' and returns the sum of the results.
  * `levels' are the total levels of `bmap'.
  */
-int bmaps_count_bnode_rnode(map_bnode **bmap, int *bmap_nodes, int levels, void *n)
+int
+bmaps_count_bnode_rnode(map_bnode ** bmap, int *bmap_nodes, int levels,
+						void *n)
 {
 	int i, e;
 
-	for(i=0, e=0; i<levels; i++)
-		e+=map_count_bnode_rnode(bmap[i], bmap_nodes[i], n);
+	for (i = 0, e = 0; i < levels; i++)
+		e += map_count_bnode_rnode(bmap[i], bmap_nodes[i], n);
 
 	return e;
 }
@@ -204,19 +220,20 @@ int bmaps_count_bnode_rnode(map_bnode **bmap, int *bmap_nodes, int levels, void 
  * `bmap' is the address of the pointer to the bmap.
  * It returns the number of rnodes deleted.
  */
-int map_del_bnode_rnode(map_bnode **bmap, int *bmap_nodes, void *n)
+int
+map_del_bnode_rnode(map_bnode ** bmap, int *bmap_nodes, void *n)
 {
 	map_bnode *bm;
-	int e, p, ret=0;
+	int e, p, ret = 0;
 
-	bm=*bmap;
-	for(e=0; e < *bmap_nodes; e++) {
-		if((p=rnode_find((map_node *)&bm[e], (map_node *)n)) != -1) {
+	bm = *bmap;
+	for (e = 0; e < *bmap_nodes; e++) {
+		if ((p = rnode_find((map_node *) & bm[e], (map_node *) n)) != -1) {
 			rnode_del(&bm[e], p);
 
-			if(!bm[e].links) {
-				*bmap=map_bnode_del(*bmap,(u_int*)bmap_nodes, &bm[e]);
-				bm=*bmap;
+			if (!bm[e].links) {
+				*bmap = map_bnode_del(*bmap, (u_int *) bmap_nodes, &bm[e]);
+				bm = *bmap;
 			}
 			ret++;
 		}
@@ -231,12 +248,14 @@ int map_del_bnode_rnode(map_bnode **bmap, int *bmap_nodes, void *n)
  * `levels' are the total levels of `bmap'.
  * It returns the total number of rnodes deleted
  */
-int bmaps_del_bnode_rnode(map_bnode **bmap, int *bmap_nodes, int levels, void *n)
+int
+bmaps_del_bnode_rnode(map_bnode ** bmap, int *bmap_nodes, int levels,
+					  void *n)
 {
 	int i, e;
 
-	for(i=0, e=0; i<levels; i++)
-		e+=map_del_bnode_rnode(&bmap[i], &bmap_nodes[i], n);
+	for (i = 0, e = 0; i < levels; i++)
+		e += map_del_bnode_rnode(&bmap[i], &bmap_nodes[i], n);
 
 	return e;
 }
@@ -245,22 +264,25 @@ int bmaps_del_bnode_rnode(map_bnode **bmap, int *bmap_nodes, int levels, void *n
  * map_set_bnode_flag: sets the `flags' to all the `bmap_nodes'# present in
  * `bmap'.
  */
-void map_set_bnode_flag(map_bnode *bmap, int bmap_nodes, int flags)
+void
+map_set_bnode_flag(map_bnode * bmap, int bmap_nodes, int flags)
 {
 	int e;
-	for(e=0; e<bmap_nodes; e++)
-		bmap[e].flags|=flags;
+	for (e = 0; e < bmap_nodes; e++)
+		bmap[e].flags |= flags;
 }
 
 /*
  * bmaps_set_bnode_flag: sets the `flags' to all the bnodes present in the
  * `levels'#  `bmap'.
  */
-void bmaps_set_bnode_flag(map_bnode **bmap, int *bmap_nodes, int levels, int flags)
+void
+bmaps_set_bnode_flag(map_bnode ** bmap, int *bmap_nodes, int levels,
+					 int flags)
 {
-	int i;		
-	
-	for(i=0; i<levels; i++)
+	int i;
+
+	for (i = 0; i < levels; i++)
 		map_set_bnode_flag(bmap[i], bmap_nodes[i], flags);
 }
 
@@ -272,35 +294,37 @@ void bmaps_set_bnode_flag(map_bnode **bmap, int *bmap_nodes, int levels, int fla
  * The package will be in network order.
  */
 char *
-pack_all_bmaps(map_bnode **bmaps,  u_int *bmap_nodes, map_gnode **ext_map,
-		quadro_group quadg, size_t *pack_sz)
+pack_all_bmaps(map_bnode ** bmaps, u_int * bmap_nodes,
+			   map_gnode ** ext_map, quadro_group quadg, size_t * pack_sz)
 {
 	struct bnode_maps_hdr bmaps_hdr;
 	size_t sz, tmp_sz[BMAP_LEVELS(quadg.levels)];
 	char *pack[BMAP_LEVELS(quadg.levels)], *final_pack, *buf;
 	u_char level;
 
-	*pack_sz=0;
+	*pack_sz = 0;
 
-	for(level=0; level < BMAP_LEVELS(quadg.levels); level++) {
-		pack[level]=pack_map((map_node *)bmaps[level], (int *)ext_map[_EL(level+1)], 
-				bmap_nodes[level], 0, &sz);
-		tmp_sz[level]=sz;
-		(*pack_sz)+=sz;
+	for (level = 0; level < BMAP_LEVELS(quadg.levels); level++) {
+		pack[level] =
+			pack_map((map_node *) bmaps[level],
+					 (int *) ext_map[_EL(level + 1)], bmap_nodes[level], 0,
+					 &sz);
+		tmp_sz[level] = sz;
+		(*pack_sz) += sz;
 	}
 
-	bmaps_hdr.levels=BMAP_LEVELS(quadg.levels);
-	bmaps_hdr.bmaps_block_sz=*pack_sz;
-	(*pack_sz)+=sizeof(struct bnode_maps_hdr);
-	
-	final_pack=xmalloc((*pack_sz));
+	bmaps_hdr.levels = BMAP_LEVELS(quadg.levels);
+	bmaps_hdr.bmaps_block_sz = *pack_sz;
+	(*pack_sz) += sizeof(struct bnode_maps_hdr);
+
+	final_pack = xmalloc((*pack_sz));
 	memcpy(final_pack, &bmaps_hdr, sizeof(struct bnode_maps_hdr));
 	ints_host_to_network(final_pack, bnode_maps_hdr_iinfo);
-	
-	buf=final_pack+sizeof(struct bnode_maps_hdr);
-	for(level=0; level < BMAP_LEVELS(quadg.levels); level++) {
+
+	buf = final_pack + sizeof(struct bnode_maps_hdr);
+	for (level = 0; level < BMAP_LEVELS(quadg.levels); level++) {
 		memcpy(buf, pack[level], tmp_sz[level]);
-		buf+=tmp_sz[level];
+		buf += tmp_sz[level];
 		xfree(pack[level]);
 	}
 
@@ -319,57 +343,60 @@ pack_all_bmaps(map_bnode **bmaps,  u_int *bmap_nodes, map_gnode **ext_map,
  * contain.
  * On error 0 is returned.
  * Note: `pack' will be modified during the unpacking.
- */ 
+ */
 map_bnode **
-unpack_all_bmaps(char *pack, u_char max_levels, map_gnode **ext_map, 
-		u_int **bmap_nodes, int maxbnodes, int maxbnode_rnodeblock)
+unpack_all_bmaps(char *pack, u_char max_levels, map_gnode ** ext_map,
+				 u_int ** bmap_nodes, int maxbnodes,
+				 int maxbnode_rnodeblock)
 {
 	struct bnode_maps_hdr *bmaps_hdr;
 	struct bnode_map_hdr *bmap_hdr;
 	map_bnode **bmap, *unpacked_bmap;
 	size_t bblock_sz, pack_sz;
-	int i,e=0;
+	int i, e = 0;
 	char *bblock, *buf;
 	u_char levels;
-	
-	bmaps_hdr=(struct bnode_maps_hdr *)pack;
+
+	bmaps_hdr = (struct bnode_maps_hdr *) pack;
 	ints_network_to_host(bmaps_hdr, bnode_maps_hdr_iinfo);
 
-	levels=bmaps_hdr->levels;
-	pack_sz=bmaps_hdr->bmaps_block_sz;
-	
-	if(levels > max_levels || pack_sz < sizeof(struct bnode_maps_hdr))
+	levels = bmaps_hdr->levels;
+	pack_sz = bmaps_hdr->bmaps_block_sz;
+
+	if (levels > max_levels || pack_sz < sizeof(struct bnode_maps_hdr))
 		return 0;
 
 	bmap_levels_init(levels, &bmap, bmap_nodes);
 
-	buf=pack+sizeof(struct bnode_maps_hdr);
-	for(i=0; i<levels; i++) {
-		bmap_hdr=(struct bnode_map_hdr *)buf;
-		if(!bmap_hdr->bnode_map_sz) {
-			buf+=sizeof(struct bnode_map_hdr);
+	buf = pack + sizeof(struct bnode_maps_hdr);
+	for (i = 0; i < levels; i++) {
+		bmap_hdr = (struct bnode_map_hdr *) buf;
+		if (!bmap_hdr->bnode_map_sz) {
+			buf += sizeof(struct bnode_map_hdr);
 			continue;
 		}
-		
-		/*Extracting the map...*/
-		bblock=(char *)bmap_hdr;
-		unpacked_bmap=unpack_map(bblock, (int *)ext_map[_EL(i+1)], 0,	
-				maxbnodes, maxbnode_rnodeblock);
-		if(!unpacked_bmap) {
-			error("Cannot unpack the bnode_map at level %d ! Skipping...", i);
+
+		/*Extracting the map... */
+		bblock = (char *) bmap_hdr;
+		unpacked_bmap = unpack_map(bblock, (int *) ext_map[_EL(i + 1)], 0,
+								   maxbnodes, maxbnode_rnodeblock);
+		if (!unpacked_bmap) {
+			error("Cannot unpack the bnode_map at level %d ! Skipping...",
+				  i);
 			e++;
 			continue;
 		}
 
-		(*bmap_nodes)[i]=bmap_hdr->bnode_map_sz/MAP_BNODE_PACK_SZ;
-		bblock_sz=INT_MAP_BLOCK_SZ(bmap_hdr->bnode_map_sz, bmap_hdr->rblock_sz);
+		(*bmap_nodes)[i] = bmap_hdr->bnode_map_sz / MAP_BNODE_PACK_SZ;
+		bblock_sz =
+			INT_MAP_BLOCK_SZ(bmap_hdr->bnode_map_sz, bmap_hdr->rblock_sz);
 
-		bmap[i]=unpacked_bmap;
+		bmap[i] = unpacked_bmap;
 
-		buf+=bblock_sz;
+		buf += bblock_sz;
 	}
-	
-	if(e == levels)
+
+	if (e == levels)
 		/* Not a single map was restored */
 		return 0;
 
@@ -383,20 +410,22 @@ unpack_all_bmaps(char *pack, u_char max_levels, map_gnode **ext_map,
  * `bmap_nodes[x]' nodes. `ext_map' is the pointer to the external map the bmap is
  * referring to.
  */
-int save_bmap(map_bnode **bmaps, u_int *bmap_nodes, map_gnode **ext_map, 
-		quadro_group quadg, char *file)
+int
+save_bmap(map_bnode ** bmaps, u_int * bmap_nodes, map_gnode ** ext_map,
+		  quadro_group quadg, char *file)
 {
 	FILE *fd;
 	char *pack;
 	size_t pack_sz;
-	
-	
-	pack=pack_all_bmaps(bmaps, bmap_nodes, ext_map, quadg, &pack_sz);
-	if(!pack_sz || !pack)
+
+
+	pack = pack_all_bmaps(bmaps, bmap_nodes, ext_map, quadg, &pack_sz);
+	if (!pack_sz || !pack)
 		return 0;
 
-	if((fd=fopen(file, "w"))==NULL) {
-		error("Cannot save the bnode_map in %s: %s", file, strerror(errno));
+	if ((fd = fopen(file, "w")) == NULL) {
+		error("Cannot save the bnode_map in %s: %s", file,
+			  strerror(errno));
 		return -1;
 	}
 	fwrite(pack, pack_sz, 1, fd);
@@ -412,43 +441,45 @@ int save_bmap(map_bnode **bmaps, u_int *bmap_nodes, map_gnode **ext_map,
  * the bmap shall refer to. In `bmap_nodes' the address of the u_int array, used
  * to count the nodes in each bmaps, is stored. On error 0 is returned.
  */
-map_bnode **load_bmap(char *file, map_gnode **ext_map, u_char max_levels, u_int **bmap_nodes)
+map_bnode **
+load_bmap(char *file, map_gnode ** ext_map, u_char max_levels,
+		  u_int ** bmap_nodes)
 {
-	map_bnode **bmap=0;
+	map_bnode **bmap = 0;
 	FILE *fd;
 	struct bnode_maps_hdr bmaps_hdr;
 	size_t pack_sz;
 	u_char levels;
-	char *pack=0;
-	
-	if((fd=fopen(file, "r"))==NULL) {
+	char *pack = 0;
+
+	if ((fd = fopen(file, "r")) == NULL) {
 		error("Cannot load the bmap from %s: %s", file, strerror(errno));
 		return 0;
 	}
-	
-	if(!fread(&bmaps_hdr, sizeof(struct bnode_maps_hdr), 1, fd))
+
+	if (!fread(&bmaps_hdr, sizeof(struct bnode_maps_hdr), 1, fd))
 		goto finish;
-		
+
 	ints_network_to_host(&bmaps_hdr, bnode_maps_hdr_iinfo);
-	levels=bmaps_hdr.levels;
-	pack_sz=bmaps_hdr.bmaps_block_sz;
-	if(levels > max_levels || pack_sz < sizeof(struct bnode_maps_hdr))
+	levels = bmaps_hdr.levels;
+	pack_sz = bmaps_hdr.bmaps_block_sz;
+	if (levels > max_levels || pack_sz < sizeof(struct bnode_maps_hdr))
 		goto finish;
 
 	/* Extracting the map... */
 	rewind(fd);
-	pack=xmalloc(pack_sz);
-	if(!fread(pack, pack_sz, 1, fd))
+	pack = xmalloc(pack_sz);
+	if (!fread(pack, pack_sz, 1, fd))
 		goto finish;
-	
-	bmap=unpack_all_bmaps(pack, max_levels, ext_map, bmap_nodes, 
-			MAXGROUPNODE, MAXBNODE_RNODEBLOCK);
-	
-finish:
+
+	bmap = unpack_all_bmaps(pack, max_levels, ext_map, bmap_nodes,
+							MAXGROUPNODE, MAXBNODE_RNODEBLOCK);
+
+  finish:
 	fclose(fd);
-	if(pack)
+	if (pack)
 		xfree(pack);
-	if(!bmap)
+	if (!bmap)
 		error("Malformed bmap file. Cannot load the bnode maps.");
 	return bmap;
 }

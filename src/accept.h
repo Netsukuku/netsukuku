@@ -22,26 +22,25 @@
 #define MAX_CONNECTIONS		512
 
 #define MAX_ACCEPTS		16
-#define FREE_ACCEPT_TIME	4		/*in seconds*/
+#define FREE_ACCEPT_TIME	4	/*in seconds */
 
 /*
  * This struct keep tracks of single connection to the server.
  * The thread_daemon who handle the connection knows the connection
  * position in the accept_tbl.
  */
-struct accept_table
-{
-	inet_prefix	   ip;			/*Ip of the node connected*/
-	unsigned char	   accepts;		/*Number of connection from this node*/
-	pid_t              *pid;   	        /*The pid of each child that have accepted the conn*/
-	unsigned char      *closed; 		/*Each element of this array is 1 or 0. It indicates if the connection has
-                                                  been closed*/
-	time_t		   *acp_t;		/*The time when the connection was accepted. The "accepts" counter
-						  will decrement when one of the acp_t+FREE_ACCEPT_TIME will 
-						  be <= current_time AND (the relative pid will be non existent OR
-						  the relative closed element will be == 1)
-						 */
-	struct request_tbl rqtbl;		/*The request table*/
+struct accept_table {
+	inet_prefix ip;				/*Ip of the node connected */
+	unsigned char accepts;		/*Number of connection from this node */
+	pid_t *pid;					/*The pid of each child that have accepted the conn */
+	unsigned char *closed;		/*Each element of this array is 1 or 0. It indicates if the connection has
+								   been closed */
+	time_t *acp_t;				/*The time when the connection was accepted. The "accepts" counter
+								   will decrement when one of the acp_t+FREE_ACCEPT_TIME will 
+								   be <= current_time AND (the relative pid will be non existent OR
+								   the relative closed element will be == 1)
+								 */
+	struct request_tbl rqtbl;	/*The request table */
 };
 
 /* This struct keeps all the info regarding each node connected */
@@ -62,14 +61,14 @@ int max_connections, max_accepts_per_host, free_accept_time;
 void init_accept_tbl(int startups, int accepts, int time);
 void destroy_accept_tbl(void);
 void update_accept_tbl(void);
-int  find_ip_acpt(inet_prefix ip);
-int  find_first_free(void);
-int  is_ip_acpt_free(inet_prefix ip, int *index);
-int  find_free_acp_t(int idx);
+int find_ip_acpt(inet_prefix ip);
+int find_first_free(void);
+int is_ip_acpt_free(inet_prefix ip, int *index);
+int find_free_acp_t(int idx);
 int new_accept(int idx, inet_prefix ip);
 int add_accept(inet_prefix ip, int replace);
 void del_accept(int idx, int *sidx);
-int  close_accept(int idx, int sidx);
+int close_accept(int idx, int sidx);
 void add_accept_pid(pid_t pid, int idx, int sidx);
 
-#endif /*ACCEPT_H*/
+#endif							/*ACCEPT_H */

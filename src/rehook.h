@@ -19,7 +19,7 @@
 #ifndef REHOOK_H
 #define REHOOK_H
 
-int rehook_mutex;	/* The can be only one rehook at the same time */
+int rehook_mutex;				/* The can be only one rehook at the same time */
 
 /*
  * REHOOK_PER_INSTANCE the is total number of rehooks allowed in
@@ -35,17 +35,17 @@ int rehook_mutex;	/* The can be only one rehook at the same time */
 #define REHOOK_WAIT_TIME(level)		(( (8<<(level)) - (1<<(level)) ) * 60)
 
 
-time_t last_instance_rehook;		/* When the first rehook of the latest
-					   instance occurred */
-int total_rehooks;			/* Number of rehooks made in the current 
-					   instance. 
-					   It cannot be > REHOOK_PER_INSTANCE */
+time_t last_instance_rehook;	/* When the first rehook of the latest
+								   instance occurred */
+int total_rehooks;				/* Number of rehooks made in the current 
+								   instance. 
+								   It cannot be > REHOOK_PER_INSTANCE */
 
 
 
 #define CHALLENGE_THRESHOLD	(1<<16)	/* When the gnode X, which must
-					   rehook, has a gnode_count >= (1<<16) 
-					   it sends a new challenge. */
+									   rehook, has a gnode_count >= (1<<16) 
+									   it sends a new challenge. */
 
 /* `rk_gnode_ip' is the ip that will be used if we cannot rehook directly to 
  * any gnode: a new gnode is created with the ip equal to `rk_gnode_ip'. */
@@ -53,7 +53,7 @@ inet_prefix rk_gnode_ip;
 
 /*  *  *  Functions declaration  *  *  */
 void rehook_init(void);
-void new_rehook(map_gnode *gnode, int gid, int level, int gnode_count);
-int rehook(map_gnode *hook_gnode, int hook_level);
+void new_rehook(map_gnode * gnode, int gid, int level, int gnode_count);
+int rehook(map_gnode * hook_gnode, int hook_level);
 
-#endif /*REHOOK_H*/
+#endif							/*REHOOK_H */

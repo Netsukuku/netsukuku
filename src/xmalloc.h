@@ -54,14 +54,14 @@ do{									\
 }while(0)
 
 /* Functions declaration */
-void	*xmalloc(size_t);
-void    *xzalloc(size_t size);
-void	*xrealloc(void *, size_t);
-void 	*xcalloc(size_t nmemb, size_t size);
-void    _xfree(void *);
-char 	*xstrndup(const char *str, size_t n);
-char	*xstrdup(const char *);
+void *xmalloc(size_t);
+void *xzalloc(size_t size);
+void *xrealloc(void *, size_t);
+void *xcalloc(size_t nmemb, size_t size);
+void _xfree(void *);
+char *xstrndup(const char *str, size_t n);
+char *xstrdup(const char *);
 
 #endif
 
-#endif /*XMALLOC_H*/
+#endif							/*XMALLOC_H */
