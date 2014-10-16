@@ -17,3 +17,7 @@
 *.app
 .*
 *~
+
+config.h
+*.log
+build.conf

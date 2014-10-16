@@ -24,8 +24,8 @@
 #include "if.h"
 
 #define MAX_MULTIPATH_ROUTES		24	/* The maximum number of 
-						   nexthops used to create a 
-						   single multipath route. */
+										   nexthops used to create a 
+										   single multipath route. */
 
 /* 
  * get_gw_gnode_recurse() uses this array to decide the number of forks per
@@ -40,23 +40,25 @@
  * For the ipv6 it's the same thing, but from the level 11 there will be no
  * more forks.
  */
-const static int sub_gw_links[MAX_LEVELS] = { 4, 3, 2, 1, 1, 1, 1, 1, 
-					  1, 1, 1, 1, 1, 1, 1, 1 };
+const static int sub_gw_links[MAX_LEVELS] = { 4, 3, 2, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1
+};
 
 /* * * Functions declaration * * */
-void **get_gw_gnode(map_node *, map_gnode **, map_bnode **, 
-		u_int *, map_gnode *, u_char, u_char, int);
-int get_gw_ips(map_node *, map_gnode **, map_bnode **, u_int *, 
-		quadro_group *, map_gnode *, u_char, u_char, 
-		inet_prefix *, map_node **, int);
-struct nexthop *rt_build_nexthop_gw(map_node *node, map_gnode *gnode, int level,
-		int maxhops);
-void rt_update_node(inet_prefix *dst_ip, void *dst_node, quadro_group *dst_quadg, 
-		      void *void_gw, interface **, u_char level);
+void **get_gw_gnode(map_node *, map_gnode **, map_bnode **,
+					u_int *, map_gnode *, u_char, u_char, int);
+int get_gw_ips(map_node *, map_gnode **, map_bnode **, u_int *,
+			   quadro_group *, map_gnode *, u_char, u_char,
+			   inet_prefix *, map_node **, int);
+struct nexthop *rt_build_nexthop_gw(map_node * node, map_gnode * gnode,
+									int level, int maxhops);
+void rt_update_node(inet_prefix * dst_ip, void *dst_node,
+					quadro_group * dst_quadg, void *void_gw, interface **,
+					u_char level);
 void rt_rnodes_update(int check_update_flag);
 void rt_full_update(int check_update_flag);
 
-int rt_get_default_gw(inet_prefix *gw, char *dev_name);
+int rt_get_default_gw(inet_prefix * gw, char *dev_name);
 int rt_add_gw(char *dev, inet_prefix to, inet_prefix gw, u_char table);
 int rt_del_gw(char *dev, inet_prefix to, inet_prefix gw, u_char table);
 int rt_change_gw(char *dev, inet_prefix to, inet_prefix gw, u_char table);
@@ -65,6 +67,6 @@ int rt_replace_def_gw(char *dev, inet_prefix gw, u_char table);
 int rt_delete_def_gw(u_char);
 
 int rt_del_loopback_net(void);
-int rt_append_subnet_src(inet_prefix *src, char *dev);
+int rt_append_subnet_src(inet_prefix * src, char *dev);
 
-#endif /*ROUTE_H*/
+#endif							/*ROUTE_H */

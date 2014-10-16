@@ -28,28 +28,29 @@ pthread_mutex_t tcp_daemon_lock;
 
 /* flags for udp_exec_pkt_argv and udp_daemon_argv */
 #define UDP_THREAD_FOR_EACH_PKT		1	/* For each incoming udp
-						   packets use threads */
+										   packets use threads */
 
 /* Argv passed to udp_exec_pkt() */
 struct udp_exec_pkt_argv {
-	PACKET 		*recv_pkt;
-	int		acpt_idx;
-	int		acpt_sidx;
-	u_char		flags;
+	PACKET *recv_pkt;
+	int acpt_idx;
+	int acpt_sidx;
+	u_char flags;
 };
 
 /* Argv passed to udp_daemon */
 struct udp_daemon_argv {
-	u_short		port;
-	u_char		flags;
+	u_short port;
+	u_char flags;
 };
 
 pthread_mutex_t udp_exec_lock;
 pthread_mutex_t tcp_exec_lock;
 
-int prepare_listen_socket(int family, int socktype, u_short port, interface *dev);
+int prepare_listen_socket(int family, int socktype, u_short port,
+						  interface * dev);
 void *tcp_recv_loop(void *recv_pkt);
 void *tcp_daemon(void *null);
 void *udp_daemon(void *door);
 
-#endif /*DAEMON_H*/
+#endif							/*DAEMON_H */

@@ -175,37 +175,37 @@ dump_entry(STRUCT_ENTRY *e, const TC_HANDLE_T handle)
 }*/
 
 static unsigned char *
-is_same(const STRUCT_ENTRY *a, const STRUCT_ENTRY *b, unsigned char *matchmask)
+is_same(const STRUCT_ENTRY * a, const STRUCT_ENTRY * b,
+		unsigned char *matchmask)
 {
 	unsigned int i;
 	unsigned char *mptr;
 
 	/* Always compare head structures: ignore mask here. */
 	if (a->ip.src.s_addr != b->ip.src.s_addr
-	    || a->ip.dst.s_addr != b->ip.dst.s_addr
-	    || a->ip.smsk.s_addr != b->ip.smsk.s_addr
-	    || a->ip.dmsk.s_addr != b->ip.dmsk.s_addr
-	    || a->ip.proto != b->ip.proto
-	    || a->ip.flags != b->ip.flags
-	    || a->ip.invflags != b->ip.invflags)
+		|| a->ip.dst.s_addr != b->ip.dst.s_addr
+		|| a->ip.smsk.s_addr != b->ip.smsk.s_addr
+		|| a->ip.dmsk.s_addr != b->ip.dmsk.s_addr
+		|| a->ip.proto != b->ip.proto
+		|| a->ip.flags != b->ip.flags || a->ip.invflags != b->ip.invflags)
 		return NULL;
 
 	for (i = 0; i < IFNAMSIZ; i++) {
 		if (a->ip.iniface_mask[i] != b->ip.iniface_mask[i])
 			return NULL;
 		if ((a->ip.iniface[i] & a->ip.iniface_mask[i])
-		    != (b->ip.iniface[i] & b->ip.iniface_mask[i]))
+			!= (b->ip.iniface[i] & b->ip.iniface_mask[i]))
 			return NULL;
 		if (a->ip.outiface_mask[i] != b->ip.outiface_mask[i])
 			return NULL;
 		if ((a->ip.outiface[i] & a->ip.outiface_mask[i])
-		    != (b->ip.outiface[i] & b->ip.outiface_mask[i]))
+			!= (b->ip.outiface[i] & b->ip.outiface_mask[i]))
 			return NULL;
 	}
 
 	if (a->nfcache != b->nfcache
-	    || a->target_offset != b->target_offset
-	    || a->next_offset != b->next_offset)
+		|| a->target_offset != b->target_offset
+		|| a->next_offset != b->next_offset)
 		return NULL;
 
 	mptr = matchmask + sizeof(STRUCT_ENTRY);
@@ -223,15 +223,15 @@ unconditional(const struct ipt_ip *ip)
 {
 	unsigned int i;
 
-	for (i = 0; i < sizeof(*ip)/sizeof(u_int32_t); i++)
-		if (((u_int32_t *)ip)[i])
+	for (i = 0; i < sizeof(*ip) / sizeof(u_int32_t); i++)
+		if (((u_int32_t *) ip)[i])
 			return 0;
 
 	return 1;
 }
 
 static inline int
-check_match(const STRUCT_ENTRY_MATCH *m, unsigned int *off)
+check_match(const STRUCT_ENTRY_MATCH * m, unsigned int *off)
 {
 	assert(m->u.match_size >= sizeof(STRUCT_ENTRY_MATCH));
 	assert(ALIGN(m->u.match_size) == m->u.match_size);
@@ -241,23 +241,22 @@ check_match(const STRUCT_ENTRY_MATCH *m, unsigned int *off)
 }
 
 static inline int
-check_entry(const STRUCT_ENTRY *e, unsigned int *i, unsigned int *off,
-	    unsigned int user_offset, int *was_return,
-	    TC_HANDLE_T h)
+check_entry(const STRUCT_ENTRY * e, unsigned int *i, unsigned int *off,
+			unsigned int user_offset, int *was_return, TC_HANDLE_T h)
 {
 	unsigned int toff;
 	STRUCT_STANDARD_TARGET *t;
 
 	assert(e->target_offset >= sizeof(STRUCT_ENTRY));
 	assert(e->next_offset >= e->target_offset
-	       + sizeof(STRUCT_ENTRY_TARGET));
+		   + sizeof(STRUCT_ENTRY_TARGET));
 	toff = sizeof(STRUCT_ENTRY);
 	IPT_MATCH_ITERATE(e, check_match, &toff);
 
 	assert(toff == e->target_offset);
 
 	t = (STRUCT_STANDARD_TARGET *)
-		GET_TARGET((STRUCT_ENTRY *)e);
+		GET_TARGET((STRUCT_ENTRY *) e);
 	/* next_offset will have to be multiple of entry alignment. */
 	assert(e->next_offset == ALIGN(e->next_offset));
 	assert(e->target_offset == ALIGN(e->target_offset));
@@ -266,47 +265,45 @@ check_entry(const STRUCT_ENTRY *e, unsigned int *i, unsigned int *off,
 
 	if (strcmp(t->target.u.user.name, STANDARD_TARGET) == 0) {
 		assert(t->target.u.target_size
-		       == ALIGN(sizeof(STRUCT_STANDARD_TARGET)));
+			   == ALIGN(sizeof(STRUCT_STANDARD_TARGET)));
 
-		assert(t->verdict == -NF_DROP-1
-		       || t->verdict == -NF_ACCEPT-1
-		       || t->verdict == RETURN
-		       || t->verdict < (int)h->entries->size);
+		assert(t->verdict == -NF_DROP - 1
+			   || t->verdict == -NF_ACCEPT - 1
+			   || t->verdict == RETURN
+			   || t->verdict < (int) h->entries->size);
 
 		if (t->verdict >= 0) {
 			STRUCT_ENTRY *te = get_entry(h, t->verdict);
 			int idx;
 
 			idx = iptcb_entry2index(h, te);
-			assert(strcmp(GET_TARGET(te)->u.user.name,
-				      IPT_ERROR_TARGET)
-			       != 0);
+			assert(strcmp(GET_TARGET(te)->u.user.name, IPT_ERROR_TARGET)
+				   != 0);
 			assert(te != e);
 
 			/* Prior node must be error node, or this node. */
-			assert(t->verdict == iptcb_entry2offset(h, e)+e->next_offset
-			       || strcmp(GET_TARGET(index2entry(h, idx-1))
-					 ->u.user.name, IPT_ERROR_TARGET)
-			       == 0);
+			assert(t->verdict == iptcb_entry2offset(h, e) + e->next_offset
+				   || strcmp(GET_TARGET(index2entry(h, idx - 1))
+							 ->u.user.name, IPT_ERROR_TARGET)
+				   == 0);
 		}
 
-		if (t->verdict == RETURN
-		    && unconditional(&e->ip)
-		    && e->target_offset == sizeof(*e))
+		if (t->verdict == RETURN && unconditional(&e->ip)
+			&& e->target_offset == sizeof(*e))
 			*was_return = 1;
 		else
 			*was_return = 0;
 	} else if (strcmp(t->target.u.user.name, IPT_ERROR_TARGET) == 0) {
 		assert(t->target.u.target_size
-		       == ALIGN(sizeof(struct ipt_error_target)));
+			   == ALIGN(sizeof(struct ipt_error_target)));
 
 		/* If this is in user area, previous must have been return */
 		if (*off > user_offset)
 			assert(*was_return);
 
 		*was_return = 0;
-	}
-	else *was_return = 0;
+	} else
+		*was_return = 0;
 
 	if (*off == user_offset)
 		assert(strcmp(t->target.u.user.name, IPT_ERROR_TARGET) == 0);
@@ -322,15 +319,14 @@ static void
 do_check(TC_HANDLE_T h, unsigned int line)
 {
 	unsigned int i, n;
-	unsigned int user_offset; /* Offset of first user chain */
+	unsigned int user_offset;	/* Offset of first user chain */
 	int was_return;
 
 	assert(h->changed == 0 || h->changed == 1);
 	if (strcmp(h->info.name, "filter") == 0) {
 		assert(h->info.valid_hooks
-		       == (1 << NF_IP_LOCAL_IN
-			   | 1 << NF_IP_FORWARD
-			   | 1 << NF_IP_LOCAL_OUT));
+			   == (1 << NF_IP_LOCAL_IN
+				   | 1 << NF_IP_FORWARD | 1 << NF_IP_LOCAL_OUT));
 
 		/* Hooks should be first three */
 		assert(h->info.hook_entry[NF_IP_LOCAL_IN] == 0);
@@ -346,14 +342,13 @@ do_check(TC_HANDLE_T h, unsigned int line)
 		user_offset = h->info.hook_entry[NF_IP_LOCAL_OUT];
 	} else if (strcmp(h->info.name, "nat") == 0) {
 		assert((h->info.valid_hooks
-		        == (1 << NF_IP_PRE_ROUTING
-			    | 1 << NF_IP_POST_ROUTING
-			    | 1 << NF_IP_LOCAL_OUT)) ||
-		       (h->info.valid_hooks
-			== (1 << NF_IP_PRE_ROUTING
-			    | 1 << NF_IP_LOCAL_IN
-			    | 1 << NF_IP_POST_ROUTING
-			    | 1 << NF_IP_LOCAL_OUT)));
+				== (1 << NF_IP_PRE_ROUTING
+					| 1 << NF_IP_POST_ROUTING
+					| 1 << NF_IP_LOCAL_OUT)) ||
+			   (h->info.valid_hooks
+				== (1 << NF_IP_PRE_ROUTING
+					| 1 << NF_IP_LOCAL_IN
+					| 1 << NF_IP_POST_ROUTING | 1 << NF_IP_LOCAL_OUT)));
 
 		assert(h->info.hook_entry[NF_IP_PRE_ROUTING] == 0);
 
@@ -379,14 +374,13 @@ do_check(TC_HANDLE_T h, unsigned int line)
 		 * two mangle hooks, linux >= 2.4.18-pre6 has five mangle hooks
 		 * */
 		assert((h->info.valid_hooks
-			== (1 << NF_IP_PRE_ROUTING
-			    | 1 << NF_IP_LOCAL_OUT)) || 
-		       (h->info.valid_hooks
-			== (1 << NF_IP_PRE_ROUTING
-			    | 1 << NF_IP_LOCAL_IN
-			    | 1 << NF_IP_FORWARD
-			    | 1 << NF_IP_LOCAL_OUT
-			    | 1 << NF_IP_POST_ROUTING)));
+				== (1 << NF_IP_PRE_ROUTING
+					| 1 << NF_IP_LOCAL_OUT)) ||
+			   (h->info.valid_hooks
+				== (1 << NF_IP_PRE_ROUTING
+					| 1 << NF_IP_LOCAL_IN
+					| 1 << NF_IP_FORWARD
+					| 1 << NF_IP_LOCAL_OUT | 1 << NF_IP_POST_ROUTING)));
 
 		/* Hooks should be first five */
 		assert(h->info.hook_entry[NF_IP_PRE_ROUTING] == 0);
@@ -417,8 +411,7 @@ do_check(TC_HANDLE_T h, unsigned int line)
 		}
 	} else if (strcmp(h->info.name, "raw") == 0) {
 		assert(h->info.valid_hooks
-		       == (1 << NF_IP_PRE_ROUTING
-			   | 1 << NF_IP_LOCAL_OUT));
+			   == (1 << NF_IP_PRE_ROUTING | 1 << NF_IP_LOCAL_OUT));
 
 		/* Hooks should be first three */
 		assert(h->info.hook_entry[NF_IP_PRE_ROUTING] == 0);
@@ -447,7 +440,7 @@ do_check(TC_HANDLE_T h, unsigned int line)
 	user_offset += get_entry(h, user_offset)->next_offset;
 
 	/* Overflows should be end of entry chains, and unconditional
-           policy nodes. */
+	   policy nodes. */
 	for (i = 0; i < NUMHOOKS; i++) {
 		STRUCT_ENTRY *e;
 		STRUCT_STANDARD_TARGET *t;
@@ -455,47 +448,48 @@ do_check(TC_HANDLE_T h, unsigned int line)
 		if (!(h->info.valid_hooks & (1 << i)))
 			continue;
 		assert(h->info.underflow[i]
-		       == get_chain_end(h, h->info.hook_entry[i]));
+			   == get_chain_end(h, h->info.hook_entry[i]));
 
 		e = get_entry(h, get_chain_end(h, h->info.hook_entry[i]));
 		assert(unconditional(&e->ip));
 		assert(e->target_offset == sizeof(*e));
-		t = (STRUCT_STANDARD_TARGET *)GET_TARGET(e);
+		t = (STRUCT_STANDARD_TARGET *) GET_TARGET(e);
 		assert(t->target.u.target_size == ALIGN(sizeof(*t)));
 		assert(e->next_offset == sizeof(*e) + ALIGN(sizeof(*t)));
 
-		assert(strcmp(t->target.u.user.name, STANDARD_TARGET)==0);
-		assert(t->verdict == -NF_DROP-1 || t->verdict == -NF_ACCEPT-1);
+		assert(strcmp(t->target.u.user.name, STANDARD_TARGET) == 0);
+		assert(t->verdict == -NF_DROP - 1 || t->verdict == -NF_ACCEPT - 1);
 
 		/* Hooks and underflows must be valid entries */
 		entry2index(h, get_entry(h, h->info.hook_entry[i]));
 		entry2index(h, get_entry(h, h->info.underflow[i]));
 	}
 
-	assert(h->info.size
-	       >= h->info.num_entries * (sizeof(STRUCT_ENTRY)
-					 +sizeof(STRUCT_STANDARD_TARGET)));
+	assert(h->info.size >= h->info.num_entries * (sizeof(STRUCT_ENTRY)
+												  +
+												  sizeof
+												  (STRUCT_STANDARD_TARGET)));
 
-	assert(h->entries.size
-	       >= (h->new_number
-		   * (sizeof(STRUCT_ENTRY)
-		      + sizeof(STRUCT_STANDARD_TARGET))));
+	assert(h->entries.size >= (h->new_number * (sizeof(STRUCT_ENTRY)
+												+
+												sizeof
+												(STRUCT_STANDARD_TARGET))));
 	assert(strcmp(h->info.name, h->entries.name) == 0);
 
-	i = 0; n = 0;
+	i = 0;
+	n = 0;
 	was_return = 0;
 	/* Check all the entries. */
 	ENTRY_ITERATE(h->entries.entrytable, h->entries.size,
-		      check_entry, &i, &n, user_offset, &was_return, h);
+				  check_entry, &i, &n, user_offset, &was_return, h);
 
 	assert(i == h->new_number);
 	assert(n == h->entries.size);
 
 	/* Final entry must be error node */
-	assert(strcmp(GET_TARGET(index2entry(h, h->new_number-1))
-		      ->u.user.name,
-		      ERROR_TARGET) == 0);
+	assert(strcmp(GET_TARGET(index2entry(h, h->new_number - 1))
+				  ->u.user.name, ERROR_TARGET) == 0);
 }
-#endif /*IPTC_DEBUG*/
+#endif							/*IPTC_DEBUG */
 
 #endif

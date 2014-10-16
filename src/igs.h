@@ -43,7 +43,7 @@
 \*/
 
 /* Minum bandwidth necessary to share an internet connection */
-#define MIN_CONN_BANDWIDTH	3		/* 16 Kb/s */
+#define MIN_CONN_BANDWIDTH	3	/* 16 Kb/s */
 
 #define MAX_INTERNET_HNAMES	10
 #define MAX_INTERNET_HNAME_SZ	64
@@ -51,17 +51,17 @@
 #define IGW_HOST_PING_TIMEOUT	10
 #define INET_NEXT_PING_WAIT	10
 
-#define IGW_BW_DELTA		1		/* If the difference between the old and the new
-						   igw->bandwidth is >= IGW_BW_DELTA, then 
-						   me.igws is reordered and the routing table
-						   updated */
+#define IGW_BW_DELTA		1	/* If the difference between the old and the new
+								   igw->bandwidth is >= IGW_BW_DELTA, then 
+								   me.igws is reordered and the routing table
+								   updated */
 #define MAXIGWS			MAXGROUPNODE	/* max number of internet 
-						   gateways in each level */
+										   gateways in each level */
 
 #define RTTABLE_IGW		221		/* Routing tables from 221 to 244 */
-#define RTTABLE_ALISHIELD	245		/* Anti Loop multi-Igw Shield
-						   (what a damn long name, read the Ntk_IGS
-						   RFC) */
+#define RTTABLE_ALISHIELD	245	/* Anti Loop multi-Igw Shield
+								   (what a damn long name, read the Ntk_IGS
+								   RFC) */
 #define FWMARK_ALISHIELD	25
 
 #ifdef DEBUG
@@ -73,10 +73,10 @@
  * inet_gw flags
  */
 #define IGW_TUNNELED		1
-#define IGW_ACTIVE		(1<<1)		/* This gw is being used in the
-						   routing table */
-#define IGW_RTRULE		(1<<2)		/* The relative routing rule is already
-						   present */
+#define IGW_ACTIVE		(1<<1)	/* This gw is being used in the
+								   routing table */
+#define IGW_RTRULE		(1<<2)	/* The relative routing rule is already
+								   present */
 
 /*
  * internet_gateway
@@ -84,29 +84,28 @@
  * This struct points to a particular (g)node which is sharing its Internet 
  * connection
  */
-struct internet_gateway
-{
-	LLIST_HDR	(struct internet_gateway);
+struct internet_gateway {
+	LLIST_HDR(struct internet_gateway);
 
-	u_int		ip[MAX_IP_INT];
-	u_char		gid;
-	map_node	*node;
+	u_int ip[MAX_IP_INT];
+	u_char gid;
+	map_node *node;
 
-	char		flags;
-	u_char		bandwidth;	/* Its Internet bandwidth */
+	char flags;
+	u_char bandwidth;			/* Its Internet bandwidth */
 };
 typedef struct internet_gateway inet_gw;
 
 /* We pack only `gid' and `bandwidth' */
 #define INET_GW_PACK_SZ		(sizeof(u_char)*2 + MAX_IP_SZ)
 
-struct inet_gw_pack_hdr
-{
-	int16_t		gws[MAX_LEVELS];/* Number of inet_gws there are in the
-					   pack, for each level */
-	u_char		levels;
-}_PACKED_;
-INT_INFO inet_gw_pack_hdr_iinfo = { 1, { INT_TYPE_16BIT }, { 0 }, { MAX_LEVELS } };
+struct inet_gw_pack_hdr {
+	int16_t gws[MAX_LEVELS];	/* Number of inet_gws there are in the
+								   pack, for each level */
+	u_char levels;
+} _PACKED_;
+INT_INFO inet_gw_pack_hdr_iinfo =
+	{ 1, {INT_TYPE_16BIT}, {0}, {MAX_LEVELS} };
 
 /* 
  * The inet_gw_pack_body is:
@@ -141,15 +140,15 @@ INT_INFO inet_gw_pack_hdr_iinfo = { 1, { INT_TYPE_16BIT }, { 0 }, { MAX_LEVELS }
  * keep track of them.
  */
 struct default_inet_gw_nexthop {
-	inet_prefix	nexthop;
+	inet_prefix nexthop;
 
-	u_char		flags;		/* inet_gw flags */
-	
-	u_char		table;
-	u_char		tunl;		/* `tunl' is the number of the tunnel
-					   we are using to reach this igw. 
-					   (tunl = 4 means we are using the 
-					   "tunl4" device) */
+	u_char flags;				/* inet_gw flags */
+
+	u_char table;
+	u_char tunl;				/* `tunl' is the number of the tunnel
+								   we are using to reach this igw. 
+								   (tunl = 4 means we are using the 
+								   "tunl4" device) */
 };
 typedef struct default_inet_gw_nexthop igw_nexthop;
 
@@ -169,8 +168,8 @@ typedef struct default_inet_gw_nexthop igw_nexthop;
 \*/
 
 #define MAX_IGW_PER_QSPN_CHUNK		16	/* Maximum number of IGWs 
-						   contained in a single 
-						   QSPN chunk */
+										   contained in a single 
+										   QSPN chunk */
 
 
 /*\
@@ -190,46 +189,50 @@ igw_nexthop multigw_nh[MAX_MULTIPATH_ROUTES];
 \*/
 
 u_char bandwidth_in_8bit(u_int x);
-int str_to_inet_gw(char *str, inet_prefix *gw, char **dev);
+int str_to_inet_gw(char *str, inet_prefix * gw, char **dev);
 char **parse_internet_hosts(char *str, int *hosts);
 void free_internet_hosts(char **hnames, int hosts);
 
 void init_my_igw(void);
-void init_igws(inet_gw ***igws, int **igws_counter, int levels);
-void reset_igws(inet_gw **igws, int *igws_counter, int levels);
-void free_igws(inet_gw **igws, int *igws_counter, int levels);
-void init_my_igws(inet_gw **igws, int *igws_counter,
-		inet_gw ***my_new_igws, u_char my_bandwidth, 
-		map_node *cur_node, quadro_group *qg);
-void free_my_igws(inet_gw ***my_igs);
+void init_igws(inet_gw *** igws, int **igws_counter, int levels);
+void reset_igws(inet_gw ** igws, int *igws_counter, int levels);
+void free_igws(inet_gw ** igws, int *igws_counter, int levels);
+void init_my_igws(inet_gw ** igws, int *igws_counter,
+				  inet_gw *** my_new_igws, u_char my_bandwidth,
+				  map_node * cur_node, quadro_group * qg);
+void free_my_igws(inet_gw *** my_igs);
 void init_internet_gateway_search(void);
 void close_internet_gateway_search(void);
-inet_gw *igw_add_node(inet_gw **igws, int *igws_counter,  int level,
-		int gid, map_node *node, int ip[MAX_IP_INT], u_char bandwidth);
-int igw_del(inet_gw **igws, int *igws_counter, inet_gw *igw, int level);
-inet_gw *igw_find_node(inet_gw **igws, int level, map_node *node);
-inet_gw *igw_find_ip(inet_gw **igws, int level, u_int ip[MAX_IP_INT]);
-int igw_del_node(inet_gw **, int *,  int, map_node *);
+inet_gw *igw_add_node(inet_gw ** igws, int *igws_counter, int level,
+					  int gid, map_node * node, int ip[MAX_IP_INT],
+					  u_char bandwidth);
+int igw_del(inet_gw ** igws, int *igws_counter, inet_gw * igw, int level);
+inet_gw *igw_find_node(inet_gw ** igws, int level, map_node * node);
+inet_gw *igw_find_ip(inet_gw ** igws, int level, u_int ip[MAX_IP_INT]);
+int igw_del_node(inet_gw **, int *, int, map_node *);
 void igw_update_gnode_bw(int *, inet_gw **, inet_gw *, int, int, int);
-void igw_order(inet_gw **igws, int *igws_counter, inet_gw **my_igws, int level);
+void igw_order(inet_gw ** igws, int *igws_counter, inet_gw ** my_igws,
+			   int level);
 
 int igw_check_inet_conn(void);
 void *igw_check_inet_conn_t(void *null);
 void *igw_monitor_igws_t(void *null);
 
 int igw_exec_masquerade_sh(char *script, int stop);
-int igw_exec_tcshaper_sh(char *script, int stop, 
-		char *dev, int upload_bw, int dnload_bw);
-void reset_igw_nexthop(igw_nexthop *igwn);
+int igw_exec_tcshaper_sh(char *script, int stop,
+						 char *dev, int upload_bw, int dnload_bw);
+void reset_igw_nexthop(igw_nexthop * igwn);
 void reset_igw_rules(void);
-int igw_replace_def_igws(inet_gw **igws, int *igws_counter, 
-		inet_gw **my_igws, int max_levels, int family);
+int igw_replace_def_igws(inet_gw ** igws, int *igws_counter,
+						 inet_gw ** my_igws, int max_levels, int family);
 
-char *igw_build_bentry(u_char level, size_t *pack_sz, int *new_bblocks);
-int igw_store_bblock(bnode_hdr *bblock_hdr, bnode_chunk *bchunk, u_char level);
-char *pack_igws(inet_gw **igws, int *igws_counter, int levels, int *pack_sz);
-int unpack_igws(char *pack, size_t pack_sz,
-		map_node *int_map, map_gnode **ext_map, int levels,
-		inet_gw ***new_igws, int **new_igws_counter);
+char *igw_build_bentry(u_char level, size_t * pack_sz, int *new_bblocks);
+int igw_store_bblock(bnode_hdr * bblock_hdr, bnode_chunk * bchunk,
+					 u_char level);
+char *pack_igws(inet_gw ** igws, int *igws_counter, int levels,
+				int *pack_sz);
+int unpack_igws(char *pack, size_t pack_sz, map_node * int_map,
+				map_gnode ** ext_map, int levels, inet_gw *** new_igws,
+				int **new_igws_counter);
 
-#endif /*IGS_H*/
+#endif							/*IGS_H */

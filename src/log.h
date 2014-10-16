@@ -107,7 +107,7 @@
 #endif
 
 /* functions declaration */
-void log_init(char *, int, int );
+void log_init(char *, int, int);
 int log_to_file(char *filename);
 void close_log_file(void);
 
@@ -118,4 +118,4 @@ void debug(int lvl, const char *, ...);
 
 void print_log(int level, const char *fmt, va_list args);
 
-#endif /*LOG_H*/
+#endif							/*LOG_H */

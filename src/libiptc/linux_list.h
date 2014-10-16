@@ -69,9 +69,9 @@ struct list_head {
  * This is only for internal list manipulation where we know
  * the prev/next entries already!
  */
-static inline void __list_add(struct list_head *new,
-			      struct list_head *prev,
-			      struct list_head *next)
+static inline void
+__list_add(struct list_head *new,
+		   struct list_head *prev, struct list_head *next)
 {
 	next->prev = new;
 	new->next = next;
@@ -87,7 +87,8 @@ static inline void __list_add(struct list_head *new,
  * Insert a new entry after the specified head.
  * This is good for implementing stacks.
  */
-static inline void list_add(struct list_head *new, struct list_head *head)
+static inline void
+list_add(struct list_head *new, struct list_head *head)
 {
 	__list_add(new, head, head->next);
 }
@@ -100,7 +101,8 @@ static inline void list_add(struct list_head *new, struct list_head *head)
  * Insert a new entry before the specified head.
  * This is useful for implementing queues.
  */
-static inline void list_add_tail(struct list_head *new, struct list_head *head)
+static inline void
+list_add_tail(struct list_head *new, struct list_head *head)
 {
 	__list_add(new, head->prev, head);
 }
@@ -111,8 +113,9 @@ static inline void list_add_tail(struct list_head *new, struct list_head *head)
  * This is only for internal list manipulation where we know
  * the prev/next entries already!
  */
-static inline void __list_add_rcu(struct list_head * new,
-		struct list_head * prev, struct list_head * next)
+static inline void
+__list_add_rcu(struct list_head *new,
+			   struct list_head *prev, struct list_head *next)
 {
 	new->next = next;
 	new->prev = prev;
@@ -137,7 +140,8 @@ static inline void __list_add_rcu(struct list_head * new,
  * the _rcu list-traversal primitives, such as
  * list_for_each_entry_rcu().
  */
-static inline void list_add_rcu(struct list_head *new, struct list_head *head)
+static inline void
+list_add_rcu(struct list_head *new, struct list_head *head)
 {
 	__list_add_rcu(new, head, head->next);
 }
@@ -158,8 +162,8 @@ static inline void list_add_rcu(struct list_head *new, struct list_head *head)
  * the _rcu list-traversal primitives, such as
  * list_for_each_entry_rcu().
  */
-static inline void list_add_tail_rcu(struct list_head *new,
-					struct list_head *head)
+static inline void
+list_add_tail_rcu(struct list_head *new, struct list_head *head)
 {
 	__list_add_rcu(new, head->prev, head);
 }
@@ -171,7 +175,8 @@ static inline void list_add_tail_rcu(struct list_head *new,
  * This is only for internal list manipulation where we know
  * the prev/next entries already!
  */
-static inline void __list_del(struct list_head * prev, struct list_head * next)
+static inline void
+__list_del(struct list_head *prev, struct list_head *next)
 {
 	next->prev = prev;
 	prev->next = next;
@@ -183,7 +188,8 @@ static inline void __list_del(struct list_head * prev, struct list_head * next)
  * Note: list_empty on entry does not return true after this, the entry is
  * in an undefined state.
  */
-static inline void list_del(struct list_head *entry)
+static inline void
+list_del(struct list_head *entry)
 {
 	__list_del(entry->prev, entry->next);
 	entry->next = LIST_POISON1;
@@ -214,7 +220,8 @@ static inline void list_del(struct list_head *entry)
  * or call_rcu() must be used to defer freeing until an RCU
  * grace period has elapsed.
  */
-static inline void list_del_rcu(struct list_head *entry)
+static inline void
+list_del_rcu(struct list_head *entry)
 {
 	__list_del(entry->prev, entry->next);
 	entry->prev = LIST_POISON2;
@@ -224,7 +231,8 @@ static inline void list_del_rcu(struct list_head *entry)
  * list_del_init - deletes entry from list and reinitialize it.
  * @entry: the element to delete from the list.
  */
-static inline void list_del_init(struct list_head *entry)
+static inline void
+list_del_init(struct list_head *entry)
 {
 	__list_del(entry->prev, entry->next);
 	INIT_LIST_HEAD(entry);
@@ -235,10 +243,11 @@ static inline void list_del_init(struct list_head *entry)
  * @list: the entry to move
  * @head: the head that will precede our entry
  */
-static inline void list_move(struct list_head *list, struct list_head *head)
+static inline void
+list_move(struct list_head *list, struct list_head *head)
 {
-        __list_del(list->prev, list->next);
-        list_add(list, head);
+	__list_del(list->prev, list->next);
+	list_add(list, head);
 }
 
 /**
@@ -246,18 +255,19 @@ static inline void list_move(struct list_head *list, struct list_head *head)
  * @list: the entry to move
  * @head: the head that will follow our entry
  */
-static inline void list_move_tail(struct list_head *list,
-				  struct list_head *head)
+static inline void
+list_move_tail(struct list_head *list, struct list_head *head)
 {
-        __list_del(list->prev, list->next);
-        list_add_tail(list, head);
+	__list_del(list->prev, list->next);
+	list_add_tail(list, head);
 }
 
 /**
  * list_empty - tests whether a list is empty
  * @head: the list to test.
  */
-static inline int list_empty(const struct list_head *head)
+static inline int
+list_empty(const struct list_head *head)
 {
 	return head->next == head;
 }
@@ -274,14 +284,15 @@ static inline int list_empty(const struct list_head *head)
  *
  * @head: the list to test.
  */
-static inline int list_empty_careful(const struct list_head *head)
+static inline int
+list_empty_careful(const struct list_head *head)
 {
 	struct list_head *next = head->next;
 	return (next == head) && (next == head->prev);
 }
 
-static inline void __list_splice(struct list_head *list,
-				 struct list_head *head)
+static inline void
+__list_splice(struct list_head *list, struct list_head *head)
 {
 	struct list_head *first = list->next;
 	struct list_head *last = list->prev;
@@ -299,7 +310,8 @@ static inline void __list_splice(struct list_head *list,
  * @list: the new list to add.
  * @head: the place to add it in the first list.
  */
-static inline void list_splice(struct list_head *list, struct list_head *head)
+static inline void
+list_splice(struct list_head *list, struct list_head *head)
 {
 	if (!list_empty(list))
 		__list_splice(list, head);
@@ -312,8 +324,8 @@ static inline void list_splice(struct list_head *list, struct list_head *head)
  *
  * The list at @list is reinitialised
  */
-static inline void list_splice_init(struct list_head *list,
-				    struct list_head *head)
+static inline void
+list_splice_init(struct list_head *list, struct list_head *head)
 {
 	if (!list_empty(list)) {
 		__list_splice(list, head);
@@ -519,17 +531,20 @@ struct hlist_node {
 #define INIT_HLIST_HEAD(ptr) ((ptr)->first = NULL)
 #define INIT_HLIST_NODE(ptr) ((ptr)->next = NULL, (ptr)->pprev = NULL)
 
-static inline int hlist_unhashed(const struct hlist_node *h)
+static inline int
+hlist_unhashed(const struct hlist_node *h)
 {
 	return !h->pprev;
 }
 
-static inline int hlist_empty(const struct hlist_head *h)
+static inline int
+hlist_empty(const struct hlist_head *h)
 {
 	return !h->first;
 }
 
-static inline void __hlist_del(struct hlist_node *n)
+static inline void
+__hlist_del(struct hlist_node *n)
 {
 	struct hlist_node *next = n->next;
 	struct hlist_node **pprev = n->pprev;
@@ -538,7 +553,8 @@ static inline void __hlist_del(struct hlist_node *n)
 		next->pprev = pprev;
 }
 
-static inline void hlist_del(struct hlist_node *n)
+static inline void
+hlist_del(struct hlist_node *n)
 {
 	__hlist_del(n);
 	n->next = LIST_POISON1;
@@ -564,15 +580,17 @@ static inline void hlist_del(struct hlist_node *n)
  * the _rcu list-traversal primitives, such as
  * hlist_for_each_entry().
  */
-static inline void hlist_del_rcu(struct hlist_node *n)
+static inline void
+hlist_del_rcu(struct hlist_node *n)
 {
 	__hlist_del(n);
 	n->pprev = LIST_POISON2;
 }
 
-static inline void hlist_del_init(struct hlist_node *n)
+static inline void
+hlist_del_init(struct hlist_node *n)
 {
-	if (n->pprev)  {
+	if (n->pprev) {
 		__hlist_del(n);
 		INIT_HLIST_NODE(n);
 	}
@@ -580,7 +598,8 @@ static inline void hlist_del_init(struct hlist_node *n)
 
 #define hlist_del_rcu_init hlist_del_init
 
-static inline void hlist_add_head(struct hlist_node *n, struct hlist_head *h)
+static inline void
+hlist_add_head(struct hlist_node *n, struct hlist_head *h)
 {
 	struct hlist_node *first = h->first;
 	n->next = first;
@@ -610,8 +629,8 @@ static inline void hlist_add_head(struct hlist_node *n, struct hlist_head *h)
  *
  * OK, so why don't we have an hlist_for_each_entry_rcu()???
  */
-static inline void hlist_add_head_rcu(struct hlist_node *n,
-					struct hlist_head *h)
+static inline void
+hlist_add_head_rcu(struct hlist_node *n, struct hlist_head *h)
 {
 	struct hlist_node *first = h->first;
 	n->next = first;
@@ -623,8 +642,8 @@ static inline void hlist_add_head_rcu(struct hlist_node *n,
 }
 
 /* next must be != NULL */
-static inline void hlist_add_before(struct hlist_node *n,
-					struct hlist_node *next)
+static inline void
+hlist_add_before(struct hlist_node *n, struct hlist_node *next)
 {
 	n->pprev = next->pprev;
 	n->next = next;
@@ -632,15 +651,15 @@ static inline void hlist_add_before(struct hlist_node *n,
 	*(n->pprev) = n;
 }
 
-static inline void hlist_add_after(struct hlist_node *n,
-					struct hlist_node *next)
+static inline void
+hlist_add_after(struct hlist_node *n, struct hlist_node *next)
 {
 	next->next = n->next;
 	n->next = next;
 	next->pprev = &n->next;
 
-	if(next->next)
-		next->next->pprev  = &next->next;
+	if (next->next)
+		next->next->pprev = &next->next;
 }
 
 #define hlist_entry(ptr, type, member) container_of(ptr,type,member)

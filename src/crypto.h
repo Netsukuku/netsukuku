@@ -35,12 +35,14 @@
 void init_crypto(void);
 void free_crypto(void);
 char *ssl_strerr(void);
-RSA *genrsa(int key_bits, u_char **pub, u_int *pub_len, u_char **priv, u_int *priv_len);
-RSA *get_rsa_pub(const u_char **pub_key, long length);
-RSA *get_rsa_priv(const u_char **priv_key, long length);
-u_char *hash_sha1(u_char *msg, u_int len, u_char *hash);
-u_char *hash_md5(u_char *msg, u_int m_len, u_char *hash);
-u_char *rsa_sign(u_char *msg, u_int m_len, RSA *priv, u_int *siglen);
-int verify_sign(u_char *msg, u_int m_len, u_char *signature, u_int siglen, RSA *pub);
+RSA *genrsa(int key_bits, u_char ** pub, u_int * pub_len, u_char ** priv,
+			u_int * priv_len);
+RSA *get_rsa_pub(const u_char ** pub_key, long length);
+RSA *get_rsa_priv(const u_char ** priv_key, long length);
+u_char *hash_sha1(u_char * msg, u_int len, u_char * hash);
+u_char *hash_md5(u_char * msg, u_int m_len, u_char * hash);
+u_char *rsa_sign(u_char * msg, u_int m_len, RSA * priv, u_int * siglen);
+int verify_sign(u_char * msg, u_int m_len, u_char * signature,
+				u_int siglen, RSA * pub);
 
-#endif /*CRYPTO_H*/
+#endif							/*CRYPTO_H */

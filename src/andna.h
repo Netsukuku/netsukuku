@@ -28,7 +28,7 @@
 #define ETC_RESOLV_CONF_BAK	"/etc/resolv.conf.bak"
 
 /* How many different andna pkt can be flooded simultaneusly */
-#define ANDNA_MAX_FLOODS	(ANDNA_MAX_QUEUE*3+1) 
+#define ANDNA_MAX_FLOODS	(ANDNA_MAX_QUEUE*3+1)
 
 /* How many new hash_gnodes are supported in the andna hash_gnode mutation */
 #define ANDNA_MAX_NEW_GNODES	1024
@@ -77,12 +77,12 @@ int last_spread_acache_pkt_id[ANDNA_MAX_FLOODS];
 #define ANDNA_REV_RESOLVE_RQ_TIMEOUT	60
 
 /* * * andna pkt flags * * */
-#define ANDNA_PKT_UPDATE	1		/* Update the hostname */
-#define ANDNA_PKT_FORWARD	(1<<1)		/* Forward this pkt, plz */
-#define ANDNA_PKT_REV_RESOLVE	(1<<2)		/* Give me your hostnames */
-#define ANDNA_PKT_JUST_CHECK	(1<<3)		/* Check only, don't update
-						   anything */
-#define ANDNA_PKT_SNSD_DEL	(1<<4)		/* SNSD delete request */
+#define ANDNA_PKT_UPDATE	1	/* Update the hostname */
+#define ANDNA_PKT_FORWARD	(1<<1)	/* Forward this pkt, plz */
+#define ANDNA_PKT_REV_RESOLVE	(1<<2)	/* Give me your hostnames */
+#define ANDNA_PKT_JUST_CHECK	(1<<3)	/* Check only, don't update
+										   anything */
+#define ANDNA_PKT_SNSD_DEL	(1<<4)	/* SNSD delete request */
 
 /*
  * andna_reg_pkt
@@ -98,32 +98,31 @@ int last_spread_acache_pkt_id[ANDNA_MAX_FLOODS];
  * that have to be registered. However the packet forwarded to the counter 
  * node won't keep this part.
  */
-struct andna_reg_pkt
-{
-	u_int	 	rip[MAX_IP_INT];	/* register_node ip */
- 	u_int		hash[MAX_IP_INT];	/* md5 hash of the host name to
-						   register. */
- 	char		pubkey[ANDNA_PKEY_LEN];	/* public key of the register
- 						   node. */
-	u_short		hname_updates;		/* number of updates already 
-						   made for the hostname */
-	
- 	char		sign[ANDNA_SIGNATURE_LEN]; /* RSA signature of the 
-						      entire pkt (excluding 
-						      `sign' itself and `flags'
-						    */
-	char 		flags;
-	
+struct andna_reg_pkt {
+	u_int rip[MAX_IP_INT];		/* register_node ip */
+	u_int hash[MAX_IP_INT];		/* md5 hash of the host name to
+								   register. */
+	char pubkey[ANDNA_PKEY_LEN];	/* public key of the register
+									   node. */
+	u_short hname_updates;		/* number of updates already 
+								   made for the hostname */
+
+	char sign[ANDNA_SIGNATURE_LEN];	/* RSA signature of the 
+									   entire pkt (excluding 
+									   `sign' itself and `flags'
+									 */
+	char flags;
+
 } _PACKED_;
 #define ANDNA_REG_PKT_SZ	     (sizeof(struct andna_reg_pkt))
 #define ANDNA_REG_SIGNED_BLOCK_SZ (ANDNA_REG_PKT_SZ - ANDNA_SIGNATURE_LEN - \
 				 	sizeof(char))
-INT_INFO andna_reg_pkt_iinfo = 	{ 1, /* `rip' and `hash' aren't considered */
-				 { INT_TYPE_16BIT },
-				 { MAX_IP_SZ*2 + ANDNA_PKEY_LEN },
-				 { 1 },
-			  	};
-				 
+INT_INFO andna_reg_pkt_iinfo = { 1,	/* `rip' and `hash' aren't considered */
+	{INT_TYPE_16BIT},
+	{MAX_IP_SZ * 2 + ANDNA_PKEY_LEN},
+	{1},
+};
+
 
 /*
  *   andna_resolve_rq_pkt
@@ -131,42 +130,40 @@ INT_INFO andna_reg_pkt_iinfo = 	{ 1, /* `rip' and `hash' aren't considered */
  * The andna resolve request pkt is used to resolve hostnames, IPs and MX
  * hostnames.
  */
-struct andna_resolve_rq_pkt
-{
-	u_int	 	rip[MAX_IP_INT];	/* the ip of the requester node */
-	char		flags;
-	
-	u_int           hash[MAX_IP_INT];       /* md5 hash of the hostname to
-						   resolve. */
-	int		service;		/* the snsd service of the hname */
-	u_char		proto;			/* the protocol of `service' */
+struct andna_resolve_rq_pkt {
+	u_int rip[MAX_IP_INT];		/* the ip of the requester node */
+	char flags;
+
+	u_int hash[MAX_IP_INT];		/* md5 hash of the hostname to
+								   resolve. */
+	int service;				/* the snsd service of the hname */
+	u_char proto;				/* the protocol of `service' */
 } _PACKED_;
 #define ANDNA_RESOLVE_RQ_PKT_SZ		(sizeof(struct andna_resolve_rq_pkt))
-INT_INFO andna_resolve_rq_pkt_iinfo =	{ 1, /* `rip' and `hash' are ignored */
-					  { INT_TYPE_32BIT },
-					  { MAX_IP_SZ*2+sizeof(char) },
-					  { 1 },
-					};
+INT_INFO andna_resolve_rq_pkt_iinfo = { 1,	/* `rip' and `hash' are ignored */
+	{INT_TYPE_32BIT},
+	{MAX_IP_SZ * 2 + sizeof(char)},
+	{1},
+};
 
 /* 
  * The reply to the resolve request
  */
-struct andna_resolve_reply_pkt
-{
-	uint32_t	timestamp;		/* the difference between the current
-						   time and the last time the resolved
-						   hname was updated */
+struct andna_resolve_reply_pkt {
+	uint32_t timestamp;			/* the difference between the current
+								   time and the last time the resolved
+								   hname was updated */
 	/*
 	 * the rest of the pkt is a pack of one snsd_service llist:
-	 * char		service[SNSD_SERVICE_LLIST_PACK_SZ(service)];
+	 * char     service[SNSD_SERVICE_LLIST_PACK_SZ(service)];
 	 */
 } _PACKED_;
 #define ANDNA_RESOLVE_REPLY_PKT_SZ	(sizeof(struct andna_resolve_reply_pkt))
-INT_INFO andna_resolve_reply_pkt_iinfo = { 1, /* `ip' is ignored */
-					   { INT_TYPE_32BIT }, 
-					   { 0 }, 
-					   { 1 }
-					 };
+INT_INFO andna_resolve_reply_pkt_iinfo = { 1,	/* `ip' is ignored */
+	{INT_TYPE_32BIT},
+	{0},
+	{1}
+};
 
 
 /* 
@@ -189,19 +186,19 @@ INT_INFO andna_resolve_reply_pkt_iinfo = { 1, /* `ip' is ignored */
  * the pkt reaches a true old hash_gnode, or cannot be forwarded anymore since
  * there are no more older hash_gnodes.
  */
-struct single_acache_hdr
-{
-	u_int		rip[MAX_IP_INT];	/* the ip of the requester node */
-	u_int		hash[MAX_IP_INT];
-	u_short		hgnodes;		/* Number of hgnodes in the 
-						   body. */
-	u_char		flags;
+struct single_acache_hdr {
+	u_int rip[MAX_IP_INT];		/* the ip of the requester node */
+	u_int hash[MAX_IP_INT];
+	u_short hgnodes;			/* Number of hgnodes in the 
+								   body. */
+	u_char flags;
 } _PACKED_;
-INT_INFO single_acache_hdr_iinfo = { 1, /* `rip' and `hash' are ignored */
-				     { INT_TYPE_16BIT },
-				     { MAX_IP_SZ*2 },
-				     { 1 },
-				   };
+INT_INFO single_acache_hdr_iinfo = { 1,	/* `rip' and `hash' are ignored */
+	{INT_TYPE_16BIT},
+	{MAX_IP_SZ * 2},
+	{1},
+};
+
 /*
  * The single_acache body is:
  * struct {
@@ -220,12 +217,11 @@ INT_INFO single_acache_hdr_iinfo = { 1, /* `rip' and `hash' are ignored */
  * Tell the node, which receives the pkt, to send a ANDNA_GET_SINGLE_ACACHE
  * request to fetch the andna_cache for the `hash' included in the pkt.
  */
-struct spread_acache_pkt
-{
-	u_int		hash[MAX_IP_INT];
+struct spread_acache_pkt {
+	u_int hash[MAX_IP_INT];
 } _PACKED_;
 #define SPREAD_ACACHE_PKT_SZ	(sizeof(struct spread_acache_pkt))
-INT_INFO spread_acache_pkt_info = { 0, { 0 }, { 0 }, { 0 } };
+INT_INFO spread_acache_pkt_info = { 0, {0}, {0}, {0} };
 
 
 
@@ -243,16 +239,16 @@ void andna_close(void);
 void andna_resolvconf_modify(void);
 void andna_resolvconf_restore(void);
 
-int andna_register_hname(lcl_cache *alcl, snsd_service *snsd_delete);
+int andna_register_hname(lcl_cache * alcl, snsd_service * snsd_delete);
 int andna_recv_reg_rq(PACKET rpkt);
 
 int andna_check_counter(PACKET pkt);
 int andna_recv_check_counter(PACKET rpkt);
 
-snsd_service *andna_resolve_hash(u_int hname_hash[MAX_IP_INT], int service, 
-				 u_char proto, int *records);
-snsd_service *andna_resolve_hname(char *hname, int service, u_char proto, 
-				  int *records);
+snsd_service *andna_resolve_hash(u_int hname_hash[MAX_IP_INT], int service,
+								 u_char proto, int *records);
+snsd_service *andna_resolve_hname(char *hname, int service, u_char proto,
+								  int *records);
 int andna_recv_resolve_rq(PACKET rpkt);
 
 lcl_cache *andna_reverse_resolve(inet_prefix ip);
@@ -260,7 +256,8 @@ int andna_recv_rev_resolve_rq(PACKET rpkt);
 
 int spread_single_acache(u_int hash[MAX_IP_INT]);
 int recv_spread_single_acache(PACKET rpkt);
-andna_cache *get_single_andna_c(u_int hash[MAX_IP_INT], u_int hash_gnode[MAX_IP_INT]);
+andna_cache *get_single_andna_c(u_int hash[MAX_IP_INT],
+								u_int hash_gnode[MAX_IP_INT]);
 int put_single_acache(PACKET rpkt);
 int put_andna_cache(PACKET rq_pkt);
 int put_counter_cache(PACKET rq_pkt);
@@ -270,4 +267,4 @@ void andna_update_hnames(int only_new_hname);
 void *andna_maintain_hnames_active(void *null);
 void *andna_main(void *);
 
-#endif /*ANDNA_H*/
+#endif							/*ANDNA_H */

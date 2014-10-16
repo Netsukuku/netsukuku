@@ -31,7 +31,8 @@
  *
  * It returns how many groups there are in the given level.
  */
-inline int get_groups(int max_levels, int lvl)
+int
+get_groups(int max_levels, int lvl)
 {
 	return lvl == max_levels ? 1 : MAXGROUPNODE;
 }
@@ -42,57 +43,57 @@ inline int get_groups(int max_levels, int lvl)
  * returns 1 if the `gid' of level `lvl' is invalid and
  * cannot be used in a regular IP.
  */
-int is_group_invalid(int *gids, int gid, int lvl, int family)
+int
+is_group_invalid(int *gids, int gid, int lvl, int family)
 {
-	if(family == AF_INET) {
-		if(lvl == GET_LEVELS(family)-1) {
-			if(!gid) /* ZERONET */
+	if (family == AF_INET) {
+		if (lvl == GET_LEVELS(family) - 1) {
+			if (!gid)			/* ZERONET */
 				return 1;
 
-			if(gid >= 224 && gid <= 255)
+			if (gid >= 224 && gid <= 255)
 				/* MULTICAST and BADCLASS */
 				return 1;
 
-			if(gid == 127) /* LOOPBACK */
+			if (gid == 127)		/* LOOPBACK */
 				return 1;
 
-			if(gid == 192 && gids[lvl-1] == 168)
+			if (gid == 192 && gids[lvl - 1] == 168)
 				/* 192.168.x.x is private, we cannot use IP of
 				 * that range */
 				return 1;
 
-			if((gid == 172 && (gids[lvl-1] >= 16 || gids[lvl-1] <= 31)) &&
-				!restricted_mode)
+			if ((gid == 172
+				 && (gids[lvl - 1] >= 16 || gids[lvl - 1] <= 31))
+				&& !restricted_mode)
 				/* We aren't in restricted mode, so
 				 * 172.16.0.0-172.31.255.255 is a private
 				 * class */
 				return 1;
 
-			if(restricted_mode &&
-			      (
-				(restricted_class == RESTRICTED_10 && gid != 10) ||
-				(
-				 restricted_class == RESTRICTED_172 &&
-				 	!(gid == 172 && (gids[lvl-1] >= 16 ||
-							gids[lvl-1] <= 31))
+			if (restricted_mode &&
+				((restricted_class == RESTRICTED_10 && gid != 10) ||
+				 (restricted_class == RESTRICTED_172 &&
+				  !(gid == 172 && (gids[lvl - 1] >= 16 ||
+								   gids[lvl - 1] <= 31))
+				 )
 				)
-			      )
-			  )
+				)
 				/* We are in restricted mode, thus this IP is
 				 * invalid because it isn't in the 10.x.x.x or
 				 * 172.(16-31).x.x format */
 				return 1;
 
-		} else if(lvl == GET_LEVELS(family)-2) {
-			if(gid == 168 && gids[lvl+1] == 192)
+		} else if (lvl == GET_LEVELS(family) - 2) {
+			if (gid == 168 && gids[lvl + 1] == 192)
 				/* 192.168.x.x */
 				return 1;
-			if(((gid >= 16 || gid <= 31) && gids[lvl+1] == 172) &&
+			if (((gid >= 16 || gid <= 31) && gids[lvl + 1] == 172) &&
 				!restricted_mode)
 				/* 172.16.0.0-172.31.255.255 */
 				return 1;
 		}
-	} else if(family == AF_INET6) {
+	} else if (family == AF_INET6) {
 		/* TODO: nothing ? */
 		return 0;
 	}
@@ -106,9 +107,10 @@ int is_group_invalid(int *gids, int gid, int lvl, int family)
  *
  * It returns the position of the `gnode' in the `map'
  */
-int pos_from_gnode(map_gnode *gnode, map_gnode *map)
+int
+pos_from_gnode(map_gnode * gnode, map_gnode * map)
 {
-	return (int)(((char *)gnode-(char *)map)/sizeof(map_gnode));
+	return (int) (((char *) gnode - (char *) map) / sizeof(map_gnode));
 }
 
 /*
@@ -116,9 +118,10 @@ int pos_from_gnode(map_gnode *gnode, map_gnode *map)
  *
  * it returns the fnode pointer calculated by the given `pos' in the map
  */
-map_gnode *gnode_from_pos(int pos, map_gnode *map)
+map_gnode *
+gnode_from_pos(int pos, map_gnode * map)
 {
-	return (map_gnode *)((pos*sizeof(map_gnode))+(char *)map);
+	return (map_gnode *) ((pos * sizeof(map_gnode)) + (char *) map);
 }
 
 /*
@@ -127,21 +130,23 @@ map_gnode *gnode_from_pos(int pos, map_gnode *map)
  * converts the node `maprnode', which is a rnode of the root_node,
  * to the relative ip.
  */
-void rnodetoip(u_int mapstart, u_int maprnode, inet_prefix ipstart,
-		inet_prefix *ret)
+void
+rnodetoip(u_int mapstart, u_int maprnode, inet_prefix ipstart,
+		  inet_prefix * ret)
 {
 	ext_rnode *e_rnode;
-	map_node *rnode=(map_node *)maprnode;
+	map_node *rnode = (map_node *) maprnode;
 
 	setzero(ret, sizeof(inet_prefix));
-	if(rnode->flags & MAP_ERNODE) {
-		e_rnode=(ext_rnode *)rnode;
+	if (rnode->flags & MAP_ERNODE) {
+		e_rnode = (ext_rnode *) rnode;
 		inet_copy(ret, &e_rnode->quadg.ipstart[0]);
 	} else
 		maptoip(mapstart, maprnode, ipstart, ret);
 }
 
-const char *rnode_to_ipstr(u_int mapstart, u_int maprnode, inet_prefix ipstart)
+const char *
+rnode_to_ipstr(u_int mapstart, u_int maprnode, inet_prefix ipstart)
 {
 	inet_prefix ip;
 
@@ -156,9 +161,10 @@ const char *rnode_to_ipstr(u_int mapstart, u_int maprnode, inet_prefix ipstart)
  * ip to gnode id, of the specified `level', conversion function.
  * Note: this function cannot fail! So be sure to pass a valid `level'.
  */
-int iptogid(inet_prefix *ip, int level)
+int
+iptogid(inet_prefix * ip, int level)
 {
-	u_char *h_ip=(u_char *)ip->data;
+	u_char *h_ip = (u_char *) ip->data;
 	int gid;
 
 	/*
@@ -168,9 +174,9 @@ int iptogid(inet_prefix *ip, int level)
 	 * the `level'-th byte of ip.data.
 	 */
 #if BYTE_ORDER == LITTLE_ENDIAN
-	gid=(int)h_ip[level];
+	gid = (int) h_ip[level];
 #else
-	gid=(int)h_ip[GET_LEVELS(ip->family)-level-1];
+	gid = (int) h_ip[GET_LEVELS(ip->family) - level - 1];
 #endif
 
 	return gid;
@@ -182,11 +188,12 @@ int iptogid(inet_prefix *ip, int level)
  * it fills the `gid' array which has `levels'# members with
  * 	gid[x] = iptogid(`ip', x);
  */
-void iptogids(inet_prefix *ip, int *gid, int levels)
+void
+iptogids(inet_prefix * ip, int *gid, int levels)
 {
 	int i;
-	for(i=0; i<levels; i++)
-		gid[i]=iptogid(ip, i);
+	for (i = 0; i < levels; i++)
+		gid[i] = iptogid(ip, i);
 }
 
 /*
@@ -200,32 +207,33 @@ void iptogids(inet_prefix *ip, int *gid, int levels)
  * only the elements going from gid[total_levels-levels] to gid[total_levels-1].
  * `family' is used to fill the inet_prefix of ipstart.
  */
-void gidtoipstart(int *gid, u_char total_levels, u_char levels, int family,
-		inet_prefix *ip)
+void
+gidtoipstart(int *gid, u_char total_levels, u_char levels, int family,
+			 inet_prefix * ip)
 {
 	int i, h_ip[MAX_IP_INT];
 	u_char *ipstart;
 
 	setzero(h_ip, MAX_IP_SZ);
-	ipstart=(u_char *)h_ip;
+	ipstart = (u_char *) h_ip;
 
-	for(i=total_levels-ZERO_LEVEL; i >= total_levels-levels; i--) {
+	for (i = total_levels - ZERO_LEVEL; i >= total_levels - levels; i--) {
 		/* The formula is:
 		 * ipstart += MAXGROUPNODE^i * gid[i];
 		 * but since MAXGROUPNODE is equal to 2^8 we just set each
 		 * single byte of ipstart. */
 #if BYTE_ORDER == LITTLE_ENDIAN
-		ipstart[i]=(u_char)gid[i];
+		ipstart[i] = (u_char) gid[i];
 #else
-		ipstart[GET_LEVELS(family)-i-1]=(u_char)gid[i];
+		ipstart[GET_LEVELS(family) - i - 1] = (u_char) gid[i];
 #endif
 
 	}
 
 	memcpy(ip->data, h_ip, MAX_IP_SZ);
-	ip->family=family;
+	ip->family = family;
 	ip->len = (family == AF_INET) ? 4 : 16;
-	ip->bits=ip->len*8;
+	ip->bits = ip->len * 8;
 }
 
 /*
@@ -234,7 +242,9 @@ void gidtoipstart(int *gid, u_char total_levels, u_char levels, int family,
  * Using the given `ip' it fills the `qg' quadro_group struct. The `flags'
  * given specify what element fill in the struct (the flags are in gmap.h).
  */
-void iptoquadg(inet_prefix ip, map_gnode **ext_map, quadro_group *qg, char flags)
+void
+iptoquadg(inet_prefix ip, map_gnode ** ext_map, quadro_group * qg,
+		  char flags)
 {
 	int i;
 	u_char levels;
@@ -242,41 +252,44 @@ void iptoquadg(inet_prefix ip, map_gnode **ext_map, quadro_group *qg, char flags
 
 	setzero(qg, sizeof(quadro_group));
 
-	levels=GET_LEVELS(ip.family);
-	qg->levels=levels;
+	levels = GET_LEVELS(ip.family);
+	qg->levels = levels;
 
-	if(flags & QUADG_GID) {
+	if (flags & QUADG_GID) {
 		iptogids(&ip, qg->gid, levels);
 		memcpy(gid, qg->gid, sizeof(gid));
 
-		if(flags & QUADG_IPSTART)
-			for(i=0; i<levels; i++)
-				gidtoipstart(gid, levels, levels-i, ip.family,
-						&qg->ipstart[i]);
+		if (flags & QUADG_IPSTART)
+			for (i = 0; i < levels; i++)
+				gidtoipstart(gid, levels, levels - i, ip.family,
+							 &qg->ipstart[i]);
 	}
-	if(flags & QUADG_GNODE) {
-		for(i=0; i<levels-ZERO_LEVEL; i++)
-			qg->gnode[i]=gnode_from_pos(qg->gid[i+1], ext_map[i]);
-		qg->gnode[levels-ZERO_LEVEL]=&ext_map[i][0];
+	if (flags & QUADG_GNODE) {
+		for (i = 0; i < levels - ZERO_LEVEL; i++)
+			qg->gnode[i] = gnode_from_pos(qg->gid[i + 1], ext_map[i]);
+		qg->gnode[levels - ZERO_LEVEL] = &ext_map[i][0];
 	}
 }
 
-void quadg_setflags(quadro_group *qg, char flags)
+void
+quadg_setflags(quadro_group * qg, char flags)
 {
 	map_gnode *gnode;
 	int i;
 
-	for(i=1; i < qg->levels; i++)
-		if((gnode=qg->gnode[_EL(i)]))
-			gnode->g.flags|=flags;
+	for (i = 1; i < qg->levels; i++)
+		if ((gnode = qg->gnode[_EL(i)]))
+			gnode->g.flags |= flags;
 }
 
-void quadg_free(quadro_group *qg)
+void
+quadg_free(quadro_group * qg)
 {
 	setzero(qg, sizeof(quadro_group));
 }
 
-void quadg_destroy(quadro_group *qg)
+void
+quadg_destroy(quadro_group * qg)
 {
 	quadg_free(qg);
 	xfree(qg);
@@ -288,15 +301,16 @@ void quadg_destroy(quadro_group *qg)
  * it increments the seeds counter in the `qg'->gnode[_EL(`level'-1)] gnode,
  * setting the appropriate flag if the gnodes is full.
  */
-void gnode_inc_seeds(quadro_group *qg, int level)
+void
+gnode_inc_seeds(quadro_group * qg, int level)
 {
-	if(level >= qg->levels-1)
+	if (level >= qg->levels - 1)
 		return;
 
-	if(qg->gnode[_EL(level+1)]->seeds == MAXGROUPNODE-1)
-		qg->gnode[_EL(level+1)]->flags|=GMAP_FULL;
+	if (qg->gnode[_EL(level + 1)]->seeds == MAXGROUPNODE - 1)
+		qg->gnode[_EL(level + 1)]->flags |= GMAP_FULL;
 	else
-		qg->gnode[_EL(level+1)]->seeds++;
+		qg->gnode[_EL(level + 1)]->seeds++;
 }
 
 /*
@@ -304,14 +318,15 @@ void gnode_inc_seeds(quadro_group *qg, int level)
  *
  * the same of gnode_inc_seeds, but it decrements instead.
  */
-void gnode_dec_seeds(quadro_group *qg, int level)
+void
+gnode_dec_seeds(quadro_group * qg, int level)
 {
-	if(level >= qg->levels-1)
+	if (level >= qg->levels - 1)
 		return;
 
-	if(qg->gnode[_EL(level+1)]->seeds-1 >= 0)
-		qg->gnode[_EL(level+1)]->seeds--;
-	qg->gnode[_EL(level+1)]->flags&=~GMAP_FULL;
+	if (qg->gnode[_EL(level + 1)]->seeds - 1 >= 0)
+		qg->gnode[_EL(level + 1)]->seeds--;
+	qg->gnode[_EL(level + 1)]->flags &= ~GMAP_FULL;
 }
 
 /*
@@ -320,22 +335,23 @@ void gnode_dec_seeds(quadro_group *qg, int level)
  * packs the `qg' quadro_group struct and stores it in `pack', which must be
  * QUADRO_GROUP_PACK_SZ bytes big. `pack' will be in network order.
  */
-void pack_quadro_group(quadro_group *qg, char *pack)
+void
+pack_quadro_group(quadro_group * qg, char *pack)
 {
 	char *buf;
 	int i;
 
-	buf=pack;
+	buf = pack;
 
 	memcpy(buf, &qg->levels, sizeof(u_char));
-	buf+=sizeof(u_char);
+	buf += sizeof(u_char);
 
-	memcpy(buf, qg->gid, sizeof(int)*MAX_LEVELS);
-	buf+=sizeof(int)*MAX_LEVELS;
+	memcpy(buf, qg->gid, sizeof(int) * MAX_LEVELS);
+	buf += sizeof(int) * MAX_LEVELS;
 
-	for(i=0; i<MAX_LEVELS; i++) {
+	for (i = 0; i < MAX_LEVELS; i++) {
 		pack_inet_prefix(&qg->ipstart[i], buf);
-		buf+=INET_PREFIX_PACK_SZ;
+		buf += INET_PREFIX_PACK_SZ;
 	}
 
 	ints_host_to_network(pack, quadro_group_iinfo);
@@ -347,24 +363,25 @@ void pack_quadro_group(quadro_group *qg, char *pack)
  * restores in `qg' the quadro_group struct contained in `pack'.
  * Note that `pack' will be modified during the restoration.
  */
-void unpack_quadro_group(quadro_group *qg, char *pack)
+void
+unpack_quadro_group(quadro_group * qg, char *pack)
 {
 	char *buf;
 	int i;
 
-	buf=pack;
+	buf = pack;
 
 	ints_network_to_host(pack, quadro_group_iinfo);
 
 	memcpy(&qg->levels, buf, sizeof(u_char));
-	buf+=sizeof(u_char);
+	buf += sizeof(u_char);
 
-	memcpy(qg->gid, buf, sizeof(int)*MAX_LEVELS);
-	buf+=sizeof(int)*MAX_LEVELS;
+	memcpy(qg->gid, buf, sizeof(int) * MAX_LEVELS);
+	buf += sizeof(int) * MAX_LEVELS;
 
-	for(i=0; i<MAX_LEVELS; i++) {
+	for (i = 0; i < MAX_LEVELS; i++) {
 		unpack_inet_prefix(&qg->ipstart[i], buf);
-		buf+=INET_PREFIX_PACK_SZ;
+		buf += INET_PREFIX_PACK_SZ;
 	}
 }
 
@@ -372,22 +389,26 @@ void unpack_quadro_group(quadro_group *qg, char *pack)
  * Functions used by increment_gids(), see below
  */
 
-int is_map_void_flag_set(map_node *node)
+int
+is_map_void_flag_set(map_node * node)
 {
 	return node->flags & MAP_VOID;
 }
 
-int is_gmap_full_flag_set(map_gnode *gnode)
+int
+is_gmap_full_flag_set(map_gnode * gnode)
 {
 	return gnode->flags & GMAP_FULL;
 }
 
-int is_gmap_void_flag_set(map_gnode *gnode)
+int
+is_gmap_void_flag_set(map_gnode * gnode)
 {
 	return gnode->flags & GMAP_VOID;
 }
 
-int isnot_gmap_void_flag_set(map_gnode *gnode)
+int
+isnot_gmap_void_flag_set(map_gnode * gnode)
 {
 	return !is_gmap_void_flag_set(gnode);
 }
@@ -411,36 +432,41 @@ int isnot_gmap_void_flag_set(map_gnode *gnode)
  * It's assumed that `ext_map' and `int_map' are the maps relative to the
  * `qg' quadro_group.
  */
-int increment_gids(quadro_group *qg, int level, map_gnode **ext_map,
-		map_node *int_map, int(*is_gnode_flag_set)(map_gnode *gnode),
-		int(*is_node_flag_set)(map_node *node))
+int
+increment_gids(quadro_group * qg, int level, map_gnode ** ext_map,
+			   map_node * int_map,
+			   int (*is_gnode_flag_set) (map_gnode * gnode),
+			   int (*is_node_flag_set) (map_node * node))
 {
-	int g, groups, gid, i, e=0, family;
+	int g, groups, gid, i, e = 0, family;
 
-	if(level >= qg->levels)
+	if (level >= qg->levels)
 		return -1;
 
 	family = qg->ipstart[level].family;
 
 	g = level == qg->levels ? 0 : qg->gid[level];
-	groups=get_groups(qg->levels, level);
-	gid=qg->gid[level];
+	groups = get_groups(qg->levels, level);
+	gid = qg->gid[level];
 
-	if((!level && !is_node_flag_set(&int_map[gid])) ||
-			(level && is_gnode_flag_set(&ext_map[_EL(level)][g]))) {
+	if ((!level && !is_node_flag_set(&int_map[gid])) ||
+		(level && is_gnode_flag_set(&ext_map[_EL(level)][g]))) {
 
 		/*
 		 * find a gid in this `level' which isn't full
 		 */
-		for(i=0, e=0; i < groups; i++) {
-			qg->gid[level]=(gid + i) % groups;
+		for (i = 0, e = 0; i < groups; i++) {
+			qg->gid[level] = (gid + i) % groups;
 
-			if(is_group_invalid(qg->gid, qg->gid[level], level, family))
+			if (is_group_invalid(qg->gid, qg->gid[level], level, family))
 				continue;
 
-			if((!level && is_node_flag_set(&int_map[qg->gid[level]])) ||
-				(level && !is_gnode_flag_set(&ext_map[_EL(level)][qg->gid[level]]))) {
-				e=1;
+			if ((!level && is_node_flag_set(&int_map[qg->gid[level]])) ||
+				(level
+				 &&
+				 !is_gnode_flag_set(&ext_map[_EL(level)][qg->gid[level]])))
+			{
+				e = 1;
 				break;
 			}
 		}
@@ -448,11 +474,11 @@ int increment_gids(quadro_group *qg, int level, map_gnode **ext_map,
 		/*
 		 * not a single free gid was found
 		 */
-		if(!e) {
-			g = level+1 == qg->levels ? 0 : qg->gid[level+1];
+		if (!e) {
+			g = level + 1 == qg->levels ? 0 : qg->gid[level + 1];
 
-			if((is_gmap_full_flag_set == is_gnode_flag_set) &&
-					!(ext_map[_EL(level+1)][g].flags & GMAP_FULL)) {
+			if ((is_gmap_full_flag_set == is_gnode_flag_set) &&
+				!(ext_map[_EL(level + 1)][g].flags & GMAP_FULL)) {
 				/*
 				 * There is a logical contradiction here:
 				 * we didn't find any free (g)nodes in this
@@ -461,22 +487,21 @@ int increment_gids(quadro_group *qg, int level, map_gnode **ext_map,
 				 * marked as full! So what's happening here?
 				 * Ignore this absurd and mark it as full -_-
 				 */
-				ext_map[_EL(level+1)][g].flags|=GMAP_FULL;
+				ext_map[_EL(level + 1)][g].flags |= GMAP_FULL;
 				debug(DBG_NORMAL, ERROR_MSG "logical "
-						"contradiction detected",
-						ERROR_POS);
+					  "contradiction detected", ERROR_POS);
 			}
 
 			/*
 			 * Recurse by leveling up
 			 */
-			if(!increment_gids(qg, level+1, ext_map, int_map,
-					is_gnode_flag_set, is_node_flag_set))
+			if (!increment_gids(qg, level + 1, ext_map, int_map,
+								is_gnode_flag_set, is_node_flag_set))
 				/*
 				 * We changed one of our upper gid, we can
 				 * retake the old gid we had at this `level'
 				 */
-				qg->gid[level]=gid;
+				qg->gid[level] = gid;
 			else
 				/*
 				 * It's all full!
@@ -493,11 +518,12 @@ int increment_gids(quadro_group *qg, int level, map_gnode **ext_map,
  *
  * it uses increment_gids() to choose gids which don't point to FULL gnodes.
  */
-int free_gids(quadro_group *qg, int level, map_gnode **ext_map,
-		map_node *int_map)
+int
+free_gids(quadro_group * qg, int level, map_gnode ** ext_map,
+		  map_node * int_map)
 {
 	return increment_gids(qg, level, ext_map, int_map,
-			is_gmap_full_flag_set, is_map_void_flag_set);
+						  is_gmap_full_flag_set, is_map_void_flag_set);
 }
 
 /*
@@ -505,11 +531,12 @@ int free_gids(quadro_group *qg, int level, map_gnode **ext_map,
  *
  * it uses increment_gids() to choose gids which point to VOID gnodes.
  */
-int void_gids(quadro_group *qg, int level, map_gnode **ext_map,
-		map_node *int_map)
+int
+void_gids(quadro_group * qg, int level, map_gnode ** ext_map,
+		  map_node * int_map)
 {
 	return increment_gids(qg, level, ext_map, int_map,
-			isnot_gmap_void_flag_set, is_map_void_flag_set);
+						  isnot_gmap_void_flag_set, is_map_void_flag_set);
 }
 
 /*
@@ -528,9 +555,10 @@ int void_gids(quadro_group *qg, int level, map_gnode **ext_map,
  * In this case -1 may be returned if there aren't any free gnode to choose.
  * The new ip is stored in `new_ip' and on success 0 is returned.
  */
-int random_ip(inet_prefix *ipstart, int final_level, int final_gid,
-		int total_levels, map_gnode **ext_map, int only_free_gnode,
-		inet_prefix *new_ip, int my_family)
+int
+random_ip(inet_prefix * ipstart, int final_level, int final_gid,
+		  int total_levels, map_gnode ** ext_map, int only_free_gnode,
+		  inet_prefix * new_ip, int my_family)
 {
 	int i, e, x, level, levels;
 	int gid[total_levels];
@@ -538,24 +566,26 @@ int random_ip(inet_prefix *ipstart, int final_level, int final_gid,
 
 	setzero(new_ip, sizeof(inet_prefix));
 
-	if(!ipstart || final_level==total_levels) {
-		u_int idata[MAX_IP_INT]={0,0,0,0};
+	if (!ipstart || final_level == total_levels) {
+		u_int idata[MAX_IP_INT] = { 0, 0, 0, 0 };
 
-		for(;;) {
+		for (;;) {
 			/*
 			 * Let's choose a completely random ip.
 			 */
-			levels=total_levels;
-			if(my_family == AF_INET)
-				idata[0]=rand();
+			levels = total_levels;
+			if (my_family == AF_INET)
+				idata[0] = rand();
 			else {
-				idata[0]=rand();	idata[1]=rand();
-				idata[2]=rand();	idata[3]=rand();
+				idata[0] = rand();
+				idata[1] = rand();
+				idata[2] = rand();
+				idata[3] = rand();
 			}
 
 			inet_setip(new_ip, idata, my_family);
 
-			if(!inet_validate_ip(*new_ip))
+			if (!inet_validate_ip(*new_ip))
 				break;
 		}
 		return 0;
@@ -575,23 +605,23 @@ int random_ip(inet_prefix *ipstart, int final_level, int final_gid,
 	 *     gids of qg.gid[x >= final_level].
 	 * - The ipstart is recomposed from the gids.
 	 */
-	levels=final_level;
+	levels = final_level;
 	iptoquadg(*ipstart, ext_map, &qg, QUADG_GID);
-	gid[levels]=final_gid;
-	for(i=final_level+1; i<total_levels; i++)
-		gid[i]=qg.gid[i];
+	gid[levels] = final_gid;
+	for (i = final_level + 1; i < total_levels; i++)
+		gid[i] = qg.gid[i];
 
 	/* Change the gids if some of them point to full gnodes */
-	free_gids(&qg, final_level+1, ext_map, 0);
+	free_gids(&qg, final_level + 1, ext_map, 0);
 
 	/*
 	 * Now we choose random gids for each level so we'll have a random ip
 	 * with gidtoipstart();
 	 */
-	for(level=levels-1; level >=0; level--) {
-		gid[level]=rand_range(0, MAXGROUPNODE-1);
+	for (level = levels - 1; level >= 0; level--) {
+		gid[level] = rand_range(0, MAXGROUPNODE - 1);
 
-		if(level && only_free_gnode) {
+		if (level && only_free_gnode) {
 			/*
 			 * We have to be sure that we're not picking a gnode
 			 * already used in the ext_map. Generally when we hook
@@ -599,35 +629,35 @@ int random_ip(inet_prefix *ipstart, int final_level, int final_gid,
 			 * taken gnodes we increase the possibility to create a
 			 * brand new, and not already used, gnode.
 			 */
-			if(!(ext_map[_EL(level)][gid[level]].flags & GMAP_VOID)) {
+			if (!(ext_map[_EL(level)][gid[level]].flags & GMAP_VOID)) {
 
 				/* Take a random position and loop trough the
 				 * map */
-				i=rand_range(0, MAXGROUPNODE-1);
+				i = rand_range(0, MAXGROUPNODE - 1);
 
-				for(x=0, e=i; e<MAXGROUPNODE; e++) {
-					if(is_group_invalid(gid, e, level, my_family))
+				for (x = 0, e = i; e < MAXGROUPNODE; e++) {
+					if (is_group_invalid(gid, e, level, my_family))
 						continue;
 
-					if(ext_map[_EL(level)][e].flags & GMAP_VOID) {
-						gid[level]=e;
-						x=1;
+					if (ext_map[_EL(level)][e].flags & GMAP_VOID) {
+						gid[level] = e;
+						x = 1;
 						break;
 					}
 				}
-				if(!x) {
-					for(x=0; i>=0; i--) {
-						if(is_group_invalid(gid, i, level, my_family))
+				if (!x) {
+					for (x = 0; i >= 0; i--) {
+						if (is_group_invalid(gid, i, level, my_family))
 							continue;
 
-						if(ext_map[_EL(level)][i].flags & GMAP_VOID) {
-							gid[level]=i;
-							x=1;
+						if (ext_map[_EL(level)][i].flags & GMAP_VOID) {
+							gid[level] = i;
+							x = 1;
 							break;
 						}
 					}
 				}
-				if(!x)
+				if (!x)
 					/* not a single free gnode was found */
 					return -1;
 			}
@@ -653,20 +683,22 @@ int random_ip(inet_prefix *ipstart, int final_level, int final_gid,
  * CIDR blocks format, in this way the `ip' includes also the ranges of the
  * gnode's level: ip <= x <= ip+MAXGROUPNODE^(level+1).
  */
-void gnodetoip(quadro_group *quadg, int gnodeid, u_char level, inet_prefix *ip)
+void
+gnodetoip(quadro_group * quadg, int gnodeid, u_char level,
+		  inet_prefix * ip)
 {
 	int gid[quadg->levels];
 
-	if(level > quadg->levels || !level)
+	if (level > quadg->levels || !level)
 		return;
 
-	memcpy(gid, quadg->gid, sizeof(int)*quadg->levels);
-	gid[level]=gnodeid;
+	memcpy(gid, quadg->gid, sizeof(int) * quadg->levels);
+	gid[level] = gnodeid;
 
-	gidtoipstart(gid, quadg->levels, quadg->levels-level,
-			quadg->ipstart[0].family, ip);
+	gidtoipstart(gid, quadg->levels, quadg->levels - level,
+				 quadg->ipstart[0].family, ip);
 
-	ip->bits-=(level*MAXGROUPNODE_BITS);
+	ip->bits -= (level * MAXGROUPNODE_BITS);
 }
 
 /*
@@ -676,12 +708,13 @@ void gnodetoip(quadro_group *quadg, int gnodeid, u_char level, inet_prefix *ip)
  * `lvl'th member to the `max_lvl-1'th. If the gids compared are the same,
  * zero is returned.
  */
-int gids_cmp(int *gids_a, int *gids_b, int lvl, int max_lvl)
+int
+gids_cmp(int *gids_a, int *gids_b, int lvl, int max_lvl)
 {
 	int i;
 
-	for(i=lvl; i < max_lvl; i++)
-		if(gids_a[i] != gids_b[i])
+	for (i = lvl; i < max_lvl; i++)
+		if (gids_a[i] != gids_b[i])
 			return 1;
 	return 0;
 
@@ -693,9 +726,10 @@ int gids_cmp(int *gids_a, int *gids_b, int lvl, int max_lvl)
  * compares the gids of `a' and `b' starting from the `lvl'th
  * level. If the gids compared are the same, zero is returned.
  */
-int quadg_gids_cmp(quadro_group a, quadro_group b, int lvl)
+int
+quadg_gids_cmp(quadro_group a, quadro_group b, int lvl)
 {
-	if(a.levels != b.levels)
+	if (a.levels != b.levels)
 		return 1;
 
 	return gids_cmp(a.gid, b.gid, lvl, a.levels);
@@ -706,7 +740,8 @@ int quadg_gids_cmp(quadro_group a, quadro_group b, int lvl)
  *
  * a wrapper to quadg_gids_cmp() that takes inet_prefixes as argvs.
  */
-int ip_gids_cmp(inet_prefix a, inet_prefix b, int lvl)
+int
+ip_gids_cmp(inet_prefix a, inet_prefix b, int lvl)
 {
 	quadro_group qa, qb;
 
@@ -721,20 +756,22 @@ int ip_gids_cmp(inet_prefix a, inet_prefix b, int lvl)
  */
 
 /* e_rnode_init: Initialize an ext_rnode_cache list and zeros the `counter' */
-ext_rnode_cache *e_rnode_init(u_int *counter)
+ext_rnode_cache *
+e_rnode_init(u_int * counter)
 {
-	return (ext_rnode_cache *)clist_init(counter);
+	return (ext_rnode_cache *) clist_init(counter);
 }
 
 /* e_rnode_free: destroy an ext_rnode_cache list */
-void e_rnode_free(ext_rnode_cache **erc, u_int *counter)
+void
+e_rnode_free(ext_rnode_cache ** erc, u_int * counter)
 {
-	if(counter)
-		*counter=0;
-	if(!*erc)
+	if (counter)
+		*counter = 0;
+	if (!*erc)
 		return;
 	list_destroy(*erc);
-	*erc=0;
+	*erc = 0;
 }
 
 /*
@@ -742,25 +779,29 @@ void e_rnode_free(ext_rnode_cache **erc, u_int *counter)
  *
  * adds an external node in the ext_rnode_cache list.
  */
-void e_rnode_add(ext_rnode_cache **erc, ext_rnode *e_rnode, int rnode_pos, u_int *counter)
+void
+e_rnode_add(ext_rnode_cache ** erc, ext_rnode * e_rnode, int rnode_pos,
+			u_int * counter)
 {
 	ext_rnode_cache *p;
 
-	p=xzalloc(sizeof(ext_rnode_cache));
-	p->e=e_rnode;
-	p->rnode_pos=rnode_pos;
+	p = xzalloc(sizeof(ext_rnode_cache));
+	p->e = e_rnode;
+	p->rnode_pos = rnode_pos;
 
 	clist_add(erc, counter, p);
 }
 
-void e_rnode_del(ext_rnode_cache **erc_head, u_int *counter, ext_rnode_cache *erc)
+void
+e_rnode_del(ext_rnode_cache ** erc_head, u_int * counter,
+			ext_rnode_cache * erc)
 {
-	if((*counter) <= 0 || !*erc_head)
+	if ((*counter) <= 0 || !*erc_head)
 		return;
 
-	if(erc->e) {
+	if (erc->e) {
 		xfree(erc->e);
-		erc->e=0;
+		erc->e = 0;
 	}
 
 	clist_del(erc_head, counter, erc);
@@ -776,25 +817,27 @@ void e_rnode_del(ext_rnode_cache **erc_head, u_int *counter, ext_rnode_cache *er
  * The `old_rnode_pos' holds the deleted rnode position.
  * Note: it's assumed that the old rnode has been alread deleted.
  */
-void erc_update_rnodepos(ext_rnode_cache *erc, map_node *root_node, int old_rnode_pos)
+void
+erc_update_rnodepos(ext_rnode_cache * erc, map_node * root_node,
+					int old_rnode_pos)
 {
-	ext_rnode_cache *p=erc;
+	ext_rnode_cache *p = erc;
 
-	if(!erc)
+	if (!erc)
 		return;
 
 	/* If the old rnode was in the last position, it wasn't swapped */
-	if(old_rnode_pos == root_node->links)
+	if (old_rnode_pos == root_node->links)
 		return;
 
 	list_for(p) {
-		if(!p->e)
+		if (!p->e)
 			continue;
 
 		/* If the ext_rnode was in the last position, now it is swapped
 		 * in `old_rnode_pos' */
-		if(p->rnode_pos == root_node->links)
-			p->rnode_pos=old_rnode_pos;
+		if (p->rnode_pos == root_node->links)
+			p->rnode_pos = old_rnode_pos;
 	}
 
 	return;
@@ -809,23 +852,27 @@ void erc_update_rnodepos(ext_rnode_cache *erc, map_node *root_node, int old_rnod
  * it finds the right rnode and it updates the erc->rnode_pos value.
  * If an adequate rnode isn't find, the relative erc struct is removed.
  */
-void erc_reorder_rnodepos(ext_rnode_cache **erc, u_int *erc_counter, map_node *root_node)
+void
+erc_reorder_rnodepos(ext_rnode_cache ** erc, u_int * erc_counter,
+					 map_node * root_node)
 {
-	ext_rnode_cache *p=*erc, *next;
+	ext_rnode_cache *p = *erc, *next;
 
-	if(!erc || !*erc)
+	if (!erc || !*erc)
 		return;
 
 	list_safe_for(p, next) {
-		if(p->rnode_pos >= root_node->links ||
-			root_node->r_node[p->rnode_pos].r_node != (int *)&p->e->node) {
+		if (p->rnode_pos >= root_node->links ||
+			root_node->r_node[p->rnode_pos].r_node !=
+			(int *) &p->e->node) {
 
 			/* Search the right rnode_pos */
 			p->rnode_pos = rnode_find(root_node, &p->e->node);
 
-			if(p->rnode_pos < 0) {
-				debug(DBG_NOISE, "erc_reorder_rnodepos: Warning erc 0x%x delete. "
-						"Something strange is happening", p);
+			if (p->rnode_pos < 0) {
+				debug(DBG_NOISE,
+					  "erc_reorder_rnodepos: Warning erc 0x%x delete. "
+					  "Something strange is happening", p);
 				e_rnode_del(erc, erc_counter, p);
 			}
 		}
@@ -839,16 +886,16 @@ void erc_reorder_rnodepos(ext_rnode_cache **erc, u_int *erc_counter, map_node *r
  * erc->e == e_rnode and returns it.
  */
 ext_rnode_cache *
-erc_find(ext_rnode_cache *erc, ext_rnode *e_rnode)
+erc_find(ext_rnode_cache * erc, ext_rnode * e_rnode)
 {
-	ext_rnode_cache *p=erc;
-	if(!erc)
+	ext_rnode_cache *p = erc;
+	if (!erc)
 		return 0;
 
 	list_for(p) {
-		if(!p->e)
+		if (!p->e)
 			continue;
-		if(p->e == e_rnode)
+		if (p->e == e_rnode)
 			return p;
 	}
 	return 0;
@@ -864,17 +911,17 @@ erc_find(ext_rnode_cache *erc, ext_rnode *e_rnode)
  * If nothing is found 0 is returned.
  */
 ext_rnode_cache *
-e_rnode_find(ext_rnode_cache *erc, quadro_group *qg, int level)
+e_rnode_find(ext_rnode_cache * erc, quadro_group * qg, int level)
 {
-	ext_rnode_cache *p=erc;
+	ext_rnode_cache *p = erc;
 
-	if(!erc)
+	if (!erc)
 		return 0;
 
 	list_for(p) {
-		if(!p->e)
+		if (!p->e)
 			continue;
-		if(!quadg_gids_cmp(p->e->quadg, *qg, level))
+		if (!quadg_gids_cmp(p->e->quadg, *qg, level))
 			return p;
 	}
 	return 0;
@@ -885,19 +932,19 @@ e_rnode_find(ext_rnode_cache *erc, quadro_group *qg, int level)
  * erc->e->quadg.gnode[_EL( `level' )] == `gnode'
  */
 ext_rnode_cache *
-erc_find_gnode(ext_rnode_cache *erc, map_gnode *gnode, u_char level)
+erc_find_gnode(ext_rnode_cache * erc, map_gnode * gnode, u_char level)
 {
-	ext_rnode_cache *p=erc;
+	ext_rnode_cache *p = erc;
 
-	if(!erc || !level)
+	if (!erc || !level)
 		return 0;
 
 	list_for(p) {
-		if(!p->e)
+		if (!p->e)
 			continue;
 
-		if(p->e->quadg.gnode[_EL(level)] == gnode)
-				return p;
+		if (p->e->quadg.gnode[_EL(level)] == gnode)
+			return p;
 	}
 
 	return 0;
@@ -907,15 +954,16 @@ erc_find_gnode(ext_rnode_cache *erc, map_gnode *gnode, u_char level)
  * * * External map functions * * *
  */
 
-map_gnode *init_gmap(int groups)
+map_gnode *
+init_gmap(int groups)
 {
 	map_gnode *gmap;
 	size_t len;
 
-	if(!groups)
-		groups=MAXGROUPNODE;
-	len=sizeof(map_gnode) * groups;
-	gmap=(map_gnode *)xmalloc(len);
+	if (!groups)
+		groups = MAXGROUPNODE;
+	len = sizeof(map_gnode) * groups;
+	gmap = (map_gnode *) xmalloc(len);
 	setzero(gmap, len);
 
 	reset_gmap(gmap, groups);
@@ -923,68 +971,72 @@ map_gnode *init_gmap(int groups)
 	return gmap;
 }
 
-void reset_gmap(map_gnode *gmap, int groups)
+void
+reset_gmap(map_gnode * gmap, int groups)
 {
 	int i;
 	size_t len;
 
-	if(!groups)
-		groups=MAXGROUPNODE;
-	len=sizeof(map_gnode)*groups;
+	if (!groups)
+		groups = MAXGROUPNODE;
+	len = sizeof(map_gnode) * groups;
 
-	for(i=0; i<groups; i++)
+	for (i = 0; i < groups; i++)
 		gmap_node_del(&gmap[i]);
 }
 
 /* init_gmap: Initialize an ext_map with `levels' gmap. Each gmap
  * has `groups' elements*/
-map_gnode **init_extmap(u_char levels, int groups)
+map_gnode **
+init_extmap(u_char levels, int groups)
 {
 	map_gnode **ext_map;
 	int i;
 
-	if(!levels)
-		levels=MAX_LEVELS;
-	if(!groups)
-		groups=MAXGROUPNODE;
+	if (!levels)
+		levels = MAX_LEVELS;
+	if (!groups)
+		groups = MAXGROUPNODE;
 
-	ext_map=(map_gnode **)xmalloc(sizeof(map_gnode *) * (levels));
-	levels--; /*We strip off the Zero level*/
-	for(i=0; i<levels; i++)
-		ext_map[i]=init_gmap(groups);
+	ext_map = (map_gnode **) xmalloc(sizeof(map_gnode *) * (levels));
+	levels--;					/*We strip off the Zero level */
+	for (i = 0; i < levels; i++)
+		ext_map[i] = init_gmap(groups);
 
-	/*Ok, now we stealthy add the unity_level which has only one gmap.*/
-	ext_map[levels]=init_gmap(1);
+	/*Ok, now we stealthy add the unity_level which has only one gmap. */
+	ext_map[levels] = init_gmap(1);
 	return ext_map;
 }
 
 /* free_extmap: Destroy the ext_map*/
-void free_extmap(map_gnode **ext_map, u_char levels, int groups)
+void
+free_extmap(map_gnode ** ext_map, u_char levels, int groups)
 {
 	int e;
 
-	if(!levels)
-		levels=MAX_LEVELS;
-	if(!groups)
-		groups=MAXGROUPNODE;
+	if (!levels)
+		levels = MAX_LEVELS;
+	if (!groups)
+		groups = MAXGROUPNODE;
 
 	levels--;
-	for(e=0; e<levels; e++) {
+	for (e = 0; e < levels; e++) {
 		reset_gmap(ext_map[e], groups);
 		xfree(ext_map[e]);
 	}
-	/*Free the unity_level map*/
+	/*Free the unity_level map */
 	reset_gmap(ext_map[levels], 1);
 	xfree(ext_map[levels]);
 
 	xfree(ext_map);
 }
 
-void reset_extmap(map_gnode **ext_map, u_char levels, int groups)
+void
+reset_extmap(map_gnode ** ext_map, u_char levels, int groups)
 {
 	int i;
 
-	for(i=1; i<levels; i++)
+	for (i = 1; i < levels; i++)
 		reset_gmap(ext_map[_EL(i)], groups);
 	gmap_node_del(&ext_map[_EL(levels)][0]);
 }
@@ -992,9 +1044,10 @@ void reset_extmap(map_gnode **ext_map, u_char levels, int groups)
 /* g_rnode_find: It searches in `gnode'.g a rnode which points to the gnode `n'.
  * It then returns the position of that rnode.
  * If the rnode is not found it returns -1;*/
-int g_rnode_find(map_gnode *gnode, map_gnode *n)
+int
+g_rnode_find(map_gnode * gnode, map_gnode * n)
 {
-	return rnode_find(&gnode->g, (map_node *)n);
+	return rnode_find(&gnode->g, (map_node *) n);
 }
 
 /* extmap_find_level: It returns the position of the gnode map which contains
@@ -1003,16 +1056,18 @@ int g_rnode_find(map_gnode *gnode, map_gnode *n)
  * present in the `ext_map'.
  * ex: if gnode is in ext_map[i] it will return i;
  * On failure -1 is returned.*/
-int  extmap_find_level(map_gnode **ext_map, map_gnode *gnode, u_char max_level)
+int
+extmap_find_level(map_gnode ** ext_map, map_gnode * gnode,
+				  u_char max_level)
 {
 	int i, a, b, c;
 
-	for(i=1; i<max_level; i++) {
-		a=(int) gnode;
-		b=(int)&ext_map[_EL(i)][0];
-		c=(int)&ext_map[_EL(i)][MAXGROUPNODE-1];
+	for (i = 1; i < max_level; i++) {
+		a = (int) gnode;
+		b = (int) &ext_map[_EL(i)][0];
+		c = (int) &ext_map[_EL(i)][MAXGROUPNODE - 1];
 
-		if(a >= b && a <= c)
+		if (a >= b && a <= c)
 			return i;
 	}
 	return -1;
@@ -1020,12 +1075,13 @@ int  extmap_find_level(map_gnode **ext_map, map_gnode *gnode, u_char max_level)
 
 /* gmap_node_del: It deletes a `gnode' from the `gmap'. Really it sets the
  * gnode's flags to GMAP_VOID.*/
-void gmap_node_del(map_gnode *gnode)
+void
+gmap_node_del(map_gnode * gnode)
 {
 	map_node_del(&gnode->g);
 	setzero(gnode, sizeof(map_gnode));
-	gnode->flags|=GMAP_VOID;
-	gnode->g.flags|=MAP_VOID;
+	gnode->flags |= GMAP_VOID;
+	gnode->g.flags |= MAP_VOID;
 }
 
 /*
@@ -1036,64 +1092,66 @@ void gmap_node_del(map_gnode *gnode)
  * This function is the exact replica of merge_maps() in map.c, that's why it
  * isn't commented.
  */
-int merge_lvl_ext_maps(map_gnode *base, map_gnode *new, quadro_group base_root,
-		quadro_group new_root, int level)
+int
+merge_lvl_ext_maps(map_gnode * base, map_gnode * new,
+				   quadro_group base_root, quadro_group new_root,
+				   int level)
 {
 	map_gnode *gnode_gw, *new_root_in_base;
 	int base_root_pos, ngpos;
 	u_int base_trtt, new_trtt;
 	int i, e, x;
 
-	new_root_in_base=&base[new_root.gid[level]];
-	base_root_pos=base_root.gid[level];
+	new_root_in_base = &base[new_root.gid[level]];
+	base_root_pos = base_root.gid[level];
 
-	for(i=0; i<MAXGROUPNODE; i++) {
-		if(base[i].g.flags & MAP_ME 	  || new[i].g.flags & MAP_ME ||
+	for (i = 0; i < MAXGROUPNODE; i++) {
+		if (base[i].g.flags & MAP_ME || new[i].g.flags & MAP_ME ||
 			new[i].g.flags & MAP_VOID || base[i].flags & GMAP_ME ||
-			new[i].flags & GMAP_ME    || new[i].flags & GMAP_VOID)
+			new[i].flags & GMAP_ME || new[i].flags & GMAP_VOID)
 			continue;
 
-		for(e=0; e<new[i].g.links; e++) {
-			gnode_gw=(map_gnode *)new[i].g.r_node[e].r_node;
+		for (e = 0; e < new[i].g.links; e++) {
+			gnode_gw = (map_gnode *) new[i].g.r_node[e].r_node;
 
-			ngpos=pos_from_gnode(gnode_gw, new);
-			if(ngpos == base_root_pos)
+			ngpos = pos_from_gnode(gnode_gw, new);
+			if (ngpos == base_root_pos)
 				continue;
 
-			if(new[i].g.flags & MAP_RNODE)
-				new[i].g.r_node[e].r_node=(int *)new_root_in_base;
-			else if(base[ngpos].g.flags & MAP_VOID ||
-				base[ngpos].flags & GMAP_VOID || !base[ngpos].g.links)
-				new[i].g.r_node[e].r_node=(int *)new_root_in_base;
+			if (new[i].g.flags & MAP_RNODE)
+				new[i].g.r_node[e].r_node = (int *) new_root_in_base;
+			else if (base[ngpos].g.flags & MAP_VOID ||
+					 base[ngpos].flags & GMAP_VOID || !base[ngpos].g.links)
+				new[i].g.r_node[e].r_node = (int *) new_root_in_base;
 			else
-				new[i].g.r_node[e].r_node=base[ngpos].g.r_node[0].r_node;
+				new[i].g.r_node[e].r_node = base[ngpos].g.r_node[0].r_node;
 
-			if(e >= base[i].g.links) {
+			if (e >= base[i].g.links) {
 				rnode_add(&base[i].g, &new[i].g.r_node[e]);
 				rnode_trtt_order(&base[i].g);
-				base[i].g.flags|=MAP_UPDATE;
+				base[i].g.flags |= MAP_UPDATE;
 				continue;
 			}
 
-			base_trtt = get_route_trtt(&base[i].g, base[i].g.links-1);
-			new_trtt  = get_route_trtt(&new[i].g, e);
-			if(base_trtt < new_trtt)
+			base_trtt = get_route_trtt(&base[i].g, base[i].g.links - 1);
+			new_trtt = get_route_trtt(&new[i].g, e);
+			if (base_trtt < new_trtt)
 				continue;
 
-			for(x=0; x<base[i].g.links; x++) {
+			for (x = 0; x < base[i].g.links; x++) {
 				base_trtt = get_route_trtt(&base[i].g, x);
-				new_trtt  = get_route_trtt(&new[i].g, e);
-				if(base_trtt > new_trtt) {
+				new_trtt = get_route_trtt(&new[i].g, e);
+				if (base_trtt > new_trtt) {
 					map_rnode_insert(&base[i].g, x, &new[i].g.r_node[e]);
-					base[i].g.flags|=MAP_UPDATE;
+					base[i].g.flags |= MAP_UPDATE;
 					break;
 				}
 			}
 		}
 
-		if(base[i].g.links) {
-			base[i].g.flags&=~MAP_VOID;
-			base[i].flags&=~GMAP_VOID;
+		if (base[i].g.links) {
+			base[i].g.flags &= ~MAP_VOID;
+			base[i].flags &= ~GMAP_VOID;
 		} else
 			gmap_node_del(&base[i]);
 	}
@@ -1110,24 +1168,25 @@ int merge_lvl_ext_maps(map_gnode *base, map_gnode *new, quadro_group base_root,
  * `new_root' is the quadro_group of the `new' ext_map.
  * On error -1 is returned.
  */
-int merge_ext_maps(map_gnode **base, map_gnode **new, quadro_group base_root,
-		quadro_group new_root)
+int
+merge_ext_maps(map_gnode ** base, map_gnode ** new, quadro_group base_root,
+			   quadro_group new_root)
 {
 	int level, i;
 
-	for(level=base_root.levels-1; level >= 0; level--) {
+	for (level = base_root.levels - 1; level >= 0; level--) {
 
-		if(base_root.gid[level] != base_root.gid[level])
+		if (base_root.gid[level] != base_root.gid[level])
 			break;
 
-		if(level == 1)
+		if (level == 1)
 			/* The two maps are of the same quadro_group */
 			return -1;
 	}
 
-	for(i=level; i < base_root.levels; i++)
+	for (i = level; i < base_root.levels; i++)
 		merge_lvl_ext_maps(base[_EL(i)], new[_EL(i)], base_root,
-				new_root, i);
+						   new_root, i);
 
 	return 0;
 }
@@ -1140,34 +1199,36 @@ int merge_ext_maps(map_gnode **base, map_gnode **new, quadro_group base_root,
  * It returns a pointer to the start of the rnode block and stores in "count"
  * the number of rnode structs packed.
  */
-map_rnode *gmap_get_rblock(map_gnode *map, int maxgroupnode, int *count)
+map_rnode *
+gmap_get_rblock(map_gnode * map, int maxgroupnode, int *count)
 {
-	int i, c=0, tot=0;
- 	map_rnode *rblock;
-	*count=0;
+	int i, c = 0, tot = 0;
+	map_rnode *rblock;
+	*count = 0;
 
-	for(i=0; i<maxgroupnode; i++)
-		tot+=map[i].g.links;
-	if(!tot)
+	for (i = 0; i < maxgroupnode; i++)
+		tot += map[i].g.links;
+	if (!tot)
 		return 0;
-	rblock=(map_rnode *)xmalloc(sizeof(map_rnode)*tot);
+	rblock = (map_rnode *) xmalloc(sizeof(map_rnode) * tot);
 
-	for(i=0; i<maxgroupnode; i++)
-		c+=get_rnode_block((int *)map, &map[i].g, rblock, c);
+	for (i = 0; i < maxgroupnode; i++)
+		c += get_rnode_block((int *) map, &map[i].g, rblock, c);
 
-	*count=c;
+	*count = c;
 	return rblock;
 }
 
 /* gmap_store_rblock: Given a correct ext_map with `maxgroupnode' elements it
  * restores all the r_node structs in the map from the rnode_block using
  * store_rnode_block.*/
-int gmap_store_rblock(map_gnode *gmap, int maxgroupnode, map_rnode *rblock)
+int
+gmap_store_rblock(map_gnode * gmap, int maxgroupnode, map_rnode * rblock)
 {
-	int i, c=0;
+	int i, c = 0;
 
-	for(i=0; i<maxgroupnode; i++)
-		c+=store_rnode_block((int *)gmap, &gmap[i].g, rblock, c);
+	for (i = 0; i < maxgroupnode; i++)
+		c += store_rnode_block((int *) gmap, &gmap[i].g, rblock, c);
 	return c;
 }
 
@@ -1185,21 +1246,23 @@ int gmap_store_rblock(map_gnode *gmap, int maxgroupnode, map_rnode *rblock)
  * the level of the map which has those rnodes. I hope I was clear ^_-
  * PS: You'll have to xfree ret_count, rblock[0-levels], and rblock;
  */
-map_rnode **extmap_get_rblock(map_gnode **ext_map, u_char levels, int maxgroupnodes, int **ret_count)
+map_rnode **
+extmap_get_rblock(map_gnode ** ext_map, u_char levels, int maxgroupnodes,
+				  int **ret_count)
 {
 	int i;
- 	map_rnode **rblock;
+	map_rnode **rblock;
 	int *count;
 
-	if(!levels)
+	if (!levels)
 		return 0;
-	rblock=xmalloc(sizeof(map_rnode *) * levels);
-	count=xmalloc(sizeof(int) * levels);
+	rblock = xmalloc(sizeof(map_rnode *) * levels);
+	count = xmalloc(sizeof(int) * levels);
 
-	for(i=0; i<levels; i++)
-		rblock[i]=gmap_get_rblock(ext_map[i], maxgroupnodes, &count[i]);
+	for (i = 0; i < levels; i++)
+		rblock[i] = gmap_get_rblock(ext_map[i], maxgroupnodes, &count[i]);
 
-	*ret_count=count;
+	*ret_count = count;
 	return rblock;
 }
 
@@ -1208,14 +1271,15 @@ map_rnode **extmap_get_rblock(map_gnode **ext_map, u_char levels, int maxgroupno
  * The rnodes are taken from the `rblock'.
  * The number of map restored is returned and it shall be equal to the number of `levels'.
  */
-int extmap_store_rblock(map_gnode **ext_map, u_char levels, int maxgroupnode,
-		map_rnode *rblock, size_t *rblock_sz)
+int
+extmap_store_rblock(map_gnode ** ext_map, u_char levels, int maxgroupnode,
+					map_rnode * rblock, size_t * rblock_sz)
 {
 	int i;
-	for(i=0; i<levels; i++) {
-		if(rblock_sz[i])
+	for (i = 0; i < levels; i++) {
+		if (rblock_sz[i])
 			gmap_store_rblock(ext_map[i], maxgroupnode, rblock);
-		rblock = (map_rnode *)((char *)rblock + rblock_sz[i]);
+		rblock = (map_rnode *) ((char *) rblock + rblock_sz[i]);
 	}
 	return i;
 }
@@ -1226,30 +1290,32 @@ int extmap_store_rblock(map_gnode **ext_map, u_char levels, int maxgroupnode,
  * It verifies the validity of an ext_map_hdr.
  * `quadg' is the unpacked emap_hdr->quadg quadro_group.
  */
-int verify_ext_map_hdr(struct ext_map_hdr *emap_hdr, quadro_group *quadg)
+int
+verify_ext_map_hdr(struct ext_map_hdr *emap_hdr, quadro_group * quadg)
 {
 	u_char levels;
 	int maxgroupnode, i;
 
-	levels=quadg->levels-UNITY_LEVEL;
-	maxgroupnode=emap_hdr->ext_map_sz/(MAP_GNODE_PACK_SZ*levels);
-	if(levels > MAX_LEVELS || maxgroupnode > MAXGROUPNODE ||
-			emap_hdr->total_rblock_sz > MAXRNODEBLOCK_PACK_SZ*levels ||
-			emap_hdr->ext_map_sz > maxgroupnode*MAP_GNODE_PACK_SZ*levels)
+	levels = quadg->levels - UNITY_LEVEL;
+	maxgroupnode = emap_hdr->ext_map_sz / (MAP_GNODE_PACK_SZ * levels);
+	if (levels > MAX_LEVELS || maxgroupnode > MAXGROUPNODE ||
+		emap_hdr->total_rblock_sz > MAXRNODEBLOCK_PACK_SZ * levels ||
+		emap_hdr->ext_map_sz > maxgroupnode * MAP_GNODE_PACK_SZ * levels)
 		return 1;
 
-	for(i=0; i<levels; i++)
-		if(quadg->gid[i] > maxgroupnode)
+	for (i = 0; i < levels; i++)
+		if (quadg->gid[i] > maxgroupnode)
 			return 1;
 
 	return 0;
 }
 
-void free_extmap_rblock(map_rnode **rblock, u_char levels)
+void
+free_extmap_rblock(map_rnode ** rblock, u_char levels)
 {
 	int i;
-	for(i=0; i<levels; i++)
-		if(rblock[i])
+	for (i = 0; i < levels; i++)
+		if (rblock[i])
 			xfree(rblock[i]);
 	xfree(rblock);
 }
@@ -1261,23 +1327,24 @@ void free_extmap_rblock(map_rnode **rblock, u_char levels)
  * `pack', which must be MAP_GNODE_PACK_SZ bytes big. `pack' will be in
  * network order.
  */
-void pack_map_gnode(map_gnode *gnode, char *pack)
+void
+pack_map_gnode(map_gnode * gnode, char *pack)
 {
 	char *buf;
 
-	buf=pack;
+	buf = pack;
 
 	pack_map_node(&gnode->g, buf);
-	buf+=MAP_NODE_PACK_SZ;
+	buf += MAP_NODE_PACK_SZ;
 
 	memcpy(buf, &gnode->flags, sizeof(char));
-	buf+=sizeof(char);
+	buf += sizeof(char);
 
 	memcpy(buf, &gnode->seeds, sizeof(char));
-	buf+=sizeof(char);
+	buf += sizeof(char);
 
 	memcpy(buf, &gnode->gcount, sizeof(u_int));
-	buf+=sizeof(u_int);
+	buf += sizeof(u_int);
 
 	ints_host_to_network(pack, map_gnode_iinfo);
 }
@@ -1288,25 +1355,26 @@ void pack_map_gnode(map_gnode *gnode, char *pack)
  * restores in `qg' the map_gnode struct contained in `pack'.
  * Note that `pack' will be modified during the restoration.
  */
-void unpack_map_gnode(map_gnode *gnode, char *pack)
+void
+unpack_map_gnode(map_gnode * gnode, char *pack)
 {
 	char *buf;
 
-	buf=pack;
+	buf = pack;
 
 	ints_network_to_host(pack, map_gnode_iinfo);
 
 	unpack_map_node(&gnode->g, buf);
-	buf+=MAP_NODE_PACK_SZ;
+	buf += MAP_NODE_PACK_SZ;
 
 	memcpy(&gnode->flags, buf, sizeof(char));
-	buf+=sizeof(char);
+	buf += sizeof(char);
 
 	memcpy(&gnode->seeds, buf, sizeof(char));
-	buf+=sizeof(char);
+	buf += sizeof(char);
 
 	memcpy(&gnode->gcount, buf, sizeof(u_int));
-	buf+=sizeof(u_int);
+	buf += sizeof(u_int);
 }
 
 /*
@@ -1317,49 +1385,52 @@ void unpack_map_gnode(map_gnode *gnode, char *pack)
  * `maxgroupnode' nodes. `quadg' must be a valid quadro_group struct filled with
  * valid values.
  */
-char *pack_extmap(map_gnode **ext_map, int maxgroupnode, quadro_group *quadg, size_t *pack_sz)
+char *
+pack_extmap(map_gnode ** ext_map, int maxgroupnode, quadro_group * quadg,
+			size_t * pack_sz)
 {
 	struct ext_map_hdr emap_hdr;
 	map_rnode **rblock;
 	int *count, i, e;
-	char *package, *p=0;
-	u_char levels=quadg->levels-UNITY_LEVEL;
+	char *package, *p = 0;
+	u_char levels = quadg->levels - UNITY_LEVEL;
 
-	/*Packing the rblocks*/
-	rblock=extmap_get_rblock(ext_map, levels, maxgroupnode, &count);
+	/*Packing the rblocks */
+	rblock = extmap_get_rblock(ext_map, levels, maxgroupnode, &count);
 
-	/*Building the hdr...*/
+	/*Building the hdr... */
 	setzero(&emap_hdr, sizeof(struct ext_map_hdr));
-	emap_hdr.ext_map_sz=maxgroupnode*MAP_GNODE_PACK_SZ*levels;
-	for(i=0; i<levels; i++) {
-		emap_hdr.rblock_sz[i]=count[i]*MAP_RNODE_PACK_SZ;
-		emap_hdr.total_rblock_sz+=emap_hdr.rblock_sz[i];
+	emap_hdr.ext_map_sz = maxgroupnode * MAP_GNODE_PACK_SZ * levels;
+	for (i = 0; i < levels; i++) {
+		emap_hdr.rblock_sz[i] = count[i] * MAP_RNODE_PACK_SZ;
+		emap_hdr.total_rblock_sz += emap_hdr.rblock_sz[i];
 	}
 
 	pack_quadro_group(quadg, emap_hdr.quadg);
 
-	/*Let's fuse all in one*/
-	*pack_sz=EXT_MAP_BLOCK_SZ(emap_hdr.ext_map_sz, emap_hdr.total_rblock_sz);
-	package=xmalloc(*pack_sz);
+	/*Let's fuse all in one */
+	*pack_sz =
+		EXT_MAP_BLOCK_SZ(emap_hdr.ext_map_sz, emap_hdr.total_rblock_sz);
+	package = xmalloc(*pack_sz);
 
 	memcpy(package, &emap_hdr, sizeof(struct ext_map_hdr));
 	ints_host_to_network(package, ext_map_hdr_iinfo);
 
-	p=package+sizeof(struct ext_map_hdr);
-	for(i=0; i<levels; i++) {
-		for(e=0; e<maxgroupnode; e++) {
+	p = package + sizeof(struct ext_map_hdr);
+	for (i = 0; i < levels; i++) {
+		for (e = 0; e < maxgroupnode; e++) {
 			pack_map_gnode(&ext_map[i][e], p);
-			p+=MAP_GNODE_PACK_SZ;
+			p += MAP_GNODE_PACK_SZ;
 		}
 	}
 
 	/* If the rblock is not null copy it in the `package' */
-	if(rblock) {
-		for(i=0; i<levels; i++) {
-			if(!emap_hdr.rblock_sz[i])
+	if (rblock) {
+		for (i = 0; i < levels; i++) {
+			if (!emap_hdr.rblock_sz[i])
 				continue;
 			memcpy(p, rblock[i], emap_hdr.rblock_sz[i]);
-			p+=emap_hdr.rblock_sz[i];
+			p += emap_hdr.rblock_sz[i];
 		}
 		free_extmap_rblock(rblock, levels);
 	}
@@ -1379,10 +1450,11 @@ char *pack_extmap(map_gnode **ext_map, int maxgroupnode, quadro_group *quadg, si
  * the fatal value.
  * Note: `package' will be modified during the unpacking.
  */
-map_gnode **unpack_extmap(char *package, quadro_group *quadg)
+map_gnode **
+unpack_extmap(char *package, quadro_group * quadg)
 {
 	map_gnode **ext_map;
-	struct ext_map_hdr *emap_hdr=(struct ext_map_hdr *)package;
+	struct ext_map_hdr *emap_hdr = (struct ext_map_hdr *) package;
 	map_rnode *rblock;
 	u_char levels;
 	int err, i, e, maxgroupnode;
@@ -1391,61 +1463,63 @@ map_gnode **unpack_extmap(char *package, quadro_group *quadg)
 	ints_network_to_host(emap_hdr, ext_map_hdr_iinfo);
 	unpack_quadro_group(quadg, emap_hdr->quadg);
 
-	levels=quadg->levels-UNITY_LEVEL;
-	maxgroupnode=emap_hdr->ext_map_sz/(MAP_GNODE_PACK_SZ*levels);
+	levels = quadg->levels - UNITY_LEVEL;
+	maxgroupnode = emap_hdr->ext_map_sz / (MAP_GNODE_PACK_SZ * levels);
 
-	if(verify_ext_map_hdr(emap_hdr, quadg)) {
+	if (verify_ext_map_hdr(emap_hdr, quadg)) {
 		error("Malformed ext_map_hdr. Aborting unpack_map().");
 		return 0;
 	}
 
-	/*Unpacking the ext_map*/
-	p=package+sizeof(struct ext_map_hdr);
-	ext_map=init_extmap(quadg->levels, maxgroupnode);
-	for(i=0; i<levels; i++) {
-		for(e=0; e<maxgroupnode; e++) {
+	/*Unpacking the ext_map */
+	p = package + sizeof(struct ext_map_hdr);
+	ext_map = init_extmap(quadg->levels, maxgroupnode);
+	for (i = 0; i < levels; i++) {
+		for (e = 0; e < maxgroupnode; e++) {
 			unpack_map_gnode(&ext_map[i][e], p);
-			p+=MAP_GNODE_PACK_SZ;
+			p += MAP_GNODE_PACK_SZ;
 		}
 	}
 
-	/*Let's store in it the lost rnodes.*/
-	if(emap_hdr->total_rblock_sz) {
-		rblock=(map_rnode *)p;
-		err=extmap_store_rblock(ext_map, levels, maxgroupnode, rblock,
-				emap_hdr->rblock_sz);
-		if(err!=levels) {
+	/*Let's store in it the lost rnodes. */
+	if (emap_hdr->total_rblock_sz) {
+		rblock = (map_rnode *) p;
+		err = extmap_store_rblock(ext_map, levels, maxgroupnode, rblock,
+								  emap_hdr->rblock_sz);
+		if (err != levels) {
 			error("unpack_extmap(): It was not possible to restore"
-					" all the rnodes in the ext_map");
+				  " all the rnodes in the ext_map");
 			free_extmap(ext_map, quadg->levels, maxgroupnode);
 			return 0;
 		}
 	}
 
 	/* We restore the quadro_group struct */
-	for(i=0; i<levels; i++)
-		quadg->gnode[i]=gnode_from_pos(quadg->gid[i+1], ext_map[i]);
+	for (i = 0; i < levels; i++)
+		quadg->gnode[i] = gnode_from_pos(quadg->gid[i + 1], ext_map[i]);
 
 	return ext_map;
 }
 
 /* * * save/load ext_map * * */
-int save_extmap(map_gnode **ext_map, int maxgroupnode, quadro_group *quadg, char *file)
+int
+save_extmap(map_gnode ** ext_map, int maxgroupnode, quadro_group * quadg,
+			char *file)
 {
 	FILE *fd;
 	size_t pack_sz;
 	char *pack;
 
-	/*Pack!*/
-	pack=pack_extmap(ext_map, maxgroupnode, quadg, &pack_sz);
-	if(!pack || !pack_sz)
+	/*Pack! */
+	pack = pack_extmap(ext_map, maxgroupnode, quadg, &pack_sz);
+	if (!pack || !pack_sz)
 		return 0;
 
-	if((fd=fopen(file, "w"))==NULL) {
+	if ((fd = fopen(file, "w")) == NULL) {
 		error("Cannot save the map in %s: %s", file, strerror(errno));
 		return -1;
 	}
-	/*Write!*/
+	/*Write! */
 	fwrite(pack, pack_sz, 1, fd);
 
 	xfree(pack);
@@ -1453,7 +1527,8 @@ int save_extmap(map_gnode **ext_map, int maxgroupnode, quadro_group *quadg, char
 	return 0;
 }
 
-map_gnode **load_extmap(char *file, quadro_group *quadg)
+map_gnode **
+load_extmap(char *file, quadro_group * quadg)
 {
 	map_gnode **ext_map;
 	FILE *fd;
@@ -1461,34 +1536,35 @@ map_gnode **load_extmap(char *file, quadro_group *quadg)
 	size_t pack_sz;
 	char *pack;
 
-	if((fd=fopen(file, "r"))==NULL) {
+	if ((fd = fopen(file, "r")) == NULL) {
 		error("Cannot load the map from %s: %s", file, strerror(errno));
 		return 0;
 	}
 
-	if(!fread(&emap_hdr, sizeof(struct ext_map_hdr), 1, fd))
+	if (!fread(&emap_hdr, sizeof(struct ext_map_hdr), 1, fd))
 		goto error;
 
 	ints_network_to_host(&emap_hdr, ext_map_hdr_iinfo);
 	unpack_quadro_group(quadg, emap_hdr.quadg);
-	if(verify_ext_map_hdr(&emap_hdr, quadg))
+	if (verify_ext_map_hdr(&emap_hdr, quadg))
 		goto error;
 
 	rewind(fd);
-	pack_sz=EXT_MAP_BLOCK_SZ(emap_hdr.ext_map_sz, emap_hdr.total_rblock_sz);
-	pack=xmalloc(pack_sz);
-	if(!fread(pack, pack_sz, 1, fd))
+	pack_sz =
+		EXT_MAP_BLOCK_SZ(emap_hdr.ext_map_sz, emap_hdr.total_rblock_sz);
+	pack = xmalloc(pack_sz);
+	if (!fread(pack, pack_sz, 1, fd))
 		goto error;
 
-	ext_map=unpack_extmap(pack, quadg);
-	if(!ext_map)
+	ext_map = unpack_extmap(pack, quadg);
+	if (!ext_map)
 		error("Cannot unpack the ext_map!");
 
 	xfree(pack);
 	fclose(fd);
 	return ext_map;
-error:
-    fclose(fd);
+  error:
+	fclose(fd);
 	error("Malformed ext_map file. Aborting load_extmap().");
 	return 0;
 }

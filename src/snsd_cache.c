@@ -32,9 +32,10 @@
 
 int net_family;
 
-void snsd_cache_init(int family)
+void
+snsd_cache_init(int family)
 {
-	net_family=family;
+	net_family = family;
 }
 
 /*
@@ -45,23 +46,25 @@ void snsd_cache_init(int family)
  *
  * If no protocol matched, 0 is returned.
  */
-u_char str_to_snsd_proto(char *proto_name)
+u_char
+str_to_snsd_proto(char *proto_name)
 {
 	int i;
-	
-	for(i=0; i<=256; i++) {
-		if(!proto_str[i])
+
+	for (i = 0; i <= 256; i++) {
+		if (!proto_str[i])
 			break;
-		if(!strcmp(proto_name, proto_str[i]))
-			return i+1;
+		if (!strcmp(proto_name, proto_str[i]))
+			return i + 1;
 	}
 
 	return 0;
 }
 
-const char *snsd_proto_to_str(u_char proto)
+const char *
+snsd_proto_to_str(u_char proto)
 {
-	return proto_str[proto-1];
+	return proto_str[proto - 1];
 }
 
 /*
@@ -81,27 +84,28 @@ const char *snsd_proto_to_str(u_char proto)
  *	 If the service is invalid  -1 is returned.
  *	 If the protocol is invalid -2 is returned.
  */
-int str_to_snsd_service(char *str, int *service, u_char *proto)
+int
+str_to_snsd_service(char *str, int *service, u_char * proto)
 {
 	struct servent *st;
 	char *servname, *servproto;
 
-	servname=str;
-	if((servproto=strchr(str, '/'))) {
-		*servproto=0;
+	servname = str;
+	if ((servproto = strchr(str, '/'))) {
+		*servproto = 0;
 		servproto++;
-		if(!(*proto=str_to_snsd_proto(servproto)))
+		if (!(*proto = str_to_snsd_proto(servproto)))
 			return -1;
 	} else
-		*proto=SNSD_DEFAULT_PROTO;
+		*proto = SNSD_DEFAULT_PROTO;
 
-	if(!isdigit(servname[0])) {
-		if(!(st=getservbyname(servname, 0)))
+	if (!isdigit(servname[0])) {
+		if (!(st = getservbyname(servname, 0)))
 			return -2;
 
-		*service=ntohs(st->s_port);
+		*service = ntohs(st->s_port);
 	} else
-		*service=atoi(servname);
+		*service = atoi(servname);
 
 	return 0;
 }
@@ -117,16 +121,16 @@ int str_to_snsd_service(char *str, int *service, u_char *proto)
  * On error 0 is returned.
  */
 struct servent *
-snsd_service_to_str(int service, u_char proto, char **service_str, 
-		    char **proto_str)
+snsd_service_to_str(int service, u_char proto, char **service_str,
+					char **proto_str)
 {
-	struct servent *st=0;
+	struct servent *st = 0;
 
-	if(!(st=getservbyport(service, snsd_proto_to_str(proto))))
+	if (!(st = getservbyport(service, snsd_proto_to_str(proto))))
 		return 0;
 
-	*service_str=st->s_name;
-	*proto_str=st->s_proto;
+	*service_str = st->s_name;
+	*proto_str = st->s_proto;
 
 	return st;
 }
@@ -138,62 +142,64 @@ snsd_service_to_str(int service, u_char proto, char **service_str,
  *
 \*/
 
-snsd_service *snsd_find_service(snsd_service *sns, u_short service, 
-				u_char proto)
+snsd_service *
+snsd_find_service(snsd_service * sns, u_short service, u_char proto)
 {
 	list_for(sns)
-		if(sns->service == service &&
-				(sns->proto == proto || 
-				 service == SNSD_DEFAULT_SERVICE))
-			return sns;
+		if (sns->service == service &&
+			(sns->proto == proto || service == SNSD_DEFAULT_SERVICE))
+		return sns;
 	return 0;
 }
 
-snsd_service *snsd_add_service(snsd_service **head, u_short service, 
-				u_char proto)
+snsd_service *
+snsd_add_service(snsd_service ** head, u_short service, u_char proto)
 {
 	snsd_service *sns, *new;
 
-	if((sns=snsd_find_service(*head, service, proto)))
+	if ((sns = snsd_find_service(*head, service, proto)))
 		return sns;
 
-	new=xzalloc(sizeof(snsd_service));
-	new->service=service;
-	new->proto=proto;
-	
-	*head=list_add(*head, new);
+	new = xzalloc(sizeof(snsd_service));
+	new->service = service;
+	new->proto = proto;
+
+	*head = list_add(*head, new);
 
 	return new;
 }
 
-snsd_prio *snsd_find_prio(snsd_prio *snp, u_char prio)
+snsd_prio *
+snsd_find_prio(snsd_prio * snp, u_char prio)
 {
 	list_for(snp)
-		if(snp->prio == prio)
-			return snp;
+		if (snp->prio == prio)
+		return snp;
 	return 0;
 }
 
-snsd_prio *snsd_add_prio(snsd_prio **head, u_char prio)
+snsd_prio *
+snsd_add_prio(snsd_prio ** head, u_char prio)
 {
 	snsd_prio *snp, *new;
 
-	if((snp=snsd_find_prio(*head, prio)))
+	if ((snp = snsd_find_prio(*head, prio)))
 		return snp;
 
-	new=xzalloc(sizeof(snsd_prio));
-	new->prio=prio;
-	
-	*head=list_add(*head, new);
+	new = xzalloc(sizeof(snsd_prio));
+	new->prio = prio;
+
+	*head = list_add(*head, new);
 
 	return new;
 }
 
-snsd_node *snsd_find_node_by_record(snsd_node *snd, u_int record[MAX_IP_INT])
+snsd_node *
+snsd_find_node_by_record(snsd_node * snd, u_int record[MAX_IP_INT])
 {
 	list_for(snd)
-		if(!memcmp(snd->record, record, MAX_IP_SZ))
-			return snd;
+		if (!memcmp(snd->record, record, MAX_IP_SZ))
+		return snd;
 	return 0;
 }
 
@@ -208,21 +214,22 @@ snsd_node *snsd_find_node_by_record(snsd_node *snd, u_int record[MAX_IP_INT])
  * `max_records' is the max number of records allowed in the llist. If no
  * empty place are left to add the new struct, 0 is returned.
  */
-snsd_node *snsd_add_node(snsd_node **head, u_short *counter, 
-			 u_short max_records, u_int record[MAX_IP_INT])
+snsd_node *
+snsd_add_node(snsd_node ** head, u_short * counter,
+			  u_short max_records, u_int record[MAX_IP_INT])
 {
 	snsd_node *snd;
 
-	if(record && (snd=snsd_find_node_by_record(*head, record)))
+	if (record && (snd = snsd_find_node_by_record(*head, record)))
 		return snd;
 
-	if(*counter >= max_records)
+	if (*counter >= max_records)
 		/* The llist is full */
 		return 0;
 
-	snd=xzalloc(sizeof(snsd_node));
+	snd = xzalloc(sizeof(snsd_node));
 
-	if(record)
+	if (record)
 		memcpy(snd->record, record, MAX_IP_SZ);
 
 	clist_add(head, counter, snd);
@@ -237,34 +244,35 @@ snsd_node *snsd_add_node(snsd_node **head, u_short *counter,
  * The new node is returned.
  * If it isn't zero, it returns the first struct of the llist.
  */
-snsd_node *snsd_add_first_node(snsd_node **head, u_short *counter,
-				u_short max_records, u_int record[MAX_IP_INT])
+snsd_node *
+snsd_add_first_node(snsd_node ** head, u_short * counter,
+					u_short max_records, u_int record[MAX_IP_INT])
 {
-	if(!(*head) || !(*counter))
+	if (!(*head) || !(*counter))
 		return snsd_add_node(head, counter, max_records, record);
-	
+
 	return *head;
 }
 
 /*
  * just a wrapper
  */
-snsd_node *snsd_add_mainip(snsd_service **head, u_short *counter,
+snsd_node *
+snsd_add_mainip(snsd_service ** head, u_short * counter,
 				u_short max_records, u_int record[MAX_IP_INT])
 {
 	snsd_service *sns;
 	snsd_prio *snp;
 	snsd_node *snd;
 
-	if(!(sns=snsd_add_service(head, SNSD_DEFAULT_SERVICE, 
-					SNSD_DEFAULT_PROTO)) ||
-		!(snp=snsd_add_prio(&sns->prio, 
-					SNSD_DEFAULT_PRIO))  ||
-		!(snd=snsd_add_node(&snp->node, counter, 
-					max_records, record)))
+	if (!(sns = snsd_add_service(head, SNSD_DEFAULT_SERVICE,
+								 SNSD_DEFAULT_PROTO)) ||
+		!(snp = snsd_add_prio(&sns->prio,
+							  SNSD_DEFAULT_PRIO)) ||
+		!(snd = snsd_add_node(&snp->node, counter, max_records, record)))
 		return 0;
-	snd->flags|=SNSD_NODE_IP | SNSD_NODE_MAIN_IP;
-	snd->weight=SNSD_DEFAULT_WEIGHT;
+	snd->flags |= SNSD_NODE_IP | SNSD_NODE_MAIN_IP;
+	snd->weight = SNSD_DEFAULT_WEIGHT;
 
 	return snd;
 }
@@ -276,27 +284,30 @@ snsd_node *snsd_add_mainip(snsd_service **head, u_short *counter,
  *
 \*/
 
-void snsd_node_llist_del(snsd_node **head, u_short *counter)
+void
+snsd_node_llist_del(snsd_node ** head, u_short * counter)
 {
 	clist_destroy(head, counter);
 }
 
-void snsd_prio_llist_del(snsd_prio **head)
+void
+snsd_prio_llist_del(snsd_prio ** head)
 {
-	snsd_prio *snp=(*head);
+	snsd_prio *snp = (*head);
 	u_short counter;
 
 	list_for(snp)
 		snsd_node_llist_del(&snp->node, &counter);
 	clist_destroy(head, &counter);
-	(*head)=(snsd_prio *)clist_init(&counter);
+	(*head) = (snsd_prio *) clist_init(&counter);
 }
 
-void snsd_service_llist_del(snsd_service **head)
+void
+snsd_service_llist_del(snsd_service ** head)
 {
-	snsd_service *sns=(*head);
+	snsd_service *sns = (*head);
 	int counter;
-	
+
 	list_for(sns)
 		snsd_prio_llist_del(&sns->prio);
 	clist_destroy(head, &counter);
@@ -311,28 +322,28 @@ void snsd_service_llist_del(snsd_service **head)
  * `*head'.
  * `snsd_counter' is the record counter of `*head'.
  */
-void snsd_record_del_selected(snsd_service **head, u_short *snd_counter, 
-			snsd_service *selected)
+void
+snsd_record_del_selected(snsd_service ** head, u_short * snd_counter,
+						 snsd_service * selected)
 {
 	snsd_service *sns;
 	snsd_prio *snp, *snp_sel;
 	snsd_node *snd, *snd_sel;
 
 	list_for(selected) {
-		sns=snsd_find_service(*head, selected->service, 
-				selected->proto);
-		if(!sns)
+		sns = snsd_find_service(*head, selected->service, selected->proto);
+		if (!sns)
 			continue;
 
-		snp_sel=selected->prio;
+		snp_sel = selected->prio;
 		list_for(snp_sel) {
-			if(!(snp=snsd_find_prio(sns->prio, snp_sel->prio)))
+			if (!(snp = snsd_find_prio(sns->prio, snp_sel->prio)))
 				continue;
 
-			snd_sel=snp_sel->node;
+			snd_sel = snp_sel->node;
 			list_for(snd_sel) {
-				while((snd=snsd_find_node_by_record(snp->node,
-							snd_sel->record))) {
+				while ((snd = snsd_find_node_by_record(snp->node,
+													   snd_sel->record))) {
 					/* 
 					 * there can be multiple nodes with the same
 					 * record, delete them all with this
@@ -343,16 +354,16 @@ void snsd_record_del_selected(snsd_service **head, u_short *snd_counter,
 				}
 			}
 
-			if(!snp->node)
+			if (!snp->node)
 				/* if we emptied the snp->node llist, delete
 				 * this prio struct too */
-				sns->prio=list_del(sns->prio, snp);
+				sns->prio = list_del(sns->prio, snp);
 		}
 
-		if(!sns->prio)
+		if (!sns->prio)
 			/* if we emptied the sns->prio llist, delete
 			 * this service struct too */
-			*head=list_del((*head), sns);
+			*head = list_del((*head), sns);
 	}
 }
 
@@ -371,23 +382,24 @@ void snsd_record_del_selected(snsd_service **head, u_short *snd_counter,
  * SNSD_NODE_PACK_SZ, -1 is returned.
  * The number of bytes written in `pack' is returned.
  */
-int snsd_pack_node(char *pack, size_t free_sz, snsd_node *node)
+int
+snsd_pack_node(char *pack, size_t free_sz, snsd_node * node)
 {
-	char *buf=pack;
-	
-	if(free_sz < SNSD_NODE_PACK_SZ)
+	char *buf = pack;
+
+	if (free_sz < SNSD_NODE_PACK_SZ)
 		return -1;
 
 	memcpy(buf, node->record, MAX_IP_SZ);
-	if(node->flags & SNSD_NODE_IP)
-		inet_htonl((u_int *)buf, net_family);
-	buf+=MAX_IP_SZ;
+	if (node->flags & SNSD_NODE_IP)
+		inet_htonl((u_int *) buf, net_family);
+	buf += MAX_IP_SZ;
 
 	memcpy(buf, &node->flags, sizeof(char));
-	buf+=sizeof(char);
+	buf += sizeof(char);
 
 	memcpy(buf, &node->weight, sizeof(char));
-	buf+=sizeof(char);
+	buf += sizeof(char);
 
 	return SNSD_NODE_PACK_SZ;
 }
@@ -400,26 +412,27 @@ int snsd_pack_node(char *pack, size_t free_sz, snsd_node *node)
  * 
  * We are assuming that the total size of the package is >= SNSD_NODE_PACK_SZ.
  */
-snsd_node *snsd_unpack_node(char *pack)
+snsd_node *
+snsd_unpack_node(char *pack)
 {
 	snsd_node *snd;
 	char *buf;
-	
-	snd=xzalloc(sizeof(snsd_node));
 
-	buf=pack;
+	snd = xzalloc(sizeof(snsd_node));
+
+	buf = pack;
 	memcpy(snd->record, buf, MAX_IP_SZ);
-	buf+=MAX_IP_SZ;
-	
-	memcpy(&snd->flags, buf, sizeof(char));
-	buf+=sizeof(char);
-	
-	snd->weight=SNSD_WEIGHT((*((char *)(buf))));
-	buf+=sizeof(char);
+	buf += MAX_IP_SZ;
 
-	if(snd->flags & SNSD_NODE_IP)
+	memcpy(&snd->flags, buf, sizeof(char));
+	buf += sizeof(char);
+
+	snd->weight = SNSD_WEIGHT((*((char *) (buf))));
+	buf += sizeof(char);
+
+	if (snd->flags & SNSD_NODE_IP)
 		inet_ntohl(snd->record, net_family);
-	
+
 	return snd;
 }
 
@@ -437,25 +450,28 @@ snsd_node *snsd_unpack_node(char *pack)
  * 
  * On error -1 is returned.
  */
-int snsd_pack_all_nodes(char *pack, size_t pack_sz, snsd_node *head)
+int
+snsd_pack_all_nodes(char *pack, size_t pack_sz, snsd_node * head)
 {
 	struct snsd_node_llist_hdr *hdr;
-	snsd_node *snd=head;
-	int sz=0, wsz=0, counter=0;
+	snsd_node *snd = head;
+	int sz = 0, wsz = 0, counter = 0;
 
-	hdr=(struct snsd_node_llist_hdr *)pack;
-	pack+=sizeof(struct snsd_node_llist_hdr);
-	wsz+=sizeof(struct snsd_node_llist_hdr);
-	
+	hdr = (struct snsd_node_llist_hdr *) pack;
+	pack += sizeof(struct snsd_node_llist_hdr);
+	wsz += sizeof(struct snsd_node_llist_hdr);
+
 	list_for(snd) {
-		sz=snsd_pack_node(pack, pack_sz-wsz, snd);
-		if(sz <= 0)
+		sz = snsd_pack_node(pack, pack_sz - wsz, snd);
+		if (sz <= 0)
 			return -1;
-		
-		wsz+=sz; pack+=sz; counter++;
+
+		wsz += sz;
+		pack += sz;
+		counter++;
 	}
-	
-	hdr->count=htons(counter);
+
+	hdr->count = htons(counter);
 	return wsz;
 }
 
@@ -470,36 +486,37 @@ int snsd_pack_all_nodes(char *pack, size_t pack_sz, snsd_node *head)
  * The head of the unpacked llist is returned.
  * On error 0 is returned.
  */
-snsd_node *snsd_unpack_all_nodes(char *pack, size_t pack_sz, 
-					size_t *unpacked_sz, u_short *nodes_counter)
+snsd_node *
+snsd_unpack_all_nodes(char *pack, size_t pack_sz,
+					  size_t * unpacked_sz, u_short * nodes_counter)
 {
-	snsd_node *snd_head=0, *snd;
-	char *buf=pack;
-	int i, sz=0;
+	snsd_node *snd_head = 0, *snd;
+	char *buf = pack;
+	int i, sz = 0;
 	u_short counter;
-	
-	if((sz+=sizeof(struct snsd_node_llist_hdr)) > pack_sz)
+
+	if ((sz += sizeof(struct snsd_node_llist_hdr)) > pack_sz)
 		ERROR_FINISH(snd_head, 0, finish);
 
-	counter=ntohs((*(short *)buf));
-	buf+=sizeof(short);
+	counter = ntohs((*(short *) buf));
+	buf += sizeof(short);
 
-	if(counter > SNSD_MAX_REC_SERV)
+	if (counter > SNSD_MAX_REC_SERV)
 		ERROR_FINISH(snd_head, 0, finish);
-	
-	*nodes_counter=0;
-	for(i=0; i<counter; i++) {
-		if((sz+=SNSD_NODE_PACK_SZ) > pack_sz)
+
+	*nodes_counter = 0;
+	for (i = 0; i < counter; i++) {
+		if ((sz += SNSD_NODE_PACK_SZ) > pack_sz)
 			ERROR_FINISH(snd_head, 0, finish);
-		
-		snd=snsd_unpack_node(buf);
-		buf+=SNSD_NODE_PACK_SZ;
+
+		snd = snsd_unpack_node(buf);
+		buf += SNSD_NODE_PACK_SZ;
 
 		clist_add(&snd_head, nodes_counter, snd);
 	}
 
-finish:
-	(*unpacked_sz)+=sz;
+  finish:
+	(*unpacked_sz) += sz;
 	return snd_head;
 }
 
@@ -512,23 +529,24 @@ finish:
  *
  * On error -1 is returned, otherwise the size of the package is returned.
  */
-int snsd_pack_prio(char *pack, size_t free_sz, snsd_prio *prio)
+int
+snsd_pack_prio(char *pack, size_t free_sz, snsd_prio * prio)
 {
-	char *buf=pack;
-	int wsz=0, sz=0;
+	char *buf = pack;
+	int wsz = 0, sz = 0;
 
-	if(free_sz < SNSD_PRIO_PACK_SZ)
+	if (free_sz < SNSD_PRIO_PACK_SZ)
 		return -1;
-	
-	*buf=prio->prio;
-	buf+=sizeof(char);
-	wsz+=sizeof(char);
-	
-	sz=snsd_pack_all_nodes(buf, free_sz-wsz, prio->node);
-	if(sz <= 0)
+
+	*buf = prio->prio;
+	buf += sizeof(char);
+	wsz += sizeof(char);
+
+	sz = snsd_pack_all_nodes(buf, free_sz - wsz, prio->node);
+	if (sz <= 0)
 		return -1;
-	wsz+=sz;
-	
+	wsz += sz;
+
 	return wsz;
 }
 
@@ -544,25 +562,27 @@ int snsd_pack_prio(char *pack, size_t free_sz, snsd_prio *prio)
  * 
  * On error 0 is returned
  */
-snsd_prio *snsd_unpack_prio(char *pack, size_t pack_sz, size_t *unpacked_sz,
-				u_short *nodes_counter)
+snsd_prio *
+snsd_unpack_prio(char *pack, size_t pack_sz, size_t * unpacked_sz,
+				 u_short * nodes_counter)
 {
 	snsd_prio *snp;
-	u_short counter=0;
+	u_short counter = 0;
 
-	*nodes_counter=counter;
-	snp=xzalloc(sizeof(snsd_prio));
-	
-	snp->prio=*pack;
-	pack+=sizeof(char);
-	(*unpacked_sz)+=sizeof(char);
+	*nodes_counter = counter;
+	snp = xzalloc(sizeof(snsd_prio));
 
-	snp->node=snsd_unpack_all_nodes(pack, pack_sz-sizeof(char), unpacked_sz,
-					&counter);
-	if(!snp->node || counter > SNSD_MAX_REC_SERV)
+	snp->prio = *pack;
+	pack += sizeof(char);
+	(*unpacked_sz) += sizeof(char);
+
+	snp->node =
+		snsd_unpack_all_nodes(pack, pack_sz - sizeof(char), unpacked_sz,
+							  &counter);
+	if (!snp->node || counter > SNSD_MAX_REC_SERV)
 		return 0;
 
-	*nodes_counter=counter;
+	*nodes_counter = counter;
 	return snp;
 }
 
@@ -578,26 +598,27 @@ snsd_prio *snsd_unpack_prio(char *pack, size_t pack_sz, size_t *unpacked_sz,
  *
  * On error -1 is returned.
  */
-int snsd_pack_all_prios(char *pack, size_t pack_sz, snsd_prio *head)
+int
+snsd_pack_all_prios(char *pack, size_t pack_sz, snsd_prio * head)
 {
 	struct snsd_prio_llist_hdr *hdr;
-	snsd_prio *snp=head;
-	int sz=0, wsz=0, counter=0;
+	snsd_prio *snp = head;
+	int sz = 0, wsz = 0, counter = 0;
 
-	hdr=(struct snsd_prio_llist_hdr *)pack;
-	pack+=sizeof(struct snsd_prio_llist_hdr);
-	wsz+=sizeof(struct snsd_prio_llist_hdr);
-	
+	hdr = (struct snsd_prio_llist_hdr *) pack;
+	pack += sizeof(struct snsd_prio_llist_hdr);
+	wsz += sizeof(struct snsd_prio_llist_hdr);
+
 	list_for(snp) {
-		sz=snsd_pack_prio(pack, pack_sz-wsz, snp);
-		if(sz <= 0)
+		sz = snsd_pack_prio(pack, pack_sz - wsz, snp);
+		if (sz <= 0)
 			return -1;
-		wsz+=sz;
-		pack+=sz;
+		wsz += sz;
+		pack += sz;
 		counter++;
 	}
-	
-	hdr->count=htons(counter);
+
+	hdr->count = htons(counter);
 	return wsz;
 }
 
@@ -613,48 +634,49 @@ int snsd_pack_all_prios(char *pack, size_t pack_sz, snsd_prio *head)
  *
  * On error 0 is returned.
  */
-snsd_prio *snsd_unpack_all_prios(char *pack, size_t pack_sz, 
-				 size_t *unpacked_sz, u_short *nodes_counter)
+snsd_prio *
+snsd_unpack_all_prios(char *pack, size_t pack_sz,
+					  size_t * unpacked_sz, u_short * nodes_counter)
 {
-	snsd_prio *snp_head=0, *snp;
-	char *buf=pack;
-	u_short counter=0, ncounter=0, tmp_counter=0;
-	int i, sz=0, tmp_sz, usz=0;
+	snsd_prio *snp_head = 0, *snp;
+	char *buf = pack;
+	u_short counter = 0, ncounter = 0, tmp_counter = 0;
+	int i, sz = 0, tmp_sz, usz = 0;
 
-	*nodes_counter=ncounter;
+	*nodes_counter = ncounter;
 
-	if((sz+=sizeof(struct snsd_prio_llist_hdr)) > pack_sz)
+	if ((sz += sizeof(struct snsd_prio_llist_hdr)) > pack_sz)
 		ERROR_FINISH(snp_head, 0, finish);
 
-	counter=ntohs((*(short *)buf));
-	buf+=sizeof(short);
-	usz+=sizeof(short);
-	(*unpacked_sz)+=sizeof(short);
+	counter = ntohs((*(short *) buf));
+	buf += sizeof(short);
+	usz += sizeof(short);
+	(*unpacked_sz) += sizeof(short);
 
-	if(counter > SNSD_MAX_REC_SERV || counter <= 0)
+	if (counter > SNSD_MAX_REC_SERV || counter <= 0)
 		ERROR_FINISH(snp_head, 0, finish);
-	
-	for(i=0; i<counter; i++) {
-		if((sz+=SNSD_PRIO_PACK_SZ) > pack_sz)
+
+	for (i = 0; i < counter; i++) {
+		if ((sz += SNSD_PRIO_PACK_SZ) > pack_sz)
 			ERROR_FINISH(snp_head, 0, finish);
 
-		tmp_sz=(*unpacked_sz);
-		snp=snsd_unpack_prio(buf, pack_sz-usz, unpacked_sz, 
-				     &tmp_counter);
-		ncounter+=tmp_counter;
-		if(!snp || ncounter > SNSD_MAX_REC_SERV)
+		tmp_sz = (*unpacked_sz);
+		snp = snsd_unpack_prio(buf, pack_sz - usz, unpacked_sz,
+							   &tmp_counter);
+		ncounter += tmp_counter;
+		if (!snp || ncounter > SNSD_MAX_REC_SERV)
 			ERROR_FINISH(snp_head, 0, finish);
 
 		/* tmp_sz=how much we've read so far from `buf' */
-		tmp_sz=(*unpacked_sz)-tmp_sz;	
-		buf+=tmp_sz;
-		usz+=tmp_sz;
+		tmp_sz = (*unpacked_sz) - tmp_sz;
+		buf += tmp_sz;
+		usz += tmp_sz;
 
 		clist_add(&snp_head, &tmp_counter, snp);
 	}
 
-finish:
-	*nodes_counter=ncounter;
+  finish:
+	*nodes_counter = ncounter;
 	return snp_head;
 }
 
@@ -667,27 +689,28 @@ finish:
  *
  * On error -1 is returned, otherwise the size of the package is returned.
  */
-int snsd_pack_service(char *pack, size_t free_sz, snsd_service *service)
+int
+snsd_pack_service(char *pack, size_t free_sz, snsd_service * service)
 {
-	char *buf=pack;
-	int wsz=0, sz=0;
+	char *buf = pack;
+	int wsz = 0, sz = 0;
 
-	if(!service || free_sz < SNSD_SERVICE_PACK_SZ)
+	if (!service || free_sz < SNSD_SERVICE_PACK_SZ)
 		return -1;
-	
-	(*(u_short *)(buf))=htons(service->service);
-	buf+=sizeof(short);
-	
-	(*(u_char *)(buf))=service->proto;
-	buf+=sizeof(u_char);
-	
-	wsz+=SNSD_SERVICE_PACK_SZ;
-	
-	sz=snsd_pack_all_prios(buf, free_sz-wsz, service->prio);
-	if(sz <= 0)
+
+	(*(u_short *) (buf)) = htons(service->service);
+	buf += sizeof(short);
+
+	(*(u_char *) (buf)) = service->proto;
+	buf += sizeof(u_char);
+
+	wsz += SNSD_SERVICE_PACK_SZ;
+
+	sz = snsd_pack_all_prios(buf, free_sz - wsz, service->prio);
+	if (sz <= 0)
 		return -1;
-	wsz+=sz;
-	
+	wsz += sz;
+
 	return wsz;
 }
 
@@ -703,31 +726,32 @@ int snsd_pack_service(char *pack, size_t free_sz, snsd_service *service)
  * 
  * On error 0 is returned
  */
-snsd_service *snsd_unpack_service(char *pack, size_t pack_sz, 
-				  size_t *unpacked_sz, u_short *nodes_counter)
+snsd_service *
+snsd_unpack_service(char *pack, size_t pack_sz,
+					size_t * unpacked_sz, u_short * nodes_counter)
 {
 	snsd_service *sns;
-	u_short tmp_counter=0, counter=0;
+	u_short tmp_counter = 0, counter = 0;
 
-	*nodes_counter=counter;
-	sns=xzalloc(sizeof(snsd_service));
-	
-	sns->service=ntohs((*(u_short *)pack));
-	pack+=sizeof(short);
-	
-	sns->proto=(*(u_char *)pack);
-	pack+=sizeof(u_char);
-	
-	(*unpacked_sz)+=SNSD_SERVICE_PACK_SZ;
-	pack_sz-=SNSD_SERVICE_PACK_SZ;
+	*nodes_counter = counter;
+	sns = xzalloc(sizeof(snsd_service));
 
-	sns->prio=snsd_unpack_all_prios(pack, pack_sz, unpacked_sz, 
-					&tmp_counter);
-	counter+=tmp_counter;
-	if(!sns->prio || counter > SNSD_MAX_REC_SERV)
+	sns->service = ntohs((*(u_short *) pack));
+	pack += sizeof(short);
+
+	sns->proto = (*(u_char *) pack);
+	pack += sizeof(u_char);
+
+	(*unpacked_sz) += SNSD_SERVICE_PACK_SZ;
+	pack_sz -= SNSD_SERVICE_PACK_SZ;
+
+	sns->prio = snsd_unpack_all_prios(pack, pack_sz, unpacked_sz,
+									  &tmp_counter);
+	counter += tmp_counter;
+	if (!sns->prio || counter > SNSD_MAX_REC_SERV)
 		return 0;
 
-	*nodes_counter=counter;
+	*nodes_counter = counter;
 	return sns;
 }
 
@@ -743,25 +767,28 @@ snsd_service *snsd_unpack_service(char *pack, size_t pack_sz,
  *
  * On error -1 is returned.
  */
-int snsd_pack_all_services(char *pack, size_t pack_sz, snsd_service *head)
+int
+snsd_pack_all_services(char *pack, size_t pack_sz, snsd_service * head)
 {
 	struct snsd_service_llist_hdr *hdr;
-	snsd_service *sns=head;
-	int sz=0, wsz=0, counter=0;
+	snsd_service *sns = head;
+	int sz = 0, wsz = 0, counter = 0;
 
-	hdr=(struct snsd_service_llist_hdr *)pack;
-	pack+=sizeof(struct snsd_service_llist_hdr);
-	wsz+=sizeof(struct snsd_service_llist_hdr);
-	
+	hdr = (struct snsd_service_llist_hdr *) pack;
+	pack += sizeof(struct snsd_service_llist_hdr);
+	wsz += sizeof(struct snsd_service_llist_hdr);
+
 	list_for(sns) {
-		sz=snsd_pack_service(pack, pack_sz-wsz, sns);
-		if(sz <= 0)
+		sz = snsd_pack_service(pack, pack_sz - wsz, sns);
+		if (sz <= 0)
 			return -1;
-		
-		wsz+=sz; pack+=sz; counter++;
+
+		wsz += sz;
+		pack += sz;
+		counter++;
 	}
-	
-	hdr->count=htons(counter);
+
+	hdr->count = htons(counter);
 	return wsz;
 }
 
@@ -777,51 +804,52 @@ int snsd_pack_all_services(char *pack, size_t pack_sz, snsd_service *head)
  *
  * On error 0 is returned.
  */
-snsd_service *snsd_unpack_all_service(char *pack, size_t pack_sz, 
-				        size_t *unpacked_sz, u_short *nodes_counter)
+snsd_service *
+snsd_unpack_all_service(char *pack, size_t pack_sz,
+						size_t * unpacked_sz, u_short * nodes_counter)
 {
-	snsd_service *sns_head=0, *sns=0;
-	char *buf=pack;
-	u_short counter=0, ncounter=0, tmp_counter=0;
-	int i, sz=0, tmp_sz, usz=0;
-	
-	if(nodes_counter)
-		*nodes_counter=ncounter;
-	
-	if((sz+=sizeof(struct snsd_service_llist_hdr)) > pack_sz)
+	snsd_service *sns_head = 0, *sns = 0;
+	char *buf = pack;
+	u_short counter = 0, ncounter = 0, tmp_counter = 0;
+	int i, sz = 0, tmp_sz, usz = 0;
+
+	if (nodes_counter)
+		*nodes_counter = ncounter;
+
+	if ((sz += sizeof(struct snsd_service_llist_hdr)) > pack_sz)
 		ERROR_FINISH(sns_head, 0, finish);
 
-	counter=ntohs((*(short *)buf));
-	buf+=sizeof(short);
-	usz+=sizeof(short);
-	(*unpacked_sz)+=sizeof(short);
+	counter = ntohs((*(short *) buf));
+	buf += sizeof(short);
+	usz += sizeof(short);
+	(*unpacked_sz) += sizeof(short);
 
 
-	if(counter > SNSD_MAX_RECORDS || counter <= 0)
+	if (counter > SNSD_MAX_RECORDS || counter <= 0)
 		ERROR_FINISH(sns_head, 0, finish);
-	
-	for(i=0; i<counter; i++) {
-		if((sz+=SNSD_SERVICE_PACK_SZ) > pack_sz)
+
+	for (i = 0; i < counter; i++) {
+		if ((sz += SNSD_SERVICE_PACK_SZ) > pack_sz)
 			ERROR_FINISH(sns_head, 0, finish);
 
-		tmp_sz=(*unpacked_sz);
-		sns=snsd_unpack_service(buf, pack_sz-usz, unpacked_sz, 
-					&tmp_counter);
-		ncounter+=tmp_counter;
-		if(!sns || ncounter > SNSD_MAX_RECORDS)
+		tmp_sz = (*unpacked_sz);
+		sns = snsd_unpack_service(buf, pack_sz - usz, unpacked_sz,
+								  &tmp_counter);
+		ncounter += tmp_counter;
+		if (!sns || ncounter > SNSD_MAX_RECORDS)
 			ERROR_FINISH(sns_head, 0, finish);
 
 		/* tmp_sz=how much we've read from `buf' */
-		tmp_sz=(*unpacked_sz)-tmp_sz;	
-		buf+=tmp_sz;
-		usz+=tmp_sz;
+		tmp_sz = (*unpacked_sz) - tmp_sz;
+		buf += tmp_sz;
+		usz += tmp_sz;
 
 		clist_add(&sns_head, &tmp_counter, sns);
 	}
 
-finish:
-	if(nodes_counter)
-		*nodes_counter=ncounter;
+  finish:
+	if (nodes_counter)
+		*nodes_counter = ncounter;
 	return sns_head;
 }
 
@@ -831,26 +859,29 @@ finish:
  *   
 \*/
 
-int snsd_count_nodes(snsd_node *head)
+int
+snsd_count_nodes(snsd_node * head)
 {
 	return list_count(head);
 }
 
-int snsd_count_prio_nodes(snsd_prio *head)
+int
+snsd_count_prio_nodes(snsd_prio * head)
 {
-	int count=0;
-	
+	int count = 0;
+
 	list_for(head)
-		count+=snsd_count_nodes(head->node);
+		count += snsd_count_nodes(head->node);
 	return count;
 }
 
-int snsd_count_service_nodes(snsd_service *head)
+int
+snsd_count_service_nodes(snsd_service * head)
 {
-	int count=0;
-	
+	int count = 0;
+
 	list_for(head)
-		count+=snsd_count_prio_nodes(head->prio);
+		count += snsd_count_prio_nodes(head->prio);
 	return count;
 }
 
@@ -862,27 +893,29 @@ int snsd_count_service_nodes(snsd_service *head)
  * picked.
  * On error (no nodes?) 0 is returned.
  */
-snsd_node *snsd_choose_wrand(snsd_node *head)
+snsd_node *
+snsd_choose_wrand(snsd_node * head)
 {
-	snsd_node *snd=head;
-	int tot_w=0, r=0, nmemb=0;
+	snsd_node *snd = head;
+	int tot_w = 0, r = 0, nmemb = 0;
 
-	nmemb=list_count(snd);
+	nmemb = list_count(snd);
 	list_for(snd)
-		tot_w+=snd->weight;
+		tot_w += snd->weight;
 
-	if(!tot_w)
-		return list_pos(snd, rand_range(0, nmemb-1));
-		
-	r=rand_range(1, tot_w);
+	if (!tot_w)
+		return list_pos(snd, rand_range(0, nmemb - 1));
 
-	tot_w=0; snd=head;
+	r = rand_range(1, tot_w);
+
+	tot_w = 0;
+	snd = head;
 	list_for(snd) {
-		if(r > tot_w && (r <= tot_w+snd->weight))
+		if (r > tot_w && (r <= tot_w + snd->weight))
 			return snd;
-		tot_w+=snd->weight;
+		tot_w += snd->weight;
 	}
-	
+
 	return 0;
 }
 
@@ -891,13 +924,14 @@ snsd_node *snsd_choose_wrand(snsd_node *head)
  *
  * It returns the snsd_prio struct which has the highest `prio' value.
  */
-snsd_prio *snsd_highest_prio(snsd_prio *head)
+snsd_prio *
+snsd_highest_prio(snsd_prio * head)
 {
-	snsd_prio *highest=head;
+	snsd_prio *highest = head;
 
 	list_for(head)
-		if(head->prio > highest->prio)
-			highest=head;
+		if (head->prio > highest->prio)
+		highest = head;
 
 	return highest;
 }
@@ -910,18 +944,19 @@ snsd_prio *snsd_highest_prio(snsd_prio *head)
  * 
  * If it is found, it returns a pointer to it, otherwise 0 it returned.
  */
-snsd_node *snsd_find_mainip(snsd_service *sns)
+snsd_node *
+snsd_find_mainip(snsd_service * sns)
 {
 	snsd_prio *snp;
 	snsd_node *snd;
-	
+
 	list_for(sns) {
-		snp=sns->prio;
+		snp = sns->prio;
 		list_for(snp) {
-			snd=snp->node;
+			snd = snp->node;
 			list_for(snd)
-				if(snd->flags & SNSD_NODE_MAIN_IP)
-					return snd;
+				if (snd->flags & SNSD_NODE_MAIN_IP)
+				return snd;
 		}
 	}
 
@@ -933,17 +968,18 @@ snsd_node *snsd_find_mainip(snsd_service *sns)
  *
  * It unset the given `flag' in all the snsd records of the `sns' llist.
  */
-void snsd_unset_all_flags(snsd_service *sns, u_char flag)
+void
+snsd_unset_all_flags(snsd_service * sns, u_char flag)
 {
 	snsd_prio *snp;
 	snsd_node *snd;
-	
+
 	list_for(sns) {
-		snp=sns->prio;
+		snp = sns->prio;
 		list_for(snp) {
-			snd=snp->node;
+			snd = snp->node;
 			list_for(snd)
-				snd->flags&=~flag;
+				snd->flags &= ~flag;
 		}
 	}
 
@@ -965,14 +1001,15 @@ void snsd_unset_all_flags(snsd_service *sns, u_char flag)
  * The other sub-llist are duplicated too.
  * The head of the new llist is returned.
  */
-snsd_node *snsd_node_llist_copy(snsd_node *snd)
+snsd_node *
+snsd_node_llist_copy(snsd_node * snd)
 {
-	snsd_node *new_snd=0;
+	snsd_node *new_snd = 0;
 
-	snd=new_snd=list_copy_all(snd);
+	snd = new_snd = list_copy_all(snd);
 	list_for(snd)
-		if(snd->pubkey)
-			snd->pubkey=RSAPublicKey_dup(snd->pubkey);
+		if (snd->pubkey)
+		snd->pubkey = RSAPublicKey_dup(snd->pubkey);
 
 	return new_snd;
 }
@@ -984,20 +1021,22 @@ snsd_node *snsd_node_llist_copy(snsd_node *snd)
  * The other sub-llist are duplicated too.
  * The head of the new llist is returned.
  */
-snsd_prio *snsd_prio_llist_copy(snsd_prio *snp)
+snsd_prio *
+snsd_prio_llist_copy(snsd_prio * snp)
 {
-	snsd_prio *new_snp=0;
-	
-	snp=new_snp=list_copy_all(snp);
+	snsd_prio *new_snp = 0;
+
+	snp = new_snp = list_copy_all(snp);
 	list_for(snp)
-		snp->node=snsd_node_llist_copy(snp->node);
-	
+		snp->node = snsd_node_llist_copy(snp->node);
+
 	return new_snp;
 }
 
-int is_equal_to_serv_proto(snsd_service *sns, u_short service, u_char proto)
+int
+is_equal_to_serv_proto(snsd_service * sns, u_short service, u_char proto)
 {
-	return sns->service == service && 
+	return sns->service == service &&
 		(sns->proto == proto || sns->service == SNSD_DEFAULT_SERVICE);
 }
 
@@ -1013,22 +1052,22 @@ int is_equal_to_serv_proto(snsd_service *sns, u_short service, u_char proto)
  * The head of the new llist is returned.
  * If nothing has been duplicated, 0 is returned.
  */
-snsd_service *snsd_service_llist_copy(snsd_service *sns, int service, 
-					u_char proto)
+snsd_service *
+snsd_service_llist_copy(snsd_service * sns, int service, u_char proto)
 {
-	snsd_service *new_sns=0;
-	u_short	short_service=(u_short)service;
-	
-	if(!sns)
+	snsd_service *new_sns = 0;
+	u_short short_service = (u_short) service;
+
+	if (!sns)
 		return 0;
-	
-	if(service == -1)
-		sns=new_sns=list_copy_all(sns);
+
+	if (service == -1)
+		sns = new_sns = list_copy_all(sns);
 	else
-		sns=new_sns=list_copy_some(sns, is_equal_to_serv_proto, 
-					   short_service, proto);
+		sns = new_sns = list_copy_some(sns, is_equal_to_serv_proto,
+									   short_service, proto);
 	list_for(sns)
-		sns->prio=snsd_prio_llist_copy(sns->prio);
+		sns->prio = snsd_prio_llist_copy(sns->prio);
 
 	return new_sns;
 }
@@ -1042,11 +1081,12 @@ snsd_service *snsd_service_llist_copy(snsd_service *sns, int service,
  * read snsd_service_llist_merge()
 \*/
 
-void snsd_merge_node(snsd_node **head, u_short *snsd_counter, snsd_node *new)
+void
+snsd_merge_node(snsd_node ** head, u_short * snsd_counter, snsd_node * new)
 {
 	snsd_node *snd;
 
-	if(!(snd=snsd_find_node_by_record(*head, new->record))) {
+	if (!(snd = snsd_find_node_by_record(*head, new->record))) {
 		clist_add(head, snsd_counter, new);
 		return;
 	}
@@ -1054,38 +1094,44 @@ void snsd_merge_node(snsd_node **head, u_short *snsd_counter, snsd_node *new)
 	list_copy(snd, new);
 }
 
-void snsd_node_llist_merge(snsd_node **dst, u_short *snsd_counter, snsd_node *src)
+void
+snsd_node_llist_merge(snsd_node ** dst, u_short * snsd_counter,
+					  snsd_node * src)
 {
 	list_for(src)
 		snsd_merge_node(dst, snsd_counter, src);
 }
 
-void snsd_merge_prio(snsd_prio **head, u_short *snsd_counter, snsd_prio *new)
+void
+snsd_merge_prio(snsd_prio ** head, u_short * snsd_counter, snsd_prio * new)
 {
 	snsd_prio *snp;
 
-	if(!(snp=snsd_find_prio(*head, new->prio))) {
-		*head=list_add(*head, new);
+	if (!(snp = snsd_find_prio(*head, new->prio))) {
+		*head = list_add(*head, new);
 		return;
 	}
 
 	snsd_node_llist_merge(&snp->node, snsd_counter, new->node);
 }
 
-void snsd_prio_llist_merge(snsd_prio **dst, u_short *snsd_counter, snsd_prio *src)
+void
+snsd_prio_llist_merge(snsd_prio ** dst, u_short * snsd_counter,
+					  snsd_prio * src)
 {
 	list_for(src)
 		snsd_merge_prio(dst, snsd_counter, src);
 }
 
-void snsd_merge_service(snsd_service **head, u_short *snsd_counter, 
-			snsd_service *new)
+void
+snsd_merge_service(snsd_service ** head, u_short * snsd_counter,
+				   snsd_service * new)
 {
 	snsd_service *sns;
 
-	if(!(sns=snsd_find_service(*head, new->service, new->proto))) {
+	if (!(sns = snsd_find_service(*head, new->service, new->proto))) {
 		/* `new' doesn't exists in `head'. Add it. */
-		*head=list_add(*head, new);
+		*head = list_add(*head, new);
 		return;
 	}
 
@@ -1103,8 +1149,9 @@ void snsd_merge_service(snsd_service **head, u_short *snsd_counter,
  * allocated, thus if you don't want to modify `*dst', you have to do a copy
  * first using snsd_service_llist_copy().
  */
-void snsd_service_llist_merge(snsd_service **dst, u_short *snsd_counter,
-			      snsd_service *src)
+void
+snsd_service_llist_merge(snsd_service ** dst, u_short * snsd_counter,
+						 snsd_service * src)
 {
 	list_for(src)
 		snsd_merge_service(dst, snsd_counter, src);
@@ -1118,51 +1165,53 @@ void snsd_service_llist_merge(snsd_service **dst, u_short *snsd_counter,
  *          (that don't stink)
 \*/
 
-void snsd_dump_node(snsd_node *snd, int single)
+void
+snsd_dump_node(snsd_node * snd, int single)
 {
 	list_for(snd) {
 		printf("\t\t{\n "
-				"\t\trecord = %x:%x:%x:%x\n "
-				"\t\tpubkey = %p\n "
-				"\t\tflags = %d\n "
-				"\t\tweight = %d\n",
-			snd->record[0], snd->record[1], 
-			snd->record[2], snd->record[3], 
-			(char *)snd->pubkey, (int)snd->flags, 
-			(int)snd->weight);
-		if(single)
+			   "\t\trecord = %x:%x:%x:%x\n "
+			   "\t\tpubkey = %p\n "
+			   "\t\tflags = %d\n "
+			   "\t\tweight = %d\n",
+			   snd->record[0], snd->record[1],
+			   snd->record[2], snd->record[3],
+			   (char *) snd->pubkey, (int) snd->flags, (int) snd->weight);
+		if (single)
 			goto finish;
 	}
-finish:
+  finish:
 	printf("\t\t}\n");
 	return;
 }
 
-void snsd_dump_prio(snsd_prio *snp, int single, int level)
+void
+snsd_dump_prio(snsd_prio * snp, int single, int level)
 {
 	list_for(snp) {
 		printf("\t{\n \tprio = %d\n", snp->prio);
 		snsd_dump_node(snp->node, !(level > 2));
 		printf("\t}\n");
-		if(single)
+		if (single)
 			goto finish;
 	}
-finish:
+  finish:
 	printf("\t}\n");
 	return;
 }
 
-void snsd_dump_service(snsd_service *sns, int single, int level)
+void
+snsd_dump_service(snsd_service * sns, int single, int level)
 {
 	list_for(sns) {
 		printf("{\n service = %d\n proto = %d\n",
-				sns->service, sns->proto);
+			   sns->service, sns->proto);
 		snsd_dump_prio(sns->prio, !(level > 1), level);
 		printf("}\n");
-		if(single)
+		if (single)
 			goto finish;
 	}
-finish:
+  finish:
 	printf("}\n");
 	return;
 }

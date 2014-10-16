@@ -1,4 +1,4 @@
-                 /**************************************
+				 /**************************************
                 *     AUTHOR: Federico Tomassini        *
                *     Copyright (C) Federico Tomassini    *
               *     Contact effetom@gmail.com             *
@@ -68,13 +68,13 @@
 #define ERR_TOTAL_ERRS	(-(ERR_ZLIBNU))
 #define ERR_OVERFLOW    "Error number does not exist."
 
-        /* END OF DEFS */
+		/* END OF DEFS */
 
 
  /*
   * Core
   */
-const char *err_func,*err_file;
+const char *err_func, *err_file;
 #define ERR_NERR                (ERR_TOTAL_ERRS)
 #define err_seterrno(n)         errno=(n);err_func=__func__;	\
                                 err_file=__FILE__
@@ -92,4 +92,4 @@ const char *err_func,*err_file;
 
 const char *__err_strerror(int n);
 
-#endif /* ERR_ERRNO_H */
+#endif							/* ERR_ERRNO_H */

@@ -28,22 +28,21 @@
 
 extern int errno;
 
-static struct
-{       
-        int ifindex;
-        int family;
-        int oneline;
-        int showqueue;
-        inet_prefix pfx;
-        int scope, scopemask;
-        int flags, flagmask;
-        int up;
-        char *label;
-        int flushed;
-        char *flushb;
-        int flushp;
-        int flushe; 
-        struct rtnl_handle *rth;
+static struct {
+	int ifindex;
+	int family;
+	int oneline;
+	int showqueue;
+	inet_prefix pfx;
+	int scope, scopemask;
+	int flags, flagmask;
+	int up;
+	char *label;
+	int flushed;
+	char *flushb;
+	int flushp;
+	int flushe;
+	struct rtnl_handle *rth;
 } filter;
 
 /*
@@ -51,26 +50,28 @@ static struct
  * device which has the index equal to `dev_idx'.
  * `ifs' is the array which keeps the interface list and has `ifs_n' elements.
  */
-interface *ifs_find_idx(interface *ifs, int ifs_n, int dev_idx)
+interface *
+ifs_find_idx(interface * ifs, int ifs_n, int dev_idx)
 {
 	int i;
 
-	for(i=0; i<ifs_n; i++)
-		if(ifs[i].dev_idx == dev_idx)
+	for (i = 0; i < ifs_n; i++)
+		if (ifs[i].dev_idx == dev_idx)
 			return &ifs[i];
 
 	return 0;
 }
 
-int ifs_find_devname(interface *ifs, int ifs_n, char *dev_name)
+int
+ifs_find_devname(interface * ifs, int ifs_n, char *dev_name)
 {
 	int i;
 
-	if(!dev_name)
+	if (!dev_name)
 		return -1;
 
-	for(i=0; i<ifs_n; i++)
-		if(ifs[i].dev_name && 
+	for (i = 0; i < ifs_n; i++)
+		if (ifs[i].dev_name &&
 			!strncmp(ifs[i].dev_name, dev_name, IFNAMSIZ))
 			return i;
 
@@ -81,13 +82,14 @@ int ifs_find_devname(interface *ifs, int ifs_n, char *dev_name)
  * ifs_del: removes from the `ifs' array the device which is at the
  * `if_pos'th position. `*ifs_n' is then decremented.
  */
-void ifs_del(interface *ifs, int *ifs_n, int if_pos)
+void
+ifs_del(interface * ifs, int *ifs_n, int if_pos)
 {
-	if(if_pos == (*ifs_n)-1)
+	if (if_pos == (*ifs_n) - 1)
 		setzero(&ifs[if_pos], sizeof(interface));
 	else {
-		memcpy(&ifs[if_pos], &ifs[(*ifs_n)-1], sizeof(interface));
-		setzero(&ifs[(*ifs_n)-1], sizeof(interface));
+		memcpy(&ifs[if_pos], &ifs[(*ifs_n) - 1], sizeof(interface));
+		setzero(&ifs[(*ifs_n) - 1], sizeof(interface));
 	}
 
 	(*ifs_n)--;
@@ -97,12 +99,13 @@ void ifs_del(interface *ifs, int *ifs_n, int if_pos)
  * ifs_del_byname: deletes from the `ifs' array the device whose name is equal
  * to `dev_name'
  */
-void ifs_del_byname(interface *ifs, int *ifs_n, char *dev_name)
+void
+ifs_del_byname(interface * ifs, int *ifs_n, char *dev_name)
 {
 	int if_pos;
 
-	if_pos=ifs_find_devname(ifs, *ifs_n, dev_name);
-	if(if_pos < 0)
+	if_pos = ifs_find_devname(ifs, *ifs_n, dev_name);
+	if (if_pos < 0)
 		return;
 
 	ifs_del(ifs, ifs_n, if_pos);
@@ -113,20 +116,21 @@ void ifs_del_byname(interface *ifs, int *ifs_n, char *dev_name)
  * device name that begins with `dev_name'. For example, 
  * ifs_del_all_name(ifs, ifs_n, "tun") deletes all the tunnel iifs
  */
-void ifs_del_all_name(interface *ifs, int *ifs_n, char *dev_name)
+void
+ifs_del_all_name(interface * ifs, int *ifs_n, char *dev_name)
 {
 	int i, dev_len;
 
-	if(!dev_name || (dev_len=strlen(dev_name)) > IFNAMSIZ)
+	if (!dev_name || (dev_len = strlen(dev_name)) > IFNAMSIZ)
 		return;
-	
-	for(i=0; i<(*ifs_n); i++) {
-		if(ifs[i].dev_name && 
+
+	for (i = 0; i < (*ifs_n); i++) {
+		if (ifs[i].dev_name &&
 			!strncmp(ifs[i].dev_name, dev_name, dev_len)) {
 
-				ifs_del(ifs, ifs_n, i);
-				if(i <= (*ifs_n)-1)
-					i--;
+			ifs_del(ifs, ifs_n, i);
+			if (i <= (*ifs_n) - 1)
+				i--;
 		}
 	}
 }
@@ -137,12 +141,13 @@ void ifs_del_all_name(interface *ifs, int *ifs_n, char *dev_name)
  * `dev'->dev_idx. The `ifs' array has `ifs_n' members.
  * If it is not found -1 is returned.
  */
-int ifs_get_pos(interface *ifs, int ifs_n, interface *dev)
+int
+ifs_get_pos(interface * ifs, int ifs_n, interface * dev)
 {
 	int i;
 
-	for(i=0; i<ifs_n; i++)
-		if(ifs[i].dev_idx == dev->dev_idx)
+	for (i = 0; i < ifs_n; i++)
+		if (ifs[i].dev_idx == dev->dev_idx)
 			return i;
 
 	return -1;
@@ -152,17 +157,18 @@ int ifs_get_pos(interface *ifs, int ifs_n, interface *dev)
  * get_dev: It returs the first dev it finds up and sets `*dev_ids' to the
  * device's index. On error NULL is returned.
  */
-const char *get_dev(int *dev_idx) 
+const char *
+get_dev(int *dev_idx)
 {
 	int idx;
 
-	if((idx=ll_first_up_if()) == -1) {
+	if ((idx = ll_first_up_if()) == -1) {
 		error("Couldn't find \"up\" devices. Set one dev \"up\", or "
-				"specify the device name in the options.");
+			  "specify the device name in the options.");
 		return 0;
 	}
-	if(dev_idx)
-		*dev_idx=idx;
+	if (dev_idx)
+		*dev_idx = idx;
 	return ll_index_to_name(idx);
 }
 
@@ -171,48 +177,52 @@ const char *get_dev(int *dev_idx)
  * finds up. The `ifs' array has `ifs_n'# members.
  * It returns the number of filled interfaces.
  */
-int get_all_up_ifs(interface *ifs, int ifs_n)
+int
+get_all_up_ifs(interface * ifs, int ifs_n)
 {
 	int i, idx, n;
 
-	for(i=0, n=0; i<ifs_n; i++) {
-		idx=ll_nth_up_if(n+1);
-		if(idx <= 0)
+	for (i = 0, n = 0; i < ifs_n; i++) {
+		idx = ll_nth_up_if(n + 1);
+		if (idx <= 0)
 			continue;
-		
-		ifs[n].dev_idx=idx;
-	        strncpy(ifs[n].dev_name, ll_index_to_name(idx), IFNAMSIZ);
+
+		ifs[n].dev_idx = idx;
+		strncpy(ifs[n].dev_name, ll_index_to_name(idx), IFNAMSIZ);
 		loginfo("Network interface \"%s\" detected", ifs[n].dev_name);
 		n++;
 
-		if((idx-1) > i)
-			i=idx-1;
+		if ((idx - 1) > i)
+			i = idx - 1;
 	}
-	
+
 	return n;
 }
 
-int set_flags(char *dev, u_int flags, u_int mask)
+int
+set_flags(char *dev, u_int flags, u_int mask)
 {
 	struct ifreq ifr;
 	int s;
 
 	strcpy(ifr.ifr_name, dev);
-	if((s=new_socket(AF_INET)) < 0) {
+	if ((s = new_socket(AF_INET)) < 0) {
 		error("Error while setting \"%s\" flags: Cannot open socket", dev);
 		return -1;
 	}
 
-	if(ioctl(s, SIOCGIFFLAGS, &ifr)) {
-		error("Error while setting \"%s\" flags: %s", dev, strerror(errno));
+	if (ioctl(s, SIOCGIFFLAGS, &ifr)) {
+		error("Error while setting \"%s\" flags: %s", dev,
+			  strerror(errno));
 		close(s);
 		return -1;
 	}
 
 	ifr.ifr_flags &= ~mask;
-	ifr.ifr_flags |= mask&flags;
-	if(ioctl(s, SIOCSIFFLAGS, &ifr)) {
-		error("Error while setting \"%s\" flags: %s", dev, strerror(errno));
+	ifr.ifr_flags |= mask & flags;
+	if (ioctl(s, SIOCSIFFLAGS, &ifr)) {
+		error("Error while setting \"%s\" flags: %s", dev,
+			  strerror(errno));
 		close(s);
 		return -1;
 	}
@@ -220,19 +230,21 @@ int set_flags(char *dev, u_int flags, u_int mask)
 	return 0;
 }
 
-int set_dev_up(char *dev)
+int
+set_dev_up(char *dev)
 {
-	u_int mask=0, flags=0;
-	
+	u_int mask = 0, flags = 0;
+
 	mask |= IFF_UP;
 	flags |= IFF_UP;
 	return set_flags(dev, flags, mask);
 }
 
-int set_dev_down(char *dev)
+int
+set_dev_down(char *dev)
 {
-	u_int mask=0, flags=0;
-	
+	u_int mask = 0, flags = 0;
+
 	mask |= IFF_UP;
 	flags &= ~IFF_UP;
 	return set_flags(dev, flags, mask);
@@ -245,12 +257,13 @@ int set_dev_down(char *dev)
  * It returns the sum of all each return code, of set_func, therefore if it
  * returns a negative value, some `set_func' gave an error.
  */
-int set_all_ifs(interface *ifs, int ifs_n, int (*set_func)(char *dev))
+int
+set_all_ifs(interface * ifs, int ifs_n, int (*set_func) (char *dev))
 {
-	int i, ret=0;
+	int i, ret = 0;
 
-	for(i=0; i<ifs_n; i++)
-		ret+=set_func(ifs[i].dev_name);
+	for (i = 0; i < ifs_n; i++)
+		ret += set_func(ifs[i].dev_name);
 
 	return ret;
 }
@@ -264,47 +277,48 @@ int set_all_ifs(interface *ifs, int ifs_n, int (*set_func)(char *dev))
  * stores all the initialized interfaces, updating the `new_ifs_n' counter.
  * On error -1 is returned.
  */
-int if_init_all(char *ifs_name[MAX_INTERFACES], int ifs_n, 
-		interface *new_ifs, int *new_ifs_n)
+int
+if_init_all(char *ifs_name[MAX_INTERFACES], int ifs_n,
+			interface * new_ifs, int *new_ifs_n)
 {
 	struct rtnl_handle rth;
-	int ret=0, i, n;
+	int ret = 0, i, n;
 
 	if (rtnl_open(&rth, 0) < 0) {
 		error("Cannot open the rtnetlink socket to talk to the kernel's "
-				"soul");
+			  "soul");
 		return -1;
 	}
 	ll_init_map(&rth);
 
-	if(!ifs_n) {
-		ret=get_all_up_ifs(new_ifs, MAX_INTERFACES);
+	if (!ifs_n) {
+		ret = get_all_up_ifs(new_ifs, MAX_INTERFACES);
 
-		if(!ret)
+		if (!ret)
 			return -1;
 
-		*new_ifs_n=ret;
+		*new_ifs_n = ret;
 	} else {
-		for(i=0, n=0; i<ifs_n; i++) {
-			
-			new_ifs[n].dev_idx=ll_name_to_index(ifs_name[n]);
-			if(!new_ifs[n].dev_idx) {
+		for (i = 0, n = 0; i < ifs_n; i++) {
+
+			new_ifs[n].dev_idx = ll_name_to_index(ifs_name[n]);
+			if (!new_ifs[n].dev_idx) {
 				error("Cannot initialize the %s interface. "
-						"Ignoring it", ifs_name[n]);
+					  "Ignoring it", ifs_name[n]);
 				continue;
 			}
 
 			strncpy(new_ifs[n].dev_name, ifs_name[n], IFNAMSIZ);
 			n++;
 		}
-		
-		if(!n)
+
+		if (!n)
 			return -1;
-			
-		*new_ifs_n=n;
+
+		*new_ifs_n = n;
 	}
 
-	if(set_all_ifs(new_ifs, *new_ifs_n, set_dev_up) < 0)
+	if (set_all_ifs(new_ifs, *new_ifs_n, set_dev_up) < 0)
 		return -1;
 
 	rtnl_close(&rth);
@@ -312,7 +326,8 @@ int if_init_all(char *ifs_name[MAX_INTERFACES], int ifs_n,
 	return ret;
 }
 
-void if_close_all(void)
+void
+if_close_all(void)
 {
 #if 0
 	/* XXX: disabled for now, it is buggy */
@@ -324,43 +339,48 @@ void if_close_all(void)
  * set_dev_ip: Assign the given `ip' to the interface named `dev'
  * On success 0 is returned, -1 otherwise.
  */
-int set_dev_ip(inet_prefix ip, char *dev)
+int
+set_dev_ip(inet_prefix ip, char *dev)
 {
-	int s=-1;
+	int s = -1;
 
-	if(ip.family == AF_INET) {
+	if (ip.family == AF_INET) {
 		struct ifreq req;
 
-		if((s=new_socket(AF_INET)) < 0) {
-			error("Error while setting \"%s\" ip: Cannot open socket", dev);
+		if ((s = new_socket(AF_INET)) < 0) {
+			error("Error while setting \"%s\" ip: Cannot open socket",
+				  dev);
 			return -1;
 		}
 
 		strncpy(req.ifr_name, dev, IFNAMSIZ);
 		inet_to_sockaddr(&ip, 0, &req.ifr_addr, 0);
 
-		if(ioctl(s, SIOCSIFADDR, &req)) {
-			error("Error while setting \"%s\" ip: %s", dev, strerror(errno));
+		if (ioctl(s, SIOCSIFADDR, &req)) {
+			error("Error while setting \"%s\" ip: %s", dev,
+				  strerror(errno));
 			close(s);
 			return -1;
 		}
-	} else if(ip.family == AF_INET6) {
+	} else if (ip.family == AF_INET6) {
 		struct in6_ifreq req6;
 		struct sockaddr_in6 sin6;
-		struct sockaddr *sa=(struct sockaddr *)&sin6;
+		struct sockaddr *sa = (struct sockaddr *) &sin6;
 
-		if((s=new_socket(AF_INET6)) < 0) {
-			error("Error while setting \"%s\" ip: Cannot open socket", dev);
+		if ((s = new_socket(AF_INET6)) < 0) {
+			error("Error while setting \"%s\" ip: Cannot open socket",
+				  dev);
 			return -1;
 		}
-		
-		req6.ifr6_ifindex=ll_name_to_index(dev);
-		req6.ifr6_prefixlen=0;
+
+		req6.ifr6_ifindex = ll_name_to_index(dev);
+		req6.ifr6_prefixlen = 0;
 		inet_to_sockaddr(&ip, 0, sa, 0);
 		memcpy(&req6.ifr6_addr, sin6.sin6_addr.s6_addr32, ip.len);
 
-		if(ioctl(s, SIOCSIFADDR, &req6)) {
-			error("Error while setting \"%s\" ip: %s", dev, strerror(errno));
+		if (ioctl(s, SIOCSIFADDR, &req6)) {
+			error("Error while setting \"%s\" ip: %s", dev,
+				  strerror(errno));
 			close(s);
 			return -1;
 		}
@@ -376,12 +396,13 @@ int set_dev_ip(inet_prefix ip, char *dev)
  * present in the `ifs' array.
  * On error -1 is returned.
  */
-int set_all_dev_ip(inet_prefix ip, interface *ifs, int ifs_n)
+int
+set_all_dev_ip(inet_prefix ip, interface * ifs, int ifs_n)
 {
-	int i, ret=0;
-	
-	for(i=0; i<ifs_n; i++)
-		ret+=set_dev_ip(ip, ifs[i].dev_name);
+	int i, ret = 0;
+
+	for (i = 0; i < ifs_n; i++)
+		ret += set_dev_ip(ip, ifs[i].dev_name);
 
 	return ret;
 }
@@ -391,46 +412,47 @@ int set_all_dev_ip(inet_prefix ip, interface *ifs, int ifs_n)
  * and stores it to `ip'.
  * On success 0 is returned, -1 otherwise.
  */
-int get_dev_ip(inet_prefix *ip, int family, char *dev)
+int
+get_dev_ip(inet_prefix * ip, int family, char *dev)
 {
-	int s=-1;
-	int ret=0;
+	int s = -1;
+	int ret = 0;
 
 	setzero(ip, sizeof(inet_prefix));
 
-	if((s=new_socket(family)) < 0) {
+	if ((s = new_socket(family)) < 0) {
 		error("Error while setting \"%s\" ip: Cannot open socket", dev);
 		return -1;
 	}
 
-	if(family == AF_INET) {
+	if (family == AF_INET) {
 		struct ifreq req;
 
 		strncpy(req.ifr_name, dev, IFNAMSIZ);
 		req.ifr_addr.sa_family = family;
-		
-		if(ioctl(s, SIOCGIFADDR, &req))
+
+		if (ioctl(s, SIOCGIFADDR, &req))
 			ERROR_FINISH(ret, -1, finish);
 
 		sockaddr_to_inet(&req.ifr_addr, ip, 0);
-	} else if(family == AF_INET6) {
+	} else if (family == AF_INET6) {
 		struct in6_ifreq req6;
 
 		/*
 		 * XXX: NOT TESTED
 		 */
 
-		req6.ifr6_ifindex=ll_name_to_index(dev);
-		req6.ifr6_prefixlen=0;
+		req6.ifr6_ifindex = ll_name_to_index(dev);
+		req6.ifr6_prefixlen = 0;
 
-		if(ioctl(s, SIOCGIFADDR, &req6))
+		if (ioctl(s, SIOCGIFADDR, &req6))
 			ERROR_FINISH(ret, -1, finish);
 
-		inet_setip(ip, (u_int *)&req6.ifr6_addr, family);
+		inet_setip(ip, (u_int *) & req6.ifr6_addr, family);
 	}
 
-finish:
-	if(s != -1)
+  finish:
+	if (s != -1)
 		close(s);
 	return ret;
 }
@@ -442,22 +464,24 @@ finish:
  *
  * Modified lightly
  */
-static int flush_update(void)
-{                       
-        if (rtnl_send(filter.rth, filter.flushb, filter.flushp) < 0) {
-                error("Failed to send flush request: %s", strerror(errno));
-                return -1;
-        }               
-        filter.flushp = 0;
-        return 0;
+static int
+flush_update(void)
+{
+	if (rtnl_send(filter.rth, filter.flushb, filter.flushp) < 0) {
+		error("Failed to send flush request: %s", strerror(errno));
+		return -1;
+	}
+	filter.flushp = 0;
+	return 0;
 }
 
-int print_addrinfo(const struct sockaddr_nl *who, struct nlmsghdr *n, 
-		   void *arg)
+int
+print_addrinfo(const struct sockaddr_nl *who, struct nlmsghdr *n,
+			   void *arg)
 {
 	struct ifaddrmsg *ifa = NLMSG_DATA(n);
 	int len = n->nlmsg_len;
-	struct rtattr * rta_tb[IFA_MAX+1];
+	struct rtattr *rta_tb[IFA_MAX + 1];
 	char b1[64];
 
 	if (n->nlmsg_type != RTM_NEWADDR && n->nlmsg_type != RTM_DELADDR)
@@ -471,7 +495,8 @@ int print_addrinfo(const struct sockaddr_nl *who, struct nlmsghdr *n,
 	if (filter.flushb && n->nlmsg_type != RTM_NEWADDR)
 		return 0;
 
-	parse_rtattr(rta_tb, IFA_MAX, IFA_RTA(ifa), n->nlmsg_len - NLMSG_LENGTH(sizeof(*ifa)));
+	parse_rtattr(rta_tb, IFA_MAX, IFA_RTA(ifa),
+				 n->nlmsg_len - NLMSG_LENGTH(sizeof(*ifa)));
 
 	if (!rta_tb[IFA_LOCAL])
 		rta_tb[IFA_LOCAL] = rta_tb[IFA_ADDRESS];
@@ -480,9 +505,9 @@ int print_addrinfo(const struct sockaddr_nl *who, struct nlmsghdr *n,
 
 	if (filter.ifindex && filter.ifindex != ifa->ifa_index)
 		return 0;
-	if ((filter.scope^ifa->ifa_scope)&filter.scopemask)
+	if ((filter.scope ^ ifa->ifa_scope) & filter.scopemask)
 		return 0;
-	if ((filter.flags^ifa->ifa_flags)&filter.flagmask)
+	if ((filter.flags ^ ifa->ifa_flags) & filter.flagmask)
 		return 0;
 	if (filter.label) {
 		const char *label;
@@ -498,8 +523,8 @@ int print_addrinfo(const struct sockaddr_nl *who, struct nlmsghdr *n,
 			inet_prefix dst;
 			setzero(&dst, sizeof(dst));
 			dst.family = ifa->ifa_family;
-			memcpy(&dst.data, RTA_DATA(rta_tb[IFA_LOCAL]), 
-					RTA_PAYLOAD(rta_tb[IFA_LOCAL]));
+			memcpy(&dst.data, RTA_DATA(rta_tb[IFA_LOCAL]),
+				   RTA_PAYLOAD(rta_tb[IFA_LOCAL]));
 			if (inet_addr_match(&dst, &filter.pfx, filter.pfx.bits))
 				return 0;
 		}
@@ -511,46 +536,48 @@ int print_addrinfo(const struct sockaddr_nl *who, struct nlmsghdr *n,
 			if (flush_update())
 				return -1;
 		}
-		fn = (struct nlmsghdr*)(filter.flushb + NLMSG_ALIGN(filter.flushp));
+		fn = (struct nlmsghdr *) (filter.flushb +
+								  NLMSG_ALIGN(filter.flushp));
 		memcpy(fn, n, n->nlmsg_len);
 		fn->nlmsg_type = RTM_DELADDR;
 		fn->nlmsg_flags = NLM_F_REQUEST;
 		fn->nlmsg_seq = ++filter.rth->seq;
-		filter.flushp = (((char*)fn) + n->nlmsg_len) - filter.flushb;
+		filter.flushp = (((char *) fn) + n->nlmsg_len) - filter.flushb;
 		filter.flushed++;
 	}
 
 	return 0;
 }
 
-struct nlmsg_list
-{
-        struct nlmsg_list *next;
-        struct nlmsghdr   h;
+struct nlmsg_list {
+	struct nlmsg_list *next;
+	struct nlmsghdr h;
 };
 
-static int store_nlmsg(const struct sockaddr_nl *who, struct nlmsghdr *n,
-                       void *arg)
+static int
+store_nlmsg(const struct sockaddr_nl *who, struct nlmsghdr *n, void *arg)
 {
-        struct nlmsg_list **linfo = (struct nlmsg_list**)arg;
-        struct nlmsg_list *h;
-        struct nlmsg_list **lp;
+	struct nlmsg_list **linfo = (struct nlmsg_list **) arg;
+	struct nlmsg_list *h;
+	struct nlmsg_list **lp;
 
-        h = malloc(n->nlmsg_len+sizeof(void*));
-        if (h == NULL)
-                return -1;
+	h = malloc(n->nlmsg_len + sizeof(void *));
+	if (h == NULL)
+		return -1;
 
-        memcpy(&h->h, n, n->nlmsg_len);
-        h->next = NULL;
+	memcpy(&h->h, n, n->nlmsg_len);
+	h->next = NULL;
 
-        for (lp = linfo; *lp; lp = &(*lp)->next) /* NOTHING */;
-        *lp = h;
+	for (lp = linfo; *lp; lp = &(*lp)->next)	/* NOTHING */
+		;
+	*lp = h;
 
-        ll_remember_index((struct sockaddr_nl *)who, n, NULL);
-        return 0;
+	ll_remember_index((struct sockaddr_nl *) who, n, NULL);
+	return 0;
 }
 
-int ip_addr_flush(int family, char *dev, int scope)
+int
+ip_addr_flush(int family, char *dev, int scope)
 {
 	struct nlmsg_list *linfo = NULL;
 	struct rtnl_handle rth;
@@ -582,15 +609,15 @@ int ip_addr_flush(int family, char *dev, int scope)
 	}
 
 	int round = 0;
-	char flushb[4096-512];
+	char flushb[4096 - 512];
 
 	filter.flushb = flushb;
 	filter.flushp = 0;
 	filter.flushe = sizeof(flushb);
 	filter.rth = &rth;
-        filter.scopemask = -1;
+	filter.scopemask = -1;
 	filter.scope = scope;
-	
+
 	for (;;) {
 		if (rtnl_wilddump_request(&rth, filter.family, RTM_GETADDR) < 0) {
 			error("Cannot send dump request: %s", strerror(errno));
@@ -612,12 +639,13 @@ int ip_addr_flush(int family, char *dev, int scope)
 	rtnl_close(&rth);
 }
 
-int ip_addr_flush_all_ifs(interface *ifs, int ifs_n, int family, int scope)
+int
+ip_addr_flush_all_ifs(interface * ifs, int ifs_n, int family, int scope)
 {
-	int i, ret=0;
-	
-	for(i=0; i<ifs_n; i++)
-		ret+=ip_addr_flush(family, ifs[i].dev_name, scope);
+	int i, ret = 0;
+
+	for (i = 0; i < ifs_n; i++)
+		ret += ip_addr_flush(family, ifs[i].dev_name, scope);
 
 	return ret;
 }

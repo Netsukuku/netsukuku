@@ -41,7 +41,8 @@
 
 #ifndef USE_DMALLOC
 
-void *xmalloc(size_t size)
+void *
+xmalloc(size_t size)
 {
 	void *ptr;
 
@@ -49,7 +50,8 @@ void *xmalloc(size_t size)
 		fatal("xmalloc: zero size");
 	ptr = malloc(size);
 	if (!ptr)
-		fatal("xmalloc: out of memory (allocating %lu bytes)", (u_long) size);
+		fatal("xmalloc: out of memory (allocating %lu bytes)",
+			  (u_long) size);
 	return ptr;
 }
 
@@ -58,29 +60,32 @@ void *xmalloc(size_t size)
  *
  * Mallocs `size' bytes and sets them to zero
  */
-void *xzalloc(size_t size)
-{              
+void *
+xzalloc(size_t size)
+{
 	void *ptr;
 
-	ptr=xmalloc(size);
+	ptr = xmalloc(size);
 	memset(ptr, 0, size);
 	return ptr;
 }
 
-void *xcalloc(size_t nmemb, size_t size)
+void *
+xcalloc(size_t nmemb, size_t size)
 {
 	void *ptr;
 
 	if (!size || !nmemb)
 		fatal("xcalloc: zero size");
-	ptr=calloc(nmemb, size);
+	ptr = calloc(nmemb, size);
 	if (!ptr)
 		fatal("xcalloc: out of memory (allocating %lu bytes * %lu blocks)",
-				(u_long) size, (u_long) nmemb);
+			  (u_long) size, (u_long) nmemb);
 	return ptr;
 }
 
-void *xrealloc(void *ptr, size_t new_size)
+void *
+xrealloc(void *ptr, size_t new_size)
 {
 	void *new_ptr;
 
@@ -90,35 +95,39 @@ void *xrealloc(void *ptr, size_t new_size)
 		new_ptr = malloc(new_size);
 	else
 		new_ptr = realloc(ptr, new_size);
-	
+
 	if (!new_ptr)
-		fatal("xrealloc: out of memory (new_size %lu bytes)", (u_long) new_size);
+		fatal("xrealloc: out of memory (new_size %lu bytes)",
+			  (u_long) new_size);
 	return new_ptr;
 }
 
-void _xfree(void *ptr)
+void
+_xfree(void *ptr)
 {
 	if (!ptr)
 		fatal("xfree: NULL pointer given as argument");
 	free(ptr);
 }
 
-char *xstrndup(const char *str, size_t n)
+char *
+xstrndup(const char *str, size_t n)
 {
 	size_t len;
 	char *cp;
 
-	len=strlen(str) + 1;
-	if(len > n && n > 0)
-		len=n;
-	cp=xmalloc(len);
+	len = strlen(str) + 1;
+	if (len > n && n > 0)
+		len = n;
+	cp = xmalloc(len);
 	strncpy(cp, str, len);
 	return cp;
 }
 
-char *xstrdup(const char *str)
+char *
+xstrdup(const char *str)
 {
 	return xstrndup(str, 0);
 }
 
-#endif /*USE_DMALLOC*/
+#endif							/*USE_DMALLOC */

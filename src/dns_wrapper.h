@@ -24,21 +24,20 @@
 #define MIN_PKT_SZ		7
 
 /* DNS wrapper resolver api */
-void resolver_process(const char *question, unsigned question_length, 
-		char *answer, unsigned *answer_length,
-		int (*callback)(const char *name, uint32_t *ip));
+void resolver_process(const char *question, unsigned question_length,
+					  char *answer, unsigned *answer_length,
+					  int (*callback) (const char *name, uint32_t * ip));
 
 /*
  * dns_exec_pkt_argv is the struct passed to dns_exec_pkt() as argument 
  */
-struct dns_exec_pkt_argv 
-{
-	char		*rpkt;	/* Received dns query pkt */
-	ssize_t		rpkt_sz;
+struct dns_exec_pkt_argv {
+	char *rpkt;					/* Received dns query pkt */
+	ssize_t rpkt_sz;
 
-	int		sk;
-	struct sockaddr	from;
-	socklen_t	from_len;
+	int sk;
+	struct sockaddr from;
+	socklen_t from_len;
 };
 
 pthread_mutex_t dns_exec_lock;
@@ -47,4 +46,4 @@ pthread_mutex_t dns_exec_lock;
 
 void *dns_wrapper_thread(void *null);
 
-#endif /*DNS_WRAPPER_H*/
+#endif							/*DNS_WRAPPER_H */
