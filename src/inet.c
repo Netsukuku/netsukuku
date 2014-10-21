@@ -1062,6 +1062,7 @@ inet_send(int s, const void *msg, size_t len, int flags)
 				inet_send(s, msg, len/2, flags);
 				err=inet_send(s, (const char *)msg+(len/2),
 						len-(len/2), flags);
+                                error("\nEMSGSIZE inet_send testing.\n");
 				break;
 
 			default:
@@ -1109,15 +1110,14 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 			const struct sockaddr * to, socklen_t tolen)
 {
 	ssize_t err;
-
+        /* How are these last two arguments used when the function being called
+         * doesn't have those arguments? */
 	if ((err = sendto(s, msg, len, flags, to, tolen)) == -1) {
 		error("sendto errno: %d err is: %d", errno, err);
 		switch (errno) {
 		case EMSGSIZE:
 			error("Packet artificially fragmented: %d", stderr);
 			error("\nData Length: %u", len);
-			int bytesleft = len;
-			int sendbuf;
 			socklen_t optlen;
 			optlen = sizeof(sendbuf);
 			int res =
@@ -1125,18 +1125,10 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 
 			error("GetSockOpt: %i \n", res);
 
-			while (bytesleft != 0) {
-				if (bytesleft > 64000) {
-					inet_sendto(s, msg, 64000, flags, to, tolen);
-					bytesleft -= 64000;
-					msg += 64000;
-					//err=inet_sendto(s, ((const char *)msg+(len/2)),
-					//len-(len/2), flags, to, tolen);
-				} else {
-					err = inet_sendto(s, msg, bytesleft, flags, to, tolen);
-					bytesleft = 0;
-				}
-			}
+				inet_send(s, msg, len/2, flags);
+				err=inet_send(s, (const char *)msg+(len/2),
+						len-(len/2), flags);
+                                error("\nEMSGSIZE inet_sendto testing.\n");
 			break;
 		case EFAULT:
 			error("The value of to is: %d", to);
