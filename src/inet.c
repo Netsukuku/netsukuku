@@ -1121,7 +1121,7 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 				inet_send(s, msg, len/2, flags);
 				err=inet_send(s, (const char *)msg+(len/2),
 						len-(len/2), flags);
-                                error("\nEMSGSIZE inet_sendto testing.\n");
+                                error("\nsendto error after fragmention is: %d, err is: %d \n", errno, err);
 			break;
 		case EFAULT:
 			error("The value of to is: %d", to);
