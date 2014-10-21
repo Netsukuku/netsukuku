@@ -1118,9 +1118,9 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 		case EMSGSIZE:
 			error("Packet artificially fragmented: %d", stderr);
 			error("\nData Length: %u", len);
-				inet_send(s, msg, len/2, flags);
-				err=inet_send(s, (const char *)msg+(len/2),
-						len-(len/2), flags);
+				inet_sendto(s, msg, len/2, flags, to, tolen);
+				err=inet_sendto(s, (const char *)msg+(len/2),
+						len-(len/2), flags, to, tolen);
                                 error("\nsendto error after fragmention is: %d, err is: %d\n", errno, err);
 			break;
 		case EFAULT:
