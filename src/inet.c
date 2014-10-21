@@ -1118,13 +1118,6 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 		case EMSGSIZE:
 			error("Packet artificially fragmented: %d", stderr);
 			error("\nData Length: %u", len);
-			socklen_t optlen;
-			optlen = sizeof(sendbuf);
-			int res =
-				getsockopt(s, SOL_SOCKET, SO_SNDBUF, &sendbuf, &optlen);
-
-			error("GetSockOpt: %i \n", res);
-
 				inet_send(s, msg, len/2, flags);
 				err=inet_send(s, (const char *)msg+(len/2),
 						len-(len/2), flags);
