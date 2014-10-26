@@ -1117,11 +1117,13 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 						len-(len/2), flags, to, tolen);
 			break;
 		case EFAULT:
+                    /* Must be modified to accept IPv6 addresses
+                     * when IPv6 support is activated. */
 			error("Bad Address\n"
                                 "To Family is: %hu "
                                 "To Data is: %s", 
                                 to->sa_family, 
-                                inet_ntoa(  &(  ((struct sockaddr_in*)to)->sin_addr ) ));
+                                inet_ntoa(  (  ((struct sockaddr_in*)to)->sin_addr ) ));
 		default:
 			error("inet_sendto: Cannot send(): %s", strerror(errno));
 			return err;
