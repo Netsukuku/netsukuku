@@ -1109,6 +1109,7 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 			const struct sockaddr * to, socklen_t tolen)
 {
 	ssize_t err;
+	char * ipv4_addr;
 	if ((err = sendto(s, msg, len, flags, to, tolen)) == -1) {
 		switch (errno) {
 		case EMSGSIZE:
@@ -1117,9 +1118,6 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 						len-(len/2), flags, to, tolen);
 			break;
 		case EFAULT:
-                    
-                    char ipv4_addr;
-                    
 			error("To Family is: %hu "
                                 "To Data is: %s "
                                 "and: %s", to->sa_family, 
