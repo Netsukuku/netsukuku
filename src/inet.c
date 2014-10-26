@@ -1118,8 +1118,8 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 			break;
 		case EFAULT:
 			error("To Family is: %hu "
-                                "To Data is: %s "
-                                "and: %s", to->sa_family, to->sa_data, strerror(errno));
+                                "To Data is: %c "
+                                "and: %s", to->sa_family, to->sa_data[14], strerror(errno));
 		default:
 			error("inet_sendto: Cannot send(): %s", strerror(errno));
 			return err;
