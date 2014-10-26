@@ -1062,7 +1062,6 @@ inet_send(int s, const void *msg, size_t len, int flags)
 				inet_send(s, msg, len/2, flags);
 				err=inet_send(s, (const char *)msg+(len/2),
 						len-(len/2), flags);
-                                error("\nEMSGSIZE inet_send testing.\n");
 				break;
 
 			default:
@@ -1110,28 +1109,21 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 			const struct sockaddr * to, socklen_t tolen)
 {
 	ssize_t err;
-        /* How are these last two arguments used when the function being called
-         * doesn't have those arguments? */
 	if ((err = sendto(s, msg, len, flags, to, tolen)) == -1) {
-		error("sendto errno: %d err is: %d", errno, err);
+		error("sendto: %s err is: %d", strerror(errno), err);
 		switch (errno) {
 		case EMSGSIZE:
-			error("Packet artificially fragmented: %d", stderr);
-			error("\nData Length: %u", len);
 				inet_sendto(s, msg, len/2, flags, to, tolen);
 				err=inet_sendto(s, (const char *)msg+(len/2),
 						len-(len/2), flags, to, tolen);
-                                error("\nsendto error after fragmention is: %d, err is: %d\n", errno, err);
 			break;
 		case EFAULT:
-			error("The value of to is: %d", to);
+			error("The value of to is: %d and %s", to, strerror(errno));
 		default:
 			error("inet_sendto: Cannot send(): %s", strerror(errno));
 			return err;
 			break;
 		}
-
-	error("\nSuccessfully sent packet, errno: %d\n", errno);
 
 	}
 	return err;

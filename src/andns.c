@@ -199,12 +199,15 @@ andns_init(int restricted, char *resolv_conf, int family)
 	if (_default_realm_ == NTK_REALM) {
 		/* We are in NTK realm, every IP is assigned to Netsukuku,
 		 * therefore dns forwarding is meaningless */
+                loginfo("We are in the ntk realm %s\n", strerror(errno));
 		_dns_forwarding_ = 0;
 		return 0;
 	}
 
 	res = collect_resolv_conf(resolv_conf);
 	if (res <= 0) {
+                loginfo("Some kind of error occurred in collecting the dns nameservers"
+                        " %s\n", strerror(errno));
 		_dns_forwarding_ = 0;
 		debug(DBG_NORMAL, err_str);
 		err_ret(ERR_RSLAIE, -1);
