@@ -1117,9 +1117,16 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 						len-(len/2), flags, to, tolen);
 			break;
 		case EFAULT:
+                    
+                    char ipv4_addr;
+                    
 			error("To Family is: %hu "
-                                "To Data is: %c "
-                                "and: %s", to->sa_family, to->sa_data[14], strerror(errno));
+                                "To Data is: %s "
+                                "and: %s", to->sa_family, 
+                                inet_ntop(to->sa_family,
+                                &(((struct sockaddr_in*)to)->sin_addr),
+                                ipv4_addr, sizeof ipv4_addr),
+                                strerror(errno));
 		default:
 			error("inet_sendto: Cannot send(): %s", strerror(errno));
 			return err;
