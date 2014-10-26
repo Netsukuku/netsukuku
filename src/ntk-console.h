@@ -31,12 +31,12 @@ int rc, bytesReceived;
 time_t rawtime;
 struct tm *timeinfo;
 
-int uptime_sec;
-int uptime_min;
-int uptime_hour;
-int uptime_day;
-int uptime_month;
-int uptime_year;
+unsigned int uptime_sec;
+unsigned int uptime_min;
+unsigned int uptime_hour;
+unsigned int uptime_day;
+unsigned int uptime_month;
+unsigned int uptime_year;
 
 int i;
 

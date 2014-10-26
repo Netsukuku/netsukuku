@@ -179,13 +179,13 @@ ntkd_request(command_t command)
 
 void console_uptime(void) {
     
-    int uptime_sec1;
-    int uptime_min1;
-    int uptime_hour1;
+    unsigned int uptime_sec1;
+    unsigned int uptime_min1;
+    unsigned int uptime_hour1;
     
-    int uptime_day1;
-    int uptime_month1;
-    int uptime_year1;
+    unsigned int uptime_day1;
+    unsigned int uptime_month1;
+    unsigned int uptime_year1;
     
     time(&rawtime);
     

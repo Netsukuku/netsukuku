@@ -1117,11 +1117,11 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 						len-(len/2), flags, to, tolen);
 			break;
 		case EFAULT:
-			error("To Family is: %hu "
-                                "To Data is: %%pNP "
-                                "and: %s", to->sa_family, 
-                                to->sa_data,
-                                strerror(errno));
+			error("Bad Address\n"
+                                "To Family is: %hu "
+                                "To Data is: %s", 
+                                to->sa_family, 
+                                inet_ntoa(  &(  ((struct sockaddr_in*)to)->sin_addr ) ));
 		default:
 			error("inet_sendto: Cannot send(): %s", strerror(errno));
 			return err;
