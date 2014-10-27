@@ -51,8 +51,6 @@ extern int optind, opterr, optopt;
 int destroy_netsukuku_mutex;
 int pid_saved;
 
-int prevent_duplication;
-
 int options_parsed = 0;			/* How many times parse_options() has been called */
 
 void
@@ -359,117 +357,29 @@ free_server_opt(void)
 		xfree(server_opt.ifs[i]);
 }
 
-/* Checks and removes any existing interface which is intended to be excluded*/
+/* Removes specified existing interface, Ntkd should populate the device list
+ * prior to this.
+ * returns 0 on success, And closes ntkd on error.
+*/
 
-void
-check_excluded(void)
+int
+exclude_interface(void)
 {
-
 	int i;
 
 	printf("Number of Interfaces in Use: %d\n", server_opt.ifs_n);
 	printf("Interface names in Use: %s", (char *) server_opt.ifs);
 
-	for (i = 0; i < server_opt.ifs_n; i++) {
-		if (strcmp(server_opt.ifs[i], optarg) == 0) {
+	for (i = 0; i < me.cur_ifs_n; i++) {
+		if (strcmp(me.cur_ifs[i], optarg) == 0) {
 			printf("Interface %s removed, And replaced with %s",
-				   server_opt.ifs[i], server_opt.ifs[server_opt.ifs_n]);
-			strncpy(server_opt.ifs[i], server_opt.ifs[server_opt.ifs_n],
-					strlen(server_opt.ifs[server_opt.ifs_n]));
-			server_opt.ifs_n -= 1;
+			me.cur_ifs[i], me.cur_ifs[me.cur_ifs_n]);
+                        ifs_del(me.cur_ifs, &me.cur_ifs_n, i);
+                        return 0;
 		}
-
 	}
-
+        fatal("Interface %s not found!", optarg);
 }
-
-/* Adds all interfaces available which are up, And not the interface set by the user.
- * -e eth0 would exclude eth0 from being used by netsukuku. It, Also, Excludes the 
- * loopback interface, And tunl0, and tunl1, If it exists.
- * 
- * It iterates through a pointer to the getifaddrs struct, Using the ifa_name member 
- * for reading the interface name, And ifa_next to move to the next
- * interface in the array.
- * 
- * It commits every up interface name that is not the one specified to be excluded
- * by the user, Nor the loop back interface to server_opt.ifs and to pointer
- * to the struct interface in the member dev_name, And increments the server_opt.ifs_n member. 
- * It, Also, Sets the index of each interface to a pointer to the struct interface 
- * in the member dev_idx
- * 
- * It checks if it has already been run, If it has, It just runs check_excluded()
- * and then exits. check_excluded() is run at the end of the function
- * to check for errors in excluding optarg.
- * 
- * returns 0 on success, -1 on error, And 1 if it has already been run.
-*/
-
-void
-exclude_interface()
-{
-
-	if (prevent_duplication == 1) {
-		check_excluded();
-		return;
-	}
-
-	char *ifs = "null1";
-	char *old_tmp = "null2";
-	interface *ifs_a;
-	int ifs_n = 1;
-	struct ifaddrs *addrs, *tmp;
-
-	if (getifaddrs(&addrs) != 0) {
-		printf("%s\n", strerror(errno));
-		exit(-1);
-	}
-	tmp = addrs;
-	while (tmp) {
-
-		old_tmp = ifs;
-
-		if (tmp && tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_PACKET
-			&& tmp->ifa_flags & IFF_UP && !(tmp->ifa_flags & IFF_LOOPBACK
-											&& strncmp(tmp->ifa_name,
-													   "tunl0",
-													   (int) strlen(tmp->
-																	ifa_name))
-											!= 0
-											&& strncmp(tmp->ifa_name,
-													   "tunl1",
-													   (int) strlen(tmp->
-																	ifa_name))
-											!= 0
-											&& strcmp(optarg,
-													  tmp->ifa_name) !=
-											0)) {
-			ifs = tmp->ifa_name;
-			ifs_n++;
-		}
-
-		printf("Good ifs is: %s\n", ifs);
-
-		if (strcmp(old_tmp, ifs) == 0) {
-			printf("Loop finished: %s\n", ifs);
-			check_excluded();
-			return;
-		}
-
-		tmp = tmp->ifa_next;
-		server_opt.ifs[server_opt.ifs_n++] = xstrndup(ifs, IFNAMSIZ - 1);
-		printf("Using Interface: %s\n", ifs);
-
-		ifs_a[ifs_n].dev_idx = (int) tmp->ifa_flags;
-
-		strncpy(ifs_a[ifs_n].dev_name, ifs, (int) strlen(ifs));
-
-	}
-
-	check_excluded();
-
-	freeifaddrs(addrs);
-}
-
 
 void
 ntk_thread_creatation(void)
@@ -530,8 +440,6 @@ parse_options(int argc, char **argv)
 			exit(0);
 			break;
 		case 'e':
-			prevent_duplication = -1;
-			prevent_duplication++;
 			exclude_interface();
 			break;
 		case 'k':
