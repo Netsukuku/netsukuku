@@ -371,9 +371,9 @@ exclude_interface(void)
 	printf("Interface names in Use: %s", (char *) server_opt.ifs);
 
 	for (i = 0; i < me.cur_ifs_n; i++) {
-		if (strcmp(me.cur_ifs[i], optarg) == 0) {
+		if (strcmp(me.cur_ifs[i].dev_name, optarg) == 0) {
 			printf("Interface %s removed, And replaced with %s",
-			me.cur_ifs[i], me.cur_ifs[me.cur_ifs_n]);
+			me.cur_ifs[i].dev_name, me.cur_ifs[me.cur_ifs_n].dev_name);
                         ifs_del(me.cur_ifs, &me.cur_ifs_n, i);
                         return 0;
 		}
