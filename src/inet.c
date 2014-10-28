@@ -445,7 +445,7 @@ ipraw_to_str(u_int ip[MAX_IP_INT], int family)
 }
 
 /*
- * inet_to_str: returns the string rapresentation of `ip'
+ * inet_to_str: returns the string representation of `ip'
  */
 const char *
 inet_to_str(inet_prefix ip)
