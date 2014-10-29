@@ -366,9 +366,11 @@ int
 exclude_interface(void)
 {
 	int i;
-
-	printf("Number of Interfaces in Use: %d\n", server_opt.ifs_n);
-	printf("Interface names in Use: %s", (char *) server_opt.ifs);
+        
+	printf("Number of Interfaces in Use: %d\n", me.cur_ifs_n);
+        
+        for (i = 0; i < me.cur_ifs_n; i++)
+            printf("Interface names in Use: %s", me.cur_ifs[i].dev_name);
 
 	for (i = 0; i < me.cur_ifs_n; i++) {
 		if (strcmp(me.cur_ifs[i].dev_name, optarg) == 0) {
@@ -377,8 +379,9 @@ exclude_interface(void)
                         ifs_del(me.cur_ifs, &me.cur_ifs_n, i);
                         return 0;
 		}
+                else
+                    fatal("Interface %s not found!", optarg);
 	}
-        fatal("Interface %s not found!", optarg);
 }
 
 void
