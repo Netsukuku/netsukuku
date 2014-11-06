@@ -555,7 +555,7 @@ d_as_u(char *start_buf, char *buf, dns_pkt_a ** dpa, int limit_len,
  * Returns:
  * -1 on E_INTRPRT
  *  0 if pkt must be discarded.
- *  Number of bytes readed otherwise
+ *  Number of bytes read otherwise
  */
 int
 d_u(char *buf, int pktlen, dns_pkt ** dpp)

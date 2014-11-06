@@ -104,6 +104,8 @@ store_ns(char *ns)
 
 	ai = &_andns_ns_[_andns_ns_count_];
 	res = getaddrinfo(ns, DNS_PORT_STR, &_ns_filter_, ai);
+        printf("store_ns getaddrinfo nameserver: %s "
+                "res: %i: %s",ns ,res, gai_strerror(errno));
 	if (res) {
 		debug(DBG_NORMAL, "In store_ns(): gai `%s' -> %s", ns,
 			  gai_strerror(errno));
@@ -195,8 +197,8 @@ andns_init(int restricted, char *resolv_conf, int family)
 	setzero(_andns_ns_, sizeof(struct addrinfo *) * MAXNSSERVERS);
 
 	memset(msg, 0, (INET_ADDRSTRLEN + 2) * MAXNSSERVERS);
-
-	if (_default_realm_ == NTK_REALM) {
+	
+if (_default_realm_ == NTK_REALM) {
 		/* We are in NTK realm, every IP is assigned to Netsukuku,
 		 * therefore dns forwarding is meaningless */
                 loginfo("We are in the ntk realm %s\n", strerror(errno));
@@ -663,7 +665,7 @@ dns_forward(dns_pkt * dp, char *msg, int msglen, char *answer)
 	int res;
 
 	if (!_dns_forwarding_) {
-		error("In rslv: dns forwardind is disable.");
+		error("In rslv: dns forwarding is disabled.");
 		goto safe_failing;
 	}
 	debug(DBG_INSANE, "Forwarding dns query to inet nameservers...");
@@ -937,7 +939,7 @@ nk_forward(andns_pkt * ap, char *msg, int msglen, char *answer)
  *
  * Returns:
  *      NULL if the pkt has to be discarded.
- *      A ptr to the answer to be sended if OK:
+ *      A ptr to the answer to be sent if OK:
  *              in this case, answ_len is filled with
  *              the answer len.
  */

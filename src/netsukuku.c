@@ -179,8 +179,9 @@ usage(void)
 		   " -h	Shows this help\n"
 		   " -v	Shows the version you are using\n"
 		   " -k     Kills the running instance of ntkd\n"
-		   " -C	 Runs the console server for Ntk-Console to connect to\n"
-		   " -e     Excludes an interface from usage I.E all interfaces except this one\n");
+		   " -C	Runs the console server for Ntk-Console to connect to\n"
+		   " -e     Excludes an interface from usage I.E all interfaces except this one\n"
+                   " -n     Experimental, Currently meaningless argument\n to implement ntk netsplit\n http://netsukuku.freaknet.org/docs/main_doc/ntk_rfc/Ntk_net_split\n");
 }
 
 /*
@@ -425,6 +426,7 @@ parse_options(int argc, char **argv)
 			{"kill", 0, 0, 'k'},
 			{"exclude", 1, 0, 'e'},
 			{"console", 0, 0, 'C'},
+                        {"netsplit", 1, 0, 'n'},
 			{0, 0, 0, 0}
 		};
 
@@ -434,6 +436,9 @@ parse_options(int argc, char **argv)
 			break;
 
 		switch (c) {
+                case 'n':
+                    
+                    break;
 		case 'C':
 			ntk_thread_creatation();
 			break;
