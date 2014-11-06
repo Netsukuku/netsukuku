@@ -95,8 +95,8 @@ void inet_mode(char *domain) {
     ret = strstr(new_domain, ".ntk");
     
     if(ret != NULL) {
-        new_domain[strlen(new_domain)-5] = '\0';
         inet_mode_ntk_rslv:
+        new_domain[strlen(new_domain)-5] = '\0';
         rt_value = isValidIpv4Address(new_domain);
         if(rt_value == 1)
             ntkipForwarding(new_domain, AF_INET);
@@ -111,33 +111,54 @@ void inet_mode(char *domain) {
 
 void ntk_mode(char *domain) {
     
+    printf("ntk_mode: %s\n", domain);
+    
+    char *ret;
+    char *ret1;
     char new_domain[MAXNAMLEN];
     int rt_value;
     
     strcpy(new_domain, domain);
     
-    if(strstr(domain, ".inet") == NULL)
-        goto ntk_mode_inet_rslv;
+    ret = strstr(new_domain, ".inet");
     
-    if(strstr(domain, ".ntk") == NULL || strstr(domain, ".ntk") != NULL) {
-        rt_value = isValidIpv4Address(domain);
-        if(rt_value == 1)
-            ntkipForwarding(domain, AF_INET);
-        if(rt_value == 11)
-            ntkipForwarding(domain, AF_INET6);
-        if(rt_value == 0)
-           ntkDNSResolution(domain);
+    if(ret != NULL) {
+        printf("ntk_mode .inet\n");
+        goto ntk_mode_inet_rslv;
     }
     
-    if(strstr(domain, ".inet") != NULL) {
-        ntk_mode_inet_rslv:
-        rt_value = isValidIpv4Address(domain);
+    ret = strstr(new_domain, ".ntk");
+    ret1 = strstr(new_domain, ".ntk");
+    
+    if(ret1 != NULL) {
+        new_domain[strlen(new_domain)-5] = '\0';
+        printf("ntk_mode abbrevate: %s\n", new_domain);
+    }
+    
+    if(ret == NULL || ret1 != NULL) {
+        rt_value = isValidIpv4Address(new_domain);
         if(rt_value == 1)
-            inetipForwarding(domain, AF_INET);
+            ntkipForwarding(new_domain, AF_INET);
         if(rt_value == 11)
-            inetipForwarding(domain, AF_INET6);
+            ntkipForwarding(new_domain, AF_INET6);
         if(rt_value == 0)
-           inetDNSResolution(domain);
+           ntkDNSResolution(new_domain);
+        printf("ntk_mode normal\n");
+    }
+    
+    ret = strstr(new_domain, ".inet");
+    
+    if(ret != NULL) {
+        ntk_mode_inet_rslv:
+        new_domain[strlen(new_domain)-6] = '\0';
+        rt_value = isValidIpv4Address(new_domain);
+        if(rt_value == 1)
+            inetipForwarding(new_domain, AF_INET);
+        if(rt_value == 11)
+            inetipForwarding(new_domain, AF_INET6);
+        if(rt_value == 0)
+           inetDNSResolution(new_domain);
+        printf("ntk_mode abnormal\n");
     }
     
 }
