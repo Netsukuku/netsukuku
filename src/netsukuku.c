@@ -437,7 +437,7 @@ parse_options(int argc, char **argv)
 
 		switch (c) {
                 case 'n':
-                    printf("%s", optarg);
+                    printf("netsplit argument: %s", optarg);
                     if(strcmp("inet", optarg) == 0 || strcmp("INET", optarg) == 0)
                         netsplit.netsplit_inet_mode = 1;
                     if(strcmp("ntk", optarg) == 0 || strcmp("NTK", optarg) == 0)
