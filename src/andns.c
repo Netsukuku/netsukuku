@@ -31,6 +31,8 @@
 #include "andns_net.h"
 #include "andns_snsd.h"
 #include "dnslib.h"
+#include "netsplit.h"
+#include "netsukuku.h"
 
 
 static uint8_t _dns_forwarding_;
@@ -950,6 +952,11 @@ andns_rslv(char *msg, int msglen, char *answer, int *answ_len)
 	dns_pkt *dp;
 	andns_pkt *ap;
 
+        printf("andns_rslv msg %s answer %s", msg, answer);
+        
+        if(netsplit.netsplit_inet_mode == 1)
+        inet_mode (msg);
+        
 	proto = GET_NK_BIT(msg);
 	if (proto == NK_DNS)
 		res = d_u(msg, msglen, &dp);

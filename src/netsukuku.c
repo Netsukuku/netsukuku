@@ -181,7 +181,7 @@ usage(void)
 		   " -k     Kills the running instance of ntkd\n"
 		   " -C	Runs the console server for Ntk-Console to connect to\n"
 		   " -e     Excludes an interface from usage I.E all interfaces except this one\n"
-                   " -n     Experimental, Currently meaningless argument to implement ntk netsplit\n        http://netsukuku.freaknet.org/docs/main_doc/ntk_rfc/Ntk_net_split\n");
+                   " -n     Experimental argument to implement ntk netsplit\n        http://netsukuku.freaknet.org/docs/main_doc/ntk_rfc/Ntk_net_split\n");
 }
 
 /*
@@ -430,14 +430,17 @@ parse_options(int argc, char **argv)
 			{0, 0, 0, 0}
 		};
 
-		c = getopt_long(argc, argv, "i:c:l:e:hvd64DRrIakC", long_options,
+		c = getopt_long(argc, argv, "i:c:l:e:hvd64DRrIakCn", long_options,
 						&option_index);
 		if (c == -1)
 			break;
 
 		switch (c) {
                 case 'n':
-                    
+                    if(strcmp("inet", optarg) == 0 || strcmp("INET", optarg) == 0)
+                        netsplit.netsplit_inet_mode = 1;
+                    if(strcmp("ntk", optarg) == 0 || strcmp("NTK", optarg) == 0)
+                        netsplit.netsplit_ntk_mode = 1;
                     break;
 		case 'C':
 			ntk_thread_creatation();
@@ -492,6 +495,10 @@ parse_options(int argc, char **argv)
 				fatal(0);
 			break;
 		case 'i':
+                    	if(server_opt.ifs_n+1 >= MAX_INTERFACES)
+                            fatal("The maximum number of interfaces is %d",
+							MAX_INTERFACES);
+			server_opt.ifs[server_opt.ifs_n++]=xstrndup(optarg, IFNAMSIZ-1);
 			break;
 		case 'D':
 			server_opt.daemon = 0;

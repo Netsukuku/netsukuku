@@ -71,6 +71,8 @@ dns_exec_pkt(void *passed_argv)
 		return 0;
 	}
 
+        printf("dns_exec_pkt buf: %s rpkt %s", buf, argv.rpkt);
+        
 	/* Unpack the DNS query and resolve the hostname */
 	if (!andns_rslv(buf, argv.rpkt_sz, answer_buffer, &answer_length))
 		return 0;
@@ -166,6 +168,8 @@ dns_wrapper_daemon(u_short port)
 		exec_pkt_argv.rpkt_sz = err;
 		exec_pkt_argv.rpkt = buf;
 
+                printf("dns_wrapper_daemon buf: %s rpkt %s", buf, exec_pkt_argv.rpkt);
+                
 		pthread_mutex_lock(&dns_exec_lock);
 		pthread_create(&thread, &t_attr, dns_exec_pkt,
 					   (void *) &exec_pkt_argv);

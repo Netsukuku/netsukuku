@@ -29,6 +29,11 @@
 #define VERSION_STR				"NetsukukuD "VERSION" (debug)"
 #endif
 
+struct {
+        int netsplit_inet_mode;
+        int netsplit_ntk_mode;
+} netsplit;
+
 /*
  * current_globals
  *

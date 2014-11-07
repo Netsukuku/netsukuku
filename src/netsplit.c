@@ -95,7 +95,7 @@ inet_mode (char *domain)
 
   if (ret1 != NULL)
     {
-      new_domain[strlen (new_domain) - 6] = '\0';
+      new_domain[strlen (new_domain) - 5] = '\0';
       printf ("inet_mode abbrevate: %s\n", new_domain);
     }
 
@@ -109,6 +109,7 @@ inet_mode (char *domain)
       if (rt_value == 0)
 	inetDNSResolution (new_domain);
       printf ("inet_mode normal\n");
+      return;
     }
 
   ret = strstr (new_domain, ".ntk");
@@ -116,7 +117,7 @@ inet_mode (char *domain)
   if (ret != NULL)
     {
     inet_mode_ntk_rslv:
-      new_domain[strlen (new_domain) - 5] = '\0';
+      new_domain[strlen (new_domain) - 4] = '\0';
       rt_value = isValidIpv4Address (new_domain);
       if (rt_value == AF_INET)
 	ntkipForwarding (new_domain, AF_INET);
@@ -125,8 +126,11 @@ inet_mode (char *domain)
       if (rt_value == 0)
 	ntkDNSResolution (new_domain);
       printf ("inet_mode abnormal\n");
+      return;
     }
 
+  return;
+  
 }
 
 void
@@ -155,7 +159,7 @@ ntk_mode (char *domain)
 
   if (ret1 != NULL)
     {
-      new_domain[strlen (new_domain) - 5] = '\0';
+      new_domain[strlen (new_domain) - 4] = '\0';
       printf ("ntk_mode abbrevate: %s\n", new_domain);
     }
 
@@ -176,7 +180,7 @@ ntk_mode (char *domain)
   if (ret != NULL)
     {
     ntk_mode_inet_rslv:
-      new_domain[strlen (new_domain) - 6] = '\0';
+      new_domain[strlen (new_domain) - 5] = '\0';
       rt_value = isValidIpv4Address (new_domain);
       if (rt_value == AF_INET)
 	inetipForwarding (new_domain, AF_INET);
@@ -189,7 +193,7 @@ ntk_mode (char *domain)
 
 }
 
-void
+/*void
 domain_ip_processing (char *domain)
 {
   char *ret;
@@ -245,9 +249,10 @@ main (void)
       if (strcmp (request, "quit\n") == 0 || strcmp (request, "exit\n") == 0)
 	exit (0);
       fflush (stdin);
-      domain_ip_processing (request);
+      *strrchr(request, '\n') = '\0';
+      inet_mode (request);
       free (request);
     }
 
   return 0;
-}
+}*/

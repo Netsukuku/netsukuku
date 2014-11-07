@@ -22,7 +22,7 @@ getaddrinfodnsresolution(char *domain)
 	hints.ai_socktype = SOCK_DGRAM;  /* Dummy socket type */
 
 	/*
-	 * Use getaddrinfo() to resolve "www.kame.net" and allocate
+	 * Use getaddrinfo() to resolve domain and allocate
 	 * a linked list of addresses.
 	 */
 	error = getaddrinfo(domain, NULL, &hints, &res0);
