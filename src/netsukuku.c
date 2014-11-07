@@ -172,7 +172,7 @@ usage(void)
 		   " -r	Runs in restricted mode\n"
 		   " -I	Share your internet connection with other nodes\n"
 		   "\n"
-		   " -c	configuration file\n"
+		   " -c	Configuration file\n"
 		   " -l	Enables logging to file\n"
 		   "\n"
 		   " -d	Debug (Add more ds to get more info)\n"
@@ -437,6 +437,7 @@ parse_options(int argc, char **argv)
 
 		switch (c) {
                 case 'n':
+                    printf("%s", optarg);
                     if(strcmp("inet", optarg) == 0 || strcmp("INET", optarg) == 0)
                         netsplit.netsplit_inet_mode = 1;
                     if(strcmp("ntk", optarg) == 0 || strcmp("NTK", optarg) == 0)
