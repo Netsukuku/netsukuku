@@ -21,11 +21,14 @@ isValidIpv4Address (char *ipAddress)
   if (result == 0)
     {
       if (isValidIpv6Address (ipAddress) == 1)
-	return 11;
+	return AF_INET6;
       else
 	return 0;
     }
-  return result;
+  if (result == 1)
+    return AF_INET;
+  else
+    return result;
 }
 
 /* Forwards packets to this IP through the inet 
@@ -99,9 +102,9 @@ inet_mode (char *domain)
   if (ret == NULL || ret1 != NULL)
     {
       rt_value = isValidIpv4Address (new_domain);
-      if (rt_value == 1)
+      if (rt_value == AF_INET)
 	inetipForwarding (new_domain, AF_INET);
-      if (rt_value == 11)
+      if (rt_value == AF_INET6)
 	inetipForwarding (new_domain, AF_INET6);
       if (rt_value == 0)
 	inetDNSResolution (new_domain);
@@ -115,9 +118,9 @@ inet_mode (char *domain)
     inet_mode_ntk_rslv:
       new_domain[strlen (new_domain) - 5] = '\0';
       rt_value = isValidIpv4Address (new_domain);
-      if (rt_value == 1)
+      if (rt_value == AF_INET)
 	ntkipForwarding (new_domain, AF_INET);
-      if (rt_value == 11)
+      if (rt_value == AF_INET6)
 	ntkipForwarding (new_domain, AF_INET6);
       if (rt_value == 0)
 	ntkDNSResolution (new_domain);
@@ -159,9 +162,9 @@ ntk_mode (char *domain)
   if (ret == NULL || ret1 != NULL)
     {
       rt_value = isValidIpv4Address (new_domain);
-      if (rt_value == 1)
+      if (rt_value == AF_INET)
 	ntkipForwarding (new_domain, AF_INET);
-      if (rt_value == 11)
+      if (rt_value == AF_INET6)
 	ntkipForwarding (new_domain, AF_INET6);
       if (rt_value == 0)
 	ntkDNSResolution (new_domain);
@@ -175,9 +178,9 @@ ntk_mode (char *domain)
     ntk_mode_inet_rslv:
       new_domain[strlen (new_domain) - 6] = '\0';
       rt_value = isValidIpv4Address (new_domain);
-      if (rt_value == 1)
+      if (rt_value == AF_INET)
 	inetipForwarding (new_domain, AF_INET);
-      if (rt_value == 11)
+      if (rt_value == AF_INET6)
 	inetipForwarding (new_domain, AF_INET6);
       if (rt_value == 0)
 	inetDNSResolution (new_domain);
@@ -199,9 +202,9 @@ domain_ip_processing (char *domain)
     {
       new_domain[strlen (new_domain) - 6] = '\0';
       rt_value = isValidIpv4Address (new_domain);
-      if (rt_value == 1)
+      if (rt_value == AF_INET)
 	inetipForwarding (new_domain, AF_INET);
-      if (rt_value == 11)
+      if (rt_value == AF_INET6)
 	inetipForwarding (new_domain, AF_INET6);
       if (rt_value == 0)
 	inetDNSResolution (new_domain);
@@ -216,9 +219,9 @@ domain_ip_processing (char *domain)
     {
       new_domain[strlen (new_domain) - 5] = '\0';
       rt_value = isValidIpv4Address (new_domain);
-      if (rt_value == 1)
+      if (rt_value == AF_INET)
 	ntkipForwarding (new_domain, AF_INET);
-      if (rt_value == 11)
+      if (rt_value == AF_INET6)
 	ntkipForwarding (new_domain, AF_INET6);
       if (rt_value == 0)
 	ntkDNSResolution (new_domain);
@@ -242,7 +245,7 @@ main (void)
       if (strcmp (request, "quit\n") == 0 || strcmp (request, "exit\n") == 0)
 	exit (0);
       fflush (stdin);
-      inet_mode (request);
+      domain_ip_processing (request);
       free (request);
     }
 
