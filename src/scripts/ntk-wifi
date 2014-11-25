@@ -1,10 +1,14 @@
 #!/bin/sh
-# ntk-wifi: sets a wifi card in Ad-Hoc mode and its essid to "netsukuku".
+# ntk-wifi: sets a wifi card in ad-hoc mode and its essid to "netsukuku".
 
 if test -z "$1" -o "$1" = "help" -o "$1" = "-h" -o "$1" = "--help"
 then
 	echo "You must specify your wifi interface."
 	echo "Ex: ntk-wifi wlan0"
+	echo "Optional arguments:"
+	echo "-u --undo Reverts the effect of this script"
+	echo "You may need to turn your interface off and on in your network manager"
+	echo "E.G: Clicking the wifi icon and hitting off and then hitting on after"
 	exit 1
 fi
 
@@ -17,10 +21,21 @@ fi
 
 wlan=$1
 
-echo "* Setting $wlan in \"Ad-Hoc\" mode with essid \"netsukuku\":"
-echo "    iwconfig $wlan mode Ad-Hoc essid netsukuku"
+echo "$2"
 
-if ! iwconfig $wlan mode Ad-Hoc essid netsukuku
+if $2 == "-u" $2 == "--undo"
+then
+iwconfig $wlan mode managed
+ifconfig $wlan down
+ifconfig $wlan up
+exit 0
+fi
+
+
+echo "* Setting $wlan in \"ad-hoc\" mode with essid \"netsukuku\":"
+echo "    iwconfig $wlan mode ad-hoc essid netsukuku"
+
+if ! iwconfig $wlan mode ad-hoc essid netsukuku
 then
 	echo "[!] iwconfig failed."
 	echo "Retry manually with: "
