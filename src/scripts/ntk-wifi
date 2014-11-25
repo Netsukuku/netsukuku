@@ -21,9 +21,10 @@ fi
 
 wlan=$1
 
-echo "$2"
+ARGSTR1="-u"
+ARGSTR2="--undo"
 
-if $2 == "-u" $2 == "--undo"
+if [ x$2 = x$ARGSTR1 -o x$2 = x$ARGSTR2 ]
 then
 iwconfig $wlan mode managed
 ifconfig $wlan down
