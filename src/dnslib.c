@@ -491,6 +491,9 @@ d_a_u(char *start_buf, char *buf, dns_pkt_a ** dpa_orig, int limit_len)
 	if (dpa->type == T_A) {
 		memcpy(dpa->rdata, buf, rdlen);	/* 32bit address */
 		count += rdlen;
+	} else if (dpa->type == T_AAAA) {
+		memcpy(dpa->rdata, buf, rdlen);	/* 128bit address */
+		count += rdlen;
 	} else if (dpa->type == T_MX) {
 		memcpy(dpa->rdata, buf, 2);
 		if ((ui =
