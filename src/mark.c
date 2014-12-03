@@ -81,7 +81,7 @@ insert_rule(const char *rule, iptc_handle_t * t, const char *chain,
 	res = iptc_insert_entry(chain, (struct ipt_entry *) rule, 0, t);
 	error
 		("res is: %d rule is: %p chain is: %s pos is: %d t is: %p",
-		 res, *rule, chain, pos, t);
+		 res, rule, chain, pos, t);
 	if (!res) {
 		error("In insert_rule: %s.", iptc_strerror(errno));
 		err_ret(ERR_NETRUL, -1);
