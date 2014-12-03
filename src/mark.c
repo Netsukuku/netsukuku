@@ -464,6 +464,9 @@ mark_init(int igw)
 		goto cannot_init;
 	}
 	restore_output_rule_init(rule);
+        
+        error("Rule in mark_init: %s", rule);
+        
 	res = insert_rule(rule, &t, CHAIN_OUTPUT, 0);
 	if (res) {
 		error(err_str);
