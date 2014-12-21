@@ -44,21 +44,20 @@ nodes together as you want!
 
 ## Get the code!
 
-    git clone git@github.com:Netsukuku/netsukuku.git 
+    git clone https://github.com/Netsukuku/netsukuku.git 
 
 The dependencies of netsukuku can be installed by running this command, For debian/ubuntu.
 
-    sudo apt-get install zlibc libgmp-dev openssl libssl-dev libgee-dev libpth-dev libgcrypt11-dev autoconf cmake autogen mawk gawk
+    sudo apt-get install zlibc libgmp-dev openssl libssl-dev libgee-dev libpth-dev libgcrypt11-dev autoconf cmake autogen mawk gawk scons git
 
 For Archlinux, Try this.
 
-    sudo pacman -S zlib gmp lib32-gmp openssl lib32-openssl libgee pth libgcrypt autoconf cmake autogen gawk
+    sudo pacman -S zlib gmp lib32-gmp openssl lib32-openssl libgee pth libgcrypt autoconf cmake autogen gawk scons git
 
 To compile the code you can do this:
    
-    autoreconf -i
-    ./configure && make 
-    sudo make install
+    scons
+    sudo scons install 
 
 ## Once installed
 
@@ -72,7 +71,7 @@ However, There are more options, Such as:
 
     sudo ntkd -D -i eth0 -r -I -dd
     
-This will run netsukuku in restricted mode and share your internet connection.
+This will run netsukuku in restricted mode(Internet compatibility mode) and share your internet connection.
 
 (Netsukuku should be able to use any network interface you have, Even VPNs that emulate ethernet
 such as tinc.)
