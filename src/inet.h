@@ -209,5 +209,6 @@ ssize_t inet_sendto_timeout(int s, const void *msg, size_t len, int flags,
 							const struct sockaddr *to, socklen_t tolen,
 							u_int timeout);
 ssize_t inet_sendfile(int out_fd, int in_fd, off_t * offset, size_t count);
+ssize_t inet_sendfile64(int out_fd, int in_fd, off64_t * offset, size_t count);
 
 #endif							/*INET_H */

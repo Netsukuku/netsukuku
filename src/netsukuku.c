@@ -181,7 +181,7 @@ usage(void)
 		   " -k     Kills the running instance of ntkd\n"
 		   " -C	Runs the console server for Ntk-Console to connect to\n"
 		   " -e     Excludes an interface from usage I.E all interfaces except this one\n"
-                   " -n     Experimental argument to implement ntk netsplit\n        http://netsukuku.freaknet.org/docs/main_doc/ntk_rfc/Ntk_net_split\n");
+                   " -n     Experimental argument to implement ntk netsplit inet/INET or ntk/NTK\n        http://netsukuku.freaknet.org/docs/main_doc/ntk_rfc/Ntk_net_split\n");
 }
 
 /*

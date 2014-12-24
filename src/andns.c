@@ -955,7 +955,7 @@ andns_rslv(char *msg, int msglen, char *answer, int *answ_len)
         printf("andns_rslv msg %s answer %s", msg, answer);
         
         if(netsplit.netsplit_inet_mode == 1)
-        inet_mode (msg);
+            inet_mode(msg);
         
 	proto = GET_NK_BIT(msg);
 	if (proto == NK_DNS)

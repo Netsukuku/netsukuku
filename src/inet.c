@@ -1060,10 +1060,10 @@ inet_send(int s, const void *msg, size_t len, int flags)
 			* it will just come back here to repeat the process as needed. */
 			case EMSGSIZE:
 				inet_send(s, msg, len/2, flags);
-				err=inet_send(s, (const char *)msg+(len/2),
-						len-(len/2), flags);
+				err = inet_send(s, msg+(len/2), (len+1)/2);
+                                
+                                printf("%lu", err);
 				break;
-
 			default:
 				error("inet_send: Cannot send(): %s", strerror(errno));
 				return err;
@@ -1113,8 +1113,9 @@ inet_sendto(int s, const void *msg, size_t len, int flags,
 		switch (errno) {
 		case EMSGSIZE:
 				inet_sendto(s, msg, len/2, flags, to, tolen);
-				err=inet_sendto(s, (const char *)msg+(len/2),
-						len-(len/2), flags, to, tolen);
+				err = inet_sendto(s, msg+(len/2), (len+1)/2, flags, to, tolen);
+                                
+                                printf("%lu", err);
 			break;
 		case EFAULT:
                     /* Must be modified to accept IPv6 addresses
@@ -1172,5 +1173,23 @@ inet_sendfile(int out_fd, int in_fd, off_t * offset, size_t count)
 
 	if ((err = sendfile(out_fd, in_fd, offset, count)) == -1)
 		error("inet_sendfile: Cannot sendfile(): %s", strerror(errno));
+        if (err < count) {
+                count = count - err;
+                err = inet_sendfile(out_fd, in_fd, offset, count);
+        }
+	return err;
+}
+
+ssize_t
+inet_sendfile64(int out_fd, int in_fd, off64_t * offset, size_t count)
+{
+	ssize_t err;
+
+	if ((err = sendfile64(out_fd, in_fd, offset, count)) == -1)
+		error("inet_sendfile: Cannot sendfile(): %s", strerror(errno));
+        if (err < count) {
+            count = count - err;
+            err = inet_sendfile64(out_fd, in_fd, offset, count);
+        }
 	return err;
 }

@@ -465,7 +465,7 @@ mark_init(int igw)
 	}
 	restore_output_rule_init(rule);
         
-        error("Rule in mark_init: %s", rule);
+        error("Rule in mark_init: %s", *rule);
         
 	res = insert_rule(rule, &t, CHAIN_OUTPUT, 0);
 	if (res) {
