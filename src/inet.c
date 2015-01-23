@@ -1060,7 +1060,7 @@ inet_send(int s, const void *msg, size_t len, int flags)
 			* it will just come back here to repeat the process as needed. */
 			case EMSGSIZE:
 				inet_send(s, msg, len/2, flags);
-				err = inet_send(s, msg+(len/2), (len+1)/2);
+				err = inet_send(s, msg+(len/2), (len+1)/2, flags);
                                 
                                 printf("%lu", err);
 				break;
@@ -1180,6 +1180,12 @@ inet_sendfile(int out_fd, int in_fd, off_t * offset, size_t count)
 	return err;
 }
 
+/* For use in 32 bit systems requiring 64 bit operations */
+
+#if UINTPTR_MAX == 0xffffffff
+#ifndef _LARGEFILE64_SOURCE
+#define _LARGEFILE64_SOURCE
+#endif
 ssize_t
 inet_sendfile64(int out_fd, int in_fd, off64_t * offset, size_t count)
 {
@@ -1193,3 +1199,4 @@ inet_sendfile64(int out_fd, int in_fd, off64_t * offset, size_t count)
         }
 	return err;
 }
+#endif
