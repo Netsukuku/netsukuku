@@ -1180,8 +1180,9 @@ inet_sendfile(int out_fd, int in_fd, off_t * offset, size_t count)
 	return err;
 }
 
-/* For use in 32 bit systems requiring 64 bit operations */
-
+/* For use in 32 bit systems requiring 64 bit operations
+ * Currently non-functional. */
+/*
 #if UINTPTR_MAX == 0xffffffff
 #ifndef _LARGEFILE64_SOURCE
 #define _LARGEFILE64_SOURCE
@@ -1199,4 +1200,4 @@ inet_sendfile64(int out_fd, int in_fd, off64_t * offset, size_t count)
         }
 	return err;
 }
-#endif
+#endif*/
