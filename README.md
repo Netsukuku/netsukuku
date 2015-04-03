@@ -2,6 +2,10 @@ http://netsukuku.freaknet.org
 ##New Donations options have been added, Including tip4commit! Scroll down please!
 
 
+<a href="https://scan.coverity.com/projects/4742">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/4742/badge.svg"/>
+</a>
 
 
 # What is this?
