@@ -209,7 +209,7 @@ Before doing anything do:
     $ man ntkd
     $ man andna
 
-when you feel confortable and you are ready to dare run as root:
+when you feel comfortable and you are ready to dare run as root:
 
     # ntkd
 
