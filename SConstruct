@@ -24,7 +24,7 @@ opts.Add('CXX', 'The C++ compiler.')
 
 env = Environment(options = opts, ENV = os.environ, CCFLAGS = ' -Wall')
 
-env['platform'] = _platform.system().lower();
+env['platform'] = _platform.system().lower()
 env["CC"] = os.getenv("CC") or env["CC"]
 env["CXX"] = os.getenv("CXX") or env["CXX"]
 env["ENV"].update(x for x in os.environ.items() if x[0].startswith("CCC_"))
@@ -44,9 +44,9 @@ Help("""
 *** General options
 """ + opts.GenerateHelpText(env))
 
-print "===================================================="
-print "Compiling Netsukuku for " + env['platform']
-print "===================================================="
+print("====================================================")
+print("Compiling Netsukuku for " + env['platform'])
+print("====================================================")
 
 Export("env")
 
