@@ -22,16 +22,20 @@ opts.AddVariables(('CONF_DIR', """Directory where the Netsukuku configuration fi
 opts.Add('CC', 'The C compiler.')
 opts.Add('CXX', 'The C++ compiler.')
 
-env = Environment(options = opts, ENV = os.environ, CCFLAGS = ' -Wall')
+env = Environment(options=opts, ENV=os.environ, CCFLAGS=' -Wall')
 
-env['platform'] = _platform.system().lower();
+# Added       flag -fcommon for multiple definition of variables
+env.Append(CFLAGS=['-fcommon'])     # Per il codice C
+env.Append(CXXFLAGS=['-fcommon'])  # Per il codice C++
+
+env['platform'] = _platform.system().lower()
 env["CC"] = os.getenv("CC") or env["CC"]
 env["CXX"] = os.getenv("CXX") or env["CXX"]
 env["ENV"].update(x for x in os.environ.items() if x[0].startswith("CCC_"))
 
-env.Append(CPPPATH = ['#src'])
-env.Append(LIBPATH = ['#src'])
-env.Append(CFLAGS = ['-g'])
+env.Append(CPPPATH=['#src'])
+env.Append(LIBPATH=['#src'])
+env.Append(CFLAGS=['-g'])
 
 opts.Save('build.conf', env)
 
@@ -44,9 +48,9 @@ Help("""
 *** General options
 """ + opts.GenerateHelpText(env))
 
-print "===================================================="
-print "Compiling Netsukuku for " + env['platform']
-print "===================================================="
+print("====================================================")
+print("Compiling Netsukuku for " + env['platform'])
+print("====================================================")
 
 Export("env")
 
